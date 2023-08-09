@@ -1,6 +1,6 @@
 package com.ccoa.isotools.dominio.testdatabuilder;
 
-import com.ccoa.isotools.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 
 public class AreaTestDataBuilder {
 

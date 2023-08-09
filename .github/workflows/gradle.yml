@@ -22,7 +22,11 @@ jobs:
           java-version: 17
           distribution: 'adopt'
           cache: gradle
-      - name: Compile
+      - name: Grant execute permission to gradlew
+        run: |
+            chmod +x ./gradlew
+            git update-index --chmod=+x ./gradlew
+      - name: Compile Java
         run: ./gradlew compileJava
       - name: Test
         run: ./gradlew test

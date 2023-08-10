@@ -19,5 +19,6 @@ public class ServicioGuardarArea {
 
         if(this.repositorioArea.existe(area)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
 
-        return this.repositorioArea.guardar(area);}
+        return this.repositorioArea.guardar(area);
+    }
 }

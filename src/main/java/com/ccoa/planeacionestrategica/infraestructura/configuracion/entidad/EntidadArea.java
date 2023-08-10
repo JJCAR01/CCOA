@@ -3,6 +3,9 @@ package com.ccoa.planeacionestrategica.infraestructura.configuracion.entidad;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -15,6 +18,9 @@ public class EntidadArea {
 
     @Column(unique = true, length = 50, name = "nombre")
     private String nombre;
+
+    @OneToMany(mappedBy = "area")
+    private List<EntidadCargo> cargos;
 
     public EntidadArea() {
     }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RepositorioAreaMySQL implements RepositorioArea{
+public class    RepositorioAreaMySQL implements RepositorioArea{
 
     private final RepositorioAreaJpa repositorioAreaJpa;
 

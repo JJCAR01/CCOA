@@ -23,20 +23,33 @@ public class EntidadUsuario {
     @Column(unique = true, length = 50, name = "nombre")
     private String nombre;
 
-    @Column(unique = true, length = 50, name = "apellidos")
+    @Column(unique = true, length = 50, name = "apellido")
     private String apellidos;
 
-    @Column(unique = true, length = 50, name = "password")
+    @Column(length = 50, name = "password")
     private String password;
 
     @Column(unique = true, length = 50, name = "correo")
     private String correo;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "cargo_id",unique = true)
+    @JoinColumn(name = "cargo_id")
     private EntidadCargo cargo;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name= "rol_id")
+    private List<EntidadRol> roles;
 
+    public EntidadUsuario() {
+    }
 
-
+    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo, EntidadCargo cargo, List<EntidadRol> roles) {
+        this.nombreUsuario = nombreUsuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.password = password;
+        this.correo = correo;
+        this.cargo = cargo;
+        this.roles = roles;
+    }
 }

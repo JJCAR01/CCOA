@@ -1,9 +1,11 @@
 package com.ccoa.planeacionestrategica.infraestructura.configuracion.repositorio;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
 import com.ccoa.planeacionestrategica.infraestructura.configuracion.entidad.EntidadArea;
 import com.ccoa.planeacionestrategica.infraestructura.configuracion.entidad.EntidadCargo;
+import com.ccoa.planeacionestrategica.infraestructura.configuracion.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.configuracion.repositorio.jpa.RepositorioAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.configuracion.repositorio.jpa.RepositorioCargoJpa;
 import org.springframework.stereotype.Repository;
@@ -24,12 +26,13 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
 
     @Override
     public List<Cargo> listar() {
-        return null;
-    }
+        List<EntidadCargo> entidadCargos =this.repositorioCargoJpa.findAll();
+        return entidadCargos.stream().map(entidadCargo -> Cargo.of(entidadCargo.getNombre(), Area.of(entidadCargo.getArea().getNombre()))).toList();    }
 
     @Override
     public Cargo consultarPorId(Long id) {
-        return null;
+        return this.repositorioCargoJpa.findById(id).map(entidadCargo -> Cargo.of(entidadCargo.getNombre(),Area.of(entidadCargo.getNombre()))).orElse(null);
+
     }
 
     @Override
@@ -46,16 +49,28 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
 
     @Override
     public boolean existe(Cargo cargo) {
-        return false;
+        return this.repositorioCargoJpa.findByNombre(cargo.getNombre()) != null;
     }
 
     @Override
     public Long eliminar(Long id) {
-        return null;
+        this.repositorioCargoJpa.deleteById(id);
+        return id;
     }
 
     @Override
     public Long modificar(Cargo cargo, Long id) {
-        return null;
+        repositorioCargoJpa.findById(id);
+        EntidadArea area = this.repositorioAreaJpa.findByNombre(cargo.getArea().getNombre());
+
+
+        EntidadCargo entidadCargo = new EntidadCargo();
+        entidadCargo.setId(id);
+        entidadCargo.setNombre(cargo.getNombre());
+
+        entidadCargo.setArea(area);
+
+        repositorioCargoJpa.save(entidadCargo);
+        return id;
     }
 }

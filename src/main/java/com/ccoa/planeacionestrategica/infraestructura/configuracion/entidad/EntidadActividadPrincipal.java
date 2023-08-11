@@ -5,9 +5,11 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
+/*@Getter
 @Setter
 @Entity
 @Table(name = "actividad_principal")
 public class EntidadActividadPrincipal {
 }
+
+ */

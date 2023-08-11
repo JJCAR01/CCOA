@@ -3,9 +3,13 @@ package com.ccoa.planeacionestrategica.dominio.modelo;
 import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
 import com.ccoa.planeacionestrategica.dominio.validador.ValidadorObjeto;
 import com.ccoa.planeacionestrategica.dominio.validador.ValidadorPatron;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class Usuario {
 
     //Clase de de asignacion de atributos y se validan entradas

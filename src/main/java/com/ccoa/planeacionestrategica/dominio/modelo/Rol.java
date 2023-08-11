@@ -1,7 +1,11 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
 import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Rol {
 
     //Clase de de asignacion de atributos y se validan entradas

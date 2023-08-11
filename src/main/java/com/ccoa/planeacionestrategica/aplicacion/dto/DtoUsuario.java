@@ -12,8 +12,8 @@ public class DtoUsuario {
     private String nombreUsuario;
     private String nombre;
     private String apellidos;
-    private String contrasena;
-    private String email;
+    private String password;
+    private String correo;
     private DtoCargo dtoCargo;
     private DtoRol dtoRol;
 }

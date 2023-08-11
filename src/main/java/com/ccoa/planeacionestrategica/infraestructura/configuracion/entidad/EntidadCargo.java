@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -18,8 +20,11 @@ public class EntidadCargo {
     private String nombre;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "area_id",unique = true)
+    @JoinColumn(name = "area_id")
     private EntidadArea area;
+
+    @OneToMany(mappedBy = "cargo")
+    private List<EntidadUsuario> usuario;
 
     public EntidadCargo() {
     }

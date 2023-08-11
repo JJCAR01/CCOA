@@ -15,7 +15,6 @@ public class EntidadRol {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(nullable = false, length = 10, name = "nombre")
     private String nombre;
 
     public EntidadRol() {

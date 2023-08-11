@@ -7,8 +7,12 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacio
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionGuardarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionListarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionModificarArea;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionEliminarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionGuardarCargo;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionListarCargo;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionModificarCargo;
 import com.ccoa.planeacionestrategica.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +23,16 @@ public class ControladorCargo {
 
 
     private final ServicioAplicacionGuardarCargo servicioAplicacionGuardarCargo;
+    private final ServicioAplicacionListarCargo servicioAplicacionListarCargo;
+    private final ServicioAplicacionEliminarCargo servicioAplicacionEliminarCargo;
+    private final ServicioAplicacionModificarCargo servicioAplicacionModificarCargo;
 
-    public ControladorCargo(ServicioAplicacionGuardarCargo servicioAplicacionGuardarCargo) {
+    public ControladorCargo(ServicioAplicacionGuardarCargo servicioAplicacionGuardarCargo, ServicioAplicacionListarCargo servicioAplicacionListarCargo,
+                            ServicioAplicacionEliminarCargo servicioAplicacionEliminarCargo, ServicioAplicacionModificarCargo servicioAplicacionModificarCargo) {
         this.servicioAplicacionGuardarCargo = servicioAplicacionGuardarCargo;
+        this.servicioAplicacionListarCargo = servicioAplicacionListarCargo;
+        this.servicioAplicacionEliminarCargo = servicioAplicacionEliminarCargo;
+        this.servicioAplicacionModificarCargo = servicioAplicacionModificarCargo;
     }
 
     @PostMapping
@@ -29,25 +40,25 @@ public class ControladorCargo {
         return this.servicioAplicacionGuardarCargo.ejecutar(cargo);
     }
 
-    /*@GetMapping
-    public List<Area> listar(){
-        return this.servicioAplicacionListarArea.ejecutar();
+    @GetMapping
+    public List<Cargo> listar(){
+        return this.servicioAplicacionListarCargo.ejecutar();
     }
 
     @GetMapping("/{codigo}")
-    public Area listar(@PathVariable Long codigo){
-        return servicioAplicacionListarArea.consultarById(codigo);
+    public Cargo listar(@PathVariable Long codigo){
+        return servicioAplicacionListarCargo.consultarById(codigo);
     }
 
     @DeleteMapping("/{codigo}")
     public DtoRespuesta<Long> eliminar(@PathVariable Long codigo){
-        return this.servicioAplicacionEliminarArea.ejecutarEliminar(codigo);
+        return this.servicioAplicacionEliminarCargo.ejecutarEliminar(codigo);
     }
 
     @PutMapping("/{codigo}")
-    public DtoRespuesta<Long> modificar(@RequestBody DtoArea area, @PathVariable Long codigo){
-        return this.servicioAplicacionModificarArea.ejecutarModificar(area,codigo);
+    public DtoRespuesta<Long> modificar(@RequestBody DtoCargo cargo, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarCargo.ejecutarModificar(cargo,codigo);
     }
 
-     */
+
 }

@@ -30,7 +30,7 @@ public class EntidadPat {
     private Date fechaRegistro;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "usuario_id",unique = true)
+    @JoinColumn(name = "usuario_id")
     private EntidadUsuario usuario;
 
     @OneToMany(mappedBy = "pat")

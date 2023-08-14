@@ -26,12 +26,12 @@ public class EntidadTipoGI {
 
     private String observacion;
 
-    /*@OneToMany(mappedBy = "tipo_gi")
+    @OneToMany(mappedBy = "gastoTipoGI")
     private List<EntidadRubroGasto> entidadRubroGastos;
 
-    @OneToMany(mappedBy = "tipo_gi")
+    @OneToMany(mappedBy = "ingresoTipoGI")
     private List<EntidadRubroIngreso> entidadRubroIngresos;
-     */
+
     public EntidadTipoGI() {
     }
 

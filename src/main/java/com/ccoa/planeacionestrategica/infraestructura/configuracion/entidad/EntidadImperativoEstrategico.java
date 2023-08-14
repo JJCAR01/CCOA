@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,6 +36,9 @@ public class EntidadImperativoEstrategico {
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "usuario_id",unique = true)
     private EntidadUsuario usuario;
+
+    @OneToMany(mappedBy = "imperativoEstrategico")
+    private List<EntidadPrograma> programas;
 
     public EntidadImperativoEstrategico() {
     }

@@ -1,15 +1,79 @@
 package com.ccoa.planeacionestrategica.infraestructura.configuracion.entidad;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-/*
+
+import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "programa")
 public class EntidadPrograma {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @Column(unique = true, length = 255, name = "nombre")
+    private String nombre;
+
+    @Column(unique = true, length = 255)
+    private String codigo;
+
+    @Column(unique = true, length = 255)
+    private Integer version;
+
+    @Column(unique = true, name = "fecha_inicio")
+    private Date fechaInicio;
+
+    @Column(unique = true, name = "fecha_final")
+    private Date fechaFinal;
+
+    @Column(name = "fecha_registro")
+    private Date fechaRegistro;
+
+    @Column(unique = true, name = "presupuesto_ingreso")
+    private Double presupuestoIngreso;
+
+    @Column(unique = true, name = "presupuesto_gasto")
+    private Double presupuestoGasto;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "area_id")
+    private EntidadArea area;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "usuario_id")
+    private EntidadUsuario usuario;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "imperativo_estrategico_id")
+    private EntidadImperativoEstrategico imperativoEstrategico;
+
+    @OneToMany(mappedBy = "programa")
+    private List<EntidadLineaEstrategica> lineasEstrategicas;
+
+    public EntidadPrograma() {
+    }
+
+    public EntidadPrograma(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal,
+                           Date fechaRegistro, Double presupuestoIngreso, Double presupuestoGasto, EntidadArea area, EntidadUsuario usuario,
+                           EntidadImperativoEstrategico imperativoEstrategico) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.version = version;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+        this.fechaRegistro = fechaRegistro;
+        this.presupuestoIngreso = presupuestoIngreso;
+        this.presupuestoGasto = presupuestoGasto;
+        this.area = area;
+        this.usuario = usuario;
+        this.imperativoEstrategico = imperativoEstrategico;
+    }
 }
 
- */
+

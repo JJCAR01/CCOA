@@ -16,12 +16,10 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
-    private final RepositorioAreaJpa repositorioAreaJpa;
 
-    public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioAreaJpa repositorioAreaJpa) {
+    public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa) {
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
-        this.repositorioAreaJpa = repositorioAreaJpa;
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DtoActividadPrincipal {
+public class  DtoActividadPrincipal {
 
     private String nombre;
     private String entregable;

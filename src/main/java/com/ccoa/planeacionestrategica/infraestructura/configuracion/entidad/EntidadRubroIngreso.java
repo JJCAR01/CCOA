@@ -19,7 +19,7 @@ public class EntidadRubroIngreso {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "tipo_gi_id",unique = true)
-    private EntidadTipoGI entidadTipoGI;
+    private EntidadTipoGI ingresoTipoGI;
 
     public EntidadRubroIngreso() {
     }

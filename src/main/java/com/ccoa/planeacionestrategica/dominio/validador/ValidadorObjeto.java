@@ -8,6 +8,6 @@ public class ValidadorObjeto {
         }
     }
 
-    public ValidadorObjeto() {
+    private ValidadorObjeto() {
     }
 }

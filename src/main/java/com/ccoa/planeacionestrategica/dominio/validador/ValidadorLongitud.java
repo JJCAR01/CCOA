@@ -24,6 +24,6 @@ public class ValidadorLongitud {
         }
     }
 
-    public ValidadorLongitud() {
+    private ValidadorLongitud() {
     }
 }

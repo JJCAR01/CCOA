@@ -9,7 +9,7 @@ public class ValidadorNumero {
         }
     }
 
-    public ValidadorNumero() {
+    private ValidadorNumero() {
     }
 
     public static void validadorNumeroDoubleMayorACero(Double valor, String mensaje) {

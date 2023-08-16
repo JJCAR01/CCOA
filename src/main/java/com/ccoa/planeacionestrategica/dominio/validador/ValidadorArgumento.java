@@ -24,6 +24,6 @@ public class ValidadorArgumento {
         }
     }
 
-    public ValidadorArgumento() {
+    private ValidadorArgumento() {
     }
 }

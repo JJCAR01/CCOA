@@ -21,7 +21,7 @@ public class AreaTest {
 
         String nombre = null;
 
-        Assertions.assertEquals("El nobre NO puede estar vacío",Assertions.assertThrows(IllegalArgumentException.class,() ->
+        Assertions.assertEquals("El nombre del Area NO puede estar vacío",Assertions.assertThrows(IllegalArgumentException.class,() ->
                 Area.of(nombre)).getMessage());
     }
 
@@ -30,7 +30,7 @@ public class AreaTest {
 
         String nombre = "";
 
-        Assertions.assertEquals("El nobre NO puede estar vacío",Assertions.assertThrows(IllegalArgumentException.class,() ->
+        Assertions.assertEquals("El nombre del Area NO puede estar vacío",Assertions.assertThrows(IllegalArgumentException.class,() ->
                 Area.of(nombre)).getMessage());
     }
 }

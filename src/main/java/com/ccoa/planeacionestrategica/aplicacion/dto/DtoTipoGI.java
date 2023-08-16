@@ -12,9 +12,8 @@ import lombok.Setter;
 public class DtoTipoGI {
 
     private Integer cantidad;
+    private String clasificacion;
     private Double valorUnitario;
     private Double valorTotal;
     private String observacion;
-    private DtoRubroGasto dtoRubroGasto;
-    private DtoRubroIngreso dtoRubroIngreso;
 }

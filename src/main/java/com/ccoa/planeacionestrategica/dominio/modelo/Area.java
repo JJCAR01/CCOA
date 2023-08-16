@@ -11,7 +11,7 @@ public class Area {
     private final String nombre;
 
     public static Area of(String nombre){
-        ValidadorArgumento.validarObligatorio(nombre,"El nobre NO puede estar vacío");
+        ValidadorArgumento.validarObligatorio(nombre,"El nombre del Area NO puede estar vacío");
         return new Area(nombre);
     }
 

@@ -5,7 +5,7 @@ public class ValidadorPatron {
 
     private static final String PATRON_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
     private static final String PATRON_CORREO = "^\\w+([.-_+]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,10})+$";
-    private static final String PATRON_NOMBRE_USUARIO = "(^[a-z].[a-z].*[a-z])";
+    private static final String PATRON_NOMBRE_USUARIO = "^[a-z]\\.[a-z]{2,}$";
 
     public static boolean aceptacionPatron(String cadena, String patron)
     {

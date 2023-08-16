@@ -25,7 +25,8 @@ public class ServicioAplicacionGuardarImperativoEstrategico {
 
         ImperativoEstrategico imperativoEstrategico = ImperativoEstrategico.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
                 dto.getFechaRegistro(),
-                Pat.of(dto.getDtoPat().getNombre(), dto.getDtoPat().getFechaInicio(),dto.getDtoPat().getFechaFinal(), dto.getDtoPat().getFechaRegistro(), Usuario.of(dto.getDtoPat().getDtoUsuario().getNombreUsuario(),
+                Pat.of(dto.getDtoPat().getNombre(), dto.getDtoPat().getFechaInicio(),dto.getDtoPat().getFechaFinal(), dto.getDtoPat().getFechaRegistro(),
+                        Usuario.of(dto.getDtoPat().getDtoUsuario().getNombreUsuario(),
                         dto.getDtoPat().getDtoUsuario().getNombre(),
                         dto.getDtoPat().getDtoUsuario().getApellidos(),
                         dto.getDtoPat().getDtoUsuario().getPassword(),

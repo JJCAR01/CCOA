@@ -14,10 +14,10 @@ import java.io.File;
 public class DtoEjecutado {
 
     private Double valor;
+    private String tipoContrato;
     private String numeroOrden;
-    private File documento;
+    private String documento;
     private DtoActividadPrincipal dtoActividadPrincipal;
-    private DtoTipoContrato dtoTipoContrato;
     private DtoUsuario dtoUsuario;
 
 }

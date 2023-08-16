@@ -17,7 +17,7 @@ public class DtoRegistroActividad {
     private String comentario;
     private Double porcentaje;
     private Date fechaRegistro;
-    private File documento;
+    private String documento;
     private DtoActividadPrincipal dtoActividadPrincipal;
     private DtoUsuario dtoUsuario;
 

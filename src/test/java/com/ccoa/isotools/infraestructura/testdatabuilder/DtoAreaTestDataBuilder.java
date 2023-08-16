@@ -7,7 +7,7 @@ public class DtoAreaTestDataBuilder {
     private String nombre;
 
     public DtoAreaTestDataBuilder() {
-        this.nombre = "nombre";
+        this.nombre = "Tecnologia";
     }
 
     public DtoAreaTestDataBuilder conNombre(String nombre) {

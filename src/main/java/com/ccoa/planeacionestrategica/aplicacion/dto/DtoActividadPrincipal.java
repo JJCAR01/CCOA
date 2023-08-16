@@ -14,6 +14,7 @@ import java.util.Date;
 public class  DtoActividadPrincipal {
 
     private String nombre;
+    private String tipoActividad;
     private String entregable;
     private Double presupuesto;
     private Date fechaInicio;
@@ -21,7 +22,5 @@ public class  DtoActividadPrincipal {
     private Date fechaRegistro;
     private DtoLineaEstrategica dtoLineaEstrategica;
     private DtoUsuario dtoUsuario;
-    private DtoTipoActividad dtoTipoActividad;
     private DtoTipoGI dtoTipoGI;
-
 }

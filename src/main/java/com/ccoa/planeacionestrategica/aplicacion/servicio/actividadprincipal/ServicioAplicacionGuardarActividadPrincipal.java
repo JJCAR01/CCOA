@@ -25,11 +25,7 @@ public class ServicioAplicacionGuardarActividadPrincipal {
 
 
         ActividadPrincipal actividadPrincipal = ActividadPrincipal.of(dto.getNombre(),
-                dto.getEntregable(),
-                dto.getPresupuesto(),
-                dto.getFechaInicio(),
-                dto.getFechaFinal(),
-                dto.getFechaRegistro(),
+                dto.getTipoActividad(), dto.getEntregable(), dto.getPresupuesto(), dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
                 LineaEstrategica.of(dto.getDtoLineaEstrategica().getNombre(),dto.getDtoLineaEstrategica().getEntregable(),dto.getDtoLineaEstrategica().getFechaInicio(),
                         dto.getDtoLineaEstrategica().getFechaFinal(),dto.getDtoLineaEstrategica().getFechaRegistro(),dto.getDtoLineaEstrategica().getIndicadorResultado(),
                         Programa.of(dto.getDtoLineaEstrategica().getDtoPrograma().getNombre(),dto.getDtoLineaEstrategica().getDtoPrograma().getCodigo(),dto.getDtoLineaEstrategica().getDtoPrograma().getVersion(),
@@ -63,8 +59,8 @@ public class ServicioAplicacionGuardarActividadPrincipal {
                 Usuario.of(dto.getDtoUsuario().getNombreUsuario(),dto.getDtoUsuario().getNombre(),dto.getDtoUsuario().getApellidos(),dto.getDtoUsuario().getPassword(),
                         dto.getDtoUsuario().getCorreo(),roles,Cargo.of(dto.getDtoUsuario().getDtoCargo().getNombre(),
                                 Area.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre()))),
-                TipoActividad.of(dto.getDtoTipoActividad().getNombre()),
-                TipoGI.of(dto.getDtoTipoGI().getCantidad(),dto.getDtoTipoGI().getValorUnitario(),dto.getDtoTipoGI().getValorTotal(),dto.getDtoTipoGI().getObservacion()));
+                TipoGI.of(dto.getDtoTipoGI().getCantidad(),dto.getDtoTipoGI().getValorUnitario(),dto.getDtoTipoGI().getValorTotal(),dto.getDtoTipoGI().getObservacion()
+                        ,dto.getDtoTipoGI().getClasificacion()));
         return new DtoRespuesta<>(this.servicioGuardarActividadPrincipal.ejecutarGuardar(actividadPrincipal));
     }
 }

@@ -24,6 +24,10 @@ dependencies {
 	implementation 'com.h2database:h2:2.1.210'
 	testImplementation 'com.h2database:h2:2.1.210'
 
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
+
+
 	//Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'

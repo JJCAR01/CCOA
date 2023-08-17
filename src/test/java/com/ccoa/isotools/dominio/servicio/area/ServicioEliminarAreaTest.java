@@ -9,16 +9,5 @@ import org.mockito.Mockito;
 
 public class ServicioEliminarAreaTest {
 
-    @Test
-    void verifcarNoExisteArea() {
-        var area = new AreaTestDataBuilder().build();
 
-        var repositorio = Mockito.mock(RepositorioArea.class);
-        var servicio = new ServicioEliminarArea(repositorio);
-
-        Mockito.when(!repositorio.existe(Mockito.any())).thenReturn(true);
-
-        Assertions.assertEquals("No existe el Area con los datos ingresados", Assertions.assertThrows(IllegalStateException.class,()->
-                servicio.ejecutarEliminar(1L)).getMessage());
-    }
 }

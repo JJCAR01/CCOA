@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorNumero;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 import java.util.Date;
@@ -17,9 +16,9 @@ public class RegistroActividad {
     private final String documento;
 
     public static RegistroActividad of(String comentario,Double porcentaje,Date fechaRegistro,String documento){
-        ValidadorArgumento.validarObligatorio(comentario,"El comentario del registro de la actividad no puede ser vacío");
-        ValidadorNumero.validadorNumeroDoubleYMayorACero(porcentaje,"El porcentaje del registro de la actividad no puede ser vacío o menor a cero");
-        ValidadorArgumento.validarObligatorio(documento,"El documento NO puede estar vacío");
+        Validador.validarObligatorio(comentario,"El comentario del registro de la actividad no puede ser vacío");
+        Validador.validadorNumeroDoubleYMayorACero(porcentaje,"El porcentaje del registro de la actividad no puede ser vacío o menor a cero");
+        Validador.validarObligatorio(documento,"El documento NO puede estar vacío");
         return new RegistroActividad(comentario, porcentaje, fechaRegistro, documento);
     }
 

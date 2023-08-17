@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorObjeto;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 
@@ -14,8 +13,8 @@ public class Rubro {
     private final TipoGI tipoGI;
 
     public static Rubro of(String nombre, TipoGI tipoGI){
-        ValidadorArgumento.validarObligatorio(nombre,"El nombre del rubro NO puede estar vacío");
-        ValidadorObjeto.validarObjeto(tipoGI,"El Tipo Gasto/Ingreso no puede estar vacío");
+        Validador.validarObligatorio(nombre,"El nombre del rubro NO puede estar vacío");
+        Validador.validarObjeto(tipoGI,"El Tipo Gasto/Ingreso no puede estar vacío");
         return new Rubro(nombre,tipoGI);
     }
 

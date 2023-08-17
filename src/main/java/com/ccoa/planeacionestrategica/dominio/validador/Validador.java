@@ -1,0 +1,125 @@
+package com.ccoa.planeacionestrategica.dominio.validador;
+
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.exepcion.ValorObligatorioExcepcion;
+
+import java.util.Date;
+import java.util.List;
+
+public class Validador {
+
+    private static final String PATRON_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
+    private static final String PATRON_CORREO = "^\\w+([.-_+]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,10})+$";
+    private static final String PATRON_NOMBRE_USUARIO = "^[a-z]\\.[a-z]{2,}$";
+
+    private static final String CAMPO_OBLIGATORIO = "El campo %s es obligatorio.";
+    public static final String MENSAJE_DEFECTO = "Ocurrió un error procesando la solicitud. Por favor contacta al administrador del sistema.";
+
+
+    public static void validarObligatorio(Object valor, String mensajeTecnico,String mensajeHumano) {
+        if (valor == null || (valor instanceof String str && str.trim().isEmpty())) {
+            throw new ValorObligatorioExcepcion(mensajeTecnico, mensajeHumano);
+        }
+    }
+
+    public static void validarObligatorio(Object valor, String mensajeTecnico) {
+        if (valor == null || (valor instanceof String str && str.trim().isEmpty())) {
+            throw new ValorObligatorioExcepcion(mensajeTecnico, MENSAJE_DEFECTO);
+        }
+    }
+
+    public static void validarObligatorioTipoDato(Date valor, String mensaje) {
+        if(valor == null) {
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+
+    public static void validadorNoVacio(List<? extends Object> lista, String mensaje) {
+        if(lista == null  || lista.isEmpty()) {
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+    public static void longitudPassword(String valor, String mensaje)
+    {
+        if(!(valor.length()>=8 && valor.length()<=15))
+        {
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+    public static void longitudNombreUsuario(String valor, String mensaje)
+    {
+        if(!(valor.length()>=3 && valor.length()<=12))
+        {
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+    public static void validadorLongitud(String valor, Long longitud, String mensaje) {
+        if(valor.length() < longitud) {
+            throw new IllegalArgumentException(String.format(mensaje, longitud));
+        }
+    }
+    public static void validadorNumeroEnteroYMayorACero(Integer valor, String mensaje){
+
+        if((valor <= 0) || (valor == null)){
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+    public static void validadorNumeroDoubleYMayorACero(Double valor, String mensaje) {
+
+        if((valor <= 0) || (valor == null)){
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+    public static void validadorNumeroLongYMayorACero(Long valor, String mensaje) {
+
+        if((valor <= 0) || (valor == null)){
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+    public static void validarObjeto(Object objeto, String mensaje){
+        if(objeto == null){
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+
+
+    public static boolean aceptacionPatron(String cadena, String patron)
+    {
+        return cadena.matches(patron);
+    }
+
+    public static void validadorCaracteresEspecialesPassword(String password, String mensaje)
+    {
+        if(!aceptacionPatron(password, PATRON_PASSWORD))
+        {
+            throw new IllegalArgumentException(mensaje);
+        }
+        else{
+            longitudPassword(password, "Valor del tamaño excedido");
+        }
+    }
+
+    public static void validadorCaracteresEspecialesCorreo(String correo, String menssaje)
+    {
+        if(!aceptacionPatron(correo, PATRON_CORREO))
+        {
+            throw new IllegalArgumentException(menssaje);
+        }
+    }
+
+    public static void validadorNombreUsuario(String nombreUsuario, String mensaje)
+    {
+        if(!aceptacionPatron(nombreUsuario, PATRON_NOMBRE_USUARIO))
+        {
+            throw new IllegalArgumentException(mensaje);
+        }
+        else{
+            longitudNombreUsuario(nombreUsuario, "Valor del tamaño excedido");
+        }
+    }
+}

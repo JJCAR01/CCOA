@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorNumero;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorObjeto;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 import java.util.Date;
@@ -27,17 +25,17 @@ public class Programa {
     public static Programa of(String nombre,String codigo,Integer version,Date fechaInicio, Date fechaFinal,
                               Date fechaRegistro,Double presupuestoIngreso,Double presupuestoGasto, ImperativoEstrategico imperativoEstrategico,
                               Usuario usuario, Area area){
-        ValidadorArgumento.validarObligatorio(nombre,"El nombre del programa NO debe estar vacío");
-        ValidadorArgumento.validarObligatorio(codigo,"El codigo NO debe estar vacío");
-        ValidadorNumero.validadorNumeroEnteroYMayorACero(version,"La version del programa debe ser mayor a cero y NO puede estar vacío");
-        ValidadorArgumento.validarObligatorioTipoDato(fechaInicio,"La fecha de inicio del programa NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDato(fechaFinal,"La fecha final del programa NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro del programa NO debe estar vacía");
-        ValidadorNumero.validadorNumeroDoubleYMayorACero(presupuestoIngreso,"El presupuesto de ingreso del programa debe ser mayor a cero y NO puede estar vacío");
-        ValidadorNumero.validadorNumeroDoubleYMayorACero(presupuestoGasto," El presupuesto de gasto del programa debe ser mayor a cero y NO puede estar vacío");
-        ValidadorObjeto.validarObjeto(imperativoEstrategico,"El imperativo estragico NO debe estar vacío");
-        ValidadorObjeto.validarObjeto(usuario,"El usuario NO debe estar vacío");
-        ValidadorObjeto.validarObjeto(area,"El area NO debe estar vacío");
+        Validador.validarObligatorio(nombre,"El nombre del programa NO debe estar vacío");
+        Validador.validarObligatorio(codigo,"El codigo NO debe estar vacío");
+        Validador.validadorNumeroEnteroYMayorACero(version,"La version del programa debe ser mayor a cero y NO puede estar vacío");
+        Validador.validarObligatorioTipoDato(fechaInicio,"La fecha de inicio del programa NO debe estar vacía");
+        Validador.validarObligatorioTipoDato(fechaFinal,"La fecha final del programa NO debe estar vacía");
+        Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro del programa NO debe estar vacía");
+        Validador.validadorNumeroDoubleYMayorACero(presupuestoIngreso,"El presupuesto de ingreso del programa debe ser mayor a cero y NO puede estar vacío");
+        Validador.validadorNumeroDoubleYMayorACero(presupuestoGasto," El presupuesto de gasto del programa debe ser mayor a cero y NO puede estar vacío");
+        Validador.validarObjeto(imperativoEstrategico,"El imperativo estragico NO debe estar vacío");
+        Validador.validarObjeto(usuario,"El usuario NO debe estar vacío");
+        Validador.validarObjeto(area,"El area NO debe estar vacío");
 
         return new Programa(nombre,codigo,version,fechaInicio,fechaFinal,fechaRegistro,presupuestoIngreso,presupuestoGasto,
                 imperativoEstrategico,usuario,area);

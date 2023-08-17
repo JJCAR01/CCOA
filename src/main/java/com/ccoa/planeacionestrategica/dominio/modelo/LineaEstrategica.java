@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorObjeto;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 import java.util.Date;
@@ -22,14 +21,14 @@ public class LineaEstrategica {
 
     public static LineaEstrategica of(String nombre,String entregable, Date fechaInicio,Date fechaFinal,
                                       Date fechaRegistro,String indicardorResultado,Programa programa, Usuario usuario){
-        ValidadorArgumento.validarObligatorio(nombre,"El nombre de la Linea Estrategica NO debe estar vacío");
-        ValidadorArgumento.validarObligatorio(entregable,"El entregbable de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDato(fechaInicio,"La fecha inicial de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDato(fechaFinal,"La fecha final de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDato(fechaRegistro,"La fecha registro de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorio(indicardorResultado, "El indicador de resultado de la linea estatregica NO debe estar vacía");
-        ValidadorObjeto.validarObjeto(programa,"El programa NO debe de estar vacío");
-        ValidadorObjeto.validarObjeto(usuario,"El usuario no puede estra vacío");
+        Validador.validarObligatorio(nombre,"El nombre de la Linea Estrategica NO debe estar vacío");
+        Validador.validarObligatorio(entregable,"El entregbable de la linea estatregica NO debe estar vacía");
+        Validador.validarObligatorioTipoDato(fechaInicio,"La fecha inicial de la linea estatregica NO debe estar vacía");
+        Validador.validarObligatorioTipoDato(fechaFinal,"La fecha final de la linea estatregica NO debe estar vacía");
+        Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha registro de la linea estatregica NO debe estar vacía");
+        Validador.validarObligatorio(indicardorResultado, "El indicador de resultado de la linea estatregica NO debe estar vacía");
+        Validador.validarObjeto(programa,"El programa NO debe de estar vacío");
+        Validador.validarObjeto(usuario,"El usuario no puede estra vacío");
 
         return new LineaEstrategica(nombre,entregable,fechaInicio,fechaFinal,fechaRegistro,indicardorResultado,
                 programa,usuario);

@@ -32,7 +32,7 @@ public class EntidadUsuario {
     private String correo;
 
     @JoinColumn(name= "rol_id")
-    private List<EntidadRol> roles;
+    private Long idRol;
 
     @JoinColumn(name = "cargo_id")
     private Long idCargo;
@@ -40,13 +40,13 @@ public class EntidadUsuario {
     public EntidadUsuario() {
     }
 
-    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo, List<EntidadRol> roles, Long idCargo) {
+    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo,Long idRol, Long idCargo) {
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.correo = correo;
-        this.roles = roles;
+        this.idRol = idRol;
         this.idCargo = idCargo;
     }
 }

@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorNumero;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 @Getter
@@ -15,10 +14,10 @@ public class Ejecutado {
     private final String documento;
 
     public static Ejecutado of(Double valor, String tipoContrato, Integer numeroOrden, String documento){
-        ValidadorNumero.validadorNumeroDoubleYMayorACero(valor,"El valor del ejecutado no puede ser vacío");
-        ValidadorArgumento.validarObligatorio(tipoContrato,"El tipo contrato no debe ser vacío");
-        ValidadorNumero.validadorNumeroEnteroYMayorACero(numeroOrden,"El numero de orden no puede estar vacío");
-        ValidadorArgumento.validarObligatorio(documento,"El documento NO puede estar vacío");
+        Validador.validadorNumeroDoubleYMayorACero(valor,"El valor del ejecutado no puede ser vacío");
+        Validador.validarObligatorio(tipoContrato,"El tipo contrato no debe ser vacío");
+        Validador.validadorNumeroEnteroYMayorACero(numeroOrden,"El numero de orden no puede estar vacío");
+        Validador.validarObligatorio(documento,"El documento NO puede estar vacío");
 
         return new Ejecutado(valor,tipoContrato, numeroOrden, documento);
     }

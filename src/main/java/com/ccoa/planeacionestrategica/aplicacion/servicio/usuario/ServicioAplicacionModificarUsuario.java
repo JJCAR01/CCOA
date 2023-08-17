@@ -12,6 +12,7 @@ import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioModificar
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -24,10 +25,9 @@ public class ServicioAplicacionModificarUsuario {
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoUsuario dto, Long codigo){
-        List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
-        Usuario usuario = Usuario.of(dto.getNombreUsuario(),dto.getNombre(), dto.getApellidos(), dto.getPassword(), dto.getCorreo(),roles,
-                dto.getIdCargo());
+        Usuario usuario = Usuario.of(dto.getNombreUsuario(),dto.getNombre(), dto.getApellidos(), dto.getPassword(), dto.getCorreo(),
+                dto.getIdRol(), dto.getIdCargo());
 
         return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,codigo));
     }

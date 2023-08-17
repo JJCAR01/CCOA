@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 @Getter
@@ -11,7 +11,7 @@ public class Area {
     private final String nombre;
 
     public static Area of(String nombre){
-        ValidadorArgumento.validarObligatorio(nombre,"El nombre del Area NO puede estar vacío");
+        Validador.validarObligatorio(nombre,"El nombre del Area NO puede estar vacío");
         return new Area(nombre);
     }
 

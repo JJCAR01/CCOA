@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorArgumento;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorNumero;
+import com.ccoa.planeacionestrategica.dominio.validador.Validador;
 import lombok.Getter;
 
 @Getter
@@ -13,8 +12,8 @@ public class Cargo {
     private final Long idArea;
 
     public static Cargo of(String nombre,Long idArea){
-        ValidadorArgumento.validarObligatorio(nombre,"El nombre del cargo no puede ser vacío");
-        ValidadorNumero.validadorNumeroLongYMayorACero(idArea,"El area NO puede ser vacío");
+        Validador.validarObligatorio(nombre,"El nombre del cargo no puede ser vacío");
+        Validador.validadorNumeroLongYMayorACero(idArea,"El area NO puede ser vacío");
         return new Cargo(nombre,idArea);
     }
 

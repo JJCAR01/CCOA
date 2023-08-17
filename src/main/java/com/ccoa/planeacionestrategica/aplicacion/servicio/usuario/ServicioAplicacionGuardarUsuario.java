@@ -24,10 +24,9 @@ public class ServicioAplicacionGuardarUsuario {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoUsuario dto){
-        List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         Usuario usuario = Usuario.of(dto.getNombreUsuario(),dto.getNombre(), dto.getApellidos(), dto.getPassword(), dto.getCorreo(),
-                roles, dto.getIdCargo());
+                dto.getIdRol(), dto.getIdCargo());
         return new DtoRespuesta<>(this.servicioGuardarUsuario.ejecutarGuardar(usuario));
     }
 

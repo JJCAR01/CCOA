@@ -15,5 +15,5 @@ public class DtoUsuario {
     private String password;
     private String correo;
     private Long idCargo;
-    private DtoRol dtoRol;
+    private Long idRol;
 }

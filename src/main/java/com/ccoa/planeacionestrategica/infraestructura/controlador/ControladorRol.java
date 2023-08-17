@@ -1,41 +1,35 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoArea;
+import com.ccoa.planeacionestrategica.aplicacion.dto.DtoRol;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionEliminarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionGuardarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionListarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionModificarArea;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.rol.ServicioAplicacionGuardarRol;
 import com.ccoa.planeacionestrategica.dominio.modelo.Area;
-import org.springframework.http.ResponseEntity;
+import com.ccoa.planeacionestrategica.dominio.servicio.rol.ServicioGuardarRol;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/ccoa/areas")
-public class ControladorArea {
+@RequestMapping("/ccoa/roles")
+public class ControladorRol {
 
-    private final ServicioAplicacionGuardarArea servicioAplicacionGuardarArea;
-    private final ServicioAplicacionListarArea servicioAplicacionListarArea;
-    private final ServicioAplicacionEliminarArea servicioAplicacionEliminarArea;
-    private final ServicioAplicacionModificarArea servicioAplicacionModificarArea;
+    private final ServicioAplicacionGuardarRol servicioAplicacionGuardarRol;
 
-    public ControladorArea(ServicioAplicacionGuardarArea servicioAplicacionGuardarArea, ServicioAplicacionListarArea servicioAplicacionListarArea,
-                           ServicioAplicacionEliminarArea servicioAplicacionEliminarArea, ServicioAplicacionModificarArea servicioAplicacionModificarArea) {
-        this.servicioAplicacionGuardarArea = servicioAplicacionGuardarArea;
-        this.servicioAplicacionListarArea = servicioAplicacionListarArea;
-        this.servicioAplicacionEliminarArea = servicioAplicacionEliminarArea;
-        this.servicioAplicacionModificarArea = servicioAplicacionModificarArea;
+    public ControladorRol(ServicioAplicacionGuardarRol servicioAplicacionGuardarRol) {
+        this.servicioAplicacionGuardarRol = servicioAplicacionGuardarRol;
     }
-
 
     @PostMapping
-    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoArea area){
-        return ResponseEntity.ok(this.servicioAplicacionGuardarArea.ejecutar(area));
+    public DtoRespuesta<Long> crear(@RequestBody DtoRol rol){
+        return this.servicioAplicacionGuardarRol.ejecutar(rol);
     }
 
-    @GetMapping
+    /*@GetMapping
     public List<Area> listar(){
         return this.servicioAplicacionListarArea.ejecutar();
     }
@@ -54,4 +48,6 @@ public class ControladorArea {
     public DtoRespuesta<Long> modificar(@RequestBody DtoArea area, @PathVariable Long codigo){
         return this.servicioAplicacionModificarArea.ejecutarModificar(area,codigo);
     }
+
+     */
 }

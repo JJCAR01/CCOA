@@ -11,6 +11,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadU
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioCargoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioRolJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import org.springframework.stereotype.Repository;
 
@@ -24,9 +25,12 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     private static final String MENSAJE_NO_EXISTE = "No existe algunos de los componentes con los datos ingresados";
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioCargoJpa repositorioCargoJpa;
-    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa) {
+    private final RepositorioRolJpa repositorioRolJpa;
+
+    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, RepositorioRolJpa repositorioRolJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioCargoJpa = repositorioCargoJpa;
+        this.repositorioRolJpa = repositorioRolJpa;
     }
 
     @Override
@@ -50,12 +54,11 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long guardar(Usuario usuario) {
-        List<EntidadRol> roles = usuario.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
-
         Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
+        Optional<EntidadRol> entidadRol = this.repositorioRolJpa.findById(usuario.getIdCargo());
 
         EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombreUsuario(), usuario.getNombre(), usuario.getApellidos(),
-                usuario.getPassword(), usuario.getCorreo(),roles,entidadCargo.get().getId() );
+                usuario.getPassword(), usuario.getCorreo(), entidadRol.get().getId(), entidadCargo.get().getId() );
 
         return this.repositorioUsuarioJpa.save(entidadUsuario).getId();
     }
@@ -84,7 +87,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         entidadUsuario.setApellidos(usuario.getApellidos());
         entidadUsuario.setPassword(usuario.getPassword());
 
-        entidadUsuario.setIdCargo(entidadCargo.get().getId());
+        entidadUsuario.setIdCargo(entidadCargo.get().getIdArea());
 
         repositorioUsuarioJpa.save(entidadUsuario);
         return id;

@@ -11,5 +11,6 @@ import lombok.Setter;
 @Setter
 public class DtoRol {
 
-    private String nombre;
+    private String rol;
+    private String descripcion;
 }

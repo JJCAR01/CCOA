@@ -7,16 +7,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "rol")
+@Table(name = "rol_usuario")
 public class EntidadRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nombre;
+    private String rol;
+    private String descripcion;
 
-    public EntidadRol(String nombre) {
-        this.nombre = nombre;
+    public EntidadRol() {
+    }
+
+    public EntidadRol(String rol, String descripcion) {
+        this.rol = rol;
+        this.descripcion = descripcion;
     }
 }

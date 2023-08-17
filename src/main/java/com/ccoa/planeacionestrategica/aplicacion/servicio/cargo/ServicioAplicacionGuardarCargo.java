@@ -19,10 +19,7 @@ public class ServicioAplicacionGuardarCargo {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoCargo dto){
-
-        Area area = Area.of(dto.getDtoArea().getNombre());
-
-        Cargo cargo = Cargo.of(dto.getNombre(),area);
+        Cargo cargo = Cargo.of(dto.getNombre(),dto.getIdArea());
         return new DtoRespuesta<>(this.servicioGuardarCargo.ejecutarGuardar(cargo));
     }
 }

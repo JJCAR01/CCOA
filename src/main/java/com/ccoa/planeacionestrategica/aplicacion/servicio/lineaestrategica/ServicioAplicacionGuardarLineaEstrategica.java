@@ -20,7 +20,7 @@ public class ServicioAplicacionGuardarLineaEstrategica {
         this.servicioGuardarLineaEstrategica = servicioGuardarLineaEstrategica;
     }
 
-    public DtoRespuesta<Long> ejecutar(DtoLineaEstrategica dto){
+    /*public DtoRespuesta<Long> ejecutar(DtoLineaEstrategica dto){
         List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
 
@@ -54,4 +54,6 @@ public class ServicioAplicacionGuardarLineaEstrategica {
                                 Area.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre()))));
         return new DtoRespuesta<>(this.servicioGuardarLineaEstrategica.ejecutarGuardar(lineaEstrategica));
     }
+
+     */
 }

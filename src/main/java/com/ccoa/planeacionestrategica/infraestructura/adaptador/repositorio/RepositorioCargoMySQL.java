@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadCargo;
@@ -10,6 +9,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadA
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RepositorioCargoMySQL implements RepositorioCargo {
@@ -26,23 +26,19 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
     @Override
     public List<Cargo> listar() {
         List<EntidadCargo> entidadCargos =this.repositorioCargoJpa.findAll();
-        return entidadCargos.stream().map(entidadCargo -> Cargo.of(entidadCargo.getNombre(), Area.of(entidadCargo.getArea().getNombre()))).toList();    }
+        return entidadCargos.stream().map(entidadCargo -> Cargo.of(entidadCargo.getNombre(), entidadCargo.getIdArea())).toList();    }
 
     @Override
     public Cargo consultarPorId(Long id) {
-        return this.repositorioCargoJpa.findById(id).map(entidadCargo -> Cargo.of(entidadCargo.getNombre(),Area.of(entidadCargo.getNombre()))).orElse(null);
+        return this.repositorioCargoJpa.findById(id).map(entidadCargo -> Cargo.of(entidadCargo.getNombre(), entidadCargo.getIdArea())).orElse(null);
 
     }
 
     @Override
     public Long guardar(Cargo cargo) {
-        EntidadArea entidadArea = this.repositorioAreaJpa.findByNombre(cargo.getArea().getNombre());
+        Optional<EntidadArea> entidadArea = this.repositorioAreaJpa.findById(cargo.getIdArea());
 
-        if(entidadArea == null){
-            throw new IllegalStateException(MENSAJE_NO_EXISTE);
-        }
-
-        EntidadCargo entidadCargo = new EntidadCargo(cargo.getNombre(),entidadArea);
+        EntidadCargo entidadCargo = new EntidadCargo(cargo.getNombre(), entidadArea.get().getId());
         return this.repositorioCargoJpa.save(entidadCargo).getId();
     }
 
@@ -60,14 +56,14 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
     @Override
     public Long modificar(Cargo cargo, Long id) {
         repositorioCargoJpa.findById(id);
-        EntidadArea area = this.repositorioAreaJpa.findByNombre(cargo.getArea().getNombre());
+        Optional<EntidadArea> area = this.repositorioAreaJpa.findById(cargo.getIdArea());
 
 
         EntidadCargo entidadCargo = new EntidadCargo();
         entidadCargo.setId(id);
         entidadCargo.setNombre(cargo.getNombre());
 
-        entidadCargo.setArea(area);
+        entidadCargo.setIdArea(area.get().getId());
 
         repositorioCargoJpa.save(entidadCargo);
         return id;

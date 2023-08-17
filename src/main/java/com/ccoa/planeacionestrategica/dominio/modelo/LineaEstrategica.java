@@ -24,9 +24,9 @@ public class LineaEstrategica {
                                       Date fechaRegistro,String indicardorResultado,Programa programa, Usuario usuario){
         ValidadorArgumento.validarObligatorio(nombre,"El nombre de la Linea Estrategica NO debe estar vacío");
         ValidadorArgumento.validarObligatorio(entregable,"El entregbable de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaInicio,"La fecha inicial de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaFinal,"La fecha final de la linea estatregica NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaRegistro,"La fecha registro de la linea estatregica NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaInicio,"La fecha inicial de la linea estatregica NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaFinal,"La fecha final de la linea estatregica NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaRegistro,"La fecha registro de la linea estatregica NO debe estar vacía");
         ValidadorArgumento.validarObligatorio(indicardorResultado, "El indicador de resultado de la linea estatregica NO debe estar vacía");
         ValidadorObjeto.validarObjeto(programa,"El programa NO debe de estar vacío");
         ValidadorObjeto.validarObjeto(usuario,"El usuario no puede estra vacío");

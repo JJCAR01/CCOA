@@ -34,10 +34,12 @@ public class ControladorLineaEstrategica {
         this.servicioAplicacionListarLineaEstrategica = servicioAplicacionListarLineaEstrategica;
     }
 
-    @PostMapping
+    /*@PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoLineaEstrategica lineaEstrategica){
         return this.servicioAplicacionGuardarLineaEstrategica.ejecutar(lineaEstrategica);
     }
+
+     */
 
     @GetMapping
     public List<LineaEstrategica> listar(){
@@ -54,8 +56,10 @@ public class ControladorLineaEstrategica {
         return this.servicioAplicacionEliminarLineaEstrategica.ejecutarEliminar(codigo);
     }
 
-    @PutMapping("/{codigo}")
+    /*@PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoLineaEstrategica lineaEstrategica, @PathVariable Long codigo){
         return this.servicioAplicacionModificarLineaEstrategica.ejecutarModificar(lineaEstrategica,codigo);
     }
+
+     */
 }

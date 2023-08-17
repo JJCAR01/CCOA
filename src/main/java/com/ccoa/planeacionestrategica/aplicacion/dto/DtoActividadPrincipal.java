@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.LineaEstrategica;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -28,7 +28,7 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
 
     @Override
     public List<ImperativoEstrategico> listar() {
-        List<EntidadImperativoEstrategico> entidadImperativoEstrategicos =this.repositorioImperativoEstrategicoJpa.findAll();
+        /*List<EntidadImperativoEstrategico> entidadImperativoEstrategicos =this.repositorioImperativoEstrategicoJpa.findAll();
         return entidadImperativoEstrategicos.stream().map(entidad -> ImperativoEstrategico.of(entidad.getNombre(),
                 entidad.getFechaInicio(),
                 entidad.getFechaFinal(),
@@ -42,11 +42,13 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
                         entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),entidad.getUsuario().getCorreo(),
                         entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                         Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))))).toList();
+
+         */return null;
     }
 
     @Override
     public ImperativoEstrategico consultarPorId(Long id) {
-        return this.repositorioImperativoEstrategicoJpa
+        /*return this.repositorioImperativoEstrategicoJpa
                 .findById(id)
                 .map(entidad -> ImperativoEstrategico.of(entidad.getNombre(),
                         entidad.getFechaInicio(),
@@ -62,6 +64,8 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
                                 entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                                 Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre())))))
                 .orElse(null);
+
+         */return null;
     }
 
 

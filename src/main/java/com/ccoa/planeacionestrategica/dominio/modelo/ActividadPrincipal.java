@@ -29,10 +29,10 @@ public class ActividadPrincipal {
         ValidadorArgumento.validarObligatorio(nombre,"El nombre de la actividad principal NO debe estar vacía");
         ValidadorArgumento.validarObligatorio(tipoActividad,"El tipo de actividad NO debe estar vacío");
         ValidadorArgumento.validarObligatorio(entregable,"El entregable  de la actividad principal NO debe estar vacía");
-        ValidadorNumero.validadorNumeroDoubleMayorACero(presupuesto,"El presupesto de la actividad principal NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaInicio,"La fecha inicio de la actividad principal NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaFinal,"La fecha inicial de la actividad principal NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaRegistro,"La fecha de resgistro de la actividad principal NO debe estar vacía");
+        ValidadorNumero.validadorNumeroDoubleYMayorACero(presupuesto,"El presupesto de la actividad principal NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaInicio,"La fecha inicio de la actividad principal NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaFinal,"La fecha inicial de la actividad principal NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaRegistro,"La fecha de resgistro de la actividad principal NO debe estar vacía");
         ValidadorObjeto.validarObjeto(lineaEstrategica,"La linea estrategica NO debe estar vacía");
         ValidadorObjeto.validarObjeto(usuario,"El usuario NO debe estar vacía");
         ValidadorObjeto.validarObjeto(tipoGI,"El tipo GI NO debe estar vacía");

@@ -29,7 +29,7 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
 
     @Override
     public List<ActividadPrincipal> listar() {
-        List<EntidadActividadPrincipal> actividadesPrincipales = this.repositorioActividadPrincipalJpa.findAll();
+        /*List<EntidadActividadPrincipal> actividadesPrincipales = this.repositorioActividadPrincipalJpa.findAll();
         return actividadesPrincipales.stream().map(entidad -> ActividadPrincipal.of(entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
                 entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro(),
                 LineaEstrategica.of(entidad.getLineaEstrategica().getNombre(),entidad.getLineaEstrategica().getEntregable(),entidad.getLineaEstrategica().getFechaInicio(),entidad.getLineaEstrategica().getFechaFinal(),
@@ -62,10 +62,14 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
                         Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))),
                 TipoGI.of(entidad.getTipoGI().getCantidad(),entidad.getTipoGI().getValorUnitario(),entidad.getTipoGI().getValorTotal(),entidad.getTipoGI().getObservacion(),entidad.getTipoGI().getClasificacion()))).toList();
 
+
+         */
+        return null;
     }
 
     @Override
     public ActividadPrincipal consultarPorId(Long id) {
+        /*
         return this.repositorioActividadPrincipalJpa
                 .findById(id)
                 .map(entidad -> ActividadPrincipal.of(entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
@@ -99,6 +103,10 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
                                 entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                                 Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))),
                         TipoGI.of(entidad.getTipoGI().getCantidad(),entidad.getTipoGI().getValorUnitario(),entidad.getTipoGI().getValorTotal(),entidad.getTipoGI().getObservacion(),entidad.getTipoGI().getClasificacion()))).orElse(null);
+
+
+         */
+        return null;
     }
 
     @Override

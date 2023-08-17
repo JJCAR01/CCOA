@@ -14,6 +14,6 @@ public class DtoUsuario {
     private String apellidos;
     private String password;
     private String correo;
-    private DtoCargo dtoCargo;
+    private Long idCargo;
     private DtoRol dtoRol;
 }

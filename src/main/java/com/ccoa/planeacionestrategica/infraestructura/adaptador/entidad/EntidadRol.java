@@ -10,15 +10,11 @@ import lombok.Setter;
 @Table(name = "rol")
 public class EntidadRol {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nombre;
-
-    public EntidadRol() {
-    }
 
     public EntidadRol(String nombre) {
         this.nombre = nombre;

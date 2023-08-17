@@ -19,9 +19,6 @@ public class EntidadArea {
     @Column(unique = true, length = 50, name = "nombre")
     private String nombre;
 
-    @OneToMany(mappedBy = "area")
-    private List<EntidadCargo> cargos;
-
     public EntidadArea() {
     }
 

@@ -11,7 +11,7 @@ public class ValidadorArgumento {
         }
     }
 
-    public static void validarObligatorioTipoDate(Date valor, String mensaje) {
+    public static void validarObligatorioTipoDato(Date valor, String mensaje) {
         if(valor == null) {
             throw new IllegalArgumentException(mensaje);
         }

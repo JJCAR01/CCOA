@@ -21,8 +21,7 @@ public class ServicioAplicacionGuardarActividadPrincipal {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoActividadPrincipal dto){
-        List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
-
+    /*    List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         ActividadPrincipal actividadPrincipal = ActividadPrincipal.of(dto.getNombre(),
                 dto.getTipoActividad(), dto.getEntregable(), dto.getPresupuesto(), dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
@@ -34,8 +33,10 @@ public class ServicioAplicacionGuardarActividadPrincipal {
                                 dto.getDtoLineaEstrategica().getDtoPrograma().getPresupuestoGasto(),
                                 ImperativoEstrategico.of(dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getNombre(),dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getFechaInicio(),
                                         dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getFechaFinal(),dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getFechaRegistro(),
-                                        Pat.of(dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getNombre(),dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getFechaInicio(),
-                                                dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getFechaFinal(),dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getFechaRegistro(),
+                                        Pat.of(dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getNombre(),
+                                                dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getFechaInicio(),
+                                                dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getFechaFinal(),
+                                                dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getFechaRegistro(),
                                                 Usuario.of(dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getDtoUsuario().getNombreUsuario(),
                                                         dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getDtoUsuario().getNombre(),
                                                         dto.getDtoLineaEstrategica().getDtoPrograma().getDtoImperativoEstrategico().getDtoPat().getDtoUsuario().getApellidos(),
@@ -62,5 +63,8 @@ public class ServicioAplicacionGuardarActividadPrincipal {
                 TipoGI.of(dto.getDtoTipoGI().getCantidad(),dto.getDtoTipoGI().getValorUnitario(),dto.getDtoTipoGI().getValorTotal(),dto.getDtoTipoGI().getObservacion()
                         ,dto.getDtoTipoGI().getClasificacion()));
         return new DtoRespuesta<>(this.servicioGuardarActividadPrincipal.ejecutarGuardar(actividadPrincipal));
+
+     */
+        return null;
     }
 }

@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface RepositorioCargoJpa extends JpaRepository<EntidadCargo,Long> {
     EntidadCargo findByNombre(String nombre);
 
+
 }

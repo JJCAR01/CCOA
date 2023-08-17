@@ -19,7 +19,7 @@ public class ServicioAplicacionModificarCargo {
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoCargo dto, Long codigo){
-        Cargo cargo = Cargo.of(dto.getNombre(),Area.of(dto.getDtoArea().getNombre()));
+        Cargo cargo = Cargo.of(dto.getNombre(),dto.getIdArea());
 
         return new DtoRespuesta<>(this.servicioModificarCargo.ejecutarModificar(cargo,codigo));
     }

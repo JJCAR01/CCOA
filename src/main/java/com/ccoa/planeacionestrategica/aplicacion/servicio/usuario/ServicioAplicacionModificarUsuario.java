@@ -26,11 +26,8 @@ public class ServicioAplicacionModificarUsuario {
     public DtoRespuesta<Long> ejecutarModificar(DtoUsuario dto, Long codigo){
         List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
-        Area area = Area.of(dto.getDtoCargo().getDtoArea().getNombre());
-
-
         Usuario usuario = Usuario.of(dto.getNombreUsuario(),dto.getNombre(), dto.getApellidos(), dto.getPassword(), dto.getCorreo(),roles,
-                Cargo.of(dto.getDtoCargo().getNombre(),area));
+                dto.getIdCargo());
 
         return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,codigo));
     }

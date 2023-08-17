@@ -40,6 +40,7 @@ public class ControladorUsuario {
         return this.servicioAplicacionGuardarUsuario.ejecutar(usuario);
     }
 
+
     @GetMapping
     public List<DtoUsuarioResumen> listar(){
         return this.servicioAplicacionListarUsuario.ejecutar();

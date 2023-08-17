@@ -20,7 +20,7 @@ public class ServicioAplicacionGuardarPrograma {
         this.servicioGuardarPrograma = servicioGuardarPrograma;
     }
 
-    public DtoRespuesta<Long> ejecutar(DtoPrograma dto){
+    /*public DtoRespuesta<Long> ejecutar(DtoPrograma dto){
         List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
 
@@ -47,4 +47,6 @@ public class ServicioAplicacionGuardarPrograma {
 
         return new DtoRespuesta<>(this.servicioGuardarPrograma.ejecutarGuardar(programa));
     }
+
+     */
 }

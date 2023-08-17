@@ -54,8 +54,10 @@ public class ControladorActividadPrincipal {
         return this.servicioAplicacionEliminarActividadPrincipal.ejecutarEliminar(codigo);
     }
 
-    @PutMapping("/{codigo}")
+    /*@PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoActividadPrincipal actividadPrincipal, @PathVariable Long codigo){
         return this.servicioAplicacionModificarActividadPrincipal.ejecutarModificar(actividadPrincipal,codigo);
     }
+
+     */
 }

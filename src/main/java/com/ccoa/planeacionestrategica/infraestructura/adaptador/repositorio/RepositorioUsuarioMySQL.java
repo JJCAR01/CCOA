@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.lang.ref.PhantomReference;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
@@ -30,31 +31,31 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public List<DtoUsuarioResumen> listar() {
-
         List<EntidadUsuario> entidadUsuarios =this.repositorioUsuarioJpa.findAll();
         return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellidos(),
-                entidad.getPassword(),entidad.getCorreo(),
-                Cargo.of(entidad.getCargo().getArea().getNombre(), Area.of(entidad.getCargo().getArea().getNombre())))).toList();
+                entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo())).toList();
+
     }
 
     @Override
     public DtoUsuarioResumen consultarPorId(Long id) {
+
         return this.repositorioUsuarioJpa
                 .findById(id)
                 .map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellidos(),
-                        entidad.getPassword(),entidad.getCorreo(),
-                        Cargo.of(entidad.getCargo().getArea().getNombre(), Area.of(entidad.getCargo().getArea().getNombre()))))
+                        entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo()))
                 .orElse(null);
     }
+
 
     @Override
     public Long guardar(Usuario usuario) {
         List<EntidadRol> roles = usuario.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
 
-        EntidadCargo entidadCargo = this.repositorioCargoJpa.findByNombre(usuario.getCargo().getNombre());
+        Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
 
         EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombreUsuario(), usuario.getNombre(), usuario.getApellidos(),
-                usuario.getPassword(), usuario.getCorreo(),entidadCargo,roles );
+                usuario.getPassword(), usuario.getCorreo(),roles,entidadCargo.get().getId() );
 
         return this.repositorioUsuarioJpa.save(entidadUsuario).getId();
     }
@@ -74,7 +75,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     @Override
     public Long modificar(Usuario usuario, Long id) {
 
-        EntidadCargo entidadCargo =this.repositorioCargoJpa.findByNombre(usuario.getCargo().getNombre());
+        Optional<EntidadCargo> entidadCargo =this.repositorioCargoJpa.findById(usuario.getIdCargo());
 
         repositorioUsuarioJpa.findById(id);
         EntidadUsuario entidadUsuario = new EntidadUsuario();
@@ -83,7 +84,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         entidadUsuario.setApellidos(usuario.getApellidos());
         entidadUsuario.setPassword(usuario.getPassword());
 
-        entidadUsuario.setCargo(entidadCargo);
+        entidadUsuario.setIdCargo(entidadCargo.get().getId());
 
         repositorioUsuarioJpa.save(entidadUsuario);
         return id;

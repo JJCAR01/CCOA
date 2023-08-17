@@ -20,7 +20,7 @@ public class ServicioAplicacionModificarLineaEstrategica {
         this.servicioModificarLineaEstrategica = servicioModificarLineaEstrategica;
     }
 
-    public DtoRespuesta<Long> ejecutarModificar(DtoLineaEstrategica dto, Long codigo) {
+    /*public DtoRespuesta<Long> ejecutarModificar(DtoLineaEstrategica dto, Long codigo) {
         List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
 
@@ -56,4 +56,6 @@ public class ServicioAplicacionModificarLineaEstrategica {
         return new DtoRespuesta<>(this.servicioModificarLineaEstrategica.ejecutarModificar(lineaEstrategica,codigo));
 
     }
+
+     */
 }

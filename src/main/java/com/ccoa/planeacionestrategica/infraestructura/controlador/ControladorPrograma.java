@@ -34,10 +34,12 @@ public class ControladorPrograma {
         this.servicioAplicacionModificarPrograma = servicioAplicacionModificarPrograma;
     }
 
-    @PostMapping
+    /*@PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoPrograma programa){
         return this.servicioAplicacionGuardarPrograma.ejecutar(programa);
     }
+
+     */
 
     @GetMapping
     public List<Programa> listar(){
@@ -54,10 +56,12 @@ public class ControladorPrograma {
         return this.servicioAplicacionEliminarPrograma.ejecutarEliminar(codigo);
     }
 
-    @PutMapping("/{codigo}")
+    /*@PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoPrograma programa, @PathVariable Long codigo){
         return this.servicioAplicacionModificarPrograma.ejecutarModificar(programa,codigo);
     }
+
+     */
 
 
 }

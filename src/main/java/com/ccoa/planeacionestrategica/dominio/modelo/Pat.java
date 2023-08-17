@@ -19,9 +19,9 @@ public class Pat {
 
     public static Pat of(String nombre,Date fechaInicio,Date fechaFinal,Date fechaRegistro,Usuario usuario){
         ValidadorArgumento.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaInicio,"El dato fecha de inicio NO puede estar vacío");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaFinal,"El dato fecha de final NO puede estar vacío");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaRegistro,"La fecha de registro NO debe ser vacío");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaInicio,"El dato fecha de inicio NO puede estar vacío");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaFinal,"El dato fecha de final NO puede estar vacío");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro NO debe ser vacío");
         ValidadorObjeto.validarObjeto(usuario,"El usuario No puede ser vacío");
         return new Pat(nombre,fechaInicio,fechaFinal,fechaRegistro,usuario);
     }

@@ -19,36 +19,34 @@ public class EntidadUsuario {
     @Column(unique = true, length = 50, name = "nombre_usuario")
     private String nombreUsuario;
 
-    @Column(unique = true, length = 50, name = "nombre")
+    @Column(unique = true, length = 50)
     private String nombre;
 
     @Column(unique = true, length = 50, name = "apellido")
     private String apellidos;
 
-    @Column(length = 50, name = "password")
+    @Column(length = 50)
     private String password;
 
-    @Column(unique = true, length = 50, name = "correo")
+    @Column(unique = true, length = 50)
     private String correo;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "cargo_id")
-    private EntidadCargo cargo;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name= "rol_id")
     private List<EntidadRol> roles;
+
+    @JoinColumn(name = "cargo_id")
+    private Long idCargo;
 
     public EntidadUsuario() {
     }
 
-    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo, EntidadCargo cargo, List<EntidadRol> roles) {
+    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo, List<EntidadRol> roles, Long idCargo) {
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.correo = correo;
-        this.cargo = cargo;
         this.roles = roles;
+        this.idCargo = idCargo;
     }
 }

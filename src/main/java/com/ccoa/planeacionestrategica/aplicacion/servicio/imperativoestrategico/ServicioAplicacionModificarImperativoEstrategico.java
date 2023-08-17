@@ -20,7 +20,7 @@ public class ServicioAplicacionModificarImperativoEstrategico {
         this.servicioModificarImperativoEstrategico = servicioModificarImperativoEstrategico;
     }
 
-    public DtoRespuesta<Long> ejecutarModificar(DtoImperativoEstrategico dto, Long codigo){
+    /*public DtoRespuesta<Long> ejecutarModificar(DtoImperativoEstrategico dto, Long codigo){
         List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         ImperativoEstrategico imperativoEstrategico  = ImperativoEstrategico.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
@@ -38,4 +38,6 @@ public class ServicioAplicacionModificarImperativoEstrategico {
 
         return new DtoRespuesta<>(this.servicioModificarImperativoEstrategico.ejecutarModificar(imperativoEstrategico,codigo));
     }
+
+     */
 }

@@ -24,16 +24,21 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public List<Pat> listar() {
-        List<EntidadPat> entidadPats =this.repositorioPatJpa.findAll();
+        /*List<EntidadPat> entidadPats =this.repositorioPatJpa.findAll();
         return entidadPats.stream().map(entidad -> Pat.of(entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
                 entidad.getFechaRegistro(),Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),
                 entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),entidad.getUsuario().getCorreo(),
                 entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                 Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))))).toList();
+
+
+         */ return null;
     }
+
 
     @Override
     public Pat consultarPorId(Long id) {
+        /*
         return this.repositorioPatJpa
                 .findById(id)
                 .map(entidad ->  Pat.of(entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
@@ -42,6 +47,8 @@ public class RepositorioPatMySQL implements RepositorioPat {
                                 entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                                 Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre())))))
                 .orElse(null);
+
+         */return null;
     }
 
     @Override

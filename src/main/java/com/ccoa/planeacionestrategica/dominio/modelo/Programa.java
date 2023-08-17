@@ -29,12 +29,12 @@ public class Programa {
                               Usuario usuario, Area area){
         ValidadorArgumento.validarObligatorio(nombre,"El nombre del programa NO debe estar vacío");
         ValidadorArgumento.validarObligatorio(codigo,"El codigo NO debe estar vacío");
-        ValidadorNumero.validadorNumeroEnteroMayorACero(version,"La version del programa debe ser mayor a cero y NO puede estar vacío");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaInicio,"La fecha de inicio del programa NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaFinal,"La fecha final del programa NO debe estar vacía");
-        ValidadorArgumento.validarObligatorioTipoDate(fechaRegistro,"La fecha de registro del programa NO debe estar vacía");
-        ValidadorNumero.validadorNumeroDoubleMayorACero(presupuestoIngreso,"El presupuesto de ingreso del programa debe ser mayor a cero y NO puede estar vacío");
-        ValidadorNumero.validadorNumeroDoubleMayorACero(presupuestoGasto," El presupuesto de gasto del programa debe ser mayor a cero y NO puede estar vacío");
+        ValidadorNumero.validadorNumeroEnteroYMayorACero(version,"La version del programa debe ser mayor a cero y NO puede estar vacío");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaInicio,"La fecha de inicio del programa NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaFinal,"La fecha final del programa NO debe estar vacía");
+        ValidadorArgumento.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro del programa NO debe estar vacía");
+        ValidadorNumero.validadorNumeroDoubleYMayorACero(presupuestoIngreso,"El presupuesto de ingreso del programa debe ser mayor a cero y NO puede estar vacío");
+        ValidadorNumero.validadorNumeroDoubleYMayorACero(presupuestoGasto," El presupuesto de gasto del programa debe ser mayor a cero y NO puede estar vacío");
         ValidadorObjeto.validarObjeto(imperativoEstrategico,"El imperativo estragico NO debe estar vacío");
         ValidadorObjeto.validarObjeto(usuario,"El usuario NO debe estar vacío");
         ValidadorObjeto.validarObjeto(area,"El area NO debe estar vacío");

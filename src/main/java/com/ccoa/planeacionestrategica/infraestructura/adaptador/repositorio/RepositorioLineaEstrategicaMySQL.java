@@ -29,7 +29,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
 
     @Override
     public List<LineaEstrategica> listar() {
-        List<EntidadLineaEstrategica> lineaEstrategicas = this.repositorioLineaEstrategicaJpa.findAll();
+        /*List<EntidadLineaEstrategica> lineaEstrategicas = this.repositorioLineaEstrategicaJpa.findAll();
         return lineaEstrategicas.stream().map(entidad -> LineaEstrategica.of(entidad.getNombre(),entidad.getEntregable(),entidad.getFechaInicio(),entidad.getFechaFinal(),
                 entidad.getFechaRegistro(),entidad.getIndicadorResultado(),
                 Programa.of(entidad.getPrograma().getNombre(), entidad.getPrograma().getCodigo(), entidad.getPrograma().getVersion(),entidad.getPrograma().getFechaInicio(),
@@ -55,10 +55,13 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
                 Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),
                         entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                         Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))))).toList();
+
+         */return null;
     }
 
     @Override
     public LineaEstrategica consultarPorId(Long id) {
+        /*
         return this.repositorioLineaEstrategicaJpa
                 .findById(id)
                 .map(entidad -> LineaEstrategica.of(entidad.getNombre(),entidad.getEntregable(),entidad.getFechaInicio(),entidad.getFechaFinal(),
@@ -86,7 +89,11 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
                         Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),
                                 entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                                 Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))))).orElse(null);
+
+
+         */return null;
     }
+
 
     @Override
     public Long guardar(LineaEstrategica lineaEstrategica) {

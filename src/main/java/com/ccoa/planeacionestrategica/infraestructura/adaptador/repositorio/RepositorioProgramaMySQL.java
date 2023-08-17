@@ -33,7 +33,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
 
     @Override
     public List<Programa> listar() {
-        List<EntidadPrograma> programas = this.repositorioProgramaJpa.findAll();
+        /*List<EntidadPrograma> programas = this.repositorioProgramaJpa.findAll();
         return programas.stream().map(entidad -> Programa.of(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
                 entidad.getFechaFinal(),entidad.getFechaRegistro(), entidad.getPresupuestoIngreso(), entidad.getPresupuestoGasto(),
                 ImperativoEstrategico.of(entidad.getImperativoEstrategico().getNombre(),entidad.getImperativoEstrategico().getFechaInicio(),
@@ -54,11 +54,14 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
                         entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                         Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))),
                 Area.of(entidad.getArea().getNombre()))).toList();
+
+         */
+        return null;
     }
 
     @Override
     public Programa consultarPorId(Long id) {
-        return this.repositorioProgramaJpa
+        /*return this.repositorioProgramaJpa
                 .findById(id)
                 .map(entidad ->  Programa.of(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
                         entidad.getFechaFinal(),entidad.getFechaRegistro(), entidad.getPresupuestoIngreso(),entidad.getPresupuestoGasto(),
@@ -80,7 +83,13 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
                                         entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
                                         Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))),
                                 Area.of(entidad.getArea().getNombre()))).orElse(null);
+
+
+         */return null;
     }
+
+
+
 
     @Override
     public Long guardar(Programa programa) {

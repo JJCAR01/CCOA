@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -16,21 +17,18 @@ public class EntidadCargo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(unique = true, length = 50, name = "nombre")
+    @Column(unique = true, length = 50)
     private String nombre;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "area_id")
-    private EntidadArea area;
-
-    @OneToMany(mappedBy = "cargo")
-    private List<EntidadUsuario> usuarios;
+    @JoinColumn(name="id_area")
+    private Long idArea;
 
     public EntidadCargo() {
     }
 
-    public EntidadCargo(String nombre, EntidadArea area) {
+    public EntidadCargo(String nombre, Long idArea) {
         this.nombre = nombre;
-        this.area = area;
+        this.idArea = idArea;
     }
+
 }

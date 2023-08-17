@@ -20,7 +20,7 @@ public class ServicioAplicacionGuardarPat {
         this.servicioGuardarPat = servicioGuardarPat;
     }
 
-    public DtoRespuesta<Long> ejecutar(DtoPat dto){
+    /*public DtoRespuesta<Long> ejecutar(DtoPat dto){
         List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         Pat pat = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
@@ -30,4 +30,6 @@ public class ServicioAplicacionGuardarPat {
                                 Area.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre()))));
         return new DtoRespuesta<>(this.servicioGuardarPat.ejecutarGuardar(pat));
     }
+
+     */
 }

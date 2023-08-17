@@ -19,5 +19,5 @@ public class DtoUsuarioResumen {
     private String apellidos;
     private String password;
     private String correo;
-    private Cargo cargo;
+    private Long cargo;
 }

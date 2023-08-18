@@ -24,17 +24,17 @@ public class RepositorioRolMySQL implements RepositorioRol {
     @Override
     public List<Rol> listar() {
         List<EntidadRol> entidadRols =this.repositorioRolJpa.findAll();
-        return entidadRols.stream().map(entidadRol -> Rol.of(entidadRol.getRol(),entidadRol.getDescripcion())).toList();
+        return entidadRols.stream().map(entidadRol -> Rol.of(entidadRol.getRol())).toList();
     }
 
     @Override
     public Rol consultarPorId(Long id) {
-        return this.repositorioRolJpa.findById(id).map(entidadRol -> Rol.of(entidadRol.getRol(),entidadRol.getDescripcion())).orElse(null);
+        return this.repositorioRolJpa.findById(id).map(entidadRol -> Rol.of(entidadRol.getRol())).orElse(null);
     }
 
     @Override
     public Long guardar(Rol rol) {
-        EntidadRol entidadRol = new EntidadRol(rol.getRol(),rol.getDescripcion());
+        EntidadRol entidadRol = new EntidadRol(rol.getRol());
         return this.repositorioRolJpa.save(entidadRol).getId();
     }
 

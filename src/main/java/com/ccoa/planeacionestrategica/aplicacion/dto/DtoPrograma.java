@@ -21,8 +21,8 @@ public class DtoPrograma {
     private Date fechaRegistro;
     private Double presupuestoIngreso;
     private Double presupuestoGasto;
-    private DtoImperativoEstrategico dtoImperativoEstrategico;
-    private DtoUsuario dtoUsuario;
-    private DtoArea dtoArea;
+    private Long idImperativoEstrategico;
+    private Long idUsuario;
+    private Long idArea;
 
 }

@@ -53,14 +53,14 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long guardar(Pat pat) {
-        //List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
+        /*List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(pat.getUsuario().getNombre(),
                 pat.getUsuario().getApellidos());
 
         EntidadPat entidadPat = new EntidadPat(pat.getNombre(), pat.getFechaInicio(), pat.getFechaFinal(),
                 pat.getFechaRegistro(), entidadUsuario);
 
-        return this.repositorioPatJpa.save(entidadPat).getId();
+        return this.repositorioPatJpa.save(entidadPat).getId();*/return null;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long modificar(Pat pat, Long id) {
-
+        /*
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(pat.getUsuario().getNombre(),
                 pat.getUsuario().getApellidos());
 
@@ -87,7 +87,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
         entidadPat.setUsuario(entidadUsuario);
 
         repositorioPatJpa.save(entidadPat);
-        return id;
+        return id;*/return null;
     }
 
 }

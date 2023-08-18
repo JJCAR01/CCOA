@@ -1,23 +1,20 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
-import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
+import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadCargo;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadRol;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioCargoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioRolJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import org.springframework.stereotype.Repository;
 
-import java.lang.ref.PhantomReference;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
@@ -54,11 +51,12 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long guardar(Usuario usuario) {
+        //List<EntidadRol> roles = usuario.getIdRol().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
         Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
         Optional<EntidadRol> entidadRol = this.repositorioRolJpa.findById(usuario.getIdCargo());
 
         EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombreUsuario(), usuario.getNombre(), usuario.getApellidos(),
-                usuario.getPassword(), usuario.getCorreo(), entidadRol.get().getId(), entidadCargo.get().getId() );
+                usuario.getPassword(), usuario.getCorreo(), entidadCargo.get().getId_cargo() ,entidadRol.get().getId());
 
         return this.repositorioUsuarioJpa.save(entidadUsuario).getId();
     }
@@ -73,6 +71,20 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
         this.repositorioUsuarioJpa.deleteById(id);
         return id;
+    }
+
+    @Override
+    public Usuario consultar(String nombreUsuario, String password) {
+        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreUsuarioAndPassword(nombreUsuario, password);
+
+        if(entidadUsuario == null) {
+            return null;
+        }
+
+
+        //List<Rol> roles = entidadUsuario.getIdRol().stream().map(rol -> Rol.of(rol.getRol())).collect(Collectors.toList());
+        return Usuario.of(entidadUsuario.getNombreUsuario(),entidadUsuario.getNombre(), entidadUsuario.getApellidos(), entidadUsuario.getPassword(),
+                entidadUsuario.getCorreo(),entidadUsuario.getIdCargo(),entidadUsuario.getIdRol());
     }
 
     @Override

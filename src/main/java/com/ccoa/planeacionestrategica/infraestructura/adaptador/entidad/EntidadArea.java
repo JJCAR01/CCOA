@@ -14,7 +14,7 @@ public class EntidadArea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long id_area;
 
     @Column(unique = true, length = 50, name = "nombre")
     private String nombre;

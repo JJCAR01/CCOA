@@ -19,7 +19,7 @@ public class DtoLineaEstrategica {
     private Date fechaFinal;
     private Date fechaRegistro;
     private String indicadorResultado;
-    private DtoPrograma dtoPrograma;
-    private DtoUsuario dtoUsuario;
+    private Long idPrograma;
+    private Long idUsuario;
 
 }

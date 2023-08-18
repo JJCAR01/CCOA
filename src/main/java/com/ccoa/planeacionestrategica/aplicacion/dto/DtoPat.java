@@ -17,6 +17,6 @@ public class DtoPat {
     private Date fechaInicio;
     private Date fechaFinal;
     private Date fechaRegistro;
-    private DtoUsuario dtoUsuario;
+    private Long idUsuario;
 
 }

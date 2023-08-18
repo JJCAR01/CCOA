@@ -29,21 +29,17 @@ public class EntidadPat {
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "usuario_id")
-    private EntidadUsuario usuario;
-
-    @OneToMany(mappedBy = "pat")
-    private List<EntidadImperativoEstrategico> imperativoEstrategicos;
+    private Long idUsuario;
 
     public EntidadPat() {
     }
 
-    public EntidadPat(String nombre, Date fechaInicio, Date fechaFinal, Date fechaRegistro, EntidadUsuario usuario) {
+    public EntidadPat(String nombre, Date fechaInicio, Date fechaFinal, Date fechaRegistro, Long idUsuario) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-        this.usuario = usuario;
+        this.idUsuario = idUsuario;
     }
 }

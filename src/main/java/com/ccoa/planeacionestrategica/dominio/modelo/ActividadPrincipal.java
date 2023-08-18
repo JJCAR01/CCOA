@@ -17,13 +17,13 @@ public class ActividadPrincipal {
     private final Date fechaInicio;
     private final Date fechaFinal;
     private final Date fechaRegistro;
-    private final LineaEstrategica  lineaEstrategica;
-    private final Usuario usuario;
-    private final TipoGI tipoGI;
+    private final Long idLineaEstrategica;
+    private final Long idUsuario;
+    private final Long idTipoGI;
 
     public static ActividadPrincipal of(String nombre,String tipoActividad, String entregable, Double presupuesto,Date fechaInicio,
-                                        Date fechaFinal, Date fechaRegistro, LineaEstrategica lineaEstrategica,
-                                        Usuario usuario, TipoGI tipoGI){
+                                        Date fechaFinal, Date fechaRegistro, Long idLineaEstrategica,
+                                        Long idUsuario, Long idTipoGI){
         Validador.validarObligatorio(nombre,"El nombre de la actividad principal NO debe estar vacía");
         Validador.validarObligatorio(tipoActividad,"El tipo de actividad NO debe estar vacío");
         Validador.validarObligatorio(entregable,"El entregable  de la actividad principal NO debe estar vacía");
@@ -31,26 +31,25 @@ public class ActividadPrincipal {
         Validador.validarObligatorioTipoDato(fechaInicio,"La fecha inicio de la actividad principal NO debe estar vacía");
         Validador.validarObligatorioTipoDato(fechaFinal,"La fecha inicial de la actividad principal NO debe estar vacía");
         Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha de resgistro de la actividad principal NO debe estar vacía");
-        Validador.validarObjeto(lineaEstrategica,"La linea estrategica NO debe estar vacía");
-        Validador.validarObjeto(usuario,"El usuario NO debe estar vacía");
-        Validador.validarObjeto(tipoGI,"El tipo GI NO debe estar vacía");
+        Validador.validadorNumeroLongYMayorACero(idLineaEstrategica,"La linea estrategica NO debe estar vacía");
+        Validador.validadorNumeroLongYMayorACero(idUsuario,"El usuario NO debe estar vacía");
+        Validador.validadorNumeroLongYMayorACero(idTipoGI,"El tipo GI NO debe estar vacía");
 
-        return new ActividadPrincipal(nombre, entregable, presupuesto, fechaInicio, fechaFinal, fechaRegistro,
-                lineaEstrategica, usuario, tipoActividad, tipoGI);
+        return new ActividadPrincipal(nombre,tipoActividad, entregable, presupuesto, fechaInicio, fechaFinal, fechaRegistro,
+                idLineaEstrategica, idUsuario, idTipoGI);
     }
 
-    public ActividadPrincipal(String nombre, String entregable, Double presupuesto, Date fechaInicio, Date fechaFinal,
-                              Date fechaRegistro, LineaEstrategica lineaEstrategica, Usuario usuario,
-                              String tipoActividad, TipoGI tipoGI) {
+    public ActividadPrincipal(String nombre, String tipoActividad, String entregable, Double presupuesto, Date fechaInicio,
+                              Date fechaFinal, Date fechaRegistro, Long idLineaEstrategica, Long idUsuario, Long idTipoGI) {
         this.nombre = nombre;
+        this.tipoActividad = tipoActividad;
         this.entregable = entregable;
         this.presupuesto = presupuesto;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-        this.lineaEstrategica = lineaEstrategica;
-        this.usuario = usuario;
-        this.tipoActividad = tipoActividad;
-        this.tipoGI = tipoGI;
+        this.idLineaEstrategica = idLineaEstrategica;
+        this.idUsuario = idUsuario;
+        this.idTipoGI = idTipoGI;
     }
 }

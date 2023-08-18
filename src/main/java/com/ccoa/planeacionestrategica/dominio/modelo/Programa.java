@@ -18,13 +18,12 @@ public class Programa {
     private final Date fechaRegistro;
     private final Double presupuestoIngreso;
     private final Double presupuestoGasto;
-    private final ImperativoEstrategico imperativoEstrategico;
-    private final Usuario usuario;
-    private final Area area;
+    private final Long idImperativoEstrategico;
+    private final Long idUsuario;
+    private final Long idArea;
 
-    public static Programa of(String nombre,String codigo,Integer version,Date fechaInicio, Date fechaFinal,
-                              Date fechaRegistro,Double presupuestoIngreso,Double presupuestoGasto, ImperativoEstrategico imperativoEstrategico,
-                              Usuario usuario, Area area){
+    public static Programa of(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal, Date fechaRegistro, Double presupuestoIngreso,
+                              Double presupuestoGasto, Long idImperativoEstrategico, Long idUsuario, Long idArea){
         Validador.validarObligatorio(nombre,"El nombre del programa NO debe estar vacío");
         Validador.validarObligatorio(codigo,"El codigo NO debe estar vacío");
         Validador.validadorNumeroEnteroYMayorACero(version,"La version del programa debe ser mayor a cero y NO puede estar vacío");
@@ -33,16 +32,15 @@ public class Programa {
         Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro del programa NO debe estar vacía");
         Validador.validadorNumeroDoubleYMayorACero(presupuestoIngreso,"El presupuesto de ingreso del programa debe ser mayor a cero y NO puede estar vacío");
         Validador.validadorNumeroDoubleYMayorACero(presupuestoGasto," El presupuesto de gasto del programa debe ser mayor a cero y NO puede estar vacío");
-        Validador.validarObjeto(imperativoEstrategico,"El imperativo estragico NO debe estar vacío");
-        Validador.validarObjeto(usuario,"El usuario NO debe estar vacío");
-        Validador.validarObjeto(area,"El area NO debe estar vacío");
+        Validador.validadorNumeroLongYMayorACero(idImperativoEstrategico,"El imperativo estragico NO debe estar vacío");
+        Validador.validadorNumeroLongYMayorACero(idUsuario,"El usuario NO debe estar vacío");
+        Validador.validadorNumeroLongYMayorACero(idArea,"El area NO debe estar vacío");
 
         return new Programa(nombre,codigo,version,fechaInicio,fechaFinal,fechaRegistro,presupuestoIngreso,presupuestoGasto,
-                imperativoEstrategico,usuario,area);
+                idImperativoEstrategico,idUsuario,idArea);
     }
 
-    public Programa(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal, Date fechaRegistro,
-                    Double presupuestoIngreso, Double presupuestoGasto, ImperativoEstrategico imperativoEstrategico, Usuario usuario, Area area) {
+    public Programa(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal, Date fechaRegistro, Double presupuestoIngreso, Double presupuestoGasto, Long idImperativoEstrategico, Long idUsuario, Long idArea) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.version = version;
@@ -51,8 +49,8 @@ public class Programa {
         this.fechaRegistro = fechaRegistro;
         this.presupuestoIngreso = presupuestoIngreso;
         this.presupuestoGasto = presupuestoGasto;
-        this.imperativoEstrategico = imperativoEstrategico;
-        this.usuario = usuario;
-        this.area = area;
+        this.idImperativoEstrategico = idImperativoEstrategico;
+        this.idUsuario = idUsuario;
+        this.idArea = idArea;
     }
 }

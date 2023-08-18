@@ -28,9 +28,6 @@ public class EntidadTipoGI {
 
     private String clasificacion;
 
-    @OneToMany(mappedBy = "tipoGI")
-    private List<EntidadRubro> entidadRubros;
-
     public EntidadTipoGI() {
     }
 

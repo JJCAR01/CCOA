@@ -14,8 +14,7 @@ public class EntidadRegistroActividad {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "actividad_principal_id")
-    private EntidadActividadPrincipal actividadPrincipal;
+    private Long idActividadPrincipal;
 }
 

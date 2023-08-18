@@ -17,14 +17,14 @@ public class EntidadRubro {
     @Column(unique = true, length = 50, name = "nombre")
     private String nombre;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "tipo_gi_id",unique = true)
-    private EntidadTipoGI tipoGI;
+    private Long idTipoGI;
 
     public EntidadRubro() {
     }
 
-    public EntidadRubro(String nombre) {
+    public EntidadRubro(String nombre, Long idTipoGI) {
         this.nombre = nombre;
+        this.idTipoGI = idTipoGI;
     }
 }

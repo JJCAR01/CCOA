@@ -18,7 +18,7 @@ public class DtoRegistroActividad {
     private Double porcentaje;
     private Date fechaRegistro;
     private String documento;
-    private DtoActividadPrincipal dtoActividadPrincipal;
-    private DtoUsuario dtoUsuario;
+    private Long idActividadPrincipal;
+    private Long idUsuario;
 
 }

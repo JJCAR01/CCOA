@@ -17,7 +17,7 @@ public class DtoEjecutado {
     private String tipoContrato;
     private String numeroOrden;
     private String documento;
-    private DtoActividadPrincipal dtoActividadPrincipal;
-    private DtoUsuario dtoUsuario;
+    private Long idActividadPrincipal;
+    private Long idUsuario;
 
 }

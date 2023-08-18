@@ -29,26 +29,21 @@ public class EntidadImperativoEstrategico {
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "pat_id",unique = true)
-    private EntidadPat pat;
+    private Long idPat;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "usuario_id",unique = true)
-    private EntidadUsuario usuario;
-
-    @OneToMany(mappedBy = "imperativoEstrategico")
-    private List<EntidadPrograma> programas;
+    private Long idUsuario;
 
     public EntidadImperativoEstrategico() {
     }
 
-    public EntidadImperativoEstrategico(String nombre, Date fechaInicio, Date fechaFinal, Date fechaRegistro, EntidadPat pat, EntidadUsuario usuario) {
+    public EntidadImperativoEstrategico(String nombre, Date fechaInicio, Date fechaFinal, Date fechaRegistro, Long idPat, Long idUsuario) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-        this.pat = pat;
-        this.usuario = usuario;
+        this.idPat = idPat;
+        this.idUsuario = idUsuario;
     }
 }

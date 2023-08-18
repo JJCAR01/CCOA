@@ -41,27 +41,20 @@ public class EntidadPrograma {
     @Column(unique = true, name = "presupuesto_gasto")
     private Double presupuestoGasto;
 
-    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "area_id")
-    private EntidadArea area;
+    private Long idArea;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "usuario_id")
-    private EntidadUsuario usuario;
+    private Long idUsuario;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "imperativo_estrategico_id")
-    private EntidadImperativoEstrategico imperativoEstrategico;
-
-    @OneToMany(mappedBy = "programa")
-    private List<EntidadLineaEstrategica> lineasEstrategicas;
+    private Long idImperativoEstrategico;
 
     public EntidadPrograma() {
     }
 
-    public EntidadPrograma(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal,
-                           Date fechaRegistro, Double presupuestoIngreso, Double presupuestoGasto, EntidadArea area, EntidadUsuario usuario,
-                           EntidadImperativoEstrategico imperativoEstrategico) {
+    public EntidadPrograma(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal, Date fechaRegistro,
+                           Double presupuestoIngreso, Double presupuestoGasto, Long idArea, Long idUsuario, Long idImperativoEstrategico) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.version = version;
@@ -70,9 +63,9 @@ public class EntidadPrograma {
         this.fechaRegistro = fechaRegistro;
         this.presupuestoIngreso = presupuestoIngreso;
         this.presupuestoGasto = presupuestoGasto;
-        this.area = area;
-        this.usuario = usuario;
-        this.imperativoEstrategico = imperativoEstrategico;
+        this.idArea = idArea;
+        this.idUsuario = idUsuario;
+        this.idImperativoEstrategico = idImperativoEstrategico;
     }
 }
 

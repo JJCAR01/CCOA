@@ -97,7 +97,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
 
     @Override
     public Long guardar(LineaEstrategica lineaEstrategica) {
-        EntidadPrograma entidadPrograma = this.repositorioProgramaJpa.findByNombre(lineaEstrategica.getPrograma().getNombre());
+        /*EntidadPrograma entidadPrograma = this.repositorioProgramaJpa.findByNombre(lineaEstrategica.getPrograma().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(lineaEstrategica.getUsuario().getNombre(),
                 lineaEstrategica.getUsuario().getApellidos());
 
@@ -105,7 +105,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
                 lineaEstrategica.getFechaInicio(),lineaEstrategica.getFechaFinal(),lineaEstrategica.getFechaRegistro(),lineaEstrategica.getIndicardorResultado(),
                 entidadUsuario,entidadPrograma);
 
-        return this.repositorioProgramaJpa.save(entidadPrograma).getId();
+        return this.repositorioProgramaJpa.save(entidadPrograma).getId();*/return null;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
 
     @Override
     public Long modificar(LineaEstrategica lineaEstrategica, Long id) {
-        EntidadPrograma entidadPrograma = this.repositorioProgramaJpa.findByNombre(lineaEstrategica.getPrograma().getNombre());
+        /*EntidadPrograma entidadPrograma = this.repositorioProgramaJpa.findByNombre(lineaEstrategica.getPrograma().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(lineaEstrategica.getUsuario().getNombre(),
                 lineaEstrategica.getUsuario().getApellidos());
 
@@ -134,6 +134,6 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
         entidadLineaEstrategica.setUsuario(entidadUsuario);
 
         repositorioLineaEstrategicaJpa.save(entidadLineaEstrategica);
-        return id;
+        return id;*/return null;
     }
 }

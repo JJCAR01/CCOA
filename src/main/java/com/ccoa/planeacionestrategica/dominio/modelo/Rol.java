@@ -11,15 +11,13 @@ public class Rol {
     //Clase de de asignacion de atributos y se validan entradas
 
     private final String rol;
-    private final String descripcion;
 
-    public static Rol of(String rol,String descripcion){
+    public static Rol of(String rol){
         Validador.validarObligatorio(rol,"El rol NO puede ser vacío");
-        return new Rol(rol,descripcion);
+        return new Rol(rol);
     }
 
-    public Rol(String rol, String descripcion) {
+    public Rol(String rol) {
         this.rol = rol;
-        this.descripcion = descripcion;
     }
 }

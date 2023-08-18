@@ -20,24 +20,24 @@ public class RepositorioRubroMySQL implements RepositorioRubro {
 
     @Override
     public List<Rubro> listar() {
-        List<EntidadRubro> entidadRubros =this.repositorioRubroJpa.findAll();
+        /*List<EntidadRubro> entidadRubros =this.repositorioRubroJpa.findAll();
         return entidadRubros.stream().map(entidadRubro -> Rubro.of(entidadRubro.getNombre(), TipoGI.of(entidadRubro.getTipoGI().getCantidad(),
                 entidadRubro.getTipoGI().getValorUnitario(), entidadRubro.getTipoGI().getValorTotal(), entidadRubro.getTipoGI().getObservacion(),
-                entidadRubro.getTipoGI().getClasificacion()))).toList();
+                entidadRubro.getTipoGI().getClasificacion()))).toList();*/return null;
     }
 
     @Override
     public Rubro consultarPorId(Long id) {
-        return this.repositorioRubroJpa.findById(id).map(entidadRubro -> Rubro.of(entidadRubro.getNombre(), TipoGI.of(entidadRubro.getTipoGI().getCantidad(),
+        /*return this.repositorioRubroJpa.findById(id).map(entidadRubro -> Rubro.of(entidadRubro.getNombre(), TipoGI.of(entidadRubro.getTipoGI().getCantidad(),
                 entidadRubro.getTipoGI().getValorUnitario(), entidadRubro.getTipoGI().getValorTotal(), entidadRubro.getTipoGI().getObservacion(),
-                entidadRubro.getTipoGI().getClasificacion()))).orElse(null);
+                entidadRubro.getTipoGI().getClasificacion()))).orElse(null);*/return null;
 
     }
 
     @Override
     public Long guardar(Rubro rubro) {
-        EntidadRubro entidadRubro = new EntidadRubro(rubro.getNombre());
-        return this.repositorioRubroJpa.save(entidadRubro).getId();
+        /*EntidadRubro entidadRubro = new EntidadRubro(rubro.getNombre());
+        return this.repositorioRubroJpa.save(entidadRubro).getId();*/return null;
     }
 
     @Override

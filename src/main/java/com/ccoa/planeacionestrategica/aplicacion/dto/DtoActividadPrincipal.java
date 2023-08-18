@@ -21,7 +21,7 @@ public class  DtoActividadPrincipal {
     private Date fechaInicio;
     private Date fechaFinal;
     private Date fechaRegistro;
-    private DtoLineaEstrategica dtoLineaEstrategica;
-    private DtoUsuario dtoUsuario;
-    private DtoTipoGI dtoTipoGI;
+    private Long idLineaEstrategica;
+    private Long idUsuario;
+    private Long idTipoGI;
 }

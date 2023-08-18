@@ -5,12 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
+@Getter@Setter
 @AllArgsConstructor
-@Getter
-@Setter
-public class DtoRubro {
+@NoArgsConstructor
+public class DtoLogin {
 
-    private String nombre;
-    private Long idTipoGI;
+    private String nombreUsuario;
+    private String password;
 }

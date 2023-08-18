@@ -12,5 +12,4 @@ import lombok.Setter;
 public class DtoRol {
 
     private String rol;
-    private String descripcion;
 }

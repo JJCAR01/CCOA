@@ -17,7 +17,7 @@ public class DtoImperativoEstrategico {
     private Date fechaInicio;
     private Date fechaFinal;
     private Date fechaRegistro;
-    private DtoPat dtoPat;
-    private DtoUsuario dtoUsuario;
+    private Long idPat;
+    private Long idUsuario;
 
 }

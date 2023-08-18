@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "rol_usuario")
+@Table(name = "rol")
 public class EntidadRol {
 
     @Id
@@ -15,13 +15,11 @@ public class EntidadRol {
     private Long id;
 
     private String rol;
-    private String descripcion;
 
     public EntidadRol() {
     }
 
-    public EntidadRol(String rol, String descripcion) {
+    public EntidadRol(String rol) {
         this.rol = rol;
-        this.descripcion = descripcion;
     }
 }

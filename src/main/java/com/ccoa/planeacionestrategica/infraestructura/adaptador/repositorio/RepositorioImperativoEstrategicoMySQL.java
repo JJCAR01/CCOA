@@ -71,7 +71,7 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
 
     @Override
     public Long guardar(ImperativoEstrategico imperativoEstrategico) {
-        //List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
+        /*List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
         EntidadPat entidadPat = this.repositorioPatJpa.findByNombre(imperativoEstrategico.getPat().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(imperativoEstrategico.getUsuario().getNombre(),
                 imperativoEstrategico.getUsuario().getApellidos());
@@ -81,6 +81,7 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
                 entidadPat,entidadUsuario);
 
         return this.repositorioImperativoEstrategicoJpa.save(entidadImperativoEstrategico).getId();
+        */return null;
     }
 
     @Override
@@ -97,7 +98,7 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
 
     @Override
     public Long modificar(ImperativoEstrategico imperativoEstrategico, Long id) {
-
+        /*
         EntidadPat entidadPat = this.repositorioPatJpa.findByNombre(imperativoEstrategico.getPat().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(imperativoEstrategico.getUsuario().getNombre(),
                 imperativoEstrategico.getUsuario().getApellidos());
@@ -112,6 +113,8 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
 
         repositorioImperativoEstrategicoJpa.save(entidadImperativoEstrategico);
         return id;
+        */return null;
+
     }
 
 

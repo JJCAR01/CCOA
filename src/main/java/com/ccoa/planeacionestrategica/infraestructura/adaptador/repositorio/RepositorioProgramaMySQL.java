@@ -93,7 +93,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
 
     @Override
     public Long guardar(Programa programa) {
-        EntidadImperativoEstrategico entidadImperativoEstrategico = this.repositorioImperativoEstrategicoJpa.findByNombre(programa.getImperativoEstrategico().getNombre());
+        /*EntidadImperativoEstrategico entidadImperativoEstrategico = this.repositorioImperativoEstrategicoJpa.findByNombre(programa.getImperativoEstrategico().getNombre());
         EntidadArea entidadArea = this.repositorioAreaJpa.findByNombre(programa.getArea().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(programa.getUsuario().getNombre(),
                 programa.getUsuario().getApellidos());
@@ -102,7 +102,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
                 programa.getFechaFinal(),programa.getFechaRegistro(),programa.getPresupuestoIngreso(),programa.getPresupuestoGasto(),entidadArea,entidadUsuario,
                 entidadImperativoEstrategico);
 
-        return this.repositorioProgramaJpa.save(entidadPrograma).getId();
+        return this.repositorioProgramaJpa.save(entidadPrograma).getId();*/return null;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
 
     @Override
     public Long modificar(Programa programa, Long id) {
-
+        /*
         EntidadImperativoEstrategico entidadImperativoEstrategico = this.repositorioImperativoEstrategicoJpa.findByNombre(programa.getImperativoEstrategico().getNombre());
         EntidadArea entidadArea = this.repositorioAreaJpa.findByNombre(programa.getArea().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(programa.getUsuario().getNombre(),
@@ -134,6 +134,6 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
         entidadPrograma.setImperativoEstrategico(entidadImperativoEstrategico);
 
         repositorioProgramaJpa.save(entidadPrograma);
-        return id;
+        return id;*/return null;
     }
 }

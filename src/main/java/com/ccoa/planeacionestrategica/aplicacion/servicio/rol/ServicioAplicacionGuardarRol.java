@@ -19,7 +19,7 @@ public class ServicioAplicacionGuardarRol {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoRol dto){
-        Rol rol = Rol.of(dto.getRol(), dto.getDescripcion());
+        Rol rol = Rol.of(dto.getRol());
         return new DtoRespuesta<>(this.servicioGuardarRol.ejecutarGuardar(rol));
     }
 }

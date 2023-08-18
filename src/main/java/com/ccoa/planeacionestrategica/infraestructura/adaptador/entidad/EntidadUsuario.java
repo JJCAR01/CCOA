@@ -31,22 +31,22 @@ public class EntidadUsuario {
     @Column(unique = true, length = 50)
     private String correo;
 
-    @JoinColumn(name= "rol_id")
-    private Long idRol;
-
-    @JoinColumn(name = "cargo_id")
+    @Column(name = "cargo_id")
     private Long idCargo;
+
+    @Column(name= "rol_id")
+    private Long idRol;
 
     public EntidadUsuario() {
     }
 
-    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo,Long idRol, Long idCargo) {
+    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo, Long idCargo, Long idRol) {
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.correo = correo;
-        this.idRol = idRol;
         this.idCargo = idCargo;
+        this.idRol = idRol;
     }
 }

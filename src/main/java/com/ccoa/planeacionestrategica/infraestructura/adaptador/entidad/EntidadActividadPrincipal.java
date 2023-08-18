@@ -14,53 +14,36 @@ import java.util.List;
 public class EntidadActividadPrincipal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true, length = 255, name = "nombre")
+    @Column(name = "nombre")
     private String nombre;
-
-    @Column(unique = true, length = 255, name = "tipo_actividad")
+    @Column(name = "tipo_actividad")
     private String tipoActividad;
-
-    @Column(unique = true, length = 255)
+    @Column(name = "entregable")
     private String entregable;
-
-    @Column(unique = true, length = 255)
+    @Column(name = "presupuesto")
     private Double presupuesto;
-
-    @Column(unique = true, name = "fecha_inicio")
+    @Column(name = "fecha_inicio")
     private Date fechaInicio;
-
-    @Column(unique = true, name = "fecha_final")
+    @Column(name = "fecha_final")
     private Date fechaFinal;
-
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
-
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "usuario_id")
-    private EntidadUsuario usuario;
-
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "tipo_gi_id")
-    private EntidadTipoGI tipoGI;
-
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "linea_estrategica_id")
-    private EntidadLineaEstrategica lineaEstrategica;
-
-    @OneToMany(mappedBy = "actividadPrincipal")
-    private List<EntidadRegistroActividad> registroActividades;
-
-    @OneToMany(mappedBy = "actividadPrincipal")
-    private List<EntidadEjecutado> ejecutados;
+    @Column(name = "usuario_id")
+    private Long idUsuario;
+    @Column(name = "tipo_gi_id")
+    private Long idTipoGI;
+    @Column(name = "linea_estrategica_id")
+    private Long idLineaEstrategica;
 
     public EntidadActividadPrincipal() {
     }
 
-    public EntidadActividadPrincipal(String nombre, String tipoActividad, String entregable, Double presupuesto,
-                                     Date fechaInicio, Date fechaFinal, Date fechaRegistro, EntidadUsuario usuario, EntidadTipoGI tipoGI, EntidadLineaEstrategica lineaEstrategica) {
+    public EntidadActividadPrincipal(String nombre, String tipoActividad,
+                                     String entregable, Double presupuesto, Date fechaInicio, Date fechaFinal, Date fechaRegistro,
+                                     Long idUsuario, Long idTipoGI, Long idLineaEstrategica) {
         this.nombre = nombre;
         this.tipoActividad = tipoActividad;
         this.entregable = entregable;
@@ -68,9 +51,11 @@ public class EntidadActividadPrincipal {
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-        this.usuario = usuario;
-        this.tipoGI = tipoGI;
-        this.lineaEstrategica = lineaEstrategica;
+        this.idUsuario = idUsuario;
+        this.idTipoGI = idTipoGI;
+        this.idLineaEstrategica = idLineaEstrategica;
     }
+
+
 }
 

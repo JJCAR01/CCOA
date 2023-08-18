@@ -15,12 +15,12 @@ public class EntidadCargo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long id_cargo;
 
     @Column(unique = true, length = 50)
     private String nombre;
 
-    @JoinColumn(name="id_area")
+    @Column(name="area_id")
     private Long idArea;
 
     public EntidadCargo() {

@@ -10,16 +10,16 @@ public class Rubro {
     //Clase de de asignacion de atributos y se validan entradas
 
     private final String nombre;
-    private final TipoGI tipoGI;
+    private final Long idTipoGI;
 
-    public static Rubro of(String nombre, TipoGI tipoGI){
+    public static Rubro of(String nombre, Long idTipoGI){
         Validador.validarObligatorio(nombre,"El nombre del rubro NO puede estar vacío");
-        Validador.validarObjeto(tipoGI,"El Tipo Gasto/Ingreso no puede estar vacío");
-        return new Rubro(nombre,tipoGI);
+        Validador.validadorNumeroLongYMayorACero(idTipoGI,"El Tipo Gasto/Ingreso no puede estar vacío");
+        return new Rubro(nombre,idTipoGI);
     }
 
-    public Rubro(String nombre, TipoGI tipoGI) {
+    public Rubro(String nombre, Long idTipoGI) {
         this.nombre = nombre;
-        this.tipoGI = tipoGI;
+        this.idTipoGI = idTipoGI;
     }
 }

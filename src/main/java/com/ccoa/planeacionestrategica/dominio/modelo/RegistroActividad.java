@@ -14,18 +14,24 @@ public class RegistroActividad {
     private final Double porcentaje;
     private final Date fechaRegistro;
     private final String documento;
+    private final Long idActividadPrincipal;
+    private final Long idUsuario;
 
-    public static RegistroActividad of(String comentario,Double porcentaje,Date fechaRegistro,String documento){
+    public static RegistroActividad of(String comentario, Double porcentaje, Date fechaRegistro, String documento, Long idActividadPrincipal, Long idUsuario){
         Validador.validarObligatorio(comentario,"El comentario del registro de la actividad no puede ser vacío");
         Validador.validadorNumeroDoubleYMayorACero(porcentaje,"El porcentaje del registro de la actividad no puede ser vacío o menor a cero");
         Validador.validarObligatorio(documento,"El documento NO puede estar vacío");
-        return new RegistroActividad(comentario, porcentaje, fechaRegistro, documento);
+        Validador.validadorNumeroLongYMayorACero(idActividadPrincipal,"El id de la actividad principal no puede estar vacía");
+        Validador.validadorNumeroLongYMayorACero(idUsuario,"El id del usuario no puede estar vacío");
+        return new RegistroActividad(comentario, porcentaje, fechaRegistro, documento,idActividadPrincipal,idUsuario);
     }
 
-    public RegistroActividad(String comentario, Double porcentaje, Date fechaRegistro, String documento) {
+    public RegistroActividad(String comentario, Double porcentaje, Date fechaRegistro, String documento, Long idActividadPrincipal, Long idUsuario) {
         this.comentario = comentario;
         this.porcentaje = porcentaje;
         this.fechaRegistro = fechaRegistro;
         this.documento = documento;
+        this.idActividadPrincipal = idActividadPrincipal;
+        this.idUsuario = idUsuario;
     }
 }

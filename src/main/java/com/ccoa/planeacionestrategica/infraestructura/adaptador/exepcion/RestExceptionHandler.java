@@ -1,13 +1,15 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.exepcion;
 
 import com.ccoa.planeacionestrategica.dominio.validador.Validador;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.LongitudMaxExcepcion;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.LongitudMinExcepcion;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
 import com.ccoa.planeacionestrategica.infraestructura.error.Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.concurrent.ConcurrentHashMap;

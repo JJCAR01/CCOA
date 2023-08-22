@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.validador;
 
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.exepcion.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.*;
 
 import java.util.Date;
 import java.util.List;
@@ -23,27 +23,27 @@ public class Validador {
 
     public static void validarObligatorio(Object valor, String mensajeTecnico) {
         if (valor == null || (valor instanceof String str && str.trim().isEmpty())) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico, MENSAJE_DEFECTO);
+            throw new ValorObligatorioExcepcion(mensajeTecnico, CAMPO_OBLIGATORIO);
         }
     }
 
-    public static void validarObligatorioTipoDato(Date valor, String mensaje) {
+    public static void validarObligatorioTipoDato(Date valor, String mensajeTecnico) {
         if(valor == null) {
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorObligatorioExcepcion(mensajeTecnico,MENSAJE_DEFECTO);
         }
     }
 
 
-    public static void validadorNoVacio(List<? extends Object> lista, String mensaje) {
+    public static void validadorNoVacio(List<? extends Object> lista, String mensajeTecnico,String mensajeHumano) {
         if(lista == null  || lista.isEmpty()) {
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorObligatorioExcepcion(mensajeTecnico,mensajeHumano);
         }
     }
     public static void longitudPassword(String valor, String mensaje)
     {
         if(!(valor.length()>=8 && valor.length()<=15))
         {
-            throw new IllegalArgumentException(mensaje);
+            throw new LongitudMaxExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
@@ -51,41 +51,41 @@ public class Validador {
     {
         if(!(valor.length()>=3 && valor.length()<=12))
         {
-            throw new IllegalArgumentException(mensaje);
+            throw new LongitudMaxExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
-    public static void validadorLongitud(String valor, Long longitud, String mensaje) {
+    /*public static void validadorLongitud(String valor, Long longitud, String mensaje) {
         if(valor.length() < longitud) {
             throw new IllegalArgumentException(String.format(mensaje, longitud));
         }
     }
+     */
     public static void validadorNumeroEnteroYMayorACero(Integer valor, String mensaje){
 
         if((valor <= 0) || (valor == null)){
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroDoubleYMayorACero(Double valor, String mensaje) {
 
         if((valor <= 0) || (valor == null)){
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroLongYMayorACero(Long valor, String mensaje) {
 
         if((valor <= 0) || (valor == null)){
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static void validarObjeto(Object objeto, String mensaje){
         if(objeto == null){
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorObjetoExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
-
 
 
     public static boolean aceptacionPatron(String cadena, String patron)
@@ -97,18 +97,18 @@ public class Validador {
     {
         if(!aceptacionPatron(password, PATRON_PASSWORD))
         {
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
         }
         else{
             longitudPassword(password, "Valor del tamaño excedido");
         }
     }
 
-    public static void validadorCaracteresEspecialesCorreo(String correo, String menssaje)
+    public static void validadorCaracteresEspecialesCorreo(String correo, String mensaje)
     {
         if(!aceptacionPatron(correo, PATRON_CORREO))
         {
-            throw new IllegalArgumentException(menssaje);
+            throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
@@ -116,7 +116,7 @@ public class Validador {
     {
         if(!aceptacionPatron(nombreUsuario, PATRON_NOMBRE_USUARIO))
         {
-            throw new IllegalArgumentException(mensaje);
+            throw new ValorNombreExcepcion(mensaje,MENSAJE_DEFECTO);
         }
         else{
             longitudNombreUsuario(nombreUsuario, "Valor del tamaño excedido");

@@ -19,11 +19,13 @@ public class ControladorLogin {
     }
 
 
-    @PostMapping
+    /*@PostMapping
     //@LogExecutionTime
     //@Operation(summary = "Login", description = "Elemento usado para hacer login a la aplicación")
-    public String login(@RequestBody DtoLogin dto) {
+    //public String login(@RequestBody DtoLogin dto) {
         return this.servicioAplicacionLogin.ejecutar(dto);
     }
+
+     */
 
 }

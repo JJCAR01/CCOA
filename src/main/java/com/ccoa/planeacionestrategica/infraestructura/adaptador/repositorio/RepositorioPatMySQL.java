@@ -10,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RepositorioPatMySQL implements RepositorioPat {
@@ -24,43 +25,31 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public List<Pat> listar() {
-        /*List<EntidadPat> entidadPats =this.repositorioPatJpa.findAll();
+        List<EntidadPat> entidadPats =this.repositorioPatJpa.findAll();
         return entidadPats.stream().map(entidad -> Pat.of(entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
-                entidad.getFechaRegistro(),Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),
-                entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),entidad.getUsuario().getCorreo(),
-                entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))))).toList();
-
-
-         */ return null;
+                entidad.getFechaRegistro(), entidad.getIdUsuario())).toList();
     }
 
 
     @Override
     public Pat consultarPorId(Long id) {
-        /*
         return this.repositorioPatJpa
                 .findById(id)
                 .map(entidad ->  Pat.of(entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
-                        entidad.getFechaRegistro(),Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),
-                                entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),entidad.getUsuario().getCorreo(),
-                                entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre())))))
+                        entidad.getFechaRegistro(),entidad.getIdUsuario()))
                 .orElse(null);
-
-         */return null;
     }
 
     @Override
     public Long guardar(Pat pat) {
-        /*List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
-        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(pat.getUsuario().getNombre(),
-                pat.getUsuario().getApellidos());
+        //List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
+
+        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(pat.getIdUsuario());
 
         EntidadPat entidadPat = new EntidadPat(pat.getNombre(), pat.getFechaInicio(), pat.getFechaFinal(),
-                pat.getFechaRegistro(), entidadUsuario);
+                pat.getFechaRegistro(), entidadUsuario.get().getId());
 
-        return this.repositorioPatJpa.save(entidadPat).getId();*/return null;
+        return this.repositorioPatJpa.save(entidadPat).getId();
     }
 
     @Override
@@ -76,18 +65,17 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long modificar(Pat pat, Long id) {
-        /*
-        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(pat.getUsuario().getNombre(),
-                pat.getUsuario().getApellidos());
+
+        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(pat.getIdUsuario());
 
         repositorioPatJpa.findById(id);
         EntidadPat entidadPat = new EntidadPat();
         entidadPat.setId(id);
         entidadPat.setNombre(pat.getNombre());
-        entidadPat.setUsuario(entidadUsuario);
+        entidadPat.setIdUsuario(entidadUsuario.get().getId());
 
         repositorioPatJpa.save(entidadPat);
-        return id;*/return null;
+        return id;
     }
 
 }

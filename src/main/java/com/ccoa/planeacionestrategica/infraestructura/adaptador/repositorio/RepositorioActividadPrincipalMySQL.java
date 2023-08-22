@@ -30,26 +30,25 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
 
     @Override
     public List<ActividadPrincipal> listar() {
-        /*
+
         List<EntidadActividadPrincipal> entidadActividadPrincipales =this.repositorioActividadPrincipalJpa.findAll();
         return entidadActividadPrincipales.stream().map(entidad -> ActividadPrincipal.of(entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
                 entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro(),entidad.getIdLineaEstrategica(), entidad.getIdUsuario(), entidad.getIdTipoGI())).toList();
-    */return null;
     }
 
 
     @Override
     public ActividadPrincipal consultarPorId(Long id) {
-        /*
         return this.repositorioActividadPrincipalJpa
                 .findById(id)
                 .map(entidad -> ActividadPrincipal.of(entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
-                entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro(),entidad.getIdLineaEstrategica(), entidad.getIdUsuario(), entidad.getIdTipoGI())).orElse(null);
-    */return null;}
+                        entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro(),
+                        entidad.getIdLineaEstrategica(), entidad.getIdUsuario(), entidad.getIdTipoGI())).orElse(null);
+    }
 
     @Override
     public Long guardar(ActividadPrincipal actividadPrincipal) {
-        /*Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(actividadPrincipal.getIdTipoGI());
+        Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(actividadPrincipal.getIdTipoGI());
         Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(actividadPrincipal.getIdLineaEstrategica());
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(actividadPrincipal.getIdUsuario());
 
@@ -59,7 +58,7 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
                 entidadUsuario.get().getId(),entidadTipoGI.get().getId());
 
         return this.repositorioActividadPrincipalJpa.save(entidadActividadPrincipal).getId();
-    */return null;}
+    }
 
     @Override
     public boolean existe(ActividadPrincipal actividadPrincipal) {
@@ -76,7 +75,6 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     @Override
     public Long modificar(ActividadPrincipal actividadPrincipal, Long id) {
 
-/*
         Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(actividadPrincipal.getIdTipoGI());
         Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(actividadPrincipal.getIdLineaEstrategica());
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(actividadPrincipal.getIdUsuario());
@@ -91,6 +89,6 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
         entidadActividadPrincipal.setIdTipoGI(entidadTipoGI.get().getId());
 
         repositorioActividadPrincipalJpa.save(entidadActividadPrincipal);
-        return id;*/return null;
+        return id;
     }
 }

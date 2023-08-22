@@ -20,27 +20,12 @@ public class ServicioAplicacionGuardarImperativoEstrategico {
         this.servicioGuardarImperativoEstrategico = servicioGuardarImperativoEstrategico;
     }
 
-    /*public DtoRespuesta<Long> ejecutar(DtoImperativoEstrategico dto){
-        List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
+    public DtoRespuesta<Long> ejecutar(DtoImperativoEstrategico dto){
+        //List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         ImperativoEstrategico imperativoEstrategico = ImperativoEstrategico.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
-                dto.getFechaRegistro(),
-                Pat.of(dto.getDtoPat().getNombre(), dto.getDtoPat().getFechaInicio(),dto.getDtoPat().getFechaFinal(), dto.getDtoPat().getFechaRegistro(),
-                        Usuario.of(dto.getDtoPat().getDtoUsuario().getNombreUsuario(),
-                        dto.getDtoPat().getDtoUsuario().getNombre(),
-                        dto.getDtoPat().getDtoUsuario().getApellidos(),
-                        dto.getDtoPat().getDtoUsuario().getPassword(),
-                        dto.getDtoPat().getDtoUsuario().getCorreo(),
-                        roles,
-                        Cargo.of(dto.getDtoPat().getDtoUsuario().getDtoCargo().getDtoArea().getNombre(),
-                                Area.of(dto.getDtoPat().getDtoUsuario().getDtoCargo().getDtoArea().getNombre())))),
-                Usuario.of(dto.getDtoUsuario().getNombreUsuario(),dto.getDtoUsuario().getNombre(),dto.getDtoUsuario().getApellidos(),
-                        dto.getDtoUsuario().getPassword(),dto.getDtoUsuario().getCorreo(),roles,
-                        Cargo.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre(),
-                                Area.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre()))));
+                dto.getFechaRegistro(), dto.getIdPat(), dto.getIdUsuario());
 
         return new DtoRespuesta<>(this.servicioGuardarImperativoEstrategico.ejecutarGuardar(imperativoEstrategico));
     }
-
-     */
 }

@@ -19,18 +19,12 @@ public class ServicioAplicacionModificarPat {
     public ServicioAplicacionModificarPat(ServicioModificarPat servicioModificarPat) {
         this.servicioModificarPat = servicioModificarPat;
     }
+    public DtoRespuesta<Long> ejecutarModificar(DtoPat dto, Long codigo){
+        //List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
-    /*public DtoRespuesta<Long> ejecutarModificar(DtoPat dto, Long codigo){
-        List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
-
-        Pat pat  = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
-                Usuario.of(dto.getDtoUsuario().getNombreUsuario(),dto.getDtoUsuario().getNombre(),dto.getDtoUsuario().getApellidos(),
-                        dto.getDtoUsuario().getPassword(),dto.getDtoUsuario().getCorreo(),roles,
-                        Cargo.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre(),
-                                Area.of(dto.getDtoUsuario().getDtoCargo().getDtoArea().getNombre()))));
+        Pat pat = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
+                dto.getIdUsuario());
 
         return new DtoRespuesta<>(this.servicioModificarPat.ejecutarModificar(pat,codigo));
     }
-
-     */
 }

@@ -17,14 +17,14 @@ public class EntidadActividadPrincipal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "tipo_actividad")
     private String tipoActividad;
-    @Column(name = "entregable")
+
     private String entregable;
-    @Column(name = "presupuesto")
     private Double presupuesto;
+
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
     @Column(name = "fecha_final")

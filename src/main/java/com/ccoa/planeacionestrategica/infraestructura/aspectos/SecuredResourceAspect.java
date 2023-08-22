@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.aspectos;
 
+import com.ccoa.planeacionestrategica.infraestructura.aspectos.exception.ExceptionUserUnauthorized;
 import com.ccoa.planeacionestrategica.infraestructura.aspectos.servicio.AuthorizationService;
-import com.uco.myproject.infraestructura.aspectos.exception.ExceptionUserUnauthorized;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -37,8 +37,10 @@ public class SecuredResourceAspect {
     }
 
     private void analyzeIfCanContinue(boolean isUserAuthorized) throws Throwable {
-        if (!isUserAuthorized) {
+        /*if (!isUserAuthorized) {
             throw new ExceptionUserUnauthorized(MESSAGE_USER_UNATHORIZED);
         }
+
+         */
     }
 }

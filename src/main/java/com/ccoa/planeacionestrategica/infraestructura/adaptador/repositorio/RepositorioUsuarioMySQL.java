@@ -33,7 +33,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     @Override
     public List<DtoUsuarioResumen> listar() {
         List<EntidadUsuario> entidadUsuarios =this.repositorioUsuarioJpa.findAll();
-        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellidos(),
+        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellido(),
                 entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo())).toList();
 
     }
@@ -43,7 +43,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
         return this.repositorioUsuarioJpa
                 .findById(id)
-                .map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellidos(),
+                .map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellido(),
                         entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo()))
                 .orElse(null);
     }
@@ -55,16 +55,16 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
         Optional<EntidadRol> entidadRol = this.repositorioRolJpa.findById(usuario.getIdCargo());
 
-        EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombreUsuario(), usuario.getNombre(), usuario.getApellidos(),
-                usuario.getPassword(), usuario.getCorreo(), entidadCargo.get().getId_cargo() ,entidadRol.get().getId());
+        EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombreUsuario(), usuario.getNombre(), usuario.getApellido(),
+                usuario.getPassword(), usuario.getCorreo(), entidadCargo.get().getId_cargo() ,entidadRol.get().getId_rol());
 
-        return this.repositorioUsuarioJpa.save(entidadUsuario).getId();
+        return this.repositorioUsuarioJpa.save(entidadUsuario).getId_usuario();
     }
 
     @Override
     public boolean existe(Usuario usuario) {
 
-        return this.repositorioUsuarioJpa.findByNombreAndApellidos(usuario.getNombre(), usuario.getApellidos()) != null;    }
+        return this.repositorioUsuarioJpa.findByNombreAndApellido(usuario.getNombre(), usuario.getApellido()) != null;    }
 
     @Override
     public Long eliminar(Long id) {
@@ -77,13 +77,8 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     public Usuario consultar(String nombreUsuario, String password) {
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreUsuarioAndPassword(nombreUsuario, password);
 
-        if(entidadUsuario == null) {
-            return null;
-        }
-
-
         //List<Rol> roles = entidadUsuario.getIdRol().stream().map(rol -> Rol.of(rol.getRol())).collect(Collectors.toList());
-        return Usuario.of(entidadUsuario.getNombreUsuario(),entidadUsuario.getNombre(), entidadUsuario.getApellidos(), entidadUsuario.getPassword(),
+        return Usuario.of(entidadUsuario.getNombreUsuario(),entidadUsuario.getNombre(), entidadUsuario.getApellido(), entidadUsuario.getPassword(),
                 entidadUsuario.getCorreo(),entidadUsuario.getIdCargo(),entidadUsuario.getIdRol());
     }
 
@@ -94,9 +89,9 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
         repositorioUsuarioJpa.findById(id);
         EntidadUsuario entidadUsuario = new EntidadUsuario();
-        entidadUsuario.setId(id);
+        entidadUsuario.setId_usuario(id);
         entidadUsuario.setNombre(usuario.getNombre());
-        entidadUsuario.setApellidos(usuario.getApellidos());
+        entidadUsuario.setApellido(usuario.getApellido());
         entidadUsuario.setPassword(usuario.getPassword());
 
         entidadUsuario.setIdCargo(entidadCargo.get().getIdArea());

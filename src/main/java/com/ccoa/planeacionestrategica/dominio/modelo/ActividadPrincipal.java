@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.Validador;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import lombok.Getter;
 
 import java.util.Date;
@@ -24,16 +24,16 @@ public class ActividadPrincipal {
     public static ActividadPrincipal of(String nombre,String tipoActividad, String entregable, Double presupuesto,Date fechaInicio,
                                         Date fechaFinal, Date fechaRegistro, Long idLineaEstrategica,
                                         Long idUsuario, Long idTipoGI){
-        Validador.validarObligatorio(nombre,"El nombre de la actividad principal NO debe estar vacía");
-        Validador.validarObligatorio(tipoActividad,"El tipo de actividad NO debe estar vacío");
-        Validador.validarObligatorio(entregable,"El entregable  de la actividad principal NO debe estar vacía");
-        Validador.validadorNumeroDoubleYMayorACero(presupuesto,"El presupesto de la actividad principal NO debe estar vacía");
-        Validador.validarObligatorioTipoDato(fechaInicio,"La fecha inicio de la actividad principal NO debe estar vacía");
-        Validador.validarObligatorioTipoDato(fechaFinal,"La fecha inicial de la actividad principal NO debe estar vacía");
-        Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha de resgistro de la actividad principal NO debe estar vacía");
-        Validador.validadorNumeroLongYMayorACero(idLineaEstrategica,"La linea estrategica NO debe estar vacía");
-        Validador.validadorNumeroLongYMayorACero(idUsuario,"El usuario NO debe estar vacía");
-        Validador.validadorNumeroLongYMayorACero(idTipoGI,"El tipo GI NO debe estar vacía");
+        ValidadorDominio.validarObligatorio(nombre,"El nombre de la actividad principal NO debe estar vacía");
+        ValidadorDominio.validarObligatorio(tipoActividad,"El tipo de actividad NO debe estar vacío");
+        ValidadorDominio.validarObligatorio(entregable,"El entregable  de la actividad principal NO debe estar vacía");
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(presupuesto,"El presupesto de la actividad principal NO debe estar vacía");
+        ValidadorDominio.validarObligatorioTipoDato(fechaInicio,"La fecha inicio de la actividad principal NO debe estar vacía");
+        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"La fecha inicial de la actividad principal NO debe estar vacía");
+        ValidadorDominio.validarObligatorioTipoDato(fechaRegistro,"La fecha de resgistro de la actividad principal NO debe estar vacía");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idLineaEstrategica,"La linea estrategica NO debe estar vacía");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,"El usuario NO debe estar vacía");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idTipoGI,"El tipo GI NO debe estar vacía");
 
         return new ActividadPrincipal(nombre,tipoActividad, entregable, presupuesto, fechaInicio, fechaFinal, fechaRegistro,
                 idLineaEstrategica, idUsuario, idTipoGI);

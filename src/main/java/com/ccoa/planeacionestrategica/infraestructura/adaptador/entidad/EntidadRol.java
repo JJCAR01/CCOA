@@ -12,7 +12,7 @@ public class EntidadRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id_rol;
 
     private String rol;
 

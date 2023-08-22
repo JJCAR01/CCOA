@@ -1,4 +1,4 @@
-package com.uco.myproject.infraestructura.aspectos.exception;
+package com.ccoa.planeacionestrategica.infraestructura.aspectos.exception;
 
 public class ExceptionUserUnauthorized extends RuntimeException{
 

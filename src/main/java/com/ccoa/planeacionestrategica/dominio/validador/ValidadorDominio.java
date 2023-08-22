@@ -5,7 +5,7 @@ import com.ccoa.planeacionestrategica.dominio.validador.excepcion.*;
 import java.util.Date;
 import java.util.List;
 
-public class Validador {
+public class ValidadorDominio {
 
     private static final String PATRON_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
     private static final String PATRON_CORREO = "^\\w+([.-_+]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,10})+$";
@@ -120,6 +120,17 @@ public class Validador {
         }
         else{
             longitudNombreUsuario(nombreUsuario, "Valor del tamaño excedido");
+        }
+    }
+
+    public static void validadorDiferente(Object value ,String technicalMessage, String humanMessage) {
+        if (value.equals(value)) {
+            throw new ValorInvalidoExcepcion(technicalMessage, humanMessage);
+        }
+    }
+    public static void validadorIgual(Object value, Object unexpectedValue, String technicalMessage, String humanMessage) {
+        if (unexpectedValue.equals(value)) {
+            throw new ValorInvalidoExcepcion(technicalMessage, humanMessage);
         }
     }
 }

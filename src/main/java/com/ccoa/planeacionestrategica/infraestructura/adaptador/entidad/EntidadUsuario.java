@@ -14,7 +14,7 @@ public class EntidadUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long id_usuario;
 
     @Column(unique = true, length = 50, name = "nombre_usuario")
     private String nombreUsuario;
@@ -23,7 +23,7 @@ public class EntidadUsuario {
     private String nombre;
 
     @Column(unique = true, length = 50, name = "apellido")
-    private String apellidos;
+    private String apellido;
 
     @Column(length = 50)
     private String password;
@@ -40,10 +40,10 @@ public class EntidadUsuario {
     public EntidadUsuario() {
     }
 
-    public EntidadUsuario(String nombreUsuario, String nombre, String apellidos, String password, String correo, Long idCargo, Long idRol) {
+    public EntidadUsuario(String nombreUsuario, String nombre, String apellido, String password, String correo, Long idCargo, Long idRol) {
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellido = apellido;
         this.password = password;
         this.correo = correo;
         this.idCargo = idCargo;

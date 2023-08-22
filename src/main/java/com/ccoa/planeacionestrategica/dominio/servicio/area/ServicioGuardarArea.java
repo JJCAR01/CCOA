@@ -2,7 +2,11 @@ package com.ccoa.planeacionestrategica.dominio.servicio.area;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
+
+import static com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarArea {
@@ -17,7 +21,7 @@ public class ServicioGuardarArea {
 
     public Long ejecutarGuardar(Area area){
 
-        if(this.repositorioArea.existe(area)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        if(this.repositorioArea.existe(area)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioArea.guardar(area);
     }

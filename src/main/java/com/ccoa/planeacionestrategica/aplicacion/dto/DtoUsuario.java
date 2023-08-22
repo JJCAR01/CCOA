@@ -13,7 +13,7 @@ public class DtoUsuario {
 
     private String nombreUsuario;
     private String nombre;
-    private String apellidos;
+    private String apellido;
     private String password;
     private String correo;
     private Long idCargo;

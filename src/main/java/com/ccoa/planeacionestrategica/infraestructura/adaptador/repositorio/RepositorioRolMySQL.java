@@ -35,7 +35,7 @@ public class RepositorioRolMySQL implements RepositorioRol {
     @Override
     public Long guardar(Rol rol) {
         EntidadRol entidadRol = new EntidadRol(rol.getRol());
-        return this.repositorioRolJpa.save(entidadRol).getId();
+        return this.repositorioRolJpa.save(entidadRol).getId_rol();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class RepositorioRolMySQL implements RepositorioRol {
     public Long modificar(Rol rol, Long id) {
         repositorioRolJpa.findById(id);
         EntidadRol entidadRol = new EntidadRol();
-        entidadRol.setId(id);
+        entidadRol.setId_rol(id);
         entidadRol.setRol(rol.getRol());
         repositorioRolJpa.save(entidadRol);
         return id;

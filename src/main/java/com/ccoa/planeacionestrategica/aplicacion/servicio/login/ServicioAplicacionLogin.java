@@ -37,8 +37,8 @@ public class ServicioAplicacionLogin {
 
         //List<String> roles = usuario.getRoles().stream().map(Rol::getRol).toList();
 
-        //return new DtoRespuesta<>(this.servicioGenerarToken.ejecutar(dto.getNombreUsuario(), roles));
-        return new DtoRespuesta<>("Hecho");
+        return new DtoRespuesta<>(this.servicioGenerarToken.ejecutar(dto.getNombreUsuario()));
+
     }
 
 }

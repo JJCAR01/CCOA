@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.Validador;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import lombok.Getter;
 
 import java.util.Date;
@@ -17,11 +17,11 @@ public class Pat {
     private final Long idUsuario;
 
     public static Pat of(String nombre,Date fechaInicio,Date fechaFinal,Date fechaRegistro,Long idUsuario){
-        Validador.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
-        Validador.validarObligatorioTipoDato(fechaInicio,"El dato fecha de inicio NO puede estar vacío");
-        Validador.validarObligatorioTipoDato(fechaFinal,"El dato fecha de final NO puede estar vacío");
-        Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro NO debe ser vacío");
-        Validador.validadorNumeroLongYMayorACero(idUsuario,"El usuario No puede ser vacío");
+        ValidadorDominio.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
+        ValidadorDominio.validarObligatorioTipoDato(fechaInicio,"El dato fecha de inicio NO puede estar vacío");
+        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"El dato fecha de final NO puede estar vacío");
+        ValidadorDominio.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro NO debe ser vacío");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,"El usuario No puede ser vacío");
         return new Pat(nombre,fechaInicio,fechaFinal,fechaRegistro,idUsuario);
     }
 

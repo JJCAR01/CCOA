@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.Validador;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import lombok.Getter;
 
 import java.util.Date;
@@ -18,11 +18,11 @@ public class RegistroActividad {
     private final Long idUsuario;
 
     public static RegistroActividad of(String comentario, Double porcentaje, Date fechaRegistro, String documento, Long idActividadPrincipal, Long idUsuario){
-        Validador.validarObligatorio(comentario,"El comentario del registro de la actividad no puede ser vacío");
-        Validador.validadorNumeroDoubleYMayorACero(porcentaje,"El porcentaje del registro de la actividad no puede ser vacío o menor a cero");
-        Validador.validarObligatorio(documento,"El documento NO puede estar vacío");
-        Validador.validadorNumeroLongYMayorACero(idActividadPrincipal,"El id de la actividad principal no puede estar vacía");
-        Validador.validadorNumeroLongYMayorACero(idUsuario,"El id del usuario no puede estar vacío");
+        ValidadorDominio.validarObligatorio(comentario,"El comentario del registro de la actividad no puede ser vacío");
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentaje,"El porcentaje del registro de la actividad no puede ser vacío o menor a cero");
+        ValidadorDominio.validarObligatorio(documento,"El documento NO puede estar vacío");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idActividadPrincipal,"El id de la actividad principal no puede estar vacía");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,"El id del usuario no puede estar vacío");
         return new RegistroActividad(comentario, porcentaje, fechaRegistro, documento,idActividadPrincipal,idUsuario);
     }
 

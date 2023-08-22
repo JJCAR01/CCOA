@@ -14,8 +14,8 @@ public class ConfigurationSecurity {
     public FilterRegistrationBean<FiltroAutenticacion> authenticationFilter(ServicioValidacionToken tokenValidationService){
         FilterRegistrationBean<FiltroAutenticacion> registrationBean = new FilterRegistrationBean<>();
 
-        registrationBean.setFilter(new FiltroAutenticacion(tokenValidationService, new String[]{"/api/login","/api/usuarios","/api/clientes"
-        ,"/api/modulo","/api/driver"}));
+        registrationBean.setFilter(new FiltroAutenticacion(tokenValidationService, new String[]{"/ccoa/login","/ccoa/usuarios","/ccoa/areas"
+        ,"/ccoa/cargos","/ccoa/roles"}));
         registrationBean.addUrlPatterns(URL_PATTERN);
 
         return registrationBean;

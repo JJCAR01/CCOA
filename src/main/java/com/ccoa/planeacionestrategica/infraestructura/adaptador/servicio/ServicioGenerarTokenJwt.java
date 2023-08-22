@@ -37,6 +37,16 @@ public class ServicioGenerarTokenJwt implements ServicioGenerarToken {
                 .compact();
     }
 
+    @Override
+    public String ejecutar(String usuario) {
+        return Jwts.builder().setIssuer("CCOA").setSubject(usuario).setIssuedAt(createDate(LocalDateTime.now())).
+                setExpiration(createDate(LocalDateTime.now().plusHours(1))).
+                setId(UUID.randomUUID().toString()).signWith(
+                        SignatureAlgorithm.HS256,
+                        TextCodec.BASE64.decode(this.environment.getRequiredProperty("token.key"))
+                ).compact();
+    }
+
     private static Date createDate(LocalDateTime localDateTime) {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }

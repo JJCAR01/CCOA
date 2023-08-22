@@ -55,7 +55,7 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
         EntidadActividadPrincipal entidadActividadPrincipal = new EntidadActividadPrincipal(actividadPrincipal.getNombre(), actividadPrincipal.getTipoActividad(),
                 actividadPrincipal.getEntregable(),
                 actividadPrincipal.getPresupuesto(), actividadPrincipal.getFechaInicio(), actividadPrincipal.getFechaFinal(),actividadPrincipal.getFechaRegistro(),entidadLineaEstrategica.get().getId(),
-                entidadUsuario.get().getId(),entidadTipoGI.get().getId());
+                entidadUsuario.get().getId_usuario(),entidadTipoGI.get().getId());
 
         return this.repositorioActividadPrincipalJpa.save(entidadActividadPrincipal).getId();
     }
@@ -84,7 +84,7 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
         entidadActividadPrincipal.setId(id);
         entidadActividadPrincipal.setNombre(actividadPrincipal.getNombre());
 
-        entidadActividadPrincipal.setIdUsuario(entidadUsuario.get().getId());
+        entidadActividadPrincipal.setIdUsuario(entidadUsuario.get().getId_usuario());
         entidadActividadPrincipal.setIdLineaEstrategica(entidadLineaEstrategica.get().getId());
         entidadActividadPrincipal.setIdTipoGI(entidadTipoGI.get().getId());
 

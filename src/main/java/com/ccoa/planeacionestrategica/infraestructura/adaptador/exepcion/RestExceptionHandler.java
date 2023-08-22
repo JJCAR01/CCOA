@@ -1,9 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.exepcion;
 
-import com.ccoa.planeacionestrategica.dominio.validador.Validador;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.LongitudMaxExcepcion;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.LongitudMinExcepcion;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.*;
 import com.ccoa.planeacionestrategica.infraestructura.error.Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +22,10 @@ public class RestExceptionHandler {
         STATES.put(LongitudMaxExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(NoDatoExcepcion.class.getSimpleName(), HttpStatus.NOT_FOUND);
         STATES.put(ValorObligatorioExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ValorCaracteresExcepcion.class.getSimpleName(), HttpStatus.BAD_REQUEST);
+        STATES.put(ValorNombreExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ValorObjetoExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(BaseExcepcion.class)
@@ -36,7 +38,7 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> exceptionResolver(Exception e) {
-        Error err = new Error(e.getClass().getSimpleName(), e.getMessage(), Validador.MENSAJE_DEFECTO);
+        Error err = new Error(e.getClass().getSimpleName(), e.getMessage(), ValidadorDominio.MENSAJE_DEFECTO);
         LOGGER.error(e.getClass().getSimpleName(), e);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);

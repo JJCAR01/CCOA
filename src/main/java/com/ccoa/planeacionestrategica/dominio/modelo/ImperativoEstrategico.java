@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.Validador;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import lombok.Getter;
 
 import java.util.Date;
@@ -18,12 +18,12 @@ public class ImperativoEstrategico {
     private final Long idUsuario;
 
     public static ImperativoEstrategico of(String nombre, Date fechaInicio, Date fechaFinal, Date fechaRegistro, Long idPat, Long idUsuario){
-        Validador.validarObligatorio(nombre,"El nombre del Imperativo Estraegico NO debe estar vacío");
-        Validador.validarObligatorioTipoDato(fechaInicio,"La fecha de inicio del Imperativo estrategico NO debe estar vacía");
-        Validador.validarObligatorioTipoDato(fechaFinal,"La fecha final NO del Imperativo estrategico  debe estar vacía");
-        Validador.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro  del Imperativo estrategico NO debe estar vacía");
-        Validador.validarObjeto(idPat, "El Pat NO debe de estar vacío");
-        Validador.validarObjeto(idUsuario, "El Usuario NO debe de estar vacío");
+        ValidadorDominio.validarObligatorio(nombre,"El nombre del Imperativo Estraegico NO debe estar vacío");
+        ValidadorDominio.validarObligatorioTipoDato(fechaInicio,"La fecha de inicio del Imperativo estrategico NO debe estar vacía");
+        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"La fecha final NO del Imperativo estrategico  debe estar vacía");
+        ValidadorDominio.validarObligatorioTipoDato(fechaRegistro,"La fecha de registro  del Imperativo estrategico NO debe estar vacía");
+        ValidadorDominio.validarObjeto(idPat, "El Pat NO debe de estar vacío");
+        ValidadorDominio.validarObjeto(idUsuario, "El Usuario NO debe de estar vacío");
         return new ImperativoEstrategico(nombre,fechaInicio,fechaFinal,fechaRegistro,idPat,idUsuario);
     }
 

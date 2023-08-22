@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.validador.Validador;
+import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +13,7 @@ public class Rol {
     private final String rol;
 
     public static Rol of(String rol){
-        Validador.validarObligatorio(rol,"El rol NO puede ser vacío");
+        ValidadorDominio.validarObligatorio(rol,"El rol NO puede ser vacío");
         return new Rol(rol);
     }
 

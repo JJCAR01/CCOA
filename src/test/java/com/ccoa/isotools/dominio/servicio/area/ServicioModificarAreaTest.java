@@ -3,6 +3,7 @@ package com.ccoa.isotools.dominio.servicio.area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.isotools.dominio.testdatabuilder.AreaTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.servicio.area.ServicioModificarArea;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -10,7 +11,7 @@ import org.mockito.Mockito;
 public class ServicioModificarAreaTest {
 
     @Test
-    void verificarNoExistaProducto()
+    void verificarNoExistaArea()
     {
         var area = new AreaTestDataBuilder().build();
 
@@ -20,7 +21,7 @@ public class ServicioModificarAreaTest {
         Mockito.when(!repositorio.existe(Mockito.any())).thenReturn(true);
 
         Assertions.assertEquals("No existe el Area con los datos ingresados",
-                Assertions.assertThrows(IllegalStateException.class, () -> servicio.ejecutarModificar(area,1L)).getMessage());
+                Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutarModificar(area,1L)).getMessage());
     }
 
 

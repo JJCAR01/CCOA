@@ -20,7 +20,7 @@ public class ServicioModificarArea {
 
     public Long ejecutarModificar(Area area, Long codigo){
 
-        if(this.repositorioArea.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_DEFECTO,MENSAJE_NO_EXISTE);
+        if(this.repositorioArea.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_NO_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioArea.modificar(area,codigo);
     }

@@ -28,8 +28,8 @@ public class ServicioAplicacionLogin {
 
     public DtoRespuesta<String> ejecutar(DtoLogin dto) {
 
-        String claveCifrada = this.servicioCifrarTexto.ejecutar(dto.getPassword());
-        Usuario usuario = this.repositorioUsuario.consultar(dto.getNombreUsuario(), claveCifrada);
+        //String claveCifrada = this.servicioCifrarTexto.ejecutar(dto.getPassword());
+        Usuario usuario = this.repositorioUsuario.consultar(dto.getNombreUsuario(), dto.getPassword());
 
         if(usuario == null) {
             throw new IllegalStateException("Usuario o clave incorrecta");

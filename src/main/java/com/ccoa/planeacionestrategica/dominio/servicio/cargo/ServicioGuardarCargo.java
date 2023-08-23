@@ -4,12 +4,15 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
+
+import static com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarCargo {
 
-    private static final String MENSAJE_YA_EXISTE = "Ya existe el Area con los datos ingresados";
+    private static final String MENSAJE_YA_EXISTE = "Ya existe el Cargo con los datos ingresados";
 
     private final RepositorioCargo repositorioCargo;
 
@@ -19,7 +22,7 @@ public class ServicioGuardarCargo {
 
     public Long ejecutarGuardar(Cargo cargo){
 
-        if(this.repositorioCargo.existe(cargo)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        if(this.repositorioCargo.existe(cargo)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioCargo.guardar(cargo);}
 }

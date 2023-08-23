@@ -37,10 +37,8 @@ public class SecuredResourceAspect {
     }
 
     private void analyzeIfCanContinue(boolean isUserAuthorized) throws Throwable {
-        /*if (!isUserAuthorized) {
+        if (!isUserAuthorized) {
             throw new ExceptionUserUnauthorized(MESSAGE_USER_UNATHORIZED);
         }
-
-         */
     }
 }

@@ -4,7 +4,10 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
+
+import static com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioModificarUsuario {
@@ -18,7 +21,7 @@ public class ServicioModificarUsuario {
 
     public Long ejecutarModificar(Usuario usuario, Long codigo){
 
-        if(this.repositorioUsuario.consultarPorId(codigo)==null) throw new IllegalStateException(MENSAJE_NO_EXISTE);
+        if(this.repositorioUsuario.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_NO_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioUsuario.modificar(usuario,codigo);
     }

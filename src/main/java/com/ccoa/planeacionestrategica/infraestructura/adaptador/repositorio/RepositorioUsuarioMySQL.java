@@ -77,6 +77,10 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     public Usuario consultar(String nombreUsuario, String password) {
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreUsuarioAndPassword(nombreUsuario, password);
 
+        if(entidadUsuario == null) {
+            return null;
+        }
+
         //List<Rol> roles = entidadUsuario.getIdRol().stream().map(rol -> Rol.of(rol.getRol())).collect(Collectors.toList());
         return Usuario.of(entidadUsuario.getNombreUsuario(),entidadUsuario.getNombre(), entidadUsuario.getApellido(), entidadUsuario.getPassword(),
                 entidadUsuario.getCorreo(),entidadUsuario.getIdCargo(),entidadUsuario.getIdRol());

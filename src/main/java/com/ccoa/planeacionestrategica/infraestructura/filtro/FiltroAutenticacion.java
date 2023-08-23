@@ -49,5 +49,4 @@ public class FiltroAutenticacion extends OncePerRequestFilter {
         }
         return shouldNotFilter;
     }
-
 }

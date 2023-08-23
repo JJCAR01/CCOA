@@ -12,6 +12,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+
 @Component
 public class ServicioGenerarTokenJwt implements ServicioGenerarToken {
 
@@ -24,7 +26,7 @@ public class ServicioGenerarTokenJwt implements ServicioGenerarToken {
     @Override
     public String ejecutar(String usuario, List<String> roles) {
         return Jwts.builder()
-                .setIssuer("CCOA")
+                .setIssuer("Universidad Catolica de Oriente")
                 .setSubject(usuario)
                 .claim("roles", roles)
                 .setIssuedAt(createDate(LocalDateTime.now()))
@@ -39,12 +41,17 @@ public class ServicioGenerarTokenJwt implements ServicioGenerarToken {
 
     @Override
     public String ejecutar(String usuario) {
-        return Jwts.builder().setIssuer("CCOA").setSubject(usuario).setIssuedAt(createDate(LocalDateTime.now())).
-                setExpiration(createDate(LocalDateTime.now().plusHours(1))).
-                setId(UUID.randomUUID().toString()).signWith(
+        return Jwts.builder()
+                .setIssuer("CCOA")
+                .setSubject(usuario)
+                .setIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                .setExpiration(Date.from(LocalDateTime.now().plusHours(1).atZone(ZoneId.systemDefault()).toInstant()))
+                .setId(UUID.randomUUID().toString())
+                .signWith(
                         SignatureAlgorithm.HS256,
                         TextCodec.BASE64.decode(this.environment.getRequiredProperty("token.key"))
-                ).compact();
+                )
+                .compact();
     }
 
     private static Date createDate(LocalDateTime localDateTime) {

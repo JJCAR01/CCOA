@@ -4,7 +4,10 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
+
+import static com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarUsuario {
@@ -19,7 +22,7 @@ public class ServicioGuardarUsuario {
 
     public Long ejecutarGuardar(Usuario usuario){
 
-        if(this.repositorioUsuario.existe(usuario)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        if(this.repositorioUsuario.existe(usuario)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioUsuario.guardar(usuario);
     }

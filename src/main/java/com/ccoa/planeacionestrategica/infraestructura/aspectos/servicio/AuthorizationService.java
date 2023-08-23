@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.aspectos.servicio;
 
 import io.jsonwebtoken.*;
+
 import io.jsonwebtoken.impl.TextCodec;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +25,7 @@ public class AuthorizationService {
         String token = obtenerTokenActual();
         final SigningKeyResolver firma = obtenerFirma();
         List<String> roles = obtenerRoles(token, firma);
-        return roles.indexOf(roleToAuthorized) != -1;
+        return roles.contains(roleToAuthorized);
     }
 
     private List<String> obtenerRoles(String token, SigningKeyResolver signingKeyResolver) {

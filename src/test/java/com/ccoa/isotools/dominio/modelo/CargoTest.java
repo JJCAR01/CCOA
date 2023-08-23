@@ -28,8 +28,8 @@ public class CargoTest {
         Assertions.assertEquals("j.cardona", usuario.getNombreUsuario());
         Assertions.assertEquals("Juan Jose",usuario.getNombre());
         Assertions.assertEquals("cardona", usuario.getApellido());
-        Assertions.assertEquals("Colombia22+",usuario.getCorreo());
-        Assertions.assertEquals("juan@gmail.com", usuario.getPassword());
+        Assertions.assertEquals("Colombia22+",usuario.getPassword());
+        Assertions.assertEquals("juan@gmail.com", usuario.getCorreo());
         Assertions.assertEquals(1,usuario.getIdCargo());
         Assertions.assertEquals(1,usuario.getIdRol());
 

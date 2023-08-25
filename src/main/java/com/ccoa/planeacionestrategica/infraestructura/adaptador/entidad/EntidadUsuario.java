@@ -1,7 +1,9 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,44 +11,33 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "usuario")
 public class EntidadUsuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id_usuario;
-
-    @Column(unique = true, length = 50, name = "nombre_usuario")
-    private String nombreUsuario;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_usuario", nullable = false)
+    private Long idUsuario;
 
     @Column(unique = true, length = 50)
     private String nombre;
 
-    @Column(unique = true, length = 50, name = "apellido")
+    @Column(unique = true, length = 50)
     private String apellido;
-
-    @Column(length = 50)
-    private String password;
 
     @Column(unique = true, length = 50)
     private String correo;
 
+    @Column(length = 100)
+    private String password;
+
     @Column(name = "cargo_id")
     private Long idCargo;
 
-    @Column(name= "rol_id")
-    private Long idRol;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario")
+    private List<EntidadRolUsuario> roles;
 
-    public EntidadUsuario() {
-    }
-
-    public EntidadUsuario(String nombreUsuario, String nombre, String apellido, String password, String correo, Long idCargo, Long idRol) {
-        this.nombreUsuario = nombreUsuario;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.password = password;
-        this.correo = correo;
-        this.idCargo = idCargo;
-        this.idRol = idRol;
-    }
 }

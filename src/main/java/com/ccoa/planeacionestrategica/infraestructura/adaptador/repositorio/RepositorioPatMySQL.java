@@ -47,7 +47,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(pat.getIdUsuario());
 
         EntidadPat entidadPat = new EntidadPat(pat.getNombre(), pat.getFechaInicio(), pat.getFechaFinal(),
-                pat.getFechaRegistro(), entidadUsuario.get().getId_usuario());
+                pat.getFechaRegistro(), entidadUsuario.get().getIdUsuario());
 
         return this.repositorioPatJpa.save(entidadPat).getId();
     }
@@ -72,7 +72,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
         EntidadPat entidadPat = new EntidadPat();
         entidadPat.setId(id);
         entidadPat.setNombre(pat.getNombre());
-        entidadPat.setIdUsuario(entidadUsuario.get().getId_usuario());
+        entidadPat.setIdUsuario(entidadUsuario.get().getIdUsuario());
 
         repositorioPatJpa.save(entidadPat);
         return id;

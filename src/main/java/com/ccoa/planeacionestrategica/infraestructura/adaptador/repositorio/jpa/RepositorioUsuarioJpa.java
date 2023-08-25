@@ -9,6 +9,6 @@ public interface RepositorioUsuarioJpa extends JpaRepository<EntidadUsuario,Long
 
     EntidadUsuario findByNombreAndApellido(String nombre, String apellido);
 
-    EntidadUsuario findByNombreUsuarioAndPassword(String nombreUsuario,String password);
+    EntidadUsuario findByCorreo(String correo);
 }
 

@@ -1,25 +1,21 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "rol")
+@Getter
+@Setter
+@NoArgsConstructor
 public class EntidadRol {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_rol;
+    @Column(name = "id_rol",nullable = false, length = 20)
+    private String idRol;
 
-    private String rol;
-
-    public EntidadRol() {
-    }
-
-    public EntidadRol(String rol) {
-        this.rol = rol;
-    }
+    @Column(name = "nombre_rol",nullable = false, length = 20)
+    private String nombreRol;
 }

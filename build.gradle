@@ -28,7 +28,7 @@ dependencies {
 	//runtimeOnly 'com.mysql:mysql-connector-j'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security:3.1.2'
-	//Lombok
+	implementation 'com.auth0:java-jwt:4.4.0'
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
@@ -38,7 +38,6 @@ dependencies {
 
 
 	implementation 'io.jsonwebtoken:jjwt:0.7.0'
-	implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
 	implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
 
 

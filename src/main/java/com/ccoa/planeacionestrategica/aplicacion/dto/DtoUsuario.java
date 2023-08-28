@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class DtoUsuario {
     private String password;
     private String correo;
     private Long idCargo;
-    private Long idRol;
+    private List<Rol> roles;
 }

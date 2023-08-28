@@ -40,4 +40,12 @@ public class EntidadUsuario {
     @JoinColumn(name = "usuario")
     private List<EntidadRolUsuario> roles;
 
+    public EntidadUsuario(String nombre, String apellido, String correo, String password, Long idCargo, List<EntidadRolUsuario> roles) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.password = password;
+        this.idCargo = idCargo;
+        this.roles = roles;
+    }
 }

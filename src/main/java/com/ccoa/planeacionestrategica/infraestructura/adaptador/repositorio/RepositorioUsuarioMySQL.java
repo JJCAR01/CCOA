@@ -4,9 +4,11 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadCargo;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadRolUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioCargoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,25 +20,40 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     private static final String MENSAJE_NO_EXISTE = "No existe algunos de los componentes con los datos ingresados";
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioCargoJpa repositorioCargoJpa;
+    private final PasswordEncoder passwordEncoder;
 
-    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa) {
+    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, PasswordEncoder passwordEncoder) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioCargoJpa = repositorioCargoJpa;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
     public List<DtoUsuarioResumen> listar() {
-        return null;
-    }
+        List<EntidadUsuario> entidadUsuarios =this.repositorioUsuarioJpa.findAll();
+        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getNombre(), entidad.getApellido(),
+                entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo())).toList();
 
+    }
     @Override
     public DtoUsuarioResumen consultarPorId(Long id) {
-        return null;
+
+        return this.repositorioUsuarioJpa
+                .findById(id)
+                .map(entidad -> new DtoUsuarioResumen(entidad.getNombre(), entidad.getApellido(),
+                        entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo()))
+                .orElse(null);
     }
 
     @Override
     public Long guardar(Usuario usuario) {
-        return null;
+        List<EntidadRolUsuario> roles = (List<EntidadRolUsuario>) usuario.getRoles().stream().map(rol -> rol.getRol());
+        Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
+
+        EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombre(), usuario.getApellido(),
+                passwordEncoder.encode(usuario.getPassword()), usuario.getCorreo(), entidadCargo.get().getId_cargo() ,roles);
+        return this.repositorioUsuarioJpa.save(entidadUsuario).getIdUsuario();
+
+
     }
 
     @Override
@@ -61,37 +78,12 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 }
 
     /*@Override
-    public List<DtoUsuarioResumen> listar() {
-        List<EntidadUsuario> entidadUsuarios =this.repositorioUsuarioJpa.findAll();
-        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellido(),
-                entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo())).toList();
-
-    }
-
-    @Override
-    public DtoUsuarioResumen consultarPorId(Long id) {
-
-        return this.repositorioUsuarioJpa
-                .findById(id)
-                .map(entidad -> new DtoUsuarioResumen(entidad.getNombreUsuario(),entidad.getNombre(), entidad.getApellido(),
-                        entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo()))
-                .orElse(null);
-    }
 
 
-    @Override
-    public Long guardar(Usuario usuario) {
-        /*List<EntidadRol> roles = usuario.getIdRol().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
-        Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
-        Optional<EntidadRol> entidadRol = this.repositorioRolJpa.findById(usuario.getIdCargo());
-
-        EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombreUsuario(), usuario.getNombre(), usuario.getApellido(),
-                usuario.getPassword(), usuario.getCorreo(), entidadCargo.get().getId_cargo() ,entidadRol.get().getId_rol());
-
-        return this.repositorioUsuarioJpa.save(entidadUsuario).getId_usuario();
 
 
-    }
+
+
 
     @Override
     public boolean existe(Usuario usuario) {

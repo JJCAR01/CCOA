@@ -34,9 +34,9 @@ public class ValidadorDominio {
     }
 
 
-    public static void validadorNoVacio(List<? extends Object> lista, String mensajeTecnico,String mensajeHumano) {
+    public static void validadorNoVacio(List<? extends Object> lista, String mensajeTecnico) {
         if(lista == null  || lista.isEmpty()) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico,mensajeHumano);
+            throw new ValorObligatorioExcepcion(mensajeTecnico,MENSAJE_DEFECTO);
         }
     }
     public static void longitudPassword(String valor, String mensaje)

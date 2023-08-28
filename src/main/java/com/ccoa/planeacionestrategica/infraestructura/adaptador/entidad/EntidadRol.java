@@ -11,11 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class EntidadRol {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_rol",nullable = false, length = 20)
     private String idRol;
 
     @Column(name = "nombre_rol",nullable = false, length = 20)
     private String nombreRol;
+
 }

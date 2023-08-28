@@ -36,11 +36,10 @@ public class EntidadUsuario {
     @Column(name = "cargo_id")
     private Long idCargo;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario")
-    private List<EntidadRolUsuario> roles;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private List<EntidadUsuarioRol> roles;
 
-    public EntidadUsuario(String nombre, String apellido, String correo, String password, Long idCargo, List<EntidadRolUsuario> roles) {
+    public EntidadUsuario(String nombre, String apellido, String correo, String password, Long idCargo, List<EntidadUsuarioRol> roles) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
@@ -48,4 +47,5 @@ public class EntidadUsuario {
         this.idCargo = idCargo;
         this.roles = roles;
     }
+
 }

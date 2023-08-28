@@ -4,9 +4,10 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadCargo;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadRolUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioCargoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioRolJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -20,11 +21,13 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     private static final String MENSAJE_NO_EXISTE = "No existe algunos de los componentes con los datos ingresados";
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioCargoJpa repositorioCargoJpa;
+    private final RepositorioRolJpa repositorioRolJpa;
     private final PasswordEncoder passwordEncoder;
 
-    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, PasswordEncoder passwordEncoder) {
+    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, RepositorioRolJpa repositorioRolJpa, PasswordEncoder passwordEncoder) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioCargoJpa = repositorioCargoJpa;
+        this.repositorioRolJpa = repositorioRolJpa;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -46,7 +49,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long guardar(Usuario usuario) {
-        List<EntidadRolUsuario> roles = (List<EntidadRolUsuario>) usuario.getRoles().stream().map(rol -> rol.getRol());
+        List<EntidadUsuarioRol> roles = (List<EntidadUsuarioRol>) this.repositorioRolJpa.findByRol(usuario.getRoles().toString());
         Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
 
         EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombre(), usuario.getApellido(),

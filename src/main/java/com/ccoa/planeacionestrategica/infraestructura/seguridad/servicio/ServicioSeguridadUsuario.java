@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreo(username);
 
-        String[] roles = entidadUsuario.getRoles().stream().map(entidadRolUsuario ->  entidadRolUsuario.getRol().getNombreRol()).toArray(String[]::new);
+        String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
 
         return User.builder()
                 .username(entidadUsuario.getCorreo())

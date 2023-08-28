@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoLogin;
-import com.ccoa.planeacionestrategica.infraestructura.seguridad.filtro.JwtUtil;
+import com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

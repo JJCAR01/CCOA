@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.configuracion;
 
+import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 public class ConfiguracionCors {
 
     @Bean
+    @Transactional
     CorsConfigurationSource corsConfigurationSource(){
 
         CorsConfiguration corsConfiguration =  new CorsConfiguration();
@@ -21,7 +23,7 @@ public class ConfiguracionCors {
         corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("(/**",corsConfiguration);
+        source.registerCorsConfiguration("/**",corsConfiguration);
 
         return source;
     }

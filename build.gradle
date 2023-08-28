@@ -40,6 +40,8 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.7.0'
 	implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
 
+	implementation 'org.postgresql:postgresql:42.6.0'
+
 
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
 	implementation group: 'com.tngtech.archunit', name: 'archunit', version: '1.1.0'

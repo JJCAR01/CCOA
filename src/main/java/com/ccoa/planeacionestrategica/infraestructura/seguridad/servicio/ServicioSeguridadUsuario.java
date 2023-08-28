@@ -1,7 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadRol;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadRolUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import jakarta.transaction.Transactional;
@@ -29,13 +27,13 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        EntidadUsuario userEntity = this.repositorioUsuarioJpa.findByCorreo(username);
+        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreo(username);
 
-        String[] roles = userEntity.getRoles().stream().map(entidadRolUsuario ->  entidadRolUsuario.getRol().getNombreRol()).toArray(String[]::new);
+        String[] roles = entidadUsuario.getRoles().stream().map(entidadRolUsuario ->  entidadRolUsuario.getRol().getNombreRol()).toArray(String[]::new);
 
         return User.builder()
-                .username(userEntity.getCorreo())
-                .password(userEntity.getPassword())
+                .username(entidadUsuario.getCorreo())
+                .password(entidadUsuario.getPassword())
                 .authorities(this.grantedAuthorities(roles))
                 .build();
     }

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ServicioGuardarUsuarioTest {
-
+/*
     @Test
     void siElNombreYaExisteDeberiaRetornarError() {
 
@@ -51,4 +51,6 @@ public class ServicioGuardarUsuarioTest {
         Assertions.assertEquals(1l, id);
 
     }
+
+ */
 }

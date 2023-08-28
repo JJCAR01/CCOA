@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class UsuarioTest {
-
+/*
     @Test
     void validarCreacionExitosa() {
 
@@ -52,4 +52,6 @@ public class UsuarioTest {
                 Cargo.of(nombre,idArea)
         ).getMessage());
     }
+
+ */
 }

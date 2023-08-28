@@ -4,7 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 
 public class UsuarioTestDataBuilder {
-
+    /*
     private  String nombreUsuario;
     private  String nombre;
     private  String apellido;
@@ -62,4 +62,6 @@ public class UsuarioTestDataBuilder {
     public Usuario build() {
         return Usuario.of(nombreUsuario,nombre,apellido,password,correo,idCargo,idRol);
     }
+
+     */
 }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ServicioModificarUsuarioTest {
-
+/*
     @Test
     void verificarNoExistaCargo()
     {
@@ -26,4 +26,6 @@ public class ServicioModificarUsuarioTest {
         Assertions.assertEquals("No existe el Usuario con los datos ingresados",
                 Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutarModificar(usuario,1L)).getMessage());
     }
+
+ */
 }

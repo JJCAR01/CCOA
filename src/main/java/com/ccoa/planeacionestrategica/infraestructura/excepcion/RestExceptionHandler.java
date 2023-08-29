@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.exepcion;
+package com.ccoa.planeacionestrategica.infraestructura.excepcion;
 
 import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import com.ccoa.planeacionestrategica.dominio.validador.excepcion.*;

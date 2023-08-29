@@ -1,11 +1,14 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.filtro;
 
+import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.infraestructura.excepcion.BadRequestExcepcion;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -20,6 +23,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
+
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
@@ -31,15 +35,14 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //1.Validar que se un Header Authorization valido
-
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if(authHeader == null || authHeader.isEmpty() || !authHeader.startsWith("Bearer") ){
             filterChain.doFilter(request,response);
             return;
         }
 
-        //2.Validar que el JWT sea valido
 
+        //2.Validar que el JWT sea valido
         String jwt = authHeader.split(" ")[1].trim();
         if(!this.jwtUtil.esValido(jwt)){
             filterChain.doFilter(request,response);
@@ -47,7 +50,6 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         //3.Cargar el usuario del UserDetailService
-
         String username = this.jwtUtil.getUsername(jwt);
         User user = (User) this.userDetailsService.loadUserByUsername(username);
 

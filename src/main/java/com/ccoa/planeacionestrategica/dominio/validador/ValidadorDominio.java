@@ -122,15 +122,10 @@ public class ValidadorDominio {
             longitudNombreUsuario(nombreUsuario, "Valor del tamaño excedido");
         }
     }
-
-    public static void validadorDiferente(Object value ,String technicalMessage, String humanMessage) {
-        if (value.equals(value)) {
-            throw new ValorInvalidoExcepcion(technicalMessage, humanMessage);
-        }
-    }
     public static void validadorIgual(Object value, Object unexpectedValue, String technicalMessage, String humanMessage) {
         if (unexpectedValue.equals(value)) {
             throw new ValorInvalidoExcepcion(technicalMessage, humanMessage);
         }
     }
+
 }

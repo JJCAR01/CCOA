@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.exepcion;
+package com.ccoa.planeacionestrategica.infraestructura.excepcion;
 
 import lombok.Getter;
 

@@ -5,15 +5,14 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Component;
 
-import javax.naming.ldap.PagedResultsControl;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "paccoa";
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
+    private static final String JWT_KEY = "paccoa";
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(JWT_KEY);
 
     public String create(String username){
         return JWT.create()

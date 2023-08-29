@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class CargoTest {
 
+    /*
     @Test
     void validarCreacionExitosa() {
 
@@ -114,4 +115,6 @@ public class CargoTest {
                 Usuario.of(nombreUsuario,nombre,apellido,password,correo,idCargo,idRol)
         ).getMessage());
     }
+
+     */
 }

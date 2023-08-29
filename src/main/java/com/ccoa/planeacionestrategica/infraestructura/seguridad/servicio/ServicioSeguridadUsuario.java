@@ -3,6 +3,7 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
+import com.ccoa.planeacionestrategica.infraestructura.excepcion.AutorizacionExcepcion;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ServicioSeguridadUsuario implements UserDetailsService {
+
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
 
     @Autowired
@@ -30,13 +32,19 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreo(username);
 
-        String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
+        if(entidadUsuario != null){
+            String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
+            return User.builder()
+                    .username(entidadUsuario.getCorreo())
+                    .password(entidadUsuario.getPassword())
+                    .authorities(this.grantedAuthorities(roles))
+                    .build();
+        }else{
+            throw new AutorizacionExcepcion("Usuario o clave incorrectos");
+        }
 
-        return User.builder()
-                .username(entidadUsuario.getCorreo())
-                .password(entidadUsuario.getPassword())
-                .authorities(this.grantedAuthorities(roles))
-                .build();
+
+
     }
 
     private String[] getAuthorities(String rol) {

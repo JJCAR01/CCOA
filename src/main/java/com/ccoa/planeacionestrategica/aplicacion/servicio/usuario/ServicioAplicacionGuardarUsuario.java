@@ -26,7 +26,7 @@ public class ServicioAplicacionGuardarUsuario {
 
         //List<Rol> roles = Arrays.asList(Rol.of("A"),Rol.of("EGRESADO"));
 
-        Usuario usuario = Usuario.of(dto.getNombreUsuario(),dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),
+        Usuario usuario = Usuario.of(dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),
                 dto.getIdCargo(), dto.getRoles());
         return new DtoRespuesta<>(this.servicioGuardarUsuario.ejecutarGuardar(usuario));
     }

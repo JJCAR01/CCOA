@@ -15,7 +15,8 @@ public class EntidadCargo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id_cargo;
+    @Column(name = "id_cargo")
+    private Long idCargo;
 
     @Column(unique = true, length = 50)
     private String nombre;

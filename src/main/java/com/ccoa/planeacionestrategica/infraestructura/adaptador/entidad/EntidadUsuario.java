@@ -27,7 +27,7 @@ public class EntidadUsuario {
     @Column(unique = true, length = 50)
     private String apellido;
 
-    @Column(unique = true, length = 50)
+    @Column(unique = true, length = 100)
     private String correo;
 
     @Column(length = 100)

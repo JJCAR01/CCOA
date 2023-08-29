@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 public class DtoUsuario {
 
-    private String nombreUsuario;
     private String nombre;
     private String apellido;
     private String password;

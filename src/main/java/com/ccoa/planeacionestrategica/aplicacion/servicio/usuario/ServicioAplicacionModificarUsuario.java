@@ -26,9 +26,9 @@ public class ServicioAplicacionModificarUsuario {
 
     public DtoRespuesta<Long> ejecutarModificar(DtoUsuario dto, Long codigo){
 
-        List<Rol> roles = Arrays.asList(Rol.of("ADMIN"),Rol.of("OPERADOR"));
+        List<Rol> roles = Arrays.asList(dto.getRoles().toArray(new Rol[0]));
 
-        Usuario usuario = Usuario.of(dto.getNombreUsuario(),dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(), dto.getIdCargo(),
+        Usuario usuario = Usuario.of(dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(), dto.getIdCargo(),
                roles);
 
         return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,codigo));

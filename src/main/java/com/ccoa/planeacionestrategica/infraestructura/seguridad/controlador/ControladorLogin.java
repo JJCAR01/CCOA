@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoLogin;
+import com.ccoa.planeacionestrategica.infraestructura.seguridad.AuthResponse;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -27,7 +28,7 @@ public class ControladorLogin {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody DtoLogin dtoLogin){
+    public ResponseEntity<AuthResponse> login(@RequestBody DtoLogin dtoLogin){
         UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(dtoLogin.getCorreo(),
                 dtoLogin.getPassword());
         Authentication authentication = this.authenticationManager.authenticate(login);
@@ -37,6 +38,6 @@ public class ControladorLogin {
 
         String jwt = this.jwtUtil.create(dtoLogin.getCorreo());
 
-        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,jwt).build();
+        return ResponseEntity.ok(new AuthResponse(jwt));
     }
 }

@@ -38,8 +38,8 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
     public Long guardar(Cargo cargo) {
         Optional<EntidadArea> entidadArea = this.repositorioAreaJpa.findById(cargo.getIdArea());
 
-        EntidadCargo entidadCargo = new EntidadCargo(cargo.getNombre(), entidadArea.get().getId_area());
-        return this.repositorioCargoJpa.save(entidadCargo).getId_cargo();
+        EntidadCargo entidadCargo = new EntidadCargo(cargo.getNombre(), entidadArea.get().getIdArea());
+        return this.repositorioCargoJpa.save(entidadCargo).getIdCargo();
     }
 
     @Override
@@ -60,10 +60,10 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
 
 
         EntidadCargo entidadCargo = new EntidadCargo();
-        entidadCargo.setId_cargo(id);
+        entidadCargo.setIdCargo(id);
         entidadCargo.setNombre(cargo.getNombre());
 
-        entidadCargo.setIdArea(area.get().getId_area());
+        entidadCargo.setIdArea(area.get().getIdArea());
 
         repositorioCargoJpa.save(entidadCargo);
         return id;

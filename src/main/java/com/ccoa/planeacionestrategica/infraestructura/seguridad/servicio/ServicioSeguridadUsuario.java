@@ -32,19 +32,14 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreo(username);
 
-        if(entidadUsuario != null){
-            String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
-            return User.builder()
-                    .username(entidadUsuario.getCorreo())
-                    .password(entidadUsuario.getPassword())
-                    .authorities(this.grantedAuthorities(roles))
-                    .build();
-        }else{
-            throw new AutorizacionExcepcion("Usuario o clave incorrectos");
-        }
+        if (entidadUsuario == null) throw new AutorizacionExcepcion("Usuario o clave incorrectos");
 
-
-
+        String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
+        return User.builder()
+                .username(entidadUsuario.getCorreo())
+                .password(entidadUsuario.getPassword())
+                .authorities(this.grantedAuthorities(roles))
+                .build();
     }
 
     private String[] getAuthorities(String rol) {

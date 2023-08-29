@@ -31,7 +31,7 @@ public class    RepositorioAreaMySQL implements RepositorioArea{
     @Override
     public Long guardar(Area area) {
         EntidadArea entidadArea = new EntidadArea(area.getNombre());
-        return this.repositorioAreaJpa.save(entidadArea).getId_area();
+        return this.repositorioAreaJpa.save(entidadArea).getIdArea();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class    RepositorioAreaMySQL implements RepositorioArea{
     public Long modificar(Area area, Long id) {
         repositorioAreaJpa.findById(id);
         EntidadArea entidadArea = new EntidadArea();
-        entidadArea.setId_area(id);
+        entidadArea.setIdArea(id);
         entidadArea.setNombre(area.getNombre());
         repositorioAreaJpa.save(entidadArea);
         return id;

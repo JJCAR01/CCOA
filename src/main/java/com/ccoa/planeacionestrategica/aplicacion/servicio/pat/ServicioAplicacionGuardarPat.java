@@ -21,7 +21,6 @@ public class ServicioAplicacionGuardarPat {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoPat dto){
-        //List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
         Pat pat = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
                 dto.getIdUsuario());
         return new DtoRespuesta<>(this.servicioGuardarPat.ejecutarGuardar(pat));

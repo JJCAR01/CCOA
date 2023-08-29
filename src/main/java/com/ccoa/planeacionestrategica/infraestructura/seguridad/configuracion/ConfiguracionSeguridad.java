@@ -29,8 +29,24 @@ public class ConfiguracionSeguridad {
         this.jwtFilter = jwtFilter;
     }
 
-
     @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(Customizer.withDefaults());
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http
+                .authorizeHttpRequests(auth ->
+                        auth.
+                                requestMatchers("/ccoa/**").permitAll());
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+
+    /*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(Customizer.withDefaults());
@@ -46,6 +62,8 @@ public class ConfiguracionSeguridad {
 
         return http.build();
     }
+
+     */
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {

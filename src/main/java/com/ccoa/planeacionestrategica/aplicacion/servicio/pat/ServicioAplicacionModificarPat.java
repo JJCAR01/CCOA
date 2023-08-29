@@ -20,7 +20,6 @@ public class ServicioAplicacionModificarPat {
         this.servicioModificarPat = servicioModificarPat;
     }
     public DtoRespuesta<Long> ejecutarModificar(DtoPat dto, Long codigo){
-        //List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         Pat pat = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
                 dto.getIdUsuario());

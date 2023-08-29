@@ -9,7 +9,6 @@ public class ValidadorDominio {
 
     private static final String PATRON_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
     private static final String PATRON_CORREO = "^\\w+([.-_+]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,10})+$";
-    private static final String PATRON_NOMBRE_USUARIO = "^[a-z]\\.[a-z]{2,}$";
 
     private static final String CAMPO_OBLIGATORIO = "El campo %s es obligatorio.";
     public static final String MENSAJE_DEFECTO = "Ocurrió un error procesando la solicitud. Por favor contacta al administrador del sistema.";
@@ -112,16 +111,6 @@ public class ValidadorDominio {
         }
     }
 
-    public static void validadorNombreUsuario(String nombreUsuario, String mensaje)
-    {
-        if(!aceptacionPatron(nombreUsuario, PATRON_NOMBRE_USUARIO))
-        {
-            throw new ValorNombreExcepcion(mensaje,MENSAJE_DEFECTO);
-        }
-        else{
-            longitudNombreUsuario(nombreUsuario, "Valor del tamaño excedido");
-        }
-    }
     public static void validadorIgual(Object value, Object unexpectedValue, String technicalMessage, String humanMessage) {
         if (unexpectedValue.equals(value)) {
             throw new ValorInvalidoExcepcion(technicalMessage, humanMessage);

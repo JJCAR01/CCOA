@@ -17,7 +17,7 @@ public class EntidadPat {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(unique = true, length = 255, name = "nombre")
+    @Column(unique = true,   name = "nombre")
     private String nombre;
 
     @Column(unique = true, name = "fecha_inicio")

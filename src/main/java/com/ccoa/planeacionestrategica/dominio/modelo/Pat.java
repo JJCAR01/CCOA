@@ -16,7 +16,8 @@ public class Pat {
     private final Date fechaRegistro;
     private final Long idUsuario;
 
-    public static Pat of(String nombre,Date fechaInicio,Date fechaFinal,Date fechaRegistro,Long idUsuario){
+    public static Pat of(String nombre,Date fechaInicio,Date fechaFinal,Date fechaRegistro,
+                         Long idUsuario){
         ValidadorDominio.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
         ValidadorDominio.validarObligatorioTipoDato(fechaInicio,"El dato fecha de inicio NO puede estar vacío");
         ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"El dato fecha de final NO puede estar vacío");

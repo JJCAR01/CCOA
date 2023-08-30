@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioRolId implements Serializable {
-    private String idUsuario;
+    private Long idUsuario;
     private String rol;
 
     @Override

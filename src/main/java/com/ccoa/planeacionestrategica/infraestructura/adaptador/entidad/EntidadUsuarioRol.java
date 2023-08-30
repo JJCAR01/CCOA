@@ -16,7 +16,7 @@ import lombok.Setter;
 public class EntidadUsuarioRol {
     @Id
     @Column(name = "id_usuario",nullable = false, length = 20)
-    private String idUsuario;
+    private Long idUsuario;
 
     @Id
     @Column(nullable = false, length = 20)

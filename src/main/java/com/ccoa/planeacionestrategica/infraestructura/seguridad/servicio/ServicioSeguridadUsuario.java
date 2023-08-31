@@ -30,7 +30,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreo(username);
+            EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreo(username);
 
         if (entidadUsuario == null) throw new AutorizacionExcepcion("Usuario o clave incorrectos");
 

@@ -50,8 +50,8 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         List<EntidadUsuarioRol> roles = usuario.getRoles().stream().map(rol -> new EntidadUsuarioRol(rol.getRol())).toList();
         Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
 
-        EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombre(), usuario.getApellido(),
-                passwordEncoder.encode(usuario.getPassword()), usuario.getCorreo(), entidadCargo.get().getIdCargo() ,roles);
+        EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(),
+                passwordEncoder.encode(usuario.getPassword()), entidadCargo.get().getIdCargo() ,roles);
         return this.repositorioUsuarioJpa.save(entidadUsuario).getIdUsuario();
     }
 

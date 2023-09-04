@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.tipogi;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.TipoGI;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioTipoGI;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.programa;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Programa;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.Programa;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPrograma;
 import org.springframework.stereotype.Service;
 

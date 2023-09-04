@@ -21,8 +21,8 @@ public class ServicioAplicacionModificarPat {
     }
     public DtoRespuesta<Long> ejecutarModificar(DtoPat dto, Long codigo){
 
-        Pat pat = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro(),
-                dto.getIdUsuario());
+        Pat pat = Pat.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro()
+                ,dto.getPorcentajeReal(), dto.getPorcentajeEsperado(), dto.getCumplimiento(), dto.getIdUsuario());
 
         return new DtoRespuesta<>(this.servicioModificarPat.ejecutarModificar(pat,codigo));
     }

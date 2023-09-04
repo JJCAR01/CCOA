@@ -46,14 +46,6 @@ public class ValidadorDominio {
         }
     }
 
-    public static void longitudNombreUsuario(String valor, String mensaje)
-    {
-        if(!(valor.length()>=3 && valor.length()<=12))
-        {
-            throw new LongitudMaxExcepcion(mensaje,MENSAJE_DEFECTO);
-        }
-    }
-
     /*public static void validadorLongitud(String valor, Long longitud, String mensaje) {
         if(valor.length() < longitud) {
             throw new IllegalArgumentException(String.format(mensaje, longitud));
@@ -74,9 +66,16 @@ public class ValidadorDominio {
         }
     }
 
+    public static void validadorNumeroDoubleYMayorOIgualACero(Double valor, String mensaje) {
+
+        if((valor < 0) || (valor == null)){
+            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
+        }
+    }
+
     public static void validadorNumeroLongYMayorACero(Long valor, String mensaje) {
 
-        if((valor <= 0) || (valor == null)){
+        if((valor < 0) || (valor == null)){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }

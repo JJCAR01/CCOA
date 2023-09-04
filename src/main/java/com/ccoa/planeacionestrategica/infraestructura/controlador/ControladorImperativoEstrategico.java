@@ -35,12 +35,10 @@ public class ControladorImperativoEstrategico {
         this.servicioAplicacionModificarImperativoEstrategico = servicioAplicacionModificarImperativoEstrategico;
     }
 
-    /*@PostMapping
+    @PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoImperativoEstrategico imperativoEstrategico){
         return this.servicioAplicacionGuardarImperativoEstrategico.ejecutar(imperativoEstrategico);
     }
-
-     */
 
     @GetMapping
     public List<ImperativoEstrategico> listar(){
@@ -57,11 +55,9 @@ public class ControladorImperativoEstrategico {
         return this.servicioAplicacionEliminarImperativoEstrategico.ejecutarEliminar(codigo);
     }
 
-    /*@PutMapping("/{codigo}")
+    @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoImperativoEstrategico imperativoEstrategico, @PathVariable Long codigo){
         return this.servicioAplicacionModificarImperativoEstrategico.ejecutarModificar(imperativoEstrategico,codigo);
     }
-
-     */
 
 }

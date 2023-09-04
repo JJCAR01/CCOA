@@ -1,9 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.lineaestrategica;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.LineaEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.Programa;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioLineaEstrategica;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPrograma;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

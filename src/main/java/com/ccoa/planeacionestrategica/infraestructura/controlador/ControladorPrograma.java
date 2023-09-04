@@ -1,19 +1,11 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionEliminarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionGuardarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionListarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionModificarImperativoEstrategico;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionEliminarPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionGuardarPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionListarPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionModificarPrograma;
-import com.ccoa.planeacionestrategica.dominio.modelo.ImperativoEstrategico;
-import com.ccoa.planeacionestrategica.dominio.modelo.Programa;
-import com.ccoa.planeacionestrategica.dominio.servicio.programa.ServicioGuardarPrograma;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.Programa;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

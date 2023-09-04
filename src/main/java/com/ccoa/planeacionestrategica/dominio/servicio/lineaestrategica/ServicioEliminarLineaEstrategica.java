@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.lineaestrategica;
 
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioLineaEstrategica;
 import org.springframework.stereotype.Service;
 

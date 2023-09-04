@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -16,7 +18,10 @@ public class DtoImperativoEstrategico {
     private String nombre;
     private Date fechaInicio;
     private Date fechaFinal;
-    private Date fechaRegistro;
+    private LocalDateTime fechaRegistro;
+    private Double porcentajeReal;
+    private Double porcentajeEsperado;
+    private Double cumplimiento;
     private Long idPat;
     private Long idUsuario;
 

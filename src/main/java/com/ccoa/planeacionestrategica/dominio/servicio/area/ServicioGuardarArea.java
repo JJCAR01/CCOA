@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.servicio.area;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
 import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 

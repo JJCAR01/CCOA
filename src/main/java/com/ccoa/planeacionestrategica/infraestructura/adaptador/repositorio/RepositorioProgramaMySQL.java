@@ -1,15 +1,13 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.*;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.DetallePrograma;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.InformacionPrograma;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.Programa;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPrograma;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadArea;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadImperativoEstrategico;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadPrograma;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioProgramaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.*;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioImperativoEstrategicoJpa;
 import org.springframework.stereotype.Repository;
 
@@ -33,66 +31,23 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
 
     @Override
     public List<Programa> listar() {
-        /*List<EntidadPrograma> programas = this.repositorioProgramaJpa.findAll();
+        List<EntidadPrograma> programas = this.repositorioProgramaJpa.findAll();
         return programas.stream().map(entidad -> Programa.of(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
-                entidad.getFechaFinal(),entidad.getFechaRegistro(), entidad.getPresupuestoIngreso(), entidad.getPresupuestoGasto(),
-                ImperativoEstrategico.of(entidad.getImperativoEstrategico().getNombre(),entidad.getImperativoEstrategico().getFechaInicio(),
-                        entidad.getImperativoEstrategico().getFechaFinal(),entidad.getImperativoEstrategico().getFechaRegistro(),
-                        Pat.of(entidad.getImperativoEstrategico().getPat().getNombre(),entidad.getImperativoEstrategico().getPat().getFechaInicio(),
-                            entidad.getImperativoEstrategico().getPat().getFechaFinal(),entidad.getImperativoEstrategico().getPat().getFechaRegistro(),
-                            Usuario.of(entidad.getImperativoEstrategico().getPat().getUsuario().getNombreUsuario(),entidad.getImperativoEstrategico().getPat().getUsuario().getNombre(),
-                                entidad.getImperativoEstrategico().getPat().getUsuario().getApellidos(),entidad.getImperativoEstrategico().getPat().getUsuario().getPassword(),
-                                entidad.getImperativoEstrategico().getPat().getUsuario().getCorreo(),entidad.getImperativoEstrategico().getPat().getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                Cargo.of(entidad.getImperativoEstrategico().getPat().getUsuario().getCargo().getNombre(),
-                                    Area.of(entidad.getImperativoEstrategico().getPat().getUsuario().getCargo().getArea().getNombre())))),
-                        Usuario.of(entidad.getImperativoEstrategico().getUsuario().getNombreUsuario(),entidad.getImperativoEstrategico().getUsuario().getNombre(),
-                                entidad.getImperativoEstrategico().getUsuario().getApellidos(),entidad.getImperativoEstrategico().getUsuario().getPassword(),
-                                entidad.getImperativoEstrategico().getUsuario().getCorreo(),entidad.getImperativoEstrategico().getUsuario().getRoles().stream().map(rol ->
-                                        new Rol(rol.getNombre())).toList(),Cargo.of(entidad.getImperativoEstrategico().getUsuario().getCargo().getNombre(),
-                                        Area.of(entidad.getImperativoEstrategico().getUsuario().getCargo().getArea().getNombre())))),
-                Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),
-                        entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                        Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))),
-                Area.of(entidad.getArea().getNombre()))).toList();
+                entidad.getFechaFinal(),entidad.getFechaRegistro())).toList();
 
-         */
-        return null;
     }
 
     @Override
     public Programa consultarPorId(Long id) {
-        /*return this.repositorioProgramaJpa
+        return this.repositorioProgramaJpa
                 .findById(id)
                 .map(entidad ->  Programa.of(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
-                        entidad.getFechaFinal(),entidad.getFechaRegistro(), entidad.getPresupuestoIngreso(),entidad.getPresupuestoGasto(),
-                                    ImperativoEstrategico.of(entidad.getImperativoEstrategico().getNombre(),entidad.getImperativoEstrategico().getFechaInicio(),
-                                        entidad.getImperativoEstrategico().getFechaFinal(),entidad.getImperativoEstrategico().getFechaRegistro(),
-                                        Pat.of(entidad.getImperativoEstrategico().getPat().getNombre(),entidad.getImperativoEstrategico().getPat().getFechaInicio(),
-                                                entidad.getImperativoEstrategico().getPat().getFechaFinal(),entidad.getImperativoEstrategico().getPat().getFechaRegistro(),
-                                                Usuario.of(entidad.getImperativoEstrategico().getPat().getUsuario().getNombreUsuario(),entidad.getImperativoEstrategico().getPat().getUsuario().getNombre(),
-                                                        entidad.getImperativoEstrategico().getPat().getUsuario().getApellidos(),entidad.getImperativoEstrategico().getPat().getUsuario().getPassword(),
-                                                        entidad.getImperativoEstrategico().getPat().getUsuario().getCorreo(),entidad.getImperativoEstrategico().getPat().getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                                        Cargo.of(entidad.getImperativoEstrategico().getPat().getUsuario().getCargo().getNombre(),
-                                                                Area.of(entidad.getImperativoEstrategico().getPat().getUsuario().getCargo().getArea().getNombre())))),
-                                        Usuario.of(entidad.getImperativoEstrategico().getUsuario().getNombreUsuario(),entidad.getImperativoEstrategico().getUsuario().getNombre(),
-                                                entidad.getImperativoEstrategico().getUsuario().getApellidos(),entidad.getImperativoEstrategico().getUsuario().getPassword(),
-                                                entidad.getImperativoEstrategico().getUsuario().getCorreo(),entidad.getImperativoEstrategico().getUsuario().getRoles().stream().map(rol ->
-                                                        new Rol(rol.getNombre())).toList(),Cargo.of(entidad.getImperativoEstrategico().getUsuario().getCargo().getNombre(),
-                                                        Area.of(entidad.getImperativoEstrategico().getUsuario().getCargo().getArea().getNombre())))),
-                                Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),
-                                        entidad.getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                        Cargo.of(entidad.getUsuario().getCargo().getNombre(),Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))),
-                                Area.of(entidad.getArea().getNombre()))).orElse(null);
+                        entidad.getFechaFinal(),entidad.getFechaRegistro())).orElse(null);
 
-
-         */return null;
     }
 
-
-
-
     @Override
-    public Long guardar(Programa programa) {
+    public Long guardar(Programa programa, DetallePrograma detallePrograma, InformacionPrograma informacionPrograma) {
         /*EntidadImperativoEstrategico entidadImperativoEstrategico = this.repositorioImperativoEstrategicoJpa.findByNombre(programa.getImperativoEstrategico().getNombre());
         EntidadArea entidadArea = this.repositorioAreaJpa.findByNombre(programa.getArea().getNombre());
         EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(programa.getUsuario().getNombre(),
@@ -106,7 +61,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
     }
 
     @Override
-    public boolean existe(Programa programa) {
+    public boolean existe(Programa programa, DetallePrograma detallePrograma, InformacionPrograma informacionPrograma) {
         return this.repositorioProgramaJpa.findByNombre(programa.getNombre()) != null;
     }
 

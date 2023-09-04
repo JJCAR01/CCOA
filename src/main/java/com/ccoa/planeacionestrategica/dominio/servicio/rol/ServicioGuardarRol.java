@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.rol;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioRol;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.programa;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
-import com.ccoa.planeacionestrategica.dominio.modelo.Programa;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.DetallePrograma;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.InformacionPrograma;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.Programa;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPrograma;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +17,11 @@ public class ServicioGuardarPrograma {
         this.repositorioPrograma = repositorioPrograma;
     }
 
-    public Long ejecutarGuardar(Programa programa){
+    public Long ejecutarGuardar(Programa programa, DetallePrograma detallePrograma, InformacionPrograma informacionPrograma){
 
-        if(this.repositorioPrograma.existe(programa)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        if(this.repositorioPrograma.existe(programa,detallePrograma,informacionPrograma)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
 
-        return this.repositorioPrograma.guardar(programa);
+        return this.repositorioPrograma.guardar(programa,detallePrograma,informacionPrograma);
     }
 
 

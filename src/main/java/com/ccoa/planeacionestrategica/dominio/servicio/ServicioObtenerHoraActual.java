@@ -2,13 +2,14 @@ package com.ccoa.planeacionestrategica.dominio.servicio;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Service
-public class ServivioObtenerHoraActual {
+public class ServicioObtenerHoraActual {
 
-    public LocalTime ejecutar(){
-        return LocalTime.now();
+    public LocalDateTime ejecutar(){
+        return LocalDateTime.now();
     }
 
 

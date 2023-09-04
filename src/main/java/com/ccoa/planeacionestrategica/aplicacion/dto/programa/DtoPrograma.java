@@ -1,10 +1,11 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto;
+package com.ccoa.planeacionestrategica.aplicacion.dto.programa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -18,7 +19,10 @@ public class DtoPrograma {
     private Integer version;
     private Date fechaInicio;
     private Date fechaFinal;
-    private Date fechaRegistro;
+    private LocalDateTime fechaRegistro;
+    private Double porcentajeReal;
+    private Double porcentajeEsperado;
+    private Double cumplimiento;
     private Double presupuestoIngreso;
     private Double presupuestoGasto;
     private Long idImperativoEstrategico;

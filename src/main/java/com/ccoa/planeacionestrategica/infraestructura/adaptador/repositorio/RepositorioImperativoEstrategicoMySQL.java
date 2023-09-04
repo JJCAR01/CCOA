@@ -11,6 +11,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperativoEstrategico {
@@ -28,60 +29,38 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
 
     @Override
     public List<ImperativoEstrategico> listar() {
-        /*List<EntidadImperativoEstrategico> entidadImperativoEstrategicos =this.repositorioImperativoEstrategicoJpa.findAll();
+        List<EntidadImperativoEstrategico> entidadImperativoEstrategicos =this.repositorioImperativoEstrategicoJpa.findAll();
         return entidadImperativoEstrategicos.stream().map(entidad -> ImperativoEstrategico.of(entidad.getNombre(),
                 entidad.getFechaInicio(),
                 entidad.getFechaFinal(),
-                entidad.getFechaRegistro(),
-                Pat.of(entidad.getPat().getNombre(),entidad.getPat().getFechaInicio(),
-                        entidad.getPat().getFechaFinal(),entidad.getPat().getFechaRegistro(), Usuario.of(entidad.getPat().getUsuario().getNombreUsuario(),
-                                entidad.getPat().getUsuario().getNombre(),entidad.getPat().getUsuario().getApellidos(),entidad.getPat().getUsuario().getPassword(),
-                                entidad.getPat().getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                Cargo.of(entidad.getPat().getUsuario().getCargo().getNombre(),Area.of(entidad.getPat().getUsuario().getCargo().getArea().getNombre())))),
-                Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),
-                        entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),entidad.getUsuario().getCorreo(),
-                        entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                        Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre()))))).toList();
-
-         */return null;
+                entidad.getFechaRegistro(), entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(), entidad.getCumplimiento(),
+                entidad.getIdPat(), entidad.getIdUsuario())).toList();
     }
 
     @Override
     public ImperativoEstrategico consultarPorId(Long id) {
-        /*return this.repositorioImperativoEstrategicoJpa
+        return this.repositorioImperativoEstrategicoJpa
                 .findById(id)
                 .map(entidad -> ImperativoEstrategico.of(entidad.getNombre(),
                         entidad.getFechaInicio(),
                         entidad.getFechaFinal(),
-                        entidad.getFechaRegistro(),
-                        Pat.of(entidad.getPat().getNombre(),entidad.getPat().getFechaInicio(),
-                                entidad.getPat().getFechaFinal(),entidad.getPat().getFechaRegistro(), Usuario.of(entidad.getPat().getUsuario().getNombreUsuario(),
-                                        entidad.getPat().getUsuario().getNombre(),entidad.getPat().getUsuario().getApellidos(),entidad.getPat().getUsuario().getPassword(),
-                                        entidad.getPat().getUsuario().getCorreo(),entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                        Cargo.of(entidad.getPat().getUsuario().getCargo().getNombre(),Area.of(entidad.getPat().getUsuario().getCargo().getArea().getNombre())))),
-                        Usuario.of(entidad.getUsuario().getNombreUsuario(),entidad.getUsuario().getNombre(),
-                                entidad.getUsuario().getApellidos(),entidad.getUsuario().getPassword(),entidad.getUsuario().getCorreo(),
-                                entidad.getUsuario().getRoles().stream().map(rol -> new Rol(rol.getNombre())).toList(),
-                                Cargo.of(entidad.getUsuario().getCargo().getNombre(), Area.of(entidad.getUsuario().getCargo().getArea().getNombre())))))
+                        entidad.getFechaRegistro(), entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(),
+                        entidad.getCumplimiento(), entidad.getIdPat(), entidad.getIdUsuario()))
                 .orElse(null);
-
-         */return null;
     }
 
 
     @Override
     public Long guardar(ImperativoEstrategico imperativoEstrategico) {
-        /*List<EntidadRol> roles = pat.getRoles().stream().map(rol -> new EntidadRol(rol.getRol())).toList();
-        EntidadPat entidadPat = this.repositorioPatJpa.findByNombre(imperativoEstrategico.getPat().getNombre());
-        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(imperativoEstrategico.getUsuario().getNombre(),
-                imperativoEstrategico.getUsuario().getApellidos());
+        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(imperativoEstrategico.getIdUsuario());
+        Optional<EntidadPat> entidadPat = this.repositorioPatJpa.findById(imperativoEstrategico.getIdPat());
 
         EntidadImperativoEstrategico entidadImperativoEstrategico = new EntidadImperativoEstrategico(imperativoEstrategico.getNombre(), imperativoEstrategico.getFechaInicio(),
-                imperativoEstrategico.getFechaFinal(),imperativoEstrategico.getFechaRegistro(),
-                entidadPat,entidadUsuario);
+                imperativoEstrategico.getFechaFinal(),imperativoEstrategico.getFechaRegistro(), imperativoEstrategico.getPorcentajeReal(),
+                imperativoEstrategico.getPorcentajeEsperado(), imperativoEstrategico.getCumplimiento(), entidadPat.get().getIdPat() ,
+                entidadUsuario.get().getIdUsuario());
 
-        return this.repositorioImperativoEstrategicoJpa.save(entidadImperativoEstrategico).getId();
-        */return null;
+        return this.repositorioImperativoEstrategicoJpa.save(entidadImperativoEstrategico).getIdImperativoEstrategico();
     }
 
     @Override
@@ -98,22 +77,19 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
 
     @Override
     public Long modificar(ImperativoEstrategico imperativoEstrategico, Long id) {
-        /*
-        EntidadPat entidadPat = this.repositorioPatJpa.findByNombre(imperativoEstrategico.getPat().getNombre());
-        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreAndApellidos(imperativoEstrategico.getUsuario().getNombre(),
-                imperativoEstrategico.getUsuario().getApellidos());
+        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(imperativoEstrategico.getIdUsuario());
+        Optional<EntidadPat> entidadPat = this.repositorioPatJpa.findById(imperativoEstrategico.getIdPat());
 
         repositorioImperativoEstrategicoJpa.findById(id);
         EntidadImperativoEstrategico entidadImperativoEstrategico = new EntidadImperativoEstrategico();
-        entidadImperativoEstrategico.setId(id);
+        entidadImperativoEstrategico.setIdImperativoEstrategico(id);
         entidadImperativoEstrategico.setNombre(imperativoEstrategico.getNombre());
 
-        entidadImperativoEstrategico.setPat(entidadPat);
-        entidadPat.setUsuario(entidadUsuario);
+        entidadImperativoEstrategico.setIdPat(entidadPat.get().getIdPat());
+        entidadImperativoEstrategico.setIdUsuario(entidadUsuario.get().getIdUsuario());
 
         repositorioImperativoEstrategicoJpa.save(entidadImperativoEstrategico);
         return id;
-        */return null;
 
     }
 

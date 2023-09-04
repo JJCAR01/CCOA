@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,19 +17,28 @@ public class EntidadImperativoEstrategico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "id_imperativo_estrategico")
+    private Long idImperativoEstrategico;
 
-    @Column(unique = true, length = 255, name = "nombre")
+    @Column(unique = true)
     private String nombre;
 
-    @Column(unique = true, name = "fecha_inicio")
+    @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
-    @Column(unique = true, name = "fecha_final")
+    @Column(name = "fecha_final")
     private Date fechaFinal;
 
     @Column(name = "fecha_registro")
-    private Date fechaRegistro;
+    private LocalDateTime fechaRegistro;
+
+    @Column(name = "porcentaje_real")
+    private Double porcentajeReal;
+
+    @Column(name = "porcentaje_esperado")
+    private Double porcentajeEsperado;
+
+    private Double cumplimiento;
 
     @JoinColumn(name = "pat_id",unique = true)
     private Long idPat;
@@ -38,11 +49,16 @@ public class EntidadImperativoEstrategico {
     public EntidadImperativoEstrategico() {
     }
 
-    public EntidadImperativoEstrategico(String nombre, Date fechaInicio, Date fechaFinal, Date fechaRegistro, Long idPat, Long idUsuario) {
+    public EntidadImperativoEstrategico(String nombre, Date fechaInicio,
+                                        Date fechaFinal, LocalDateTime fechaRegistro, Double porcentajeReal, Double porcentajeEsperado,
+                                        Double cumplimiento, Long idPat, Long idUsuario) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.cumplimiento = cumplimiento;
         this.idPat = idPat;
         this.idUsuario = idUsuario;
     }

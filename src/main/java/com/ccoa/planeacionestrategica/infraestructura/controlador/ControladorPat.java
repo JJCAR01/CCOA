@@ -35,12 +35,11 @@ public class ControladorPat {
         this.servicioAplicacionModificarPat = servicioAplicacionModificarPat;
     }
 
-    /*@PostMapping
+    @PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoPat pat){
         return this.servicioAplicacionGuardarPat.ejecutar(pat);
     }
 
-     */
 
     @GetMapping
     public List<Pat> listar(){
@@ -57,10 +56,9 @@ public class ControladorPat {
         return this.servicioAplicacionEliminarPat.ejecutarEliminar(codigo);
     }
 
-    /*@PutMapping("/{codigo}")
+    @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoPat pat, @PathVariable Long codigo){
         return this.servicioAplicacionModificarPat.ejecutarModificar(pat,codigo);
     }
 
-     */
 }

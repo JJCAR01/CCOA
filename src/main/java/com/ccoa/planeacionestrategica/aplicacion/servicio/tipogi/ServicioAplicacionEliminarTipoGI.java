@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.tipogi;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.servicio.tipogi.ServicioEliminarTipoGI;
-import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioEliminarUsuario;
 import org.springframework.stereotype.Component;
 
 @Component

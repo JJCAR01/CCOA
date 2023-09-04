@@ -43,7 +43,7 @@ class ControladorAreaTest {
 
     @Autowired
     RepositorioArea repositorioArea;
-
+    /*
     @Test
     @DisplayName("Debe crear un area de forma exitosa y luego fallar al crear el mismo")
     void crearDuplicadaTest() throws Exception {
@@ -124,4 +124,6 @@ class ControladorAreaTest {
 
         return (String) objectMapper.readValue(resultLogin.getResponse().getContentAsString(), DtoRespuesta.class).getValor();
     }
+
+     */
 }

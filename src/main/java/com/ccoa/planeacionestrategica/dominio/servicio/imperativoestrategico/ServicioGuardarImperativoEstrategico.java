@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.imperativoestrategico;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.ImperativoEstrategico;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioImperativoEstrategico;
 import org.springframework.stereotype.Service;
 

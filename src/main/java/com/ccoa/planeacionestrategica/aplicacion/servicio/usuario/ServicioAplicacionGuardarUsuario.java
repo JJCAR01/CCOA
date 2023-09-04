@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioGuardarUsuario;
 import org.springframework.security.crypto.password.PasswordEncoder;

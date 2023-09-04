@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.programa;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.ImperativoEstrategico;
-import com.ccoa.planeacionestrategica.dominio.modelo.Programa;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioImperativoEstrategico;
+import com.ccoa.planeacionestrategica.dominio.modelo.programa.Programa;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPrograma;
 import org.springframework.stereotype.Component;
 

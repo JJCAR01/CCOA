@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.usuario;
 
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
 import org.springframework.stereotype.Service;

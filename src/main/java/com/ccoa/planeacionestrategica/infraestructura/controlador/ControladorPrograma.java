@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.programa.DtoPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionEliminarPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionGuardarPrograma;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.programa.ServicioAplicacionListarPrograma;
@@ -26,12 +27,10 @@ public class ControladorPrograma {
         this.servicioAplicacionModificarPrograma = servicioAplicacionModificarPrograma;
     }
 
-    /*@PostMapping
+    @PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoPrograma programa){
         return this.servicioAplicacionGuardarPrograma.ejecutar(programa);
     }
-
-     */
 
     @GetMapping
     public List<Programa> listar(){
@@ -48,12 +47,9 @@ public class ControladorPrograma {
         return this.servicioAplicacionEliminarPrograma.ejecutarEliminar(codigo);
     }
 
-    /*@PutMapping("/{codigo}")
+    @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoPrograma programa, @PathVariable Long codigo){
         return this.servicioAplicacionModificarPrograma.ejecutarModificar(programa,codigo);
     }
-
-     */
-
 
 }

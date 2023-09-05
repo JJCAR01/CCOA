@@ -21,8 +21,6 @@ public class ServicioAplicacionGuardarPrograma {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoPrograma dto){
-        //List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
-
 
         Programa programa = Programa.of(dto.getNombre(), dto.getCodigo(), dto.getVersion(),dto.getFechaInicio(),dto.getFechaFinal(), servicioObtenerHoraActual.ejecutar());
         DetallePrograma detallePrograma = DetallePrograma.of(dto.getIdImperativoEstrategico(), dto.getIdUsuario(), dto.getIdArea());

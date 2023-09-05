@@ -16,7 +16,7 @@ public class ServicioAplicacionGuardarArea {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoArea dto){
-        Area area = Area.of(dto.getNombre());
+        Area area = Area.of(dto.getIdArea(), dto.getNombre());
         return new DtoRespuesta<>(this.servicioGuardarArea.ejecutarGuardar(area));
     }
 }

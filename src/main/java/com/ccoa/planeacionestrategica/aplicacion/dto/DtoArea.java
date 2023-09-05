@@ -11,5 +11,6 @@ import lombok.Setter;
 @Setter
 public class DtoArea {
 
+    private Long idArea;
     private String nombre;
 }

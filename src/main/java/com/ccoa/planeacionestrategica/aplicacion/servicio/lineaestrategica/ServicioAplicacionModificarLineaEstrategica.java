@@ -16,7 +16,6 @@ public class ServicioAplicacionModificarLineaEstrategica {
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoLineaEstrategica dto, Long codigo) {
-        //List<Rol> roles = Arrays.asList(Rol.of("OPERADOR"));
 
         LineaEstrategica lineaEstrategica = LineaEstrategica.of(dto.getNombre(), dto.getEntregable(),dto.getFechaInicio(),dto.getFechaFinal(), dto.getFechaRegistro(),
                     dto.getIndicadorResultado(), dto.getIdPrograma(), dto.getIdUsuario());

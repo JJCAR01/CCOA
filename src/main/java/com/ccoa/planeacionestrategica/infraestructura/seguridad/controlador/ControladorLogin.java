@@ -9,10 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ccoa/auth")
@@ -36,8 +39,13 @@ public class ControladorLogin {
         System.out.println(authentication.isAuthenticated());
         System.out.println(authentication.getPrincipal());
 
-        String jwt = this.jwtUtil.create(dtoLogin.getCorreo());
+        String jwt = this.jwtUtil.create(dtoLogin.getCorreo(),getTipo((List<GrantedAuthority>) authentication.getAuthorities()));
 
         return ResponseEntity.ok(new AuthResponse(jwt));
+    }
+
+    private String getTipo(List<GrantedAuthority> authorities){
+        return authorities.stream().filter(aut -> aut.getAuthority().startsWith("ROLE_")).findFirst().
+                map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"A":"U").orElse("U");
     }
 }

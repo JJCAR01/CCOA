@@ -14,9 +14,10 @@ public class JwtUtil {
     private static final String JWT_KEY = "paccoa";
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(JWT_KEY);
 
-    public String create(String username){
+    public String create(String username,String type){
         return JWT.create()
                 .withSubject(username)
+                .withClaim("type",type)
                 .withIssuer("CCOA")
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(15)))
@@ -32,6 +33,7 @@ public class JwtUtil {
             return false;
         }
     }
+
 
     public String getUsername(String jwt){
         return JWT.require(ALGORITHM).build().verify(jwt)

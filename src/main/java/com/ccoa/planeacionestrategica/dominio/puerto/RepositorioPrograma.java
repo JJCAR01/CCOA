@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface RepositorioPrograma {
 
-    List<Programa> listar();
+    List<Programa> listarPrograma();
+    List<DetallePrograma> listarDetallePrograma();
+    List<InformacionPrograma> listarInformacionPrograma();
     Programa consultarPorId(Long id);
     Long guardar(Programa programa, DetallePrograma detallePrograma, InformacionPrograma informacionPrograma);
     boolean existe(Programa programa, DetallePrograma detallePrograma, InformacionPrograma informacionPrograma);

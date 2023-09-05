@@ -15,7 +15,7 @@ public class ServicioAplicacionListarPrograma {
         this.repositorioPrograma = repositorioPrograma;
     }
 
-    public List<Programa> ejecutar(){return this.repositorioPrograma.listar();}
+    public List<Programa> ejecutar(){return this.repositorioPrograma.listarPrograma();}
 
     public Programa consultarById(Long id){return this.repositorioPrograma.consultarPorId(id);}
 }

@@ -1,6 +1,6 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa;
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.programa;
 
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadPrograma;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.programa.EntidadPrograma;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -20,12 +20,12 @@ public class    RepositorioAreaMySQL implements RepositorioArea{
     @Override
     public List<Area> listar() {
         List<EntidadArea> entidadAreas =this.repositorioAreaJpa.findAll();
-        return entidadAreas.stream().map(entidadArea -> Area.of(entidadArea.getNombre())).toList();
+        return entidadAreas.stream().map(entidadArea -> Area.of(entidadArea.getIdArea(), entidadArea.getNombre())).toList();
     }
 
     @Override
     public Area consultarPorId(Long id) {
-        return this.repositorioAreaJpa.findById(id).map(entidadArea -> Area.of(entidadArea.getNombre())).orElse(null);
+        return this.repositorioAreaJpa.findById(id).map(entidadArea -> Area.of(entidadArea.getIdArea(),entidadArea.getNombre())).orElse(null);
     }
 
     @Override

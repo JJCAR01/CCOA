@@ -16,7 +16,7 @@ public class ServicioAplicacionModificarArea {
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoArea dto, Long codigo){
-        Area area = Area.of(dto.getNombre());
+        Area area = Area.of(dto.getIdArea(), dto.getNombre());
 
         return new DtoRespuesta<>(this.servicioModificarArea.ejecutarModificar(area,codigo));
     }

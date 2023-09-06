@@ -1,19 +1,13 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoCargo;
+
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionEliminarCargo;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionGuardarCargo;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionListarCargo;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionModificarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionEliminarUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionGuardarUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionListarUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionModificarUsuario;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
-import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
@@ -21,11 +22,13 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     private static final String MENSAJE_NO_EXISTE = "No existe algunos de los componentes con los datos ingresados";
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioCargoJpa repositorioCargoJpa;
+    private final RepositorioRolJpa repositorioRolJpa;
     private final PasswordEncoder passwordEncoder;
 
-    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, PasswordEncoder passwordEncoder) {
+    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, RepositorioRolJpa repositorioRolJpa, PasswordEncoder passwordEncoder) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioCargoJpa = repositorioCargoJpa;
+        this.repositorioRolJpa = repositorioRolJpa;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -47,15 +50,28 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long guardar(Usuario usuario) {
-        List<EntidadUsuarioRol> roles = usuario.getRoles().stream().map(rol -> new EntidadUsuarioRol(rol.getRol())).toList();
         Optional<EntidadCargo> entidadCargo = this.repositorioCargoJpa.findById(usuario.getIdCargo());
 
+        // Paso 1: Guardar al usuario
         EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(),
-                passwordEncoder.encode(usuario.getPassword()), entidadCargo.get().getIdCargo() ,roles);
-        return this.repositorioUsuarioJpa.save(entidadUsuario).getIdUsuario();
+                passwordEncoder.encode(usuario.getPassword()), entidadCargo.get().getIdCargo());
+
+        entidadUsuario = this.repositorioUsuarioJpa.save(entidadUsuario);
+
+        // Paso 2: Obtener el ID del usuario y asignarlo a los roles
+        Long idUsuario = entidadUsuario.getIdUsuario();
+
+        List<EntidadUsuarioRol> roles = usuario.getRoles().stream()
+                .map(rol -> new EntidadUsuarioRol(idUsuario, rol.getRol()))
+                .collect(Collectors.toList());
+
+        // Guardar los roles en la tabla rol_usuario
+        roles = repositorioRolJpa.saveAll(roles);
+
+        return idUsuario;
     }
 
-    @Override
+        @Override
     public boolean existe(Usuario usuario) {
 
         return this.repositorioUsuarioJpa.findByCorreo(usuario.getCorreo()) != null;    }

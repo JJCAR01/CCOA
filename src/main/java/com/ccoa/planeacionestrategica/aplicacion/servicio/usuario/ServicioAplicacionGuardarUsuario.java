@@ -14,18 +14,17 @@ import java.util.List;
 public class ServicioAplicacionGuardarUsuario {
 
     private final ServicioGuardarUsuario servicioGuardarUsuario;
-    private final PasswordEncoder passwordEncoder;
 
-    public ServicioAplicacionGuardarUsuario(ServicioGuardarUsuario servicioGuardarUsuario, PasswordEncoder passwordEncoder) {
+
+    public ServicioAplicacionGuardarUsuario(ServicioGuardarUsuario servicioGuardarUsuario) {
         this.servicioGuardarUsuario = servicioGuardarUsuario;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public DtoRespuesta<Long> ejecutar(DtoUsuario dto){
 
         //List<Rol> roles = Arrays.asList(Rol.of("A"),Rol.of("EGRESADO"));
 
-        Usuario usuario = Usuario.of(dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),
+        Usuario usuario = Usuario.of(dto.getIdCargo(), dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),
                 dto.getIdCargo(), dto.getRoles());
         return new DtoRespuesta<>(this.servicioGuardarUsuario.ejecutarGuardar(usuario));
     }

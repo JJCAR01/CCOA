@@ -47,5 +47,12 @@ public class EntidadUsuario {
         this.idCargo = idCargo;
         this.roles = roles;
     }
+    public EntidadUsuario(String nombre, String apellido, String correo, String password, Long idCargo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.password = password;
+        this.idCargo = idCargo;
+    }
 
 }

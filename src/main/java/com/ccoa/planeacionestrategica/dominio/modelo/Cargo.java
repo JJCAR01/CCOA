@@ -7,17 +7,18 @@ import lombok.Getter;
 public class Cargo {
 
     //Clase de de asignacion de atributos y se validan entradas
-
+    private final Long idCargo;
     private final String nombre;
     private final Long idArea;
 
-    public static Cargo of(String nombre,Long idArea){
+    public static Cargo of(Long idCargo,String nombre,Long idArea){
         ValidadorDominio.validarObligatorio(nombre,"El nombre del cargo no puede ser vacío");
         ValidadorDominio.validadorNumeroLongYMayorACero(idArea,"El area NO puede ser vacío");
-        return new Cargo(nombre,idArea);
+        return new Cargo(idCargo, nombre,idArea);
     }
 
-    public Cargo(String nombre, Long idArea) {
+    public Cargo(Long idCargo, String nombre, Long idArea) {
+        this.idCargo = idCargo;
         this.nombre = nombre;
         this.idArea = idArea;
     }

@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacio
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionListarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionModificarArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.infraestructura.seguridad.AuthResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

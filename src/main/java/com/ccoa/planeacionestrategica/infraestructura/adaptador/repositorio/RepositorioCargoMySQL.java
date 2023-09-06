@@ -26,11 +26,11 @@ public class RepositorioCargoMySQL implements RepositorioCargo {
     @Override
     public List<Cargo> listar() {
         List<EntidadCargo> entidadCargos =this.repositorioCargoJpa.findAll();
-        return entidadCargos.stream().map(entidadCargo -> Cargo.of(entidadCargo.getNombre(), entidadCargo.getIdArea())).toList();    }
+        return entidadCargos.stream().map(entidadCargo -> Cargo.of(entidadCargo.getIdCargo(), entidadCargo.getNombre(), entidadCargo.getIdArea())).toList();    }
 
     @Override
     public Cargo consultarPorId(Long id) {
-        return this.repositorioCargoJpa.findById(id).map(entidadCargo -> Cargo.of(entidadCargo.getNombre(), entidadCargo.getIdArea())).orElse(null);
+        return this.repositorioCargoJpa.findById(id).map(entidadCargo -> Cargo.of(entidadCargo.getIdCargo(),entidadCargo.getNombre(), entidadCargo.getIdArea())).orElse(null);
 
     }
 

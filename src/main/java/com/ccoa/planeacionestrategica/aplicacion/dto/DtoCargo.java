@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class DtoCargo {
 
+    private Long idCargo;
     private String nombre;
     private Long idArea;
     

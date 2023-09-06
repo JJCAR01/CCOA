@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.puerto;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
 
 import java.util.List;
 

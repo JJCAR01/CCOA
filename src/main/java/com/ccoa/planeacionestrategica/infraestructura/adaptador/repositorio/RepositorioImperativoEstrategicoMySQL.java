@@ -2,7 +2,8 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.*;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioImperativoEstrategico;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadImperativoEstrategico;
@@ -30,7 +31,7 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
     @Override
     public List<ImperativoEstrategico> listar() {
         List<EntidadImperativoEstrategico> entidadImperativoEstrategicos =this.repositorioImperativoEstrategicoJpa.findAll();
-        return entidadImperativoEstrategicos.stream().map(entidad -> ImperativoEstrategico.of(entidad.getNombre(),
+        return entidadImperativoEstrategicos.stream().map(entidad -> ImperativoEstrategico.listar(entidad.getIdImperativoEstrategico(), entidad.getNombre(),
                 entidad.getFechaInicio(),
                 entidad.getFechaFinal(),
                 entidad.getFechaRegistro(), entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(), entidad.getCumplimiento(),
@@ -41,7 +42,7 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
     public ImperativoEstrategico consultarPorId(Long id) {
         return this.repositorioImperativoEstrategicoJpa
                 .findById(id)
-                .map(entidad -> ImperativoEstrategico.of(entidad.getNombre(),
+                .map(entidad -> ImperativoEstrategico.listar(entidad.getIdImperativoEstrategico(), entidad.getNombre(),
                         entidad.getFechaInicio(),
                         entidad.getFechaFinal(),
                         entidad.getFechaRegistro(), entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(),
@@ -55,8 +56,9 @@ public class RepositorioImperativoEstrategicoMySQL implements RepositorioImperat
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(imperativoEstrategico.getIdUsuario());
         Optional<EntidadPat> entidadPat = this.repositorioPatJpa.findById(imperativoEstrategico.getIdPat());
 
-        EntidadImperativoEstrategico entidadImperativoEstrategico = new EntidadImperativoEstrategico(imperativoEstrategico.getNombre(), imperativoEstrategico.getFechaInicio(),
-                imperativoEstrategico.getFechaFinal(),imperativoEstrategico.getFechaRegistro(), imperativoEstrategico.getPorcentajeReal(),
+        EntidadImperativoEstrategico entidadImperativoEstrategico = new EntidadImperativoEstrategico(imperativoEstrategico.getNombre(),
+                FormateadorHora.obtenerFechaTexto(imperativoEstrategico.getFechaInicio()),
+                FormateadorHora.obtenerFechaTexto(imperativoEstrategico.getFechaFinal()),imperativoEstrategico.getFechaRegistro(), imperativoEstrategico.getPorcentajeReal(),
                 imperativoEstrategico.getPorcentajeEsperado(), imperativoEstrategico.getCumplimiento(), entidadPat.get().getIdPat() ,
                 entidadUsuario.get().getIdUsuario());
 

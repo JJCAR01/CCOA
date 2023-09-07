@@ -1,20 +1,16 @@
 package com.ccoa.isotools.dominio.servicio.usuario;
 
-import com.ccoa.isotools.dominio.testdatabuilder.CargoTestDataBuilder;
-import com.ccoa.isotools.dominio.testdatabuilder.UsuarioTestDataBuilder;
-import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
-import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
+import com.ccoa.isotools.dominio.testdatabuilder.usuario.UsuarioTestDataBuilder;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
-import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioGuardarCargo;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioGuardarUsuario;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ServicioGuardarUsuarioTest {
-/*
+
     @Test
     void siElNombreYaExisteDeberiaRetornarError() {
 
@@ -52,5 +48,5 @@ public class ServicioGuardarUsuarioTest {
 
     }
 
- */
+
 }

@@ -5,12 +5,18 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 
 public class CargoTestDataBuilder {
 
+    private long idCargo;
     private String nombre;
     private long idArea;
 
     public CargoTestDataBuilder() {
+        this.idCargo = 1;
         this.nombre = "Tec 1";
         this.idArea = 1;
+    }
+    public CargoTestDataBuilder conIdCargo(Long idCargo) {
+        this.idCargo = idCargo;
+        return this;
     }
 
     public CargoTestDataBuilder conNombre(String nombre) {
@@ -24,7 +30,7 @@ public class CargoTestDataBuilder {
     }
 
     public Cargo build() {
-        return Cargo.of(nombre,idArea);
+        return Cargo.of(idCargo,nombre,idArea);
     }
 
 }

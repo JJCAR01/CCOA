@@ -3,7 +3,7 @@ package com.ccoa.isotools.dominio.servicio.area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.isotools.dominio.testdatabuilder.AreaTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.servicio.area.ServicioModificarArea;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

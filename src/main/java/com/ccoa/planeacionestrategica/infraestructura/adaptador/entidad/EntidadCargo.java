@@ -21,7 +21,7 @@ public class EntidadCargo {
     @Column(unique = true, length = 50)
     private String nombre;
 
-    @Column(name="area_id")
+    @JoinColumn(name="area_id")
     private Long idArea;
 
     public EntidadCargo() {

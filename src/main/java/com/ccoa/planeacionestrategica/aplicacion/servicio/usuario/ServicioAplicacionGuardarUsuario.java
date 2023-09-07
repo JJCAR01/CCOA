@@ -1,14 +1,10 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoUsuario;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioGuardarUsuario;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class ServicioAplicacionGuardarUsuario {

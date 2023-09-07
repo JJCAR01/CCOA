@@ -20,7 +20,7 @@ public class ServicioAplicacionModificarImperativoEstrategico {
 
     public DtoRespuesta<Long> ejecutarModificar(DtoImperativoEstrategico dto, Long codigo){
 
-        ImperativoEstrategico imperativoEstrategico = ImperativoEstrategico.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
+        ImperativoEstrategico imperativoEstrategico = ImperativoEstrategico.of(dto.getIdImperativoEstrategico(), dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
                 dto.getFechaRegistro(), dto.getPorcentajeReal(), dto.getPorcentajeEsperado(), dto.getCumplimiento(),
                 dto.getIdPat(), dto.getIdUsuario());
         return new DtoRespuesta<>(this.servicioModificarImperativoEstrategico.ejecutarModificar(imperativoEstrategico,codigo));

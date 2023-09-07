@@ -12,7 +12,10 @@ public class EntidadRegistroActividad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "id_registro_actividad")
+    private Long idRegistroActividad;
+
+
 
     @JoinColumn(name = "actividad_principal_id")
     private Long idActividadPrincipal;

@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuarioRol;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.excepcion.AutorizacionExcepcion;
 import jakarta.transaction.Transactional;

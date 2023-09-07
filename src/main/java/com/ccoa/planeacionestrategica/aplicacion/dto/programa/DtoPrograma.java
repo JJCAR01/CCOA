@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -17,8 +18,8 @@ public class DtoPrograma {
     private String nombre;
     private String codigo;
     private Integer version;
-    private Date fechaInicio;
-    private Date fechaFinal;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
     private LocalDateTime fechaRegistro;
     private Double porcentajeReal;
     private Double porcentajeEsperado;

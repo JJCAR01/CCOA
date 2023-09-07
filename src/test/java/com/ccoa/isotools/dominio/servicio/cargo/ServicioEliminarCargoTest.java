@@ -1,12 +1,9 @@
 package com.ccoa.isotools.dominio.servicio.cargo;
 
-import com.ccoa.isotools.dominio.testdatabuilder.AreaTestDataBuilder;
 import com.ccoa.isotools.dominio.testdatabuilder.CargoTestDataBuilder;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
-import com.ccoa.planeacionestrategica.dominio.servicio.area.ServicioEliminarArea;
 import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioEliminarCargo;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

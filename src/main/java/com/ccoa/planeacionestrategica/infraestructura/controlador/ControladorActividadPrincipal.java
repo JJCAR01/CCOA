@@ -1,18 +1,12 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoActividadPrincipal;
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoImperativoEstrategico;
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadprincipal.DtoActividadPrincipal;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadprincipal.ServicioAplicacionEliminarActividadPrincipal;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadprincipal.ServicioAplicacionGuardarActividadPrincipal;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadprincipal.ServicioAplicacionListarActividadPrincipal;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadprincipal.ServicioAplicacionModificarActividadPrincipal;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionEliminarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionGuardarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionListarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.imperativoestrategico.ServicioAplicacionModificarImperativoEstrategico;
-import com.ccoa.planeacionestrategica.dominio.modelo.ActividadPrincipal;
-import com.ccoa.planeacionestrategica.dominio.modelo.ImperativoEstrategico;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.ActividadPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,10 +48,8 @@ public class ControladorActividadPrincipal {
         return this.servicioAplicacionEliminarActividadPrincipal.ejecutarEliminar(codigo);
     }
 
-    /*@PutMapping("/{codigo}")
+    @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoActividadPrincipal actividadPrincipal, @PathVariable Long codigo){
         return this.servicioAplicacionModificarActividadPrincipal.ejecutarModificar(actividadPrincipal,codigo);
     }
-
-     */
 }

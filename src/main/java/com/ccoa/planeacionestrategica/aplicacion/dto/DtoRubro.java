@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class DtoRubro {
 
+    private Long idRubro;
     private String nombre;
     private Long idTipoGI;
 }

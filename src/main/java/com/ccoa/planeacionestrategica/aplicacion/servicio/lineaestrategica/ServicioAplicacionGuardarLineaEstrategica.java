@@ -20,7 +20,7 @@ public class ServicioAplicacionGuardarLineaEstrategica {
 
     public DtoRespuesta<Long> ejecutar(DtoLineaEstrategica dto){
 
-        LineaEstrategica lineaEstrategica = LineaEstrategica.of(dto.getNombre(), dto.getEntregable(),dto.getFechaInicio(),dto.getFechaFinal(),
+        LineaEstrategica lineaEstrategica = LineaEstrategica.of(dto.getIdLineaEstrategica(), dto.getNombre(), dto.getEntregable(),dto.getFechaInicio(),dto.getFechaFinal(),
                 servicioObtenerHoraActual.ejecutar(),
                 dto.getIndicadorResultado(), dto.getIdPrograma(), dto.getIdUsuario());
         return new DtoRespuesta<>(this.servicioGuardarLineaEstrategica.ejecutarGuardar(lineaEstrategica));

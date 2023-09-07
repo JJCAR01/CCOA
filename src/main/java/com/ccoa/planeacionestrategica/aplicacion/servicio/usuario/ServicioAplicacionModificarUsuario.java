@@ -1,14 +1,13 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoUsuario;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
-import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioModificarUsuario;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Component

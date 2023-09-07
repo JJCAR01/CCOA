@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicioModificarTipoGI {
 
-    private static final String MENSAJE_NO_EXISTE = "No existe el Tipo GI con los datos ingresados";
+    private static final String MENSAJE_NO_EXISTE = "No existe el Tipo Gasto o Ingreso con los datos ingresados";
 
     private final RepositorioTipoGI repositorioTipoGI;
 

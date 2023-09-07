@@ -1,19 +1,12 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPat;
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacionEliminarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacionGuardarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacionModificarPat;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionEliminarUsuario;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionGuardarUsuario;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionListarUsuario;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionModificarUsuario;
-import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

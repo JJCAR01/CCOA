@@ -3,7 +3,7 @@ package com.ccoa.isotools.dominio.servicio.cargo;
 import com.ccoa.isotools.dominio.testdatabuilder.CargoTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
 import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioModificarCargo;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

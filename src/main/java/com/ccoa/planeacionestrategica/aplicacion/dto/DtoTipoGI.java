@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class DtoTipoGI {
 
+    private Long idTipoGI;
     private Integer cantidad;
     private String clasificacion;
     private Double valorUnitario;

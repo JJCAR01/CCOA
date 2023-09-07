@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.excepcion;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.*;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
+import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import com.ccoa.planeacionestrategica.infraestructura.error.Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +26,7 @@ public class RestExceptionHandler {
         STATES.put(ValorNombreExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(ValorObjetoExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
+        STATES.put(ValidadorFechaMayor.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(BaseExcepcion.class)

@@ -20,29 +20,25 @@ public class RepositorioRubroMySQL implements RepositorioRubro {
 
     @Override
     public List<Rubro> listar() {
-        /*List<EntidadRubro> entidadRubros =this.repositorioRubroJpa.findAll();
-        return entidadRubros.stream().map(entidadRubro -> Rubro.of(entidadRubro.getNombre(), TipoGI.of(entidadRubro.getTipoGI().getCantidad(),
-                entidadRubro.getTipoGI().getValorUnitario(), entidadRubro.getTipoGI().getValorTotal(), entidadRubro.getTipoGI().getObservacion(),
-                entidadRubro.getTipoGI().getClasificacion()))).toList();*/return null;
+        List<EntidadRubro> entidadRubros =this.repositorioRubroJpa.findAll();
+        return entidadRubros.stream().map(entidadRubro -> Rubro.of(entidadRubro.getIdRubro(), entidadRubro.getNombre(), entidadRubro.getIdTipoGI())).toList();
     }
 
     @Override
     public Rubro consultarPorId(Long id) {
-        /*return this.repositorioRubroJpa.findById(id).map(entidadRubro -> Rubro.of(entidadRubro.getNombre(), TipoGI.of(entidadRubro.getTipoGI().getCantidad(),
-                entidadRubro.getTipoGI().getValorUnitario(), entidadRubro.getTipoGI().getValorTotal(), entidadRubro.getTipoGI().getObservacion(),
-                entidadRubro.getTipoGI().getClasificacion()))).orElse(null);*/return null;
+        return this.repositorioRubroJpa.findById(id).map(entidadRubro -> Rubro.of(entidadRubro.getIdRubro(), entidadRubro.getNombre(), entidadRubro.getIdTipoGI())).orElse(null);
 
     }
 
     @Override
     public Long guardar(Rubro rubro) {
-        /*EntidadRubro entidadRubro = new EntidadRubro(rubro.getNombre());
-        return this.repositorioRubroJpa.save(entidadRubro).getId();*/return null;
+        EntidadRubro entidadRubro = new EntidadRubro(rubro.getNombre(), rubro.getIdTipoGI());
+        return this.repositorioRubroJpa.save(entidadRubro).getIdRubro();
     }
 
     @Override
     public boolean existe(Rubro rubro) {
-        return this.repositorioRubroJpa.findByNombre(rubro.getNombre()) != null;
+        return this.repositorioRubroJpa.findById(rubro.getIdRubro()).isPresent();
     }
 
     @Override
@@ -55,7 +51,7 @@ public class RepositorioRubroMySQL implements RepositorioRubro {
     public Long modificar(Rubro rubro, Long id) {
         repositorioRubroJpa.findById(id);
         EntidadRubro entidadRubro = new EntidadRubro();
-        entidadRubro.setId(id);
+        entidadRubro.setIdRubro(id);
         entidadRubro.setNombre(rubro.getNombre());
         repositorioRubroJpa.save(entidadRubro);
         return id;

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 @NoArgsConstructor
@@ -27,16 +28,16 @@ public class EntidadPrograma {
     private Integer version;
 
     @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fecha_final")
-    private Date fechaFinal;
+    private LocalDate fechaFinal;
 
     @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
 
-    public EntidadPrograma(String nombre, String codigo, Integer version, Date fechaInicio, Date fechaFinal, LocalDateTime fechaRegistro) {
+    public EntidadPrograma(String nombre, String codigo, Integer version, LocalDate fechaInicio, LocalDate fechaFinal, LocalDate fechaRegistro) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.version = version;

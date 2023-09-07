@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -24,13 +25,13 @@ public class EntidadPat {
     private String nombre;
 
     @Column( name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column( name = "fecha_final")
-    private Date fechaFinal;
+    private LocalDate fechaFinal;
 
     @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
     @Column(name = "porcentaje_real")
     private Double porcentajeReal;
@@ -46,7 +47,7 @@ public class EntidadPat {
     public EntidadPat() {
     }
 
-    public EntidadPat(String nombre, Date fechaInicio, Date fechaFinal, LocalDateTime fechaRegistro, Double porcentajeReal, Double porcentajeEsperado,
+    public EntidadPat(String nombre, LocalDate fechaInicio, LocalDate fechaFinal, LocalDate fechaRegistro, Double porcentajeReal, Double porcentajeEsperado,
                       Double cumplimiento, Long idUsuario) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
@@ -57,4 +58,5 @@ public class EntidadPat {
         this.cumplimiento = cumplimiento;
         this.idUsuario = idUsuario;
     }
+
 }

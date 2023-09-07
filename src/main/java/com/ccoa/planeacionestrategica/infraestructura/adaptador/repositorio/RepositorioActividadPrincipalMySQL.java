@@ -1,11 +1,16 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.*;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.ActividadPrincipal;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DetalleActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadPrincipal;
+import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.*;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadActividadPrincipal;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadDetalleActividadPrincipal;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.*;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.*;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.*;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.actividadprincipal.RepositorioActividadPrincipalJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.actividadprincipal.RepositorioDetalleActividadPrincipalJpa;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,14 +22,17 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     private final RepositorioActividadPrincipalJpa repositorioActividadPrincipalJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa;
-
+    private final RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa;
     private final RepositorioTipoGIJpa repositorioTipoGIJpa;
 
     public RepositorioActividadPrincipalMySQL(RepositorioActividadPrincipalJpa repositorioActividadPrincipalJpa,
-                                              RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa, RepositorioTipoGIJpa repositorioTipoGIJpa) {
+                                              RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa,
+                                              RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa, RepositorioTipoGIJpa repositorioTipoGIJpa) {
         this.repositorioActividadPrincipalJpa = repositorioActividadPrincipalJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioLineaEstrategicaJpa = repositorioLineaEstrategicaJpa;
+        this.repositorioDetalleActividadPrincipalJpa = repositorioDetalleActividadPrincipalJpa;
+
         this.repositorioTipoGIJpa = repositorioTipoGIJpa;
     }
 
@@ -32,8 +40,15 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     public List<ActividadPrincipal> listar() {
 
         List<EntidadActividadPrincipal> entidadActividadPrincipales =this.repositorioActividadPrincipalJpa.findAll();
-        return entidadActividadPrincipales.stream().map(entidad -> ActividadPrincipal.of(entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
-                entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro(),entidad.getIdLineaEstrategica(), entidad.getIdUsuario(), entidad.getIdTipoGI())).toList();
+        return entidadActividadPrincipales.stream().map(entidad -> ActividadPrincipal.listar(entidad.getIdActividadPrincipal(), entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
+                entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro())).toList();
+    }
+
+    @Override
+    public List<DetalleActividadPrincipal> listarDetalle() {
+        List<EntidadDetalleActividadPrincipal> entidadDetalleActividadPrincipales =this.repositorioDetalleActividadPrincipalJpa.findAll();
+        return entidadDetalleActividadPrincipales.stream().map(entidad -> DetalleActividadPrincipal.of(entidad.getIdLineaEstrategica(),
+                entidad.getIdUsuario(),entidad.getIdTipoGI())).toList();
     }
 
 
@@ -41,28 +56,29 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     public ActividadPrincipal consultarPorId(Long id) {
         return this.repositorioActividadPrincipalJpa
                 .findById(id)
-                .map(entidad -> ActividadPrincipal.of(entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
-                        entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro(),
-                        entidad.getIdLineaEstrategica(), entidad.getIdUsuario(), entidad.getIdTipoGI())).orElse(null);
+                .map(entidad -> ActividadPrincipal.listar(entidad.getIdActividadPrincipal(), entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
+                        entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro())).orElse(null);
     }
 
     @Override
-    public Long guardar(ActividadPrincipal actividadPrincipal) {
-        Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(actividadPrincipal.getIdTipoGI());
-        Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(actividadPrincipal.getIdLineaEstrategica());
-        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(actividadPrincipal.getIdUsuario());
+    public Long guardar(ActividadPrincipal actividadPrincipal, DetalleActividadPrincipal detalleActividadPrincipal) {
+        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(detalleActividadPrincipal.getIdUsuario());
+        Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(detalleActividadPrincipal.getIdTipoGI());
+        Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(detalleActividadPrincipal.getIdLineaEstrategica());
 
-        EntidadActividadPrincipal entidadActividadPrincipal = new EntidadActividadPrincipal(actividadPrincipal.getNombre(), actividadPrincipal.getTipoActividad(),
-                actividadPrincipal.getEntregable(),
-                actividadPrincipal.getPresupuesto(), actividadPrincipal.getFechaInicio(), actividadPrincipal.getFechaFinal(),actividadPrincipal.getFechaRegistro(),entidadLineaEstrategica.get().getId(),
-                entidadUsuario.get().getIdUsuario(), entidadTipoGI.get().getId());
+        var entidadActividadPrincipal = new EntidadActividadPrincipal(actividadPrincipal.getNombre(), actividadPrincipal.getTipoActividad(),
+                actividadPrincipal.getEntregable(), actividadPrincipal.getPresupuesto(),
+                FormateadorHora.obtenerFechaTexto(actividadPrincipal.getFechaInicio()),
+                FormateadorHora.obtenerFechaTexto(actividadPrincipal.getFechaFinal()),actividadPrincipal.getFechaRegistro());
+        var entidadDetalleActividadPrincipal = new EntidadDetalleActividadPrincipal(entidadLineaEstrategica.get().getIdLineaEstrategica(), entidadUsuario.get().getIdUsuario(),
+                entidadTipoGI.get().getIdTipoGI());
 
-        return this.repositorioActividadPrincipalJpa.save(entidadActividadPrincipal).getId();
+        this.repositorioDetalleActividadPrincipalJpa.save(entidadDetalleActividadPrincipal);
+        return this.repositorioActividadPrincipalJpa.save(entidadActividadPrincipal).getIdActividadPrincipal();
     }
 
     @Override
     public boolean existe(ActividadPrincipal actividadPrincipal) {
-
         return this.repositorioActividadPrincipalJpa.findByNombre(actividadPrincipal.getNombre()) != null;
     }
 
@@ -75,18 +91,20 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     @Override
     public Long modificar(ActividadPrincipal actividadPrincipal, Long id) {
 
-        Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(actividadPrincipal.getIdTipoGI());
-        Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(actividadPrincipal.getIdLineaEstrategica());
-        Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(actividadPrincipal.getIdUsuario());
+        /*Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(detalleActividadPrincipal.getIdUsuario());
+        Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(detalleActividadPrincipal.getIdTipoGI());
+        Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(detalleActividadPrincipal.getIdLineaEstrategica());
+        */
 
         repositorioActividadPrincipalJpa.findById(id);
         EntidadActividadPrincipal entidadActividadPrincipal = new EntidadActividadPrincipal();
-        entidadActividadPrincipal.setId(id);
+        entidadActividadPrincipal.setIdActividadPrincipal(id);
         entidadActividadPrincipal.setNombre(actividadPrincipal.getNombre());
 
-        entidadActividadPrincipal.setIdUsuario(entidadUsuario.get().getIdUsuario());
+        /*entidadActividadPrincipal.se(entidadUsuario.get().getIdUsuario());
         entidadActividadPrincipal.setIdLineaEstrategica(entidadLineaEstrategica.get().getId());
         entidadActividadPrincipal.setIdTipoGI(entidadTipoGI.get().getId());
+         */
 
         repositorioActividadPrincipalJpa.save(entidadActividadPrincipal);
         return id;

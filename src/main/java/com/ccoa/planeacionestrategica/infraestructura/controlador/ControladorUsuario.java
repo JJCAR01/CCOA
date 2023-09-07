@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoUsuario;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionEliminarUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.ServicioAplicacionGuardarUsuario;

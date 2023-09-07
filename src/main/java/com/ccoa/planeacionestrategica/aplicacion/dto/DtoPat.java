@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -15,10 +16,11 @@ import java.util.Date;
 @Setter
 public class DtoPat {
 
+    private Long idPat;
     private String nombre;
-    private Date fechaInicio;
-    private Date fechaFinal;
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
+    private LocalDate fechaRegistro;
     private Double porcentajeReal;
     private Double porcentajeEsperado;
     private Double cumplimiento;

@@ -2,8 +2,9 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.*;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioLineaEstrategica;
+import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadLineaEstrategica;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.programa.EntidadPrograma;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioLineaEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.programa.RepositorioProgramaJpa;
@@ -30,7 +31,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
     @Override
     public List<LineaEstrategica> listar() {
         List<EntidadLineaEstrategica> lineaEstrategicas = this.repositorioLineaEstrategicaJpa.findAll();
-        return lineaEstrategicas.stream().map(entidad -> LineaEstrategica.of(entidad.getNombre(),entidad.getEntregable(),entidad.getFechaInicio(),entidad.getFechaFinal(),
+        return lineaEstrategicas.stream().map(entidad -> LineaEstrategica.listar(entidad.getIdLineaEstrategica(), entidad.getNombre(),entidad.getEntregable(),entidad.getFechaInicio(),entidad.getFechaFinal(),
                 entidad.getFechaRegistro(),entidad.getIndicadorResultado(),entidad.getIdPrograma(),entidad.getIdUsuario())).toList();
     }
 
@@ -38,7 +39,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
     public LineaEstrategica consultarPorId(Long id) {
         return this.repositorioLineaEstrategicaJpa
                 .findById(id)
-                .map(entidad -> LineaEstrategica.of(entidad.getNombre(),entidad.getEntregable(),entidad.getFechaInicio(),entidad.getFechaFinal(),
+                .map(entidad -> LineaEstrategica.listar(entidad.getIdLineaEstrategica(), entidad.getNombre(),entidad.getEntregable(),entidad.getFechaInicio(),entidad.getFechaFinal(),
                         entidad.getFechaRegistro(),entidad.getIndicadorResultado(),entidad.getIdPrograma(),entidad.getIdUsuario())).orElse(null);
 
     }
@@ -50,10 +51,11 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
         Optional<EntidadPrograma> entidadPrograma = this.repositorioProgramaJpa.findById(lineaEstrategica.getIdUsuario());
 
         EntidadLineaEstrategica entidadLineaEstrategica = new EntidadLineaEstrategica(lineaEstrategica.getNombre(), lineaEstrategica.getEntregable(),
-                lineaEstrategica.getFechaInicio(),lineaEstrategica.getFechaFinal(),lineaEstrategica.getFechaRegistro(),lineaEstrategica.getIndicadorResultado(),
+                FormateadorHora.obtenerFechaTexto(lineaEstrategica.getFechaInicio()),
+                FormateadorHora.obtenerFechaTexto(lineaEstrategica.getFechaFinal()),lineaEstrategica.getFechaRegistro(),lineaEstrategica.getIndicadorResultado(),
                 entidadUsuario.get().getIdUsuario(),entidadPrograma.get().getIdPrograma());
 
-        return this.repositorioLineaEstrategicaJpa.save(entidadLineaEstrategica).getId();
+        return this.repositorioLineaEstrategicaJpa.save(entidadLineaEstrategica).getIdLineaEstrategica();
     }
 
     @Override
@@ -74,7 +76,7 @@ public class RepositorioLineaEstrategicaMySQL implements RepositorioLineaEstrate
 
         repositorioLineaEstrategicaJpa.findById(id);
         EntidadLineaEstrategica entidadLineaEstrategica = new EntidadLineaEstrategica();
-        entidadLineaEstrategica.setId(id);
+        entidadLineaEstrategica.setIdLineaEstrategica(id);
         entidadLineaEstrategica.setNombre(lineaEstrategica.getNombre());
 
         entidadLineaEstrategica.setIdPrograma(entidadPrograma.get().getIdPrograma());

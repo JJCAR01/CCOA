@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -14,11 +15,12 @@ import java.util.Date;
 @Setter
 public class DtoLineaEstrategica {
 
+    private Long idLineaEstrategica;
     private String nombre;
     private String entregable;
-    private Date fechaInicio;
-    private Date fechaFinal;
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
+    private LocalDate fechaRegistro;
     private String indicadorResultado;
     private Long idPrograma;
     private Long idUsuario;

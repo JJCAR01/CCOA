@@ -1,57 +1,100 @@
 package com.ccoa.isotools.dominio.modelo;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorNumeroExcepcion;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorCaracteresExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class UsuarioTest {
-/*
+
+
     @Test
     void validarCreacionExitosa() {
 
-        String nombre= "Tec 1";
-        Long idArea = 1L;
+        long idUsuario = 1;
+        String nombre = "Juan Jose";
+        String apellido = "cardona";
+        String password = "Colombia22+";
+        String correo = "juan@gmail.com";
+        long idCargo = 1;
+        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
 
-        Cargo cargo = Cargo.of(nombre,idArea);
+        Usuario usuario = Usuario.of(idUsuario, nombre,apellido,password,correo,idCargo,roles);
 
-        Assertions.assertEquals("Tec 1", cargo.getNombre());
-        Assertions.assertEquals(1l,cargo.getIdArea());
+        Assertions.assertEquals("Juan Jose",usuario.getNombre());
+        Assertions.assertEquals("cardona", usuario.getApellido());
+        Assertions.assertEquals("Colombia22+",usuario.getPassword());
+        Assertions.assertEquals("juan@gmail.com", usuario.getCorreo());
+        Assertions.assertEquals(1,usuario.getIdCargo());
+    }
+
+    @Test
+    void validarPasswordNoCumple() {
+
+        long idUsuario = 1;
+        String nombre = "Juan Jose";
+        String apellido = "cardona";
+        String password = "Colombia";
+        String correo = "juan@gmail.com";
+        long idCargo = 1;
+        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+
+        Assertions.assertEquals("La contraseña NO cuenta con las ecritura correcta",Assertions.assertThrows(ValorCaracteresExcepcion.class, () ->
+                Usuario.of(idUsuario, nombre,apellido,password,correo,idCargo,roles)
+        ).getMessage());
+    }
+
+    @Test
+    void validarCorreoNoCumple() {
+
+        long idUsuario = 1;
+        String nombre = "Juan Jose";
+        String apellido = "cardona";
+        String password = "Colombia22+";
+        String correo = "juan@";
+        long idCargo = 1;
+        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+
+        Assertions.assertEquals("El correo NO cuenta con las ecritura correcta",Assertions.assertThrows(ValorCaracteresExcepcion.class, () ->
+                Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
+        ).getMessage());
     }
 
     @Test
     void validarCamposFaltantesNombre() {
 
-        String nombre= null;
-        Long idArea = 1L;
+        long idUsuario = 1;
+        String nombre = null;
+        String apellido = "cardona";
+        String password = "Colombia";
+        String correo = "juan@gmail.com";
+        long idCargo = 1;
+        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
 
-        Assertions.assertEquals("El nombre del cargo no puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
-                Cargo.of(nombre,idArea)
+        Assertions.assertEquals("El nombre del usuario NO puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
+                Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
         ).getMessage());
     }
 
     @Test
-    void validarCamposFaltantesIdArea() {
+    void validarCamposVaciosIdRol() {
 
-        String nombre= "Tec 1";
-        Long idArea = -1l;
+        long idUsuario = 1;
+        String nombre = "";
+        String apellido = "cardona";
+        String password = "Colombia22+";
+        String correo = "juan@gmail.com";
+        long idCargo = 0;
+        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
 
-        Assertions.assertEquals("El area NO puede ser vacío",Assertions.assertThrows(ValorNumeroExcepcion.class, () ->
-                Cargo.of(nombre,idArea)
+        Assertions.assertEquals("El nombre del usuario NO puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
+                Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
         ).getMessage());
     }
 
-    @Test
-    void validarCamposVacios() {
-
-        String nombre= "";
-        Long idArea = 0l;
-
-        Assertions.assertEquals("El nombre del cargo no puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
-                Cargo.of(nombre,idArea)
-        ).getMessage());
-    }
-
- */
 }

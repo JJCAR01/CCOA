@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.programa;
 
-import com.ccoa.planeacionestrategica.dominio.validador.ValidadorDominio;
+import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Getter;
 
 @Getter
@@ -16,7 +16,6 @@ public class DetallePrograma {
         ValidadorDominio.validadorNumeroLongYMayorACero(idArea,"El area NO debe estar vacío");
         return new DetallePrograma(idImperativoEstrategico,idUsuario,idArea);
     }
-
 
     public DetallePrograma(Long idImperativoEstrategico, Long idUsuario, Long idArea) {
         this.idImperativoEstrategico = idImperativoEstrategico;

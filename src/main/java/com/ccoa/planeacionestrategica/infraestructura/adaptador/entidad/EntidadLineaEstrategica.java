@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -15,7 +16,8 @@ public class EntidadLineaEstrategica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "id_linea_estrategica")
+    private Long idLineaEstrategica;
 
     @Column(unique = true)
     private String nombre;
@@ -23,13 +25,13 @@ public class EntidadLineaEstrategica {
     private String entregable;
 
     @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fecha_final")
-    private Date fechaFinal;
+    private LocalDate fechaFinal;
 
     @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
     @Column(name = "indicador_resultado")
     private String indicadorResultado;
@@ -43,8 +45,8 @@ public class EntidadLineaEstrategica {
     public EntidadLineaEstrategica() {
     }
 
-    public EntidadLineaEstrategica(String nombre, String entregable, Date fechaInicio, Date fechaFinal,
-                                   LocalDateTime fechaRegistro, String indicadorResultado, Long idUsuario, Long idPrograma) {
+    public EntidadLineaEstrategica(String nombre, String entregable, LocalDate fechaInicio, LocalDate fechaFinal,
+                                   LocalDate fechaRegistro, String indicadorResultado, Long idUsuario, Long idPrograma) {
         this.nombre = nombre;
         this.entregable = entregable;
         this.fechaInicio = fechaInicio;

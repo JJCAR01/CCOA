@@ -12,7 +12,8 @@ public class EntidadRubro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "id_rubro")
+    private Long idRubro;
 
     @Column(unique = true, length = 50, name = "nombre")
     private String nombre;

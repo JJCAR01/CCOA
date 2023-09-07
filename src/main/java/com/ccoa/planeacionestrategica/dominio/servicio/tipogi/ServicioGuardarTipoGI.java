@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicioGuardarTipoGI {
 
-    private static final String MENSAJE_YA_EXISTE = "Ya existe el Tipo GI con los datos ingresados";
+    private static final String MENSAJE_YA_EXISTE = "Ya existe el Tipo Gasto o Ingreso con los datos ingresados";
 
     private final RepositorioTipoGI repositorioTipoGI;
 

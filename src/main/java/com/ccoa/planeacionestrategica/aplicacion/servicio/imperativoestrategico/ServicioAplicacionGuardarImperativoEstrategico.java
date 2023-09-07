@@ -5,6 +5,7 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.modelo.*;
 import com.ccoa.planeacionestrategica.dominio.servicio.ServicioObtenerHoraActual;
 import com.ccoa.planeacionestrategica.dominio.servicio.imperativoestrategico.ServicioGuardarImperativoEstrategico;
+import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,7 +21,8 @@ public class ServicioAplicacionGuardarImperativoEstrategico {
 
     public DtoRespuesta<Long> ejecutar(DtoImperativoEstrategico dto){
 
-        ImperativoEstrategico imperativoEstrategico = ImperativoEstrategico.of(dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
+        ImperativoEstrategico imperativoEstrategico = ImperativoEstrategico.of(dto.getIdImperativoEstrategico(), dto.getNombre(),
+                dto.getFechaInicio(),dto.getFechaFinal(),
                 servicioObtenerHoraActual.ejecutar(),dto.getPorcentajeReal(),dto.getPorcentajeEsperado(),
                 dto.getCumplimiento(), dto.getIdPat(), dto.getIdUsuario());
 

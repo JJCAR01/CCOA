@@ -3,12 +3,14 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 import com.ccoa.planeacionestrategica.dominio.modelo.*;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
 import com.ccoa.planeacionestrategica.dominio.servicio.ServicioObtenerHoraActual;
+import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadPat;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import org.springframework.stereotype.Repository;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +30,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
     @Override
     public List<Pat> listar() {
         List<EntidadPat> entidadPats =this.repositorioPatJpa.findAll();
-        return entidadPats.stream().map(entidad -> Pat.of(entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
+        return entidadPats.stream().map(entidad -> Pat.listar(entidad.getIdPat(), entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
                 entidad.getFechaRegistro(),entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(), entidad.getCumplimiento()
                 , entidad.getIdUsuario())).toList();
     }
@@ -38,7 +40,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
     public Pat consultarPorId(Long id) {
         return this.repositorioPatJpa
                 .findById(id)
-                .map(entidad ->  Pat.of(entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
+                .map(entidad ->  Pat.listar(entidad.getIdPat(), entidad.getNombre(),entidad.getFechaInicio(),entidad.getFechaFinal(),
                         entidad.getFechaRegistro(),entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado(),
                         entidad.getCumplimiento(),entidad.getIdUsuario()))
                 .orElse(null);
@@ -48,7 +50,8 @@ public class RepositorioPatMySQL implements RepositorioPat {
     public Long guardar(Pat pat) {
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(pat.getIdUsuario());
 
-        EntidadPat entidadPat = new EntidadPat(pat.getNombre(), pat.getFechaInicio(), pat.getFechaFinal(),
+        EntidadPat entidadPat = new EntidadPat(pat.getNombre(), pat.getFechaInicio(),
+               pat.getFechaFinal(),
                 pat.getFechaRegistro(),pat.getPorcentajeReal(),pat.getPorcentajeEsperado(),pat.getCumplimiento(),
                 entidadUsuario.get().getIdUsuario());
 

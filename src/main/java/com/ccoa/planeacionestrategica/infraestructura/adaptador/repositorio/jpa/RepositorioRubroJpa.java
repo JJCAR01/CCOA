@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioRubroJpa extends JpaRepository<EntidadRubro,Long> {
 
-    EntidadRubro findByNombre(String nombre);
 }

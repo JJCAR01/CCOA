@@ -2,7 +2,12 @@ package com.ccoa.planeacionestrategica.dominio.servicio.pat;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+
+import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarPat {
@@ -15,9 +20,9 @@ public class ServicioGuardarPat {
         this.repositorioPat = repositorioPat;
     }
 
-    public Long ejecutarGuardar(Pat pat){
+    public Long ejecutarGuardar(Pat pat) {
 
-        if(this.repositorioPat.existe(pat)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        if(this.repositorioPat.existe(pat)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioPat.guardar(pat);
     }

@@ -17,7 +17,7 @@ public class ServicioAplicacionModificarLineaEstrategica {
 
     public DtoRespuesta<Long> ejecutarModificar(DtoLineaEstrategica dto, Long codigo) {
 
-        LineaEstrategica lineaEstrategica = LineaEstrategica.of(dto.getNombre(), dto.getEntregable(),dto.getFechaInicio(),dto.getFechaFinal(), dto.getFechaRegistro(),
+        LineaEstrategica lineaEstrategica = LineaEstrategica.of(dto.getIdLineaEstrategica(),dto.getNombre(), dto.getEntregable(),dto.getFechaInicio(),dto.getFechaFinal(), dto.getFechaRegistro(),
                     dto.getIndicadorResultado(), dto.getIdPrograma(), dto.getIdUsuario());
         return new DtoRespuesta<>(this.servicioModificarLineaEstrategica.ejecutarModificar(lineaEstrategica,codigo));
     }

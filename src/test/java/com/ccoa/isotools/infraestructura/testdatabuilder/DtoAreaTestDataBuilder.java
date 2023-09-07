@@ -5,10 +5,17 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 
 public class DtoAreaTestDataBuilder {
 
+    private long idArea;
     private String nombre;
 
     public DtoAreaTestDataBuilder() {
+        this.idArea = 1;
         this.nombre = "TI";
+    }
+
+    public DtoAreaTestDataBuilder conIdArea(Long idArea) {
+        this.idArea = idArea;
+        return this;
     }
     public DtoAreaTestDataBuilder conNombre(String nombre) {
         this.nombre = nombre;
@@ -16,7 +23,7 @@ public class DtoAreaTestDataBuilder {
     }
 
     public DtoArea build() {
-        return new DtoArea(nombre);
+        return new DtoArea(idArea, nombre);
     }
 
 

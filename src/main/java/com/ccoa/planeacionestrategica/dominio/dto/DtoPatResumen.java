@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Usuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

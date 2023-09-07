@@ -1,18 +1,15 @@
 package com.ccoa.isotools.dominio.servicio.usuario;
 
-import com.ccoa.isotools.dominio.testdatabuilder.CargoTestDataBuilder;
-import com.ccoa.isotools.dominio.testdatabuilder.UsuarioTestDataBuilder;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
+import com.ccoa.isotools.dominio.testdatabuilder.usuario.UsuarioTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
-import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioEliminarCargo;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioEliminarUsuario;
-import com.ccoa.planeacionestrategica.dominio.validador.excepcion.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ServicioEliminarUsuarioTest {
-/*
+
     @Test
     void verificarCargoExista()
     {
@@ -26,5 +23,4 @@ public class ServicioEliminarUsuarioTest {
         Assertions.assertEquals("No existe el Usuario con los datos ingresados", Assertions.assertThrows(ValorObligatorioExcepcion.class, () -> servicio.ejecutarEliminar(1L)).getMessage());
     }
 
- */
 }

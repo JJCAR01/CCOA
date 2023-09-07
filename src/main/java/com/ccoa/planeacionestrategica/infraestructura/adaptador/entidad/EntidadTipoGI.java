@@ -14,9 +14,12 @@ public class EntidadTipoGI {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "id_tipo_gi")
+    private Long idTipoGI;
 
     private Integer cantidad;
+
+    private String clasificacion;
 
     @Column(name = "valor_unitario")
     private Double valorUnitario;
@@ -26,16 +29,16 @@ public class EntidadTipoGI {
 
     private String observacion;
 
-    private String clasificacion;
+
 
     public EntidadTipoGI() {
     }
 
-    public EntidadTipoGI(Integer cantidad, Double valorUnitario, Double valorTotal, String observacion, String clasificacion) {
+    public EntidadTipoGI(Integer cantidad, String clasificacion, Double valorUnitario, Double valorTotal, String observacion) {
         this.cantidad = cantidad;
+        this.clasificacion = clasificacion;
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
         this.observacion = observacion;
-        this.clasificacion = clasificacion;
     }
 }

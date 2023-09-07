@@ -4,9 +4,10 @@ import com.ccoa.planeacionestrategica.dominio.modelo.programa.DetallePrograma;
 import com.ccoa.planeacionestrategica.dominio.modelo.programa.InformacionPrograma;
 import com.ccoa.planeacionestrategica.dominio.modelo.programa.Programa;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPrograma;
+import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadImperativoEstrategico;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.programa.EntidadDetallePograma;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.programa.EntidadInformacionPrograma;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.programa.EntidadPrograma;
@@ -43,7 +44,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
     @Override
     public List<Programa> listarPrograma() {
         List<EntidadPrograma> programas = this.repositorioProgramaJpa.findAll();
-        return programas.stream().map(entidad -> Programa.of(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
+        return programas.stream().map(entidad -> Programa.listar(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
                 entidad.getFechaFinal(),entidad.getFechaRegistro())).toList();
 
     }
@@ -66,7 +67,7 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
     public Programa consultarPorId(Long id) {
         return this.repositorioProgramaJpa
                 .findById(id)
-                .map(entidad ->  Programa.of(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
+                .map(entidad ->  Programa.listar(entidad.getNombre(), entidad.getCodigo(), entidad.getVersion(),entidad.getFechaInicio(),
                         entidad.getFechaFinal(),entidad.getFechaRegistro())).orElse(null);
 
     }
@@ -77,8 +78,8 @@ public class RepositorioProgramaMySQL implements RepositorioPrograma {
         Optional<EntidadArea> entidadArea = this.repositorioAreaJpa.findById(detallePrograma.getIdArea());
         Optional<EntidadImperativoEstrategico> entidadImperativoEstrategico = this.repositorioImperativoEstrategicoJpa.findById(detallePrograma.getIdImperativoEstrategico());
 
-        var entidadPrograma = new EntidadPrograma(programa.getNombre(), programa.getCodigo(), programa.getVersion(), programa.getFechaInicio(),
-                programa.getFechaFinal(),programa.getFechaRegistro());
+        var entidadPrograma = new EntidadPrograma(programa.getNombre(), programa.getCodigo(), programa.getVersion(), FormateadorHora.obtenerFechaTexto(programa.getFechaInicio()),
+                FormateadorHora.obtenerFechaTexto(programa.getFechaFinal()), programa.getFechaRegistro());
         var entidadInformacionPrograma = new EntidadInformacionPrograma(informacionPrograma.getPorcentajeReal(),
                 informacionPrograma.getPorcentajeEsperado(),informacionPrograma.getCumplimiento(),informacionPrograma.getPresupuestoIngreso(),
                 informacionPrograma.getPresupuestoGasto());

@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
-import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 
 import java.util.List;
 

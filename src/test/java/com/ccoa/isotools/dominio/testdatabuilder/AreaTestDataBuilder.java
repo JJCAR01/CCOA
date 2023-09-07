@@ -4,10 +4,17 @@ import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 
 public class AreaTestDataBuilder {
 
+    private Long idArea;
     private String nombre;
 
     public AreaTestDataBuilder() {
+        this.idArea = 1l;
         this.nombre = "TI";
+    }
+
+    public AreaTestDataBuilder conIdArea(Long idArea) {
+        this.idArea = idArea;
+        return this;
     }
 
     public AreaTestDataBuilder conNombre(String nombre) {
@@ -16,7 +23,7 @@ public class AreaTestDataBuilder {
     }
 
     public Area build() {
-        return Area.of(nombre);
+        return Area.of(idArea,nombre);
     }
 
 

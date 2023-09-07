@@ -28,12 +28,10 @@ public class ControladorRubro {
         this.servicioAplicacionModificarRubro = servicioAplicacionModificarRubro;
     }
 
-    /*@PostMapping
+    @PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoRubro rubro){
         return this.servicioAplicacionGuardarRubro.ejecutar(rubro);
     }
-
-     */
 
     @GetMapping
     public List<Rubro> listar(){
@@ -49,11 +47,9 @@ public class ControladorRubro {
     public DtoRespuesta<Long> eliminar(@PathVariable Long codigo){
         return this.servicioAplicacionEliminarRubro.ejecutarEliminar(codigo);
     }
-
-    /*@PutMapping("/{codigo}")
+    @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoRubro rubro, @PathVariable Long codigo){
         return this.servicioAplicacionModificarRubro.ejecutarModificar(rubro,codigo);
     }
 
-     */
 }

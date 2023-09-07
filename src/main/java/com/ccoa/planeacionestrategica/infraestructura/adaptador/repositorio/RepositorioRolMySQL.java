@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Rol;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioRol;
 import org.springframework.stereotype.Repository;
 

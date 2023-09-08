@@ -15,7 +15,7 @@ public class ServicioAplicacionModificarRubro {
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoRubro dto, Long codigo){
-        Rubro rubro = Rubro.of(dto.getIdRubro(),dto.getNombre(),dto.getIdTipoGI());
+        Rubro rubro = Rubro.of(dto.getIdRubro(),dto.getNombre(), dto.getClasificacion(), dto.getIdTipoGI());
 
         return new DtoRespuesta<>(this.servicioModificarRubro.ejecutarModificar(rubro,codigo));
     }

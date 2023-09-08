@@ -16,7 +16,7 @@ public class ServicioGuardarTipoGI {
     }
     public Long ejecutarGuardar(TipoGI tipoGI){
 
-        if(this.repositorioTipoGI.existe(tipoGI)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        //if(this.repositorioTipoGI.existe(tipoGI)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
 
         return this.repositorioTipoGI.guardar(tipoGI);
     }

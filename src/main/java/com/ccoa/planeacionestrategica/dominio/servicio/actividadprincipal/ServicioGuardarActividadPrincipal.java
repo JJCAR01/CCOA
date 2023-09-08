@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.actividadprincipal;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.ActividadPrincipal;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DatoActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DetalleActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadPrincipal;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,11 @@ public class ServicioGuardarActividadPrincipal {
     }
 
 
-    public Long ejecutarGuardar(ActividadPrincipal actividadPrincipal, DetalleActividadPrincipal detalleActividadPrincipal){
+    public Long ejecutarGuardar(ActividadPrincipal actividadPrincipal, DetalleActividadPrincipal detalleActividadPrincipal, DatoActividadPrincipal datoActividadPrincipal){
 
         if(this.repositorioActividadPrincipal.existe(actividadPrincipal)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
 
-        return this.repositorioActividadPrincipal.guardar(actividadPrincipal,detalleActividadPrincipal);
+        return this.repositorioActividadPrincipal.guardar(actividadPrincipal,detalleActividadPrincipal,datoActividadPrincipal);
     }
 
 

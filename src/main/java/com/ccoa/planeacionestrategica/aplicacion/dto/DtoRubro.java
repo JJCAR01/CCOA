@@ -13,5 +13,6 @@ public class DtoRubro {
 
     private Long idRubro;
     private String nombre;
+    private String clasificacion;
     private Long idTipoGI;
 }

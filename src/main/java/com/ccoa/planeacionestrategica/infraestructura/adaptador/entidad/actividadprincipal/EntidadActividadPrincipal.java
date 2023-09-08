@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal;
 
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.enums.ETipoActividadPrincipal;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,34 +23,22 @@ public class EntidadActividadPrincipal {
 
     private String nombre;
 
-    @Column(name = "tipo_actividad")
-    private String tipoActividad;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ETipoActividadPrincipal tipoActividad;
 
     private String entregable;
     private Double presupuesto;
-
-    @Column(name = "fecha_inicio")
-    private LocalDate fechaInicio;
-
-    @Column(name = "fecha_final")
-    private LocalDate fechaFinal;
-
-    @Column(name = "fecha_registro")
-    private LocalDate fechaRegistro;
-
 
     public EntidadActividadPrincipal() {
     }
 
     public EntidadActividadPrincipal(String nombre, String tipoActividad,
-                                     String entregable, Double presupuesto, LocalDate fechaInicio, LocalDate fechaFinal, LocalDate fechaRegistro) {
+                                     String entregable, Double presupuesto) {
         this.nombre = nombre;
-        this.tipoActividad = tipoActividad;
+        this.tipoActividad = ETipoActividadPrincipal.valueOf(tipoActividad);
         this.entregable = entregable;
         this.presupuesto = presupuesto;
-        this.fechaInicio = fechaInicio;
-        this.fechaFinal = fechaFinal;
-        this.fechaRegistro = fechaRegistro;
     }
 
 

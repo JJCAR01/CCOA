@@ -1,5 +1,6 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad;
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.gastoingreso;
 
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.gastoingreso.enums.ETipoGI;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,9 @@ public class EntidadTipoGI {
 
     private Integer cantidad;
 
-    private String clasificacion;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ETipoGI clasificacion;
 
     @Column(name = "valor_unitario")
     private Double valorUnitario;
@@ -30,15 +33,15 @@ public class EntidadTipoGI {
     private String observacion;
 
 
-
     public EntidadTipoGI() {
     }
 
     public EntidadTipoGI(Integer cantidad, String clasificacion, Double valorUnitario, Double valorTotal, String observacion) {
         this.cantidad = cantidad;
-        this.clasificacion = clasificacion;
+        this.clasificacion = ETipoGI.valueOf(clasificacion);
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
         this.observacion = observacion;
     }
+
 }

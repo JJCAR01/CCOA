@@ -1,15 +1,19 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.ActividadPrincipal;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DatoActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DetalleActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.*;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadActividadPrincipal;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadDatoActividadPrincipal;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadDetalleActividadPrincipal;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.gastoingreso.EntidadTipoGI;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.*;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.actividadprincipal.RepositorioActividadPrincipalJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.actividadprincipal.RepositorioDatoActividadPrincipalJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.actividadprincipal.RepositorioDetalleActividadPrincipalJpa;
 import org.springframework.stereotype.Repository;
 
@@ -23,15 +27,17 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa;
     private final RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa;
+    private final RepositorioDatoActividadPrincipalJpa repositorioDatoActividadPrincipalJpa;
     private final RepositorioTipoGIJpa repositorioTipoGIJpa;
 
     public RepositorioActividadPrincipalMySQL(RepositorioActividadPrincipalJpa repositorioActividadPrincipalJpa,
                                               RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa,
-                                              RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa, RepositorioTipoGIJpa repositorioTipoGIJpa) {
+                                              RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa, RepositorioDatoActividadPrincipalJpa repositorioDatoActividadPrincipalJpa, RepositorioTipoGIJpa repositorioTipoGIJpa) {
         this.repositorioActividadPrincipalJpa = repositorioActividadPrincipalJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioLineaEstrategicaJpa = repositorioLineaEstrategicaJpa;
         this.repositorioDetalleActividadPrincipalJpa = repositorioDetalleActividadPrincipalJpa;
+        this.repositorioDatoActividadPrincipalJpa = repositorioDatoActividadPrincipalJpa;
 
         this.repositorioTipoGIJpa = repositorioTipoGIJpa;
     }
@@ -40,8 +46,8 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     public List<ActividadPrincipal> listar() {
 
         List<EntidadActividadPrincipal> entidadActividadPrincipales =this.repositorioActividadPrincipalJpa.findAll();
-        return entidadActividadPrincipales.stream().map(entidad -> ActividadPrincipal.listar(entidad.getIdActividadPrincipal(), entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
-                entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro())).toList();
+        return entidadActividadPrincipales.stream().map(entidad -> ActividadPrincipal.listar(entidad.getIdActividadPrincipal(), entidad.getNombre(),
+                String.valueOf(entidad.getTipoActividad()),entidad.getEntregable(),entidad.getPresupuesto())).toList();
     }
 
     @Override
@@ -56,24 +62,25 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     public ActividadPrincipal consultarPorId(Long id) {
         return this.repositorioActividadPrincipalJpa
                 .findById(id)
-                .map(entidad -> ActividadPrincipal.listar(entidad.getIdActividadPrincipal(), entidad.getNombre(),entidad.getTipoActividad(),entidad.getEntregable(),entidad.getPresupuesto(),
-                        entidad.getFechaInicio(),entidad.getFechaFinal(),entidad.getFechaRegistro())).orElse(null);
+                .map(entidad -> ActividadPrincipal.listar(entidad.getIdActividadPrincipal(), entidad.getNombre(),
+                        String.valueOf(entidad.getTipoActividad()),entidad.getEntregable(),entidad.getPresupuesto())).orElse(null);
     }
 
     @Override
-    public Long guardar(ActividadPrincipal actividadPrincipal, DetalleActividadPrincipal detalleActividadPrincipal) {
+    public Long guardar(ActividadPrincipal actividadPrincipal, DetalleActividadPrincipal detalleActividadPrincipal, DatoActividadPrincipal datoActividadPrincipal) {
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(detalleActividadPrincipal.getIdUsuario());
         Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(detalleActividadPrincipal.getIdTipoGI());
         Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(detalleActividadPrincipal.getIdLineaEstrategica());
 
         var entidadActividadPrincipal = new EntidadActividadPrincipal(actividadPrincipal.getNombre(), actividadPrincipal.getTipoActividad(),
-                actividadPrincipal.getEntregable(), actividadPrincipal.getPresupuesto(),
-                FormateadorHora.obtenerFechaTexto(actividadPrincipal.getFechaInicio()),
-                FormateadorHora.obtenerFechaTexto(actividadPrincipal.getFechaFinal()),actividadPrincipal.getFechaRegistro());
-        var entidadDetalleActividadPrincipal = new EntidadDetalleActividadPrincipal(entidadLineaEstrategica.get().getIdLineaEstrategica(), entidadUsuario.get().getIdUsuario(),
+                actividadPrincipal.getEntregable(), actividadPrincipal.getPresupuesto());
+        var entidadDetalle = new EntidadDetalleActividadPrincipal(entidadLineaEstrategica.get().getIdLineaEstrategica(), entidadUsuario.get().getIdUsuario(),
                 entidadTipoGI.get().getIdTipoGI());
 
-        this.repositorioDetalleActividadPrincipalJpa.save(entidadDetalleActividadPrincipal);
+        var entidadDato = new EntidadDatoActividadPrincipal(FormateadorHora.obtenerFechaTexto(datoActividadPrincipal.getFechaInicio()),
+                FormateadorHora.obtenerFechaTexto(datoActividadPrincipal.getFechaFinal()),datoActividadPrincipal.getFechaRegistro());
+        this.repositorioDatoActividadPrincipalJpa.save(entidadDato);
+        this.repositorioDetalleActividadPrincipalJpa.save(entidadDetalle);
         return this.repositorioActividadPrincipalJpa.save(entidadActividadPrincipal).getIdActividadPrincipal();
     }
 

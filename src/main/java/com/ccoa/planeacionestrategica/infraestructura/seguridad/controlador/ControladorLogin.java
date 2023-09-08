@@ -10,10 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,6 +43,6 @@ public class ControladorLogin {
 
     private String getTipo(List<GrantedAuthority> authorities){
         return authorities.stream().filter(aut -> aut.getAuthority().startsWith("ROLE_")).findFirst().
-                map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"A":"U").orElse("U");
+                map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"A":"O").orElse("O");
     }
 }

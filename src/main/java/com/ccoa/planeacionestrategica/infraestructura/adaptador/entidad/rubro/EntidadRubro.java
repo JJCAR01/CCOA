@@ -1,5 +1,6 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad;
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.rubro;
 
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.gastoingreso.enums.ETipoGI;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +16,12 @@ public class EntidadRubro {
     @Column(name = "id_rubro")
     private Long idRubro;
 
-    @Column(unique = true, length = 50, name = "nombre")
+    @Column(unique = true)
     private String nombre;
+
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private ETipoGI clasificacion;
 
     @JoinColumn(name = "tipo_gi_id",unique = true)
     private Long idTipoGI;
@@ -24,8 +29,9 @@ public class EntidadRubro {
     public EntidadRubro() {
     }
 
-    public EntidadRubro(String nombre, Long idTipoGI) {
+    public EntidadRubro(String nombre, String clasificacion, Long idTipoGI) {
         this.nombre = nombre;
+        this.clasificacion = ETipoGI.valueOf(clasificacion);
         this.idTipoGI = idTipoGI;
     }
 }

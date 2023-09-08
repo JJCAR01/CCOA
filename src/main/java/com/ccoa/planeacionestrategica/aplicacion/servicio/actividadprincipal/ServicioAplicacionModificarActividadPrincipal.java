@@ -16,8 +16,7 @@ public class ServicioAplicacionModificarActividadPrincipal {
 
     public DtoRespuesta<Long> ejecutarModificar(DtoActividadPrincipal dto, Long codigo) {
 
-        ActividadPrincipal actividadPrincipal = ActividadPrincipal.of(dto.getIdActividadPrincipal(),dto.getNombre(), dto.getTipoActividad(), dto.getEntregable(),dto.getPresupuesto(),
-                dto.getFechaInicio(),dto.getFechaFinal(),dto.getFechaRegistro());
+        ActividadPrincipal actividadPrincipal = ActividadPrincipal.of(dto.getIdActividadPrincipal(),dto.getNombre(), dto.getTipoActividad(), dto.getEntregable(),dto.getPresupuesto());
 
 
         return new DtoRespuesta<>(this.servicioModificarActividadPrincipal.ejecutarModificar(actividadPrincipal,codigo));

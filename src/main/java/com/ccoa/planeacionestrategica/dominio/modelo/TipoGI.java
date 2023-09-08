@@ -21,7 +21,6 @@ public class TipoGI {
         ValidadorDominio.validadorNumeroDoubleYMayorACero(valorUnitario,"El valor unitario debe ser mayor a cero y no puede estar vacía");
         ValidadorDominio.validadorNumeroDoubleYMayorACero(valorTotal,"El valor total debe ser mayor a cero y no puede estar vacía");
         ValidadorDominio.validarObligatorio(clasificacion,"La clasificacion NO puede estar vacío");
-
         return new TipoGI(idTipoGI, cantidad,clasificacion, valorUnitario, valorTotal, observacion);
     }
 

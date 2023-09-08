@@ -17,7 +17,7 @@ public class ServicioGuardarRubro {
 
     public Long ejecutarGuardar(Rubro rubro){
 
-        if(this.RepositorioRubro.existe(rubro)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
+        //if(this.RepositorioRubro.existe(rubro)) throw new IllegalStateException(MENSAJE_YA_EXISTE);
 
         return this.RepositorioRubro.guardar(rubro);}
 }

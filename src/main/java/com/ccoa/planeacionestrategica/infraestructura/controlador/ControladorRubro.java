@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ccoa/rubrogastos")
+@RequestMapping("/ccoa/rubros")
 public class ControladorRubro {
 
     private final ServicioAplicacionGuardarRubro servicioAplicacionGuardarRubro;

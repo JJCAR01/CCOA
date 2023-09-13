@@ -3,13 +3,15 @@ package com.ccoa.planeacionestrategica.dominio.transversal.validador;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class ValidadorDominio {
 
+    private ValidadorDominio() {
+    }
+
     private static final String PATRON_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
-    private static final String PATRON_CORREO = "^\\w+([.-_+]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,10})+$";
+    private static final String PATRON_CORREO = "^[a-zA-Z]+@ccoa\\.org\\.co$";
 
     private static final String CAMPO_OBLIGATORIO = "El campo %s es obligatorio.";
     public static final String MENSAJE_DEFECTO = "Ocurrió un error procesando la solicitud. Por favor contacta al administrador del sistema.";
@@ -47,12 +49,6 @@ public class ValidadorDominio {
         }
     }
 
-    /*public static void validadorLongitud(String valor, Long longitud, String mensaje) {
-        if(valor.length() < longitud) {
-            throw new IllegalArgumentException(String.format(mensaje, longitud));
-        }
-    }
-     */
     public static void validadorNumeroEnteroYMayorACero(Integer valor, String mensaje){
 
         if((valor <= 0) || (valor == null)){

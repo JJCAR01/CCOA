@@ -10,6 +10,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,4 +47,10 @@ public class ControladorLogin {
         return authorities.stream().filter(aut -> aut.getAuthority().startsWith("ROLE_")).findFirst().
                 map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"A":"O").orElse("O");
     }
+
+        @GetMapping("/user")
+        public ResponseEntity<OAuth2User>  user(@AuthenticationPrincipal OAuth2User principal) {
+            return ResponseEntity.ok(principal);
+        }
+
 }

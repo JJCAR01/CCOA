@@ -48,9 +48,5 @@ public class ControladorLogin {
                 map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"A":"O").orElse("O");
     }
 
-        @GetMapping("/user")
-        public ResponseEntity<OAuth2User>  user(@AuthenticationPrincipal OAuth2User principal) {
-            return ResponseEntity.ok(principal);
-        }
 
 }

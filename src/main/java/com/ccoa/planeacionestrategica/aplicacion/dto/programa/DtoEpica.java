@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto.actividadprincipal;
+package com.ccoa.planeacionestrategica.aplicacion.dto.programa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,17 +11,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class  DtoActividadPrincipal {
+public class DtoEpica {
 
-    private Long idActividadPrincipal;
+    private Long idEpica;
     private String nombre;
-    private String tipoActividad;
-    private String entregable;
-    private Double presupuesto;
     private LocalDate fechaInicio;
     private LocalDate fechaFinal;
     private LocalDate fechaRegistro;
-    private Long idLineaEstrategica;
     private Long idUsuario;
-    private Long idTipoGI;
+    private Integer duracion;
+    private Integer diasRestantes;
+    private Boolean estado;
+    private Double avance;
+
 }

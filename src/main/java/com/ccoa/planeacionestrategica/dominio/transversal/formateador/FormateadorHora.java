@@ -1,18 +1,12 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.formateador;
 
-import org.springframework.cglib.core.Local;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class FormateadorHora {
 
     public static final String DD_MM_YYYY = "yyyy/MM/dd";
-    public static final String DD_MM_YYYY_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+    public static final String YYYY = "yyyy";
 
     public FormateadorHora() {
     }
@@ -22,6 +16,10 @@ public class FormateadorHora {
         String fechaFormateada = fecha.format(patron);
 
         return LocalDate.parse(fechaFormateada, patron);
+    }
+
+    public static int obtenerFechaAnual(LocalDate fecha) {
+        return fecha.getYear();
     }
 
 }

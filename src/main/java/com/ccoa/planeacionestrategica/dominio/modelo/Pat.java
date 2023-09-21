@@ -13,43 +13,34 @@ public class Pat {
     //Clase de de asignacion de atributos y se validan entradas
     private final Long idPat;
     private final String nombre;
-    private final LocalDate fechaInicio;
-    private final LocalDate fechaFinal;
+    private final Integer fechaAnual;
     private final LocalDate fechaRegistro;
-    private final Double porcentajeReal;
-    private final Double porcentajeEsperado;
-    private final Double cumplimiento;
+    private final Double porcentaje;
+    private final String proceso;
     private final Long idUsuario;
 
-    public static Pat of(Long idPat,String nombre,LocalDate fechaInicio,LocalDate fechaFinal,LocalDate fechaRegistro,
-                         Double porcentajeReal,Double porcentajeEsperado,Double cumplimiento, Long idUsuario ){
+    public static Pat of(Long idPat,String nombre,Integer fechaAnual,LocalDate fechaRegistro,
+                         Double porcentaje,String proceso, Long idUsuario ){
         ValidadorDominio.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
-        ValidadorDominio.fechaInicioEsMayorActual(fechaInicio,"La fecha de Inicio debe ser mayor a la actual");
-        ValidadorDominio.validarObligatorioTipoDato(fechaInicio,"El dato fecha de inicio NO puede estar vacío");
-        ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicio,"La fecha Final debe ser mayor a la fecha de Inicio");
-        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"El dato fecha de final NO puede estar vacío");
+        ValidadorDominio.validadorNumeroEnteroYMayorACero(fechaAnual,"El dato fecha de inicio NO puede estar vacío");
         ValidadorDominio.validarObjeto(fechaRegistro,"La fecha de registro NO debe ser vacío");
-        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeReal,"Porcentaje real null o es menor a 0");
-        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeEsperado,"Porcentaje esperado null o es menor a 0");
+        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentaje,"Porcentaje no de debe estar nulo o es menor a 0");
+        ValidadorDominio.validarObligatorio(proceso,"El proceso del programa no debe estar vacio");
         ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,"El usuario No puede ser vacío");
-        return new Pat(idPat, nombre,fechaInicio,fechaFinal,fechaRegistro,porcentajeReal,porcentajeEsperado,cumplimiento,idUsuario);
+        return new Pat(idPat, nombre,fechaAnual, fechaRegistro,porcentaje,proceso,idUsuario);
     }
 
-    public static Pat listar(Long idPat,String nombre,LocalDate fechaInicio,LocalDate fechaFinal,LocalDate fechaRegistro,
-                             Double porcentajeReal,Double porcentajeEsperado,Double cumplimiento, Long idUsuario){
-        return new Pat(idPat, nombre,fechaInicio,fechaFinal,fechaRegistro,porcentajeReal,porcentajeEsperado,cumplimiento,idUsuario);
+    public static Pat listar(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, String proceso, Long idUsuario){
+        return new Pat(idPat, nombre,fechaAnual, fechaRegistro,porcentaje,proceso,idUsuario);
     }
 
-    public Pat(Long idPat, String nombre, LocalDate fechaInicio, LocalDate fechaFinal, LocalDate fechaRegistro, Double porcentajeReal,
-               Double porcentajeEsperado, Double cumplimiento, Long idUsuario ) {
+    public Pat(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, String proceso, Long idUsuario) {
         this.idPat = idPat;
         this.nombre = nombre;
-        this.fechaInicio = fechaInicio;
-        this.fechaFinal = fechaFinal;
+        this.fechaAnual = fechaAnual;
         this.fechaRegistro = fechaRegistro;
-        this.porcentajeReal = porcentajeReal;
-        this.porcentajeEsperado = porcentajeEsperado;
-        this.cumplimiento = cumplimiento;
+        this.porcentaje = porcentaje;
+        this.proceso = proceso;
         this.idUsuario = idUsuario;
     }
 }

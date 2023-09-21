@@ -18,12 +18,10 @@ public class DtoPat {
 
     private Long idPat;
     private String nombre;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFinal;
+    private LocalDate fechaAnual;
     private LocalDate fechaRegistro;
-    private Double porcentajeReal;
-    private Double porcentajeEsperado;
-    private Double cumplimiento;
+    private Double porcentaje;
+    private String proceso;
     private Long idUsuario;
 
 }

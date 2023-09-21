@@ -24,7 +24,7 @@ public class EntidadDetalleActividadPrincipal {
     @Column(name = "linea_estrategica_id")
     private Long idLineaEstrategica;
 
-    public EntidadDetalleActividadPrincipal(Long idUsuario, Long idTipoGI, Long idLineaEstrategica) {
+    public EntidadDetalleActividadPrincipal(Long idUsuario, Long idTipoGI) {
         this.idUsuario = idUsuario;
         this.idTipoGI = idTipoGI;
         this.idLineaEstrategica = idLineaEstrategica;

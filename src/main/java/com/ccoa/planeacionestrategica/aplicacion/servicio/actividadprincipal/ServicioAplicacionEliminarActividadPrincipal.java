@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadprincipal;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadprincipal.ServicioEliminarActividadPrincipal;
-import com.ccoa.planeacionestrategica.dominio.servicio.lineaestrategica.ServicioEliminarLineaEstrategica;
 import org.springframework.stereotype.Component;
 
 @Component

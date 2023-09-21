@@ -20,9 +20,9 @@ public class ServicioAplicacionGuardarPat {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoPat dto){
-        Pat pat = Pat.of(dto.getIdPat(), dto.getNombre(),dto.getFechaInicio(),dto.getFechaFinal(),
+        Pat pat = Pat.of(dto.getIdPat(), dto.getNombre(),FormateadorHora.obtenerFechaAnual(dto.getFechaAnual()),
                 FormateadorHora.obtenerFechaTexto(servicioObtenerHoraActual.ejecutar()),
-                dto.getPorcentajeReal(), dto.getPorcentajeEsperado(), dto.getCumplimiento(), dto.getIdUsuario());
+                dto.getPorcentaje(), dto.getProceso(), dto.getIdUsuario());
         return new DtoRespuesta<>(this.servicioGuardarPat.ejecutarGuardar(pat));
     }
 }

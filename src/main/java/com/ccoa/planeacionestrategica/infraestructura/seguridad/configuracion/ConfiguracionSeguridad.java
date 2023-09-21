@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.configuracion;
 
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.filtro.JwtFilter;
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -40,6 +38,8 @@ public class ConfiguracionSeguridad {
                         auth.
                                 requestMatchers("/ccoa/**").permitAll().anyRequest().permitAll()
                 );
+
+        http.oauth2Login(Customizer.withDefaults());
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

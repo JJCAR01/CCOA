@@ -9,7 +9,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.*;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadActividadPrincipal;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadDatoActividadPrincipal;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.actividadprincipal.EntidadDetalleActividadPrincipal;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.gastoingreso.EntidadTipoGI;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.*;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.actividadprincipal.RepositorioActividadPrincipalJpa;
@@ -28,18 +27,16 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     private final RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa;
     private final RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa;
     private final RepositorioDatoActividadPrincipalJpa repositorioDatoActividadPrincipalJpa;
-    private final RepositorioTipoGIJpa repositorioTipoGIJpa;
 
     public RepositorioActividadPrincipalMySQL(RepositorioActividadPrincipalJpa repositorioActividadPrincipalJpa,
                                               RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioLineaEstrategicaJpa repositorioLineaEstrategicaJpa,
-                                              RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa, RepositorioDatoActividadPrincipalJpa repositorioDatoActividadPrincipalJpa, RepositorioTipoGIJpa repositorioTipoGIJpa) {
+                                              RepositorioDetalleActividadPrincipalJpa repositorioDetalleActividadPrincipalJpa, RepositorioDatoActividadPrincipalJpa repositorioDatoActividadPrincipalJpa) {
         this.repositorioActividadPrincipalJpa = repositorioActividadPrincipalJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioLineaEstrategicaJpa = repositorioLineaEstrategicaJpa;
         this.repositorioDetalleActividadPrincipalJpa = repositorioDetalleActividadPrincipalJpa;
         this.repositorioDatoActividadPrincipalJpa = repositorioDatoActividadPrincipalJpa;
 
-        this.repositorioTipoGIJpa = repositorioTipoGIJpa;
     }
 
     @Override
@@ -69,13 +66,11 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
     @Override
     public Long guardar(ActividadPrincipal actividadPrincipal, DetalleActividadPrincipal detalleActividadPrincipal, DatoActividadPrincipal datoActividadPrincipal) {
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(detalleActividadPrincipal.getIdUsuario());
-        Optional<EntidadTipoGI> entidadTipoGI = this.repositorioTipoGIJpa.findById(detalleActividadPrincipal.getIdTipoGI());
         Optional<EntidadLineaEstrategica> entidadLineaEstrategica = this.repositorioLineaEstrategicaJpa.findById(detalleActividadPrincipal.getIdLineaEstrategica());
 
         var entidadActividadPrincipal = new EntidadActividadPrincipal(actividadPrincipal.getNombre(), actividadPrincipal.getTipoActividad(),
                 actividadPrincipal.getEntregable(), actividadPrincipal.getPresupuesto());
-        var entidadDetalle = new EntidadDetalleActividadPrincipal(entidadLineaEstrategica.get().getIdLineaEstrategica(), entidadUsuario.get().getIdUsuario(),
-                entidadTipoGI.get().getIdTipoGI());
+        var entidadDetalle = new EntidadDetalleActividadPrincipal(entidadLineaEstrategica.get().getIdLineaEstrategica(), entidadUsuario.get().getIdUsuario());
 
         var entidadDato = new EntidadDatoActividadPrincipal(FormateadorHora.obtenerFechaTexto(datoActividadPrincipal.getFechaInicio()),
                 FormateadorHora.obtenerFechaTexto(datoActividadPrincipal.getFechaFinal()),datoActividadPrincipal.getFechaRegistro());

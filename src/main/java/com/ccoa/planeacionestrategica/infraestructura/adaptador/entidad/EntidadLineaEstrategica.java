@@ -39,14 +39,11 @@ public class EntidadLineaEstrategica {
     @JoinColumn(name = "usuario_id")
     private Long idUsuario;
 
-    @JoinColumn(name = "programa_id")
-    private Long idPrograma;
-
     public EntidadLineaEstrategica() {
     }
 
     public EntidadLineaEstrategica(String nombre, String entregable, LocalDate fechaInicio, LocalDate fechaFinal,
-                                   LocalDate fechaRegistro, String indicadorResultado, Long idUsuario, Long idPrograma) {
+                                   LocalDate fechaRegistro, String indicadorResultado, Long idUsuario) {
         this.nombre = nombre;
         this.entregable = entregable;
         this.fechaInicio = fechaInicio;
@@ -54,7 +51,6 @@ public class EntidadLineaEstrategica {
         this.fechaRegistro = fechaRegistro;
         this.indicadorResultado = indicadorResultado;
         this.idUsuario = idUsuario;
-        this.idPrograma = idPrograma;
     }
 }
 

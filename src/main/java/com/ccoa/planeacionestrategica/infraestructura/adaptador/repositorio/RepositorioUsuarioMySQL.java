@@ -54,7 +54,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
         // Paso 1: Guardar al usuario
         EntidadUsuario entidadUsuario = new EntidadUsuario(usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(),
-                passwordEncoder.encode(usuario.getPassword()), entidadCargo.get().getIdCargo());
+                passwordEncoder.encode(usuario.getPassword()), entidadCargo.orElseThrow().getIdCargo());
 
         entidadUsuario = this.repositorioUsuarioJpa.save(entidadUsuario);
 
@@ -62,11 +62,10 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         Long idUsuario = entidadUsuario.getIdUsuario();
 
         List<EntidadUsuarioRol> roles = usuario.getRoles().stream()
-                .map(rol -> new EntidadUsuarioRol(idUsuario, rol.getRol()))
-                .collect(Collectors.toList());
+                .map(rol -> new EntidadUsuarioRol(idUsuario, rol.getRol())).toList();
 
         // Guardar los roles en la tabla rol_usuario
-        roles = repositorioRolJpa.saveAll(roles);
+        repositorioRolJpa.saveAll(roles);
 
         return idUsuario;
     }

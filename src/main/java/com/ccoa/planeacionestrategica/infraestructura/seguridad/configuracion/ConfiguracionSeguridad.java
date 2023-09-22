@@ -1,6 +1,9 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.configuracion;
 
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.filtro.JwtFilter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +14,16 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.io.IOException;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -36,11 +45,24 @@ public class ConfiguracionSeguridad {
         http
                 .authorizeHttpRequests(auth ->
                         auth.
-                                requestMatchers("/ccoa/**").permitAll().anyRequest().permitAll()
-                );
+                                requestMatchers("/ccoa/auth/**").permitAll().
+                                requestMatchers("/ccoa/**").hasRole("ADMIN").
+                                anyRequest().authenticated()
+                ).oauth2Login(oauth -> oauth.loginProcessingUrl("/login")
+                        .loginPage("/oauth2/authorization/google")
+                        .successHandler(new AuthenticationSuccessHandler() {
+                            @Override
+                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                                request.authenticate(response);
+                            }
+                        }).failureHandler(new AuthenticationFailureHandler() {
+                            @Override
+                            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+
+                            }
+                        }));
 
         http.oauth2Login(Customizer.withDefaults());
-
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

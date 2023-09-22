@@ -45,7 +45,7 @@ public class ControladorLogin {
 
     private String getTipo(List<GrantedAuthority> authorities){
         return authorities.stream().filter(aut -> aut.getAuthority().startsWith("ROLE_")).findFirst().
-                map(aut -> aut.getAuthority().equals("ROLE_ADMINISTRADOR")?"A":"O").orElse("O");
+                map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"A":"O").orElse("O");
     }
 
 

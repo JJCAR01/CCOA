@@ -43,8 +43,11 @@ public class RepositorioPatMySQL implements RepositorioPat {
     public Long guardar(Pat pat) {
         Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(pat.getIdUsuario());
 
+
         EntidadPat entidadPat = new EntidadPat(pat.getNombre(), pat.getFechaAnual(),
                 pat.getFechaRegistro(),pat.getPorcentaje(),pat.getProceso(),
+
+
                 entidadUsuario.get().getIdUsuario());
 
         return this.repositorioPatJpa.save(entidadPat).getIdPat();

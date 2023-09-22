@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class DtoUsuarioResumen {
 
+    private Long idUsuario;
     private String nombre;
     private String apellidos;
     private String password;

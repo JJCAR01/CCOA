@@ -34,7 +34,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     public List<DtoUsuarioResumen> listar() {
         List<EntidadUsuario> entidadUsuarios =this.repositorioUsuarioJpa.findAll();
-        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getNombre(), entidad.getApellido(),
+        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),
                 entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo())).toList();
 
     }
@@ -43,7 +43,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
         return this.repositorioUsuarioJpa
                 .findById(id)
-                .map(entidad -> new DtoUsuarioResumen(entidad.getNombre(), entidad.getApellido(),
+                .map(entidad -> new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),
                         entidad.getPassword(),entidad.getCorreo(), entidad.getIdCargo()))
                 .orElse(null);
     }

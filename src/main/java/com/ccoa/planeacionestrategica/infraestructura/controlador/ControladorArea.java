@@ -8,6 +8,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacio
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionModificarArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class ControladorArea {
     }
 
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoArea area){
         return ResponseEntity.ok(this.servicioAplicacionGuardarArea.ejecutar(area));
     }
 
+    @Secured({"ROLE_ADMIN"})
     @GetMapping
     public List<Area> listar(){
         return this.servicioAplicacionListarArea.ejecutar();

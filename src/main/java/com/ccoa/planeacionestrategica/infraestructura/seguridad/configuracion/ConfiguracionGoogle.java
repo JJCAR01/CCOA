@@ -7,10 +7,9 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
-@Configuration
 public class ConfiguracionGoogle {
 
-    @Bean
+    /*@Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
         return new InMemoryClientRegistrationRepository(this.googleClientRegistration());
     }
@@ -28,7 +27,7 @@ public class ConfiguracionGoogle {
                 .clientName("Google")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // Especifica el tipo de concesión aquí
                 .build();
-    }
+    }*/
     
 
 }

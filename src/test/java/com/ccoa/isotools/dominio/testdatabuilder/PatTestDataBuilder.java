@@ -10,27 +10,23 @@ public class PatTestDataBuilder {
 
     private long idPat;
     private String nombre;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFinal;
+    private Integer fechaAnual;
     private LocalDate fechaRegistro;
-    private Double porcentajeReal;
-    private Double porcentajeEsperado;
-    private Double cumplimiento;
+    private Double porcentaje;
+    private String proceso;
     private long idUsuario;
 
     public PatTestDataBuilder() {
         this.idPat = 1;
         this.nombre = "PAT";
-        this.fechaInicio = LocalDate.parse("2023-12-10");
-        this.fechaFinal = LocalDate.parse("2024-12-10");
+        this.fechaAnual = 2023;
         this.fechaRegistro = LocalDate.now();
-        this.porcentajeReal = 0.0;
-        this.porcentajeEsperado = 0.0;
-        this.cumplimiento = 0.0;
+        this.porcentaje = 0.0;
+        this.proceso = "SERVICIOS_TI";
         this.idUsuario = 1;
     }
 
     public Pat build() {
-        return Pat.of(idPat,nombre,fechaInicio,fechaFinal,fechaRegistro,porcentajeReal,porcentajeEsperado,cumplimiento,idUsuario);
+        return Pat.of(idPat,nombre,fechaAnual,fechaRegistro,porcentaje,proceso,idUsuario);
     }
 }

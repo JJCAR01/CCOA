@@ -44,7 +44,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
 
     private String[] getAuthorities(String rol) {
         if ("ADMIN".equals(rol) || "OPERADOR".equals(rol)) {
-            return new String[] {"areas"};
+            return new String[]{"pats"};
         }
 
         return new String[] {};

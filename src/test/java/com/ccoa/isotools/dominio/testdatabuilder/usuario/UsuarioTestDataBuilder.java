@@ -19,8 +19,8 @@ public class UsuarioTestDataBuilder {
         this.idUsuario = 1;
         this.nombre = "Juan Jose";
         this.apellido = "cardona";
-        this.password = "Colombia22+";
-        this.correo = "juan@gmail.com";
+        this.password = "Colombia10+";
+        this.correo = "juan@ccoa.org.co";
         this.idCargo = 1;
         this.roles = List.of(Rol.of(1l,"ADMIN"));
     }

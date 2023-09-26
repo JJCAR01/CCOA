@@ -26,7 +26,7 @@ public class RestExceptionHandler {
         STATES.put(ValorNombreExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(ValorObjetoExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
-        STATES.put(ValidadorFechaMayor.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ValidadorFecha.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(BaseExcepcion.class)

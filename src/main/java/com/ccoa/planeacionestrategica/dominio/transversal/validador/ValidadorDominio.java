@@ -4,6 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class ValidadorDominio {
 
@@ -116,13 +117,19 @@ public class ValidadorDominio {
     public static void fechaInicioEsMayorActual(LocalDate fecha, String mensaje){
         LocalDate fechaActual =LocalDate.now();
         if(fecha.isBefore(fechaActual)){
-            throw new ValidadorFechaMayor(mensaje,MENSAJE_DEFECTO);
+            throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void fechaFinalEsMayorFechaInicio(LocalDate fechaFinal,LocalDate fechaInicio,String mensaje){
         if(fechaFinal.isBefore(fechaInicio)){
-            throw new ValidadorFechaMayor(mensaje,MENSAJE_DEFECTO);
+            throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
+        }
+    }
+    public static void siEsFechaActualRegistrada(LocalDate fecha,String mensaje){
+        LocalDate  fechaActual = LocalDate.now();
+        if(!Objects.equals(fecha, fechaActual)){
+            throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
 

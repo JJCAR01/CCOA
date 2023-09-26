@@ -8,7 +8,7 @@ public class DtoLoginTestDataBuilder {
     private String password;
 
     public DtoLoginTestDataBuilder() {
-        this.correo = "juan@gmail.com";
+        this.correo = "juan@ccoa.org.co";
         this.password = "Colombia10+";
     }
 

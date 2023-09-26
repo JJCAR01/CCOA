@@ -13,7 +13,6 @@ public class DtoUsuarioResumen {
     private Long idUsuario;
     private String nombre;
     private String apellidos;
-    private String password;
     private String correo;
     private Long cargo;
 }

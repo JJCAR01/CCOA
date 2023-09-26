@@ -19,17 +19,17 @@ public class UsuarioTest {
         long idUsuario = 1;
         String nombre = "Juan Jose";
         String apellido = "cardona";
-        String password = "Colombia22+";
-        String correo = "juan@gmail.com";
+        String password = "Colombia10+";
+        String correo = "juan@ccoa.org.co";
         long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+        List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
         Usuario usuario = Usuario.of(idUsuario, nombre,apellido,password,correo,idCargo,roles);
 
         Assertions.assertEquals("Juan Jose",usuario.getNombre());
         Assertions.assertEquals("cardona", usuario.getApellido());
         Assertions.assertEquals("Colombia22+",usuario.getPassword());
-        Assertions.assertEquals("juan@gmail.com", usuario.getCorreo());
+        Assertions.assertEquals("juan@ccoa.org.co", usuario.getCorreo());
         Assertions.assertEquals(1,usuario.getIdCargo());
     }
 
@@ -40,9 +40,9 @@ public class UsuarioTest {
         String nombre = "Juan Jose";
         String apellido = "cardona";
         String password = "Colombia";
-        String correo = "juan@gmail.com";
+        String correo = "juan@ccoa.org.co";
         long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+        List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
         Assertions.assertEquals("La contraseña NO cuenta con las ecritura correcta",Assertions.assertThrows(ValorCaracteresExcepcion.class, () ->
                 Usuario.of(idUsuario, nombre,apellido,password,correo,idCargo,roles)
@@ -58,7 +58,7 @@ public class UsuarioTest {
         String password = "Colombia22+";
         String correo = "juan@";
         long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+        List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
         Assertions.assertEquals("El correo NO cuenta con las ecritura correcta",Assertions.assertThrows(ValorCaracteresExcepcion.class, () ->
                 Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
@@ -72,9 +72,9 @@ public class UsuarioTest {
         String nombre = null;
         String apellido = "cardona";
         String password = "Colombia";
-        String correo = "juan@gmail.com";
+        String correo = "juan@ccoa.org.co";
         long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+        List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
         Assertions.assertEquals("El nombre del usuario NO puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
@@ -88,9 +88,9 @@ public class UsuarioTest {
         String nombre = "";
         String apellido = "cardona";
         String password = "Colombia22+";
-        String correo = "juan@gmail.com";
+        String correo = "juan@ccoa.org.co";
         long idCargo = 0;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+        List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
         Assertions.assertEquals("El nombre del usuario NO puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)

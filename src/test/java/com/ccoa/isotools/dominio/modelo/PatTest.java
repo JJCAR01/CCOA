@@ -3,7 +3,9 @@ package com.ccoa.isotools.dominio.modelo;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValidadorFecha;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorCaracteresExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorNumeroExcepcion;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,90 +21,69 @@ public class PatTest {
 
         long idPat = 1;
         String nombre = "PAT";
-        LocalDate fechaInicio = LocalDate.parse("2023-12-10");
-        LocalDate fechaFinal = LocalDate.parse("2024-12-10");
+        Integer fechaAnual = 2023;
         LocalDate fechaRegistro = LocalDate.now();
-        Double porcentajeReal = 0.0;
-        Double porcentajeEsperado = 0.0;
-        Double cumplimiento = 0.0;
+        Double procentaje = 0.0;
+        String proceso = "SERVICIOS_TI";
         long idUsuario = 1;
 
-        Pat pat = Pat.of(idPat,nombre,fechaInicio,fechaFinal,fechaRegistro,porcentajeReal,porcentajeEsperado,cumplimiento,idUsuario);
+        Pat pat = Pat.of(idPat,nombre,fechaAnual,fechaRegistro,procentaje,proceso,idUsuario);
 
         Assertions.assertEquals(1,pat.getIdPat());
         Assertions.assertEquals("PAT",pat.getNombre());
-        Assertions.assertEquals(LocalDate.parse("2023-12-10"), pat.getFechaInicio());
-        Assertions.assertEquals(LocalDate.parse("2024-12-10"),pat.getFechaFinal());
+        Assertions.assertEquals(2023, pat.getFechaAnual());
         Assertions.assertEquals(LocalDate.now(), pat.getFechaRegistro());
-        Assertions.assertEquals(0.0, pat.getPorcentajeReal());
-        Assertions.assertEquals(0.0, pat.getPorcentajeEsperado());
-        Assertions.assertEquals(0.0, pat.getCumplimiento());
+        Assertions.assertEquals(0.0, pat.getPorcentaje());
+        Assertions.assertEquals("SERVICIOS_TI", pat.getProceso());
         Assertions.assertEquals(1,pat.getIdUsuario());
     }
-/*
-    @Test
-    void validarPasswordNoCumple() {
 
-        long idUsuario = 1;
-        String nombre = "Juan Jose";
-        String apellido = "cardona";
-        String password = "Colombia";
-        String correo = "juan@gmail.com";
-        long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
-
-        Assertions.assertEquals("La contraseña NO cuenta con las ecritura correcta",Assertions.assertThrows(ValorCaracteresExcepcion.class, () ->
-                Usuario.of(idUsuario, nombre,apellido,password,correo,idCargo,roles)
-        ).getMessage());
-    }
-
-    @Test
-    void validarCorreoNoCumple() {
-
-        long idUsuario = 1;
-        String nombre = "Juan Jose";
-        String apellido = "cardona";
-        String password = "Colombia22+";
-        String correo = "juan@";
-        long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
-
-        Assertions.assertEquals("El correo NO cuenta con las ecritura correcta",Assertions.assertThrows(ValorCaracteresExcepcion.class, () ->
-                Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
-        ).getMessage());
-    }
 
     @Test
     void validarCamposFaltantesNombre() {
 
+        long idPat = 1;
+        String nombre = "";
+        Integer fechaAnual = 2023;
+        LocalDate fechaRegistro = LocalDate.now();
+        Double procentaje = 0.0;
+        String proceso = "SERVICIOS_TI";
         long idUsuario = 1;
-        String nombre = null;
-        String apellido = "cardona";
-        String password = "Colombia";
-        String correo = "juan@gmail.com";
-        long idCargo = 1;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
 
-        Assertions.assertEquals("El nombre del usuario NO puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
-                Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
+
+        Assertions.assertEquals("El nombre del PAT NO puede estar vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
+                Pat.of(idPat,nombre,fechaAnual,fechaRegistro,procentaje,proceso,idUsuario)
         ).getMessage());
     }
 
     @Test
-    void validarCamposVaciosIdRol() {
+    void validarCamposVaciosIdUsuario() {
 
-        long idUsuario = 1;
-        String nombre = "";
-        String apellido = "cardona";
-        String password = "Colombia22+";
-        String correo = "juan@gmail.com";
-        long idCargo = 0;
-        List<Rol> roles = Arrays.asList(Rol.of(1l,"ADMIN"),Rol.of(2l,"LECTOR"));
+        long idPat = 1;
+        String nombre = "PAT";
+        Integer fechaAnual = 2023;
+        LocalDate fechaRegistro = LocalDate.now();
+        Double procentaje = 0.0;
+        String proceso = "SERVICIOS_TI";
+        long idUsuario = -1;
 
-        Assertions.assertEquals("El nombre del usuario NO puede ser vacío",Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
-                Usuario.of(idUsuario,nombre,apellido,password,correo,idCargo,roles)
+        Assertions.assertEquals("El usuario No puede ser vacío",Assertions.assertThrows(ValorNumeroExcepcion.class, () ->
+                Pat.of(idPat,nombre,fechaAnual,fechaRegistro,procentaje,proceso,idUsuario)
         ).getMessage());
     }
+    @Test
+    void validarFechaRegstroActual() {
 
- */
+        long idPat = 1;
+        String nombre = "PAT";
+        Integer fechaAnual = 2023;
+        LocalDate fechaRegistro = LocalDate.of(2023,9,3);
+        Double procentaje = 0.0;
+        String proceso = "SERVICIOS_TI";
+        long idUsuario = -1;
+
+        Assertions.assertEquals("La fecha de registro NO debe ser vacío",Assertions.assertThrows(ValidadorFecha.class, () ->
+                Pat.of(idPat,nombre,fechaAnual,fechaRegistro,procentaje,proceso,idUsuario)
+        ).getMessage());
+    }
 }

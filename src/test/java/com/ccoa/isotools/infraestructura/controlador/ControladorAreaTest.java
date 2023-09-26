@@ -43,7 +43,7 @@ class ControladorAreaTest {
 
     @Autowired
     RepositorioArea repositorioArea;
-    /*
+
     @Test
     @DisplayName("Debe crear un area de forma exitosa y luego fallar al crear el mismo")
     void crearDuplicadaTest() throws Exception {
@@ -57,7 +57,7 @@ class ControladorAreaTest {
 
         // act - assert
         mocMvc.perform(MockMvcRequestBuilders.
-                        post("/coca/areas")
+                        post("/ccoa/areas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization",token)
                         .content(objectMapper.writeValueAsString(dto))
@@ -105,7 +105,7 @@ class ControladorAreaTest {
         String token = obtenerToken();
         this.crear(dto, token);
 
-        mocMvc.perform(get("/api/clientes")
+        mocMvc.perform(get("/ccoa/areas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization",token)
                 )
@@ -115,15 +115,14 @@ class ControladorAreaTest {
 
     private String obtenerToken() throws Exception {
         DtoLogin login = new DtoLoginTestDataBuilder().build();
-        var resultLogin = mocMvc.perform(MockMvcRequestBuilders.post("/api/login")
+        var resultLogin = mocMvc.perform(MockMvcRequestBuilders.post("/ccoa/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(login))
                 )
                 .andExpect(status().isOk())
                 .andReturn();
 
+
         return (String) objectMapper.readValue(resultLogin.getResponse().getContentAsString(), DtoRespuesta.class).getValor();
     }
-
-     */
 }

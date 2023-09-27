@@ -40,7 +40,6 @@ public class ConfiguracionSeguridad {
                 .authorizeHttpRequests(auth ->
                         auth.
                                 requestMatchers("/ccoa/auth/**").permitAll().
-                                requestMatchers("/ccoa/**").hasRole("ADMIN").
                                 anyRequest().authenticated()
                 );
         //.oauth2Login(oauth -> oauth.loginProcessingUrl("/login"))
@@ -50,23 +49,6 @@ public class ConfiguracionSeguridad {
         return http.build();
     }
 
-
-    /*@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(Customizer.withDefaults());
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-        http
-                .authorizeHttpRequests(auth ->
-                        auth.
-                                requestMatchers("/ccoa/auth/**").permitAll().
-                                requestMatchers("/ccoa/**").hasRole("ADMIN").
-                                anyRequest().authenticated());
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }*/
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {

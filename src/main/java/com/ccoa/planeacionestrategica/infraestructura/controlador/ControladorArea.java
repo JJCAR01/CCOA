@@ -49,12 +49,12 @@ public class ControladorArea {
     }
 
     @DeleteMapping("/{codigo}")
-    public DtoRespuesta<Long> eliminar(@PathVariable Long codigo){
-        return this.servicioAplicacionEliminarArea.ejecutarEliminar(codigo);
+    public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarArea.ejecutarEliminar(codigo));
     }
 
     @PutMapping("/{codigo}")
-    public DtoRespuesta<Long> modificar(@RequestBody DtoArea area, @PathVariable Long codigo){
-        return this.servicioAplicacionModificarArea.ejecutarModificar(area,codigo);
+    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoArea area, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarArea.ejecutarModificar(area,codigo));
     }
 }

@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacion
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.ServicioAplicacionModificarPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +29,14 @@ public class ControladorPat {
         this.servicioAplicacionModificarPat = servicioAplicacionModificarPat;
     }
 
+    @Secured({"ROLE_OPERADOR"})
     @PostMapping
     public DtoRespuesta<Long> crear(@RequestBody DtoPat pat){
         return this.servicioAplicacionGuardarPat.ejecutar(pat);
     }
 
 
+    @Secured({"ROLE_OPERADOR"})
     @GetMapping
     public List<Pat> listar(){
         return this.servicioAplicacionListarPat.ejecutar();

@@ -6,6 +6,7 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadCargo;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.EntidadUsuarioRol;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.usuario.UsuarioRolId;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioCargoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioRolJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
@@ -75,7 +76,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long eliminar(Long id) {
-
+        this.repositorioRolJpa.deleteById(id);
         this.repositorioUsuarioJpa.deleteById(id);
         return id;
     }
@@ -103,50 +104,3 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         return id;
     }
 }
-
-    /*@Override
-
-
-
-
-
-
-
-
-
-    @Override
-    public Usuario consultar(String nombreUsuario, String password) {
-        /*EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByNombreUsuarioAndPassword(nombreUsuario, password);
-
-        if(entidadUsuario == null) {
-            return null;
-        }
-
-        //List<Rol> roles = entidadUsuario.getIdRol().stream().map(rol -> Rol.of(rol.getRol())).collect(Collectors.toList());
-        return Usuario.of(entidadUsuario.getNombreUsuario(),entidadUsuario.getNombre(), entidadUsuario.getApellido(), entidadUsuario.getPassword(),
-                entidadUsuario.getCorreo(),entidadUsuario.getIdCargo(),entidadUsuario.getIdRol());
-
-
-    }
-
-    @Override
-    public Long modificar(Usuario usuario, Long id) {
-
-        Optional<EntidadCargo> entidadCargo =this.repositorioCargoJpa.findById(usuario.getIdCargo());
-
-        repositorioUsuarioJpa.findById(id);
-        EntidadUsuario entidadUsuario = new EntidadUsuario();
-        entidadUsuario.setIdUsuario(id);
-        entidadUsuario.setNombre(usuario.getNombre());
-        entidadUsuario.setApellido(usuario.getApellido());
-        entidadUsuario.setPassword(usuario.getPassword());
-
-        entidadUsuario.setIdCargo(entidadCargo.get().getIdArea());
-
-        repositorioUsuarioJpa.save(entidadUsuario);
-        return id;
-    }
-
-}
-
-     */

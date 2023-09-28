@@ -5,7 +5,7 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.ActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DatoActividadPrincipal;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadprincipal.DetalleActividadPrincipal;
-import com.ccoa.planeacionestrategica.dominio.servicio.ServicioObtenerHoraActual;
+import com.ccoa.planeacionestrategica.dominio.servicio.transversal.ServicioObtenerHoraActual;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadprincipal.ServicioGuardarActividadPrincipal;
 import org.springframework.stereotype.Component;
 

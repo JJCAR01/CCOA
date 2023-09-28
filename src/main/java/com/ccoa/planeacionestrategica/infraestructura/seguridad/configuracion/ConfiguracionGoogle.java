@@ -1,11 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.configuracion;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
 public class ConfiguracionGoogle {
 
@@ -17,7 +11,6 @@ public class ConfiguracionGoogle {
         return ClientRegistration
                 .withRegistrationId("google")
                 .clientId("659612202917-95lnaql5oq526cg8cd18li7gksjlduap.apps.googleusercontent.com")
-                .clientSecret("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")
                 .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
                 .scope("openid", "profile", "email")
                 .authorizationUri("https://accounts.google.com/o/oauth2/auth")

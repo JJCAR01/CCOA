@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.puerto;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
 
-import java.text.ParseException;
 import java.util.List;
 
 public interface RepositorioPat {

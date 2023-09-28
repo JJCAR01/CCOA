@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.pat;
 
-import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
 import org.springframework.stereotype.Component;

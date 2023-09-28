@@ -3,9 +3,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.cargo;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoCargo;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
-
 import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioGuardarCargo;
 import org.springframework.stereotype.Component;
 

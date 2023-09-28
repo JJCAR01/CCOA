@@ -5,8 +5,6 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service

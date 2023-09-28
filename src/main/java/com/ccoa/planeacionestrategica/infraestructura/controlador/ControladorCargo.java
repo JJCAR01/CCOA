@@ -1,17 +1,11 @@
 package com.ccoa.planeacionestrategica.infraestructura.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoCargo;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionEliminarArea;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionGuardarArea;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionListarArea;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.area.ServicioAplicacionModificarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionEliminarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionGuardarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionListarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.ServicioAplicacionModificarCargo;
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
 import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import org.springframework.web.bind.annotation.*;
 

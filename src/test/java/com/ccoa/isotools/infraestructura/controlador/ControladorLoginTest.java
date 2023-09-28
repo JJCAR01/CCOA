@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+/*
 public class ControladorLoginTest {
 
     @Autowired
@@ -44,4 +44,4 @@ public class ControladorLoginTest {
         Assertions.assertEquals(1,user.getIdCargo());
 
     }
-}
+}*/

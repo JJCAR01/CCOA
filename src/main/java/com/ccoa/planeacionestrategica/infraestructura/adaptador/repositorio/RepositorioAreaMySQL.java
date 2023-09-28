@@ -49,7 +49,6 @@ public class    RepositorioAreaMySQL implements RepositorioArea{
     public Long modificar(Area area, Long id) {
         repositorioAreaJpa.findById(id);
         EntidadArea entidadArea = new EntidadArea();
-        entidadArea.setIdArea(id);
         entidadArea.setNombre(area.getNombre());
         repositorioAreaJpa.save(entidadArea);
         return id;

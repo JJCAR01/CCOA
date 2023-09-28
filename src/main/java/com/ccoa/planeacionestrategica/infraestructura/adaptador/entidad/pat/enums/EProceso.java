@@ -2,5 +2,5 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.pat.enu
 
 public enum EProceso {
 
-    INFRAESTRUCTURA,seguridad,SERVICIOS_TI
+    INFRAESTRUCTURA,SEGURIDAD,SERVICIOS_TI
 }

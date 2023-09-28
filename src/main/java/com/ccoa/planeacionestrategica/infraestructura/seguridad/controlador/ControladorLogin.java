@@ -4,17 +4,15 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.DtoLogin;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.AuthResponse;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/ccoa/auth")
@@ -35,8 +33,8 @@ public class ControladorLogin {
                 dtoLogin.getPassword());
         Authentication authentication = this.authenticationManager.authenticate(login);
 
-        System.out.println(authentication.isAuthenticated());
-        System.out.println(authentication.getPrincipal());
+        Logger.getLogger(String.valueOf(authentication.isAuthenticated()));
+        Logger.getLogger((String) authentication.getPrincipal());
 
         String jwt = this.jwtUtil.create(dtoLogin.getCorreo(),getTipo((List<GrantedAuthority>) authentication.getAuthorities()));
 

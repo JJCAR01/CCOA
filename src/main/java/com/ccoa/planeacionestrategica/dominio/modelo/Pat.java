@@ -4,9 +4,6 @@ import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDom
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Getter
 public class Pat {
 

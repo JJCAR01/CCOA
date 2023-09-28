@@ -11,13 +11,10 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.io.IOException;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -29,8 +26,21 @@ public class ConfiguracionSeguridad {
     public ConfiguracionSeguridad(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
-
     @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(Customizer.withDefaults());
+
+        http
+                .authorizeHttpRequests(auth ->
+                        auth.
+                                requestMatchers("/ccoa/**").permitAll());
+        http.httpBasic(Customizer.withDefaults());
+
+        return http.build();
+    }
+
+    /*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception   {
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(Customizer.withDefaults());
@@ -47,7 +57,7 @@ public class ConfiguracionSeguridad {
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
+    }*/
 
 
     @Bean
@@ -60,22 +70,7 @@ public class ConfiguracionSeguridad {
         return new BCryptPasswordEncoder();
     }
 
-    /*@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(Customizer.withDefaults());
 
-        http
-                .authorizeHttpRequests(auth ->
-                        auth.
-                                requestMatchers("/ccoa/auth/**").permitAll().
-                                requestMatchers("/ccoa/areas").hasAuthority("areas").
-                                requestMatchers("/ccoa/**").hasRole("ADMIN").
-                                anyRequest().authenticated());
-        http.httpBasic(Customizer.withDefaults());;
-
-        return http.build();
-    }
 
     /*@Bean
     public UserDetailsService memoryUsers(){

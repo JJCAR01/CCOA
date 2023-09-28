@@ -3,7 +3,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.pat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.modelo.*;
-import com.ccoa.planeacionestrategica.dominio.servicio.ServicioObtenerHoraActual;
+import com.ccoa.planeacionestrategica.dominio.servicio.transversal.ServicioObtenerHoraActual;
 import com.ccoa.planeacionestrategica.dominio.servicio.pat.ServicioGuardarPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.formateador.FormateadorHora;
 import org.springframework.stereotype.Component;

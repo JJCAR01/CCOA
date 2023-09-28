@@ -1,11 +1,9 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.formateador;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-@AllArgsConstructor
 @NoArgsConstructor
 public class FormateadorHora {
 

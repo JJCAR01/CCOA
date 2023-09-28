@@ -70,12 +70,10 @@ public class RepositorioActividadPrincipalMySQL implements RepositorioActividadP
 
         var entidadActividadPrincipal = new EntidadActividadPrincipal(actividadPrincipal.getNombre(), actividadPrincipal.getTipoActividad(),
                 actividadPrincipal.getEntregable(), actividadPrincipal.getPresupuesto());
-        var entidadDetalle = new EntidadDetalleActividadPrincipal(entidadLineaEstrategica.get().getIdLineaEstrategica(), entidadUsuario.get().getIdUsuario());
 
         var entidadDato = new EntidadDatoActividadPrincipal(FormateadorHora.obtenerFechaTexto(datoActividadPrincipal.getFechaInicio()),
                 FormateadorHora.obtenerFechaTexto(datoActividadPrincipal.getFechaFinal()),datoActividadPrincipal.getFechaRegistro());
         this.repositorioDatoActividadPrincipalJpa.save(entidadDato);
-        this.repositorioDetalleActividadPrincipalJpa.save(entidadDetalle);
         return this.repositorioActividadPrincipalJpa.save(entidadActividadPrincipal).getIdActividadPrincipal();
     }
 

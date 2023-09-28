@@ -19,7 +19,7 @@ public class UsuarioTest {
         long idUsuario = 1;
         String nombre = "Juan Jose";
         String apellido = "cardona";
-        String password = "Colombia10+";
+        String password = "Colombia22+";
         String correo = "juan@ccoa.org.co";
         long idCargo = 1;
         List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));

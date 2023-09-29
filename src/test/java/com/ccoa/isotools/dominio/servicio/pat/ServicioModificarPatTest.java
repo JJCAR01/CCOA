@@ -1,17 +1,14 @@
 package com.ccoa.isotools.dominio.servicio.pat;
 
-import com.ccoa.isotools.dominio.testdatabuilder.CargoTestDataBuilder;
 import com.ccoa.isotools.dominio.testdatabuilder.PatTestDataBuilder;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
-import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioModificarCargo;
 import com.ccoa.planeacionestrategica.dominio.servicio.pat.ServicioModificarPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioModificarPatTest {
+class ServicioModificarPatTest {
 
     @Test
     void verificarNoExistaPat()

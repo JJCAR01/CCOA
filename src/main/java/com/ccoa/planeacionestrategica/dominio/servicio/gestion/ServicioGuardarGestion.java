@@ -10,7 +10,7 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.validador.Valid
 @Service
 public class ServicioGuardarGestion {
 
-    private static final String MENSAJE_YA_EXISTE = "Ya existe el PAT con los datos ingresados";
+    private static final String MENSAJE_YA_EXISTE = "Ya existe la gestion del area con los datos ingresados";
 
     private final RepositorioGestion repositorioGestion;
 

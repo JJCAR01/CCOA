@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-public class PatTest {
+class PatTest {
 
     @Test
     void validarCreacionExitosa() {

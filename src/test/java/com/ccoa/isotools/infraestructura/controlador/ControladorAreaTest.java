@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 /*
@@ -71,7 +72,7 @@ class ControladorAreaTest {
 
         var dto = new DtoAreaTestDataBuilder().build();
 
-        String token = obtenerToken();
+        String token =  obtenerToken();
         crear(dto, token);
     }
 
@@ -105,7 +106,7 @@ class ControladorAreaTest {
         String token = obtenerToken();
         this.crear(dto, token);
 
-        mocMvc.perform(get("/ccoa/areas")
+        mocMvc.perform(post("/ccoa/areas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization",token)
                 )

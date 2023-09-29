@@ -1,10 +1,8 @@
 package com.ccoa.isotools.dominio.testdatabuilder;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class PatTestDataBuilder {
 

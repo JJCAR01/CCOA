@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioGuardarAreaTest {
+class ServicioGuardarAreaTest {
 
     @Test
     void siElNombreYaExisteDeberiaRetornarError() {
@@ -38,13 +38,13 @@ public class ServicioGuardarAreaTest {
         var repositorio = Mockito.mock(RepositorioArea.class);
         var servicio = new ServicioGuardarArea(repositorio);
 
-        Mockito.when(repositorio.guardar(Mockito.any(Area.class))).thenReturn(1l);
+        Mockito.when(repositorio.guardar(Mockito.any(Area.class))).thenReturn(1L);
         // act
         var id = servicio.ejecutarGuardar(area);
 
         // assert
         Mockito.verify(repositorio, Mockito.times(1)).guardar(area);
-        Assertions.assertEquals(1l, id);
+        Assertions.assertEquals(1L, id);
 
     }
 

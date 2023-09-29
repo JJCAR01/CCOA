@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.repositorio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.entidad.EntidadCargo;
@@ -18,7 +19,6 @@ import java.util.Optional;
 @Repository
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
-    private static final String MENSAJE_NO_EXISTE = "No existe algunos de los componentes con los datos ingresados";
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioCargoJpa repositorioCargoJpa;
     private final RepositorioRolJpa repositorioRolJpa;
@@ -80,8 +80,17 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public Usuario consultar(String nombreUsuario, String password) {
-        return null;
+    public Usuario consultar(String correo, String password) {
+        EntidadUsuario entidadUsuario = this.repositorioUsuarioJpa.findByCorreoAndPassword(correo, password);
+
+        if(entidadUsuario == null) {
+            return null;
+        }
+
+        List<Rol> roles = entidadUsuario.getRoles().stream().map(rol -> Rol.of(rol.getIdUsuario(), rol.getRol())).toList();
+
+        return Usuario.of(entidadUsuario.getIdUsuario(), entidadUsuario.getNombre(), entidadUsuario.getApellido(), entidadUsuario.getCorreo(), entidadUsuario.getPassword(),
+                entidadUsuario.getIdCargo(),roles);
     }
 
     @Override

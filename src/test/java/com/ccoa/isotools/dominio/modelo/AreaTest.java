@@ -5,7 +5,7 @@ import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorOblig
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AreaTest {
+class AreaTest {
 
     @Test
     void validarCreacionExitosa() {

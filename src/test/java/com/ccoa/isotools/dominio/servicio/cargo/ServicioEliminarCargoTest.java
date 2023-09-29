@@ -8,13 +8,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioEliminarCargoTest {
+class ServicioEliminarCargoTest {
 
     @Test
     void verificarCargoExista()
     {
-        var cargo = new CargoTestDataBuilder().build();
-
         var repositorio = Mockito.mock(RepositorioCargo.class);
         var servicio = new ServicioEliminarCargo(repositorio);
 

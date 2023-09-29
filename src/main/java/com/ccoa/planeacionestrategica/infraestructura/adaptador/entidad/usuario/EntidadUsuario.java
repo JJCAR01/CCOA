@@ -30,7 +30,6 @@ public class EntidadUsuario {
     @Column(unique = true, length = 100)
     private String correo;
 
-    @Column(length = 100)
     private String password;
 
     @Column(name = "cargo_id")
@@ -39,14 +38,6 @@ public class EntidadUsuario {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     private List<EntidadUsuarioRol> roles;
 
-    public EntidadUsuario(String nombre, String apellido, String correo, String password, Long idCargo, List<EntidadUsuarioRol> roles) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.correo = correo;
-        this.password = password;
-        this.idCargo = idCargo;
-        this.roles = roles;
-    }
     public EntidadUsuario(String nombre, String apellido, String correo, String password, Long idCargo) {
         this.nombre = nombre;
         this.apellido = apellido;

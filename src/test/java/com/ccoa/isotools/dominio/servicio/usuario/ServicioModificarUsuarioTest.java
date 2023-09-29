@@ -1,6 +1,6 @@
 package com.ccoa.isotools.dominio.servicio.usuario;
 
-import com.ccoa.isotools.dominio.testdatabuilder.usuario.UsuarioTestDataBuilder;
+import com.ccoa.isotools.dominio.testdatabuilder.UsuarioTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioModificarUsuario;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioModificarUsuarioTest {
+class ServicioModificarUsuarioTest {
 
     @Test
     void verificarNoExistaCargo()

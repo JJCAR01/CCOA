@@ -12,6 +12,6 @@ public interface RepositorioUsuario {
     Long guardar(Usuario usuario);
     boolean existe(Usuario usuario);
     Long eliminar(Long id);
-    Usuario consultar(String nombreUsuario, String password);
+    Usuario consultar(String correo, String password);
     Long modificar(Usuario usuario,Long id);
 }

@@ -76,8 +76,8 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     }
 
     @Override
-        public boolean existe(Tarea epica, InformacionTarea informacionEpica) {
-        return this.repositorioTareaJpa.findByNombre(epica.getNombre()) != null;
+        public boolean existe(Tarea tarea, InformacionTarea informacionEpica) {
+        return this.repositorioTareaJpa.findByNombre(tarea.getNombre()) != null;
     }
 
     @Override
@@ -88,11 +88,6 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
 
     @Override
     public Long modificar(Tarea tarea, Long id) {
-
-        /*Optional<EntidadUsuario> entidadUsuario = this.repositorioUsuarioJpa.findById(detallePrograma.getIdUsuario());
-        Optional<EntidadArea> entidadArea = this.repositorioAreaJpa.findById(detallePrograma.getIdArea());
-        Optional<EntidadImperativoEstrategico> entidadImperativoEstrategico = this.repositorioImperativoEstrategicoJpa.findById(detallePrograma.getIdImperativoEstrategico());
-        */
 
         repositorioTareaJpa.findById(id);
         EntidadTarea entidadTarea = new EntidadTarea();

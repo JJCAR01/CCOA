@@ -20,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity(securedEnabled = true)
 public class ConfiguracionSeguridad {
 
+    @Autowired
     private final JwtFilter jwtFilter;
 
     @Autowired
@@ -40,26 +41,6 @@ public class ConfiguracionSeguridad {
         return http.build();
     }
 
-    /*@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception   {
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(Customizer.withDefaults());
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-        http
-                .authorizeHttpRequests(auth ->
-                        auth.
-                                requestMatchers("/ccoa/auth/**").permitAll().
-                                anyRequest().authenticated()
-                );
-        //.oauth2Login(oauth -> oauth.loginProcessingUrl("/login"))
-        //http.oauth2Login(Customizer.withDefaults());
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }*/
-
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
@@ -70,16 +51,4 @@ public class ConfiguracionSeguridad {
         return new BCryptPasswordEncoder();
     }
 
-
-
-    /*@Bean
-    public UserDetailsService memoryUsers(){
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(admin);
-    }
-     */
 }

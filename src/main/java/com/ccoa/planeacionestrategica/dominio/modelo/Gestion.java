@@ -12,8 +12,8 @@ public class Gestion {
     private final String nombre;
     private final Long idPat;
     public static Gestion of(Long idGestion, String nombre, Long idPat){
-        ValidadorDominio.validarObligatorio(nombre,"El nombre del tipo de epica o gestion del rea no debe estar vacía");
-
+        ValidadorDominio.validarObligatorio(nombre,"El nombre de la gestion del area no debe estar vacía");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idPat,"El pat NO puede ser vacío");
         return new Gestion(idGestion, nombre,idPat);
     }
 

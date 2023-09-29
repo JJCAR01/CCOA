@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 @Service
 public class ServicioModificarGestion {
-    private static final String MENSAJE_NO_EXISTE = "No existe el PAT con los datos ingresados";
+    private static final String MENSAJE_NO_EXISTE = "No existe la gestion del area con los datos ingresados";
 
     private final RepositorioGestion repositorioGestion;
 

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class UsuarioTest {
+class UsuarioTest {
 
 
     @Test
@@ -19,8 +19,8 @@ public class UsuarioTest {
         long idUsuario = 1;
         String nombre = "Juan Jose";
         String apellido = "cardona";
-        String password = "Colombia22+";
-        String correo = "juan@ccoa.org.co";
+        String password = "Colombia2020+";
+        String correo = "juancardona@ccoa.org.co";
         long idCargo = 1;
         List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
@@ -28,8 +28,8 @@ public class UsuarioTest {
 
         Assertions.assertEquals("Juan Jose",usuario.getNombre());
         Assertions.assertEquals("cardona", usuario.getApellido());
-        Assertions.assertEquals("Colombia22+",usuario.getPassword());
-        Assertions.assertEquals("juan@ccoa.org.co", usuario.getCorreo());
+        Assertions.assertEquals("Colombia2020+",usuario.getPassword());
+        Assertions.assertEquals("juancardona@ccoa.org.co", usuario.getCorreo());
         Assertions.assertEquals(1,usuario.getIdCargo());
     }
 
@@ -40,7 +40,7 @@ public class UsuarioTest {
         String nombre = "Juan Jose";
         String apellido = "cardona";
         String password = "Colombia";
-        String correo = "juan@ccoa.org.co";
+        String correo = "juancardona@ccoa.org.co";
         long idCargo = 1;
         List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
@@ -55,7 +55,7 @@ public class UsuarioTest {
         long idUsuario = 1;
         String nombre = "Juan Jose";
         String apellido = "cardona";
-        String password = "Colombia22+";
+        String password = "Colombia2020+";
         String correo = "juan@";
         long idCargo = 1;
         List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
@@ -71,8 +71,8 @@ public class UsuarioTest {
         long idUsuario = 1;
         String nombre = null;
         String apellido = "cardona";
-        String password = "Colombia";
-        String correo = "juan@ccoa.org.co";
+        String password = "Colombia2020+";
+        String correo = "juancardona@ccoa.org.co";
         long idCargo = 1;
         List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 
@@ -87,8 +87,8 @@ public class UsuarioTest {
         long idUsuario = 1;
         String nombre = "";
         String apellido = "cardona";
-        String password = "Colombia22+";
-        String correo = "juan@ccoa.org.co";
+        String password = "Colombia2020+";
+        String correo = "juancardona@ccoa.org.co";
         long idCargo = 0;
         List<Rol> roles = Arrays.asList(Rol.of(1L,"ADMIN"),Rol.of(2L,"LECTOR"));
 

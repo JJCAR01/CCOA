@@ -1,6 +1,6 @@
 package com.ccoa.isotools.dominio.servicio.usuario;
 
-import com.ccoa.isotools.dominio.testdatabuilder.usuario.UsuarioTestDataBuilder;
+import com.ccoa.isotools.dominio.testdatabuilder.UsuarioTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioGuardarUsuario;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioGuardarUsuarioTest {
+class ServicioGuardarUsuarioTest {
 
     @Test
     void siElNombreYaExisteDeberiaRetornarError() {
@@ -38,13 +38,13 @@ public class ServicioGuardarUsuarioTest {
         var repositorio = Mockito.mock(RepositorioUsuario.class);
         var servicio = new ServicioGuardarUsuario(repositorio);
 
-        Mockito.when(repositorio.guardar(Mockito.any(Usuario.class))).thenReturn(1l);
+        Mockito.when(repositorio.guardar(Mockito.any(Usuario.class))).thenReturn(1L);
         // act
         var id = servicio.ejecutarGuardar(usuario);
 
         // assert
         Mockito.verify(repositorio, Mockito.times(1)).guardar(usuario);
-        Assertions.assertEquals(1l, id);
+        Assertions.assertEquals(1L, id);
 
     }
 

@@ -8,7 +8,7 @@ public class AreaTestDataBuilder {
     private String nombre;
 
     public AreaTestDataBuilder() {
-        this.idArea = 1l;
+        this.idArea = 1L;
         this.nombre = "TI";
     }
 

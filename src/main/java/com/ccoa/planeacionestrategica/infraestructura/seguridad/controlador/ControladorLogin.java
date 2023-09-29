@@ -12,7 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/ccoa/auth")
@@ -32,9 +31,6 @@ public class ControladorLogin {
         UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(dtoLogin.getCorreo(),
                 dtoLogin.getPassword());
         Authentication authentication = this.authenticationManager.authenticate(login);
-
-        Logger.getLogger(String.valueOf(authentication.isAuthenticated()));
-        Logger.getLogger((String) authentication.getPrincipal());
 
         String jwt = this.jwtUtil.create(dtoLogin.getCorreo(),getTipo((List<GrantedAuthority>) authentication.getAuthorities()));
 

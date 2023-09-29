@@ -1,19 +1,15 @@
 package com.ccoa.isotools.dominio.servicio.pat;
 
-import com.ccoa.isotools.dominio.testdatabuilder.CargoTestDataBuilder;
 import com.ccoa.isotools.dominio.testdatabuilder.PatTestDataBuilder;
-import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
-import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioGuardarCargo;
 import com.ccoa.planeacionestrategica.dominio.servicio.pat.ServicioGuardarPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioGuardarPatTest {
+class ServicioGuardarPatTest {
 
     @Test
     void siElIdYaExisteDeberiaRetornarError() {
@@ -42,13 +38,13 @@ public class ServicioGuardarPatTest {
         var repositorio = Mockito.mock(RepositorioPat.class);
         var servicio = new ServicioGuardarPat(repositorio);
 
-        Mockito.when(repositorio.guardar(Mockito.any(Pat.class))).thenReturn(1l);
+        Mockito.when(repositorio.guardar(Mockito.any(Pat.class))).thenReturn(1L);
         // act
         var id = servicio.ejecutarGuardar(pat);
 
         // assert
         Mockito.verify(repositorio, Mockito.times(1)).guardar(pat);
-        Assertions.assertEquals(1l, id);
+        Assertions.assertEquals(1L, id);
 
     }
 }

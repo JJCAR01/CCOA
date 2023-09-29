@@ -4,12 +4,12 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.DtoLogin;
 
 public class DtoLoginTestDataBuilder {
 
-    private String correo;
-    private String password;
+    private final String correo;
+    private final String password;
 
     public DtoLoginTestDataBuilder() {
-        this.correo = "juan@ccoa.org.co";
-        this.password = "Colombia10+";
+        this.correo = "juancardona@ccoa.org.co";
+        this.password = "Colombia2020+";
     }
 
     public DtoLogin build() {

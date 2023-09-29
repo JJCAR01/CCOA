@@ -1,4 +1,4 @@
-package com.ccoa.isotools.dominio.testdatabuilder.usuario;
+package com.ccoa.isotools.dominio.testdatabuilder;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
@@ -19,8 +19,8 @@ public class UsuarioTestDataBuilder {
         this.idUsuario = 1;
         this.nombre = "Juan Jose";
         this.apellido = "cardona";
-        this.password = "Colombia10+";
-        this.correo = "juan@ccoa.org.co";
+        this.password = "Colombia2020+";
+        this.correo = "juancardona@ccoa.org.co";
         this.idCargo = 1;
         this.roles = List.of(Rol.of(1l,"ADMIN"));
     }

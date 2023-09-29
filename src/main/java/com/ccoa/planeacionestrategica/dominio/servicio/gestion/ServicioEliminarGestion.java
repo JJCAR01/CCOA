@@ -9,7 +9,7 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.validador.Valid
 @Service
 public class ServicioEliminarGestion {
 
-    private static final String MENSAJE_YA_EXISTE = "No existe el PAT con los datos ingresados";
+    private static final String MENSAJE_YA_EXISTE = "No existe la Gestion del area con los datos ingresados";
 
     private final RepositorioGestion repositorioGestion;
 

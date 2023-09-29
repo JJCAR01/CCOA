@@ -9,13 +9,12 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.gestion.ServicioAplica
 import com.ccoa.planeacionestrategica.aplicacion.servicio.gestion.ServicioAplicacionModificarGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.Gestion;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/ccoa/gestion")
+@RequestMapping("/ccoa/gestiones")
 public class ControladorGestion {
 
     private final ServicioAplicacionEliminarGestion servicioAplicacionEliminarGestion;
@@ -31,10 +30,9 @@ public class ControladorGestion {
         this.servicioAplicacionModificarGestion = servicioAplicacionModificarGestion;
     }
 
-    @Secured({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoGestion gestion){
-        return ResponseEntity.ok(this.servicioAplicacionGuardarGestion.ejecutar(gestion));
+            return ResponseEntity.ok(this.servicioAplicacionGuardarGestion.ejecutar(gestion));
     }
     @GetMapping
     public List<Gestion> listar(){

@@ -38,16 +38,13 @@ public class RepositorioGestionMySQL implements RepositorioGestion {
     @Override
     public Long guardar(Gestion gestion) {
         Optional<EntidadPat> entidadPat = this.repositorioPatJpa.findById(gestion.getIdPat());
-
-
-        EntidadGestion entidadGestion = new EntidadGestion(gestion.getIdGestion(), gestion.getNombre(), entidadPat.get().getIdPat());
-
-        return this.repositorioGestionJpa.save(entidadGestion).getIdPat();
+        EntidadGestion entidadGestion = new EntidadGestion(gestion.getNombre(), entidadPat.get().getIdPat());
+        return this.repositorioGestionJpa.save(entidadGestion).getIdGestion();
     }
 
     @Override
     public boolean existe(Gestion gestion) {
-        return this.repositorioGestionJpa.findById(gestion.getIdGestion()) != null;
+        return this.repositorioGestionJpa.findById(gestion.getIdPat()).isPresent();
     }
 
     @Override

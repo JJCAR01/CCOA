@@ -35,7 +35,8 @@ public class ConfiguracionSeguridad {
         http
                 .authorizeHttpRequests(auth ->
                         auth.
-                                requestMatchers("/ccoa/**").permitAll());
+                                requestMatchers("/ccoa/**").permitAll()
+                                .anyRequest().authenticated());
         http.httpBasic(Customizer.withDefaults());
 
         return http.build();

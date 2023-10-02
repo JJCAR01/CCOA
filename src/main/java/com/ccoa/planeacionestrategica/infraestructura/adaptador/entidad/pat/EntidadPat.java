@@ -13,10 +13,6 @@ import java.time.LocalDate;
 @Table(name = "pat")
 public class EntidadPat {
 
-    public static final String SEGURIDAD = "Seguridad";
-    public static final String INFRAESTRUCTURA = "Infraestructura";
-    public static final String SERVICIOS_TI = "Servicios TI";
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_pat")

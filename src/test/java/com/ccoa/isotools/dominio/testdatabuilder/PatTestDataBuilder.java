@@ -1,6 +1,7 @@
 package com.ccoa.isotools.dominio.testdatabuilder;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.enums.EProceso;
 
 import java.time.LocalDate;
 
@@ -25,6 +26,6 @@ public class PatTestDataBuilder {
     }
 
     public Pat build() {
-        return Pat.of(idPat,nombre,fechaAnual,fechaRegistro,porcentaje,proceso,idUsuario);
+        return Pat.of(idPat,nombre,fechaAnual,fechaRegistro,porcentaje, EProceso.valueOf(proceso),idUsuario);
     }
 }

@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.modelo;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.enums.EProceso;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -13,11 +14,11 @@ public class Pat {
     private final Integer fechaAnual;
     private final LocalDate fechaRegistro;
     private final Double porcentaje;
-    private final String proceso;
+    private final EProceso proceso;
     private final Long idUsuario;
 
     public static Pat of(Long idPat,String nombre,Integer fechaAnual,LocalDate fechaRegistro,
-                         Double porcentaje,String proceso, Long idUsuario ){
+                         Double porcentaje,EProceso proceso, Long idUsuario ){
         ValidadorDominio.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
         ValidadorDominio.validadorNumeroEnteroYMayorACero(fechaAnual,"El dato fecha de inicio NO puede estar vacío");
         ValidadorDominio.siEsFechaActualRegistrada(fechaRegistro,"La fecha de registro NO debe ser vacío");
@@ -27,11 +28,8 @@ public class Pat {
         return new Pat(idPat, nombre,fechaAnual, fechaRegistro,porcentaje,proceso,idUsuario);
     }
 
-    public static Pat listar(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, String proceso, Long idUsuario){
-        return new Pat(idPat, nombre,fechaAnual, fechaRegistro,porcentaje,proceso,idUsuario);
-    }
 
-    public Pat(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, String proceso, Long idUsuario) {
+    public Pat(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, EProceso proceso, Long idUsuario) {
         this.idPat = idPat;
         this.nombre = nombre;
         this.fechaAnual = fechaAnual;

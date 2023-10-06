@@ -8,10 +8,11 @@ public interface RepositorioGestion {
 
     List<Gestion> listar();
     Gestion consultarPorId(Long id);
+    List<Gestion> consultarPorIdPat(Long idPat);
     Long guardar(Gestion gestion);
     boolean existe(Gestion gestion);
     Long eliminar(Long id);
-    Long modificar(Gestion gestion,Long id);
+    Long modificar(Gestion gestion, Long id);
 }
 
 

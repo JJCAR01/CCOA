@@ -11,7 +11,7 @@ public class ValidadorDominio {
     private ValidadorDominio() {
     }
 
-    private static final String PATRON_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
+    private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
     private static final String PATRON_CORREO = "^[a-zA-Z]+@ccoa\\.org\\.co$";
 
     private static final String CAMPO_OBLIGATORIO = "El campo %s es obligatorio.";
@@ -91,7 +91,7 @@ public class ValidadorDominio {
 
     public static void validadorCaracteresEspecialesPassword(String password, String mensaje)
     {
-        if(!aceptacionPatron(password, PATRON_PASSWORD))
+        if(!aceptacionPatron(password, PATRON_CLAVE))
         {
             throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
         }

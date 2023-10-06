@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto;
 
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.enums.EProceso;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class DtoPat {
     private LocalDate fechaAnual;
     private LocalDate fechaRegistro;
     private Double porcentaje;
-    private String proceso;
+    private EProceso proceso;
     private Long idUsuario;
 
 }

@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.modelo;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Getter;
-
 @Getter
 public class Gestion {
 
@@ -13,7 +12,7 @@ public class Gestion {
     private final Long idPat;
     public static Gestion of(Long idGestion, String nombre, Long idPat){
         ValidadorDominio.validarObligatorio(nombre,"El nombre de la gestion del area no debe estar vacía");
-        ValidadorDominio.validadorNumeroLongYMayorACero(idPat,"El pat NO puede ser vacío");
+        ValidadorDominio.validadorNumeroLongYMayorACero(idPat,"El Pat NO puede ser vacío");
         return new Gestion(idGestion, nombre,idPat);
     }
 

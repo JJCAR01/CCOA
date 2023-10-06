@@ -11,16 +11,12 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.validador.Valid
 public class ServicioGuardarCargo {
 
     private static final String MENSAJE_YA_EXISTE = "Ya existe el Cargo con los datos ingresados";
-
     private final RepositorioCargo repositorioCargo;
 
     public ServicioGuardarCargo(RepositorioCargo repositorioCargo) {
         this.repositorioCargo = repositorioCargo;
     }
-
     public Long ejecutarGuardar(Cargo cargo){
-
         if(this.repositorioCargo.existe(cargo)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
-
         return this.repositorioCargo.guardar(cargo);}
 }

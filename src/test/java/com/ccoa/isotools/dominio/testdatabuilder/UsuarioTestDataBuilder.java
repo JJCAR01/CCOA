@@ -7,13 +7,13 @@ import java.util.List;
 
 public class UsuarioTestDataBuilder {
 
-    private long idUsuario;
-    private  String nombre;
-    private  String apellido;
-    private  String password;
-    private  String correo;
-    private  long idCargo;
-    private  List<Rol> roles;
+    private final long idUsuario;
+    private final String nombre;
+    private final String apellido;
+    private final String password;
+    private final String correo;
+    private final long idCargo;
+    private final List<Rol> roles;
 
     public UsuarioTestDataBuilder() {
         this.idUsuario = 1;
@@ -22,42 +22,7 @@ public class UsuarioTestDataBuilder {
         this.password = "Colombia2020+";
         this.correo = "juancardona@ccoa.org.co";
         this.idCargo = 1;
-        this.roles = List.of(Rol.of(1l,"ADMIN"));
-    }
-
-    public UsuarioTestDataBuilder conIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-        return this;
-    }
-
-    public UsuarioTestDataBuilder conNombre(String nombre) {
-        this.nombre = nombre;
-        return this;
-    }
-
-    public UsuarioTestDataBuilder conApellido(String apellido) {
-        this.apellido = apellido;
-        return this;
-    }
-
-    public UsuarioTestDataBuilder conPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public UsuarioTestDataBuilder conCorreo(String correo) {
-        this.correo = correo;
-        return this;
-    }
-
-    public UsuarioTestDataBuilder conIdCargo(Long idCargo) {
-        this.idCargo = idCargo;
-        return this;
-    }
-
-    public UsuarioTestDataBuilder conIdRol(List<Rol> roles) {
-        this.roles = roles;
-        return this;
+        this.roles = List.of(Rol.of(1L,"ADMIN"));
     }
 
     public Usuario build() {

@@ -10,14 +10,14 @@ public class Rol {
 
     //Clase de de asignacion de atributos y se validan entradas
     private final Long idRol;
-    private final String rol;
+    private final String nombre;
 
-    public static Rol of(Long idRol,String rol) {
-        return new Rol(idRol,rol);
+    public static Rol of(Long idRol,String nombre) {
+        return new Rol(idRol,nombre);
     }
 
-    public Rol(Long idRol, String rol) {
+    public Rol(Long idRol, String nombre) {
         this.idRol = idRol;
-        this.rol = rol;
+        this.nombre = nombre;
     }
 }

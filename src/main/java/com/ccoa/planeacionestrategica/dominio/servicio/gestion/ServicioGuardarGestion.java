@@ -11,17 +11,13 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.validador.Valid
 public class ServicioGuardarGestion {
 
     private static final String MENSAJE_YA_EXISTE = "Ya existe la gestion del area con los datos ingresados";
-
     private final RepositorioGestion repositorioGestion;
-
     public ServicioGuardarGestion(RepositorioGestion repositorioGestion) {
         this.repositorioGestion = repositorioGestion;
     }
 
     public Long ejecutarGuardar(Gestion gestion) {
-
         if(this.repositorioGestion.existe(gestion)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
-
         return this.repositorioGestion.guardar(gestion);
     }
 

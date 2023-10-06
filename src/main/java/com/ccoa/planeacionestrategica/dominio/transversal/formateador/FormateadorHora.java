@@ -1,11 +1,12 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.formateador;
 
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-@NoArgsConstructor
 public class FormateadorHora {
+    private FormateadorHora() {
+
+    }
 
     public static final String DD_MM_YYYY = "yyyy/MM/dd";
 

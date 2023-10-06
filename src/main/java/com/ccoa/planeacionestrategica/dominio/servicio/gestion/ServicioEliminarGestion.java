@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.gestion;
 
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioGestion;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
@@ -19,7 +19,7 @@ public class ServicioEliminarGestion {
 
     public Long ejecutarEliminar(Long id){
 
-        if(this.repositorioGestion.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioGestion.consultarPorId(id)== null) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
 
         return this.repositorioGestion.eliminar(id);
     }

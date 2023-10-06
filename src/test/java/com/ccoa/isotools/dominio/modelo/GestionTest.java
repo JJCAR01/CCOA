@@ -41,7 +41,7 @@ class GestionTest {
         String nombre= "Tec 1";
         long idPat = -1;
 
-        Assertions.assertEquals("El pat NO puede ser vacío",Assertions.assertThrows(ValorNumeroExcepcion.class, () ->
+        Assertions.assertEquals("El Pat NO puede ser vacío",Assertions.assertThrows(ValorNumeroExcepcion.class, () ->
                 Gestion.of( idGestion,nombre,idPat)
         ).getMessage());
     }

@@ -4,7 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoEpicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.epica.Epica;
 import com.ccoa.planeacionestrategica.dominio.modelo.epica.InformacionEpica;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioEpica;
-import com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.adaptador.entidad.EntidadEpica;
+import com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.adaptador.entidad.EntidadInformacionEpica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.adaptador.mapeador.MapeadorEpica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.adaptador.mapeador.MapeadorInformacionEpica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.adaptador.repositorio.jpa.RepositorioEpicaJpa;
@@ -28,8 +28,7 @@ public class RepositorioEpicaMySQL implements RepositorioEpica {
     @Override
     public List<DtoEpicaResumen> listar() {
         var entidad = this.repositorioEpicaJpa.findAll();
-        var entidaInfo = this.repositorioInformacionEpicaJpa.findAll();
-        return this.mapeadorEpica.mapearAListaDto(entidad,entidaInfo);
+        return this.mapeadorEpica.listarDominio(entidad);
     }
 
 
@@ -44,8 +43,8 @@ public class RepositorioEpicaMySQL implements RepositorioEpica {
     public Long guardar(Epica epica, InformacionEpica informacionEpica) {
         var epicaEntidad = this.mapeadorEpica.mapeadorEntidad(epica);
         var informacionGestionEntidad = this.mapeadorInformacionEpica.mapeadorEntidad(informacionEpica);
-        Long idInformacionEpica = this.repositorioInformacionEpicaJpa.save(informacionGestionEntidad).getIdInformacionEpica();
-        epicaEntidad.setIdEpica(idInformacionEpica);
+        var id = this.repositorioInformacionEpicaJpa.save(informacionGestionEntidad).getIdInformacionEpica();
+        epicaEntidad.setIdInformacionEpica(id);
         return this.repositorioEpicaJpa.save(epicaEntidad).getIdEpica();
     }
 
@@ -69,8 +68,8 @@ public class RepositorioEpicaMySQL implements RepositorioEpica {
     }
 
     @Override
-    public List<Epica> consultarPorIdPat(Long idPat) {
-        List<EntidadEpica> entidades = this.repositorioEpicaJpa.findByIdPat(idPat);
-        return this.mapeadorEpica.listarDominio(entidades);
+    public List<DtoEpicaResumen> consultarPorIdPat(Long idPat) {
+        List<EntidadInformacionEpica> entidades = this.repositorioInformacionEpicaJpa.findByIdPat(idPat);
+        return this.mapeadorInformacionEpica.listaDominioPorPat(entidades);
     }
 }

@@ -15,31 +15,28 @@ public class Epica {
     private final LocalDate fechaInicial;
     private final LocalDate fechaFinal;
     private final LocalDate fechaRegistro;
-    private final Long idUsuario;
-    private final Long idPat;
+    private final Long idInformacionEpica;
 
 
 
-    public static Epica of(Long idEpica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro, Long idUsuario, Long idPat){
+    public static Epica of(Long idEpica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro, Long idInformacionEpica){
         ValidadorDominio.validarObligatorio(nombre,"El Nombre de la Epica NO puede estar vacía");
         ValidadorDominio.validarObligatorioTipoDato(fechaInicial,"La fecha de inicio del epica NO debe estar vacía");
         ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,"La fecha inicial no puede ser mayor a la fecha final");
         ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"La fecha final del epica NO debe estar vacía");
         ValidadorDominio.validarObjeto(fechaRegistro,"La fecha de registro del epica NO debe estar vacía");
-        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,"El Usuario NO puede estar vacío");
-        ValidadorDominio.validadorNumeroLongYMayorACero(idPat,"El Pat NO puede estar vacío");
 
-        return new Epica(idEpica, nombre,fechaInicial,fechaFinal,fechaRegistro,idUsuario,idPat);
+        return new Epica(idEpica, nombre,fechaInicial,fechaFinal,fechaRegistro,idInformacionEpica);
     }
 
 
-    public Epica(Long idEpica, String nombre, LocalDate fechaInicio, LocalDate fechaFinal, LocalDate fechaRegistro, Long idUsuario, Long idPat) {
+    public Epica(Long idEpica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro, Long idInformacionEpica) {
         this.idEpica = idEpica;
         this.nombre = nombre;
-        this.fechaInicial = fechaInicio;
+        this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-        this.idUsuario = idUsuario;
-        this.idPat = idPat;
+        this.idInformacionEpica = idInformacionEpica;
+
     }
 }

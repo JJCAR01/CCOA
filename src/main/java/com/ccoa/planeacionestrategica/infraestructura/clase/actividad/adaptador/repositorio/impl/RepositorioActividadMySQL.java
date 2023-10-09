@@ -43,8 +43,8 @@ public class RepositorioActividadMySQL implements RepositorioActividad {
     public Long guardar(Actividad actividad, InformacionActividad informacionActividad) {
         var actividadEntidad = this.mapeadorActividad.mapeadorEntidad(actividad);
         var informacionActividadEntidad = this.mapeadorInformacionActividad.mapeadorEntidad(informacionActividad);
-        this.repositorioInformacionActividadJpa.save(informacionActividadEntidad);
-        actividadEntidad.setIdInformacionActividad(informacionActividad.getIdInformacionActividad());
+        var id = this.repositorioInformacionActividadJpa.save(informacionActividadEntidad).getIdInformacionActividad();
+        actividadEntidad.setIdInformacionActividad(id);
         return this.repositorioActividadJpa.save(actividadEntidad).getIdActividad();
     }
 

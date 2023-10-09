@@ -17,6 +17,11 @@ public class DtoEpica {
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
     private LocalDate fechaRegistro;
+    private Long idInformacionEpica;
+    private Integer duracion;
+    private Integer diasRestantes;
+    private Boolean estado;
+    private Double avance;
     private Long idUsuario;
     private Long idPat;
 }

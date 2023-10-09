@@ -15,6 +15,6 @@ public class MapeadorAplicacionEpica implements MapeadorAplicacion<DtoEpica, Epi
     @Override
     public Epica mapeadorAplicacion(DtoEpica dto) {
         return new Epica(dto.getIdEpica(), dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()),
-                dto.getIdUsuario(), dto.getIdPat());
+                dto.getIdInformacionEpica());
     }
 }

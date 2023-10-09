@@ -30,18 +30,14 @@ public class EntidadEpica {
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
-    @JoinColumn(name = "id_usuario")
-    private Long idUsuario;
+    @JoinColumn(name = "id_informacion_epica")
+    private Long idInformacionEpica;
 
-    @JoinColumn(name = "id_pat")
-    private Long idPat;
-
-    public EntidadEpica(String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro, Long idUsuario, Long idPat) {
+    public EntidadEpica(String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro, Long idInformacionEpica) {
         this.nombre = nombre;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-        this.idUsuario = idUsuario;
-        this.idPat = idPat;
+        this.idInformacionEpica = idInformacionEpica;
     }
 }

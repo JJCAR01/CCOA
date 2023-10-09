@@ -4,10 +4,8 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.adaptad
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface RepositorioEpicaJpa extends JpaRepository<EntidadEpica,Long> {
     EntidadEpica findByNombre(String nombre);
-    List<EntidadEpica> findByIdPat(Long idPat);
+    EntidadEpica findByIdInformacionEpica(Long idInformacionEpica);
 }

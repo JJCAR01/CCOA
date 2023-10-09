@@ -46,8 +46,6 @@ public class MapeadorActividad implements MapeadorInfraestructura<EntidadActivid
 
             listaDto.add(dto);
         }
-
         return listaDto;
-
     }
 }

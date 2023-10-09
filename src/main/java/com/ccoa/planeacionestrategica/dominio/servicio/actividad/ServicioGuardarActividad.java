@@ -3,10 +3,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.actividad;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividad.Actividad;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividad.InformacionActividad;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividad;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
-
-import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarActividad {

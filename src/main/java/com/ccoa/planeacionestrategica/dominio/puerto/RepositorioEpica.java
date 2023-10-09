@@ -13,5 +13,5 @@ public interface RepositorioEpica{
     boolean existe(Epica epica);
     Long eliminar(Long id);
     Long modificar(Epica epica , Long id);
-    List<Epica> consultarPorIdPat(Long idPat);
+    List<DtoEpicaResumen> consultarPorIdPat(Long idPat);
 }

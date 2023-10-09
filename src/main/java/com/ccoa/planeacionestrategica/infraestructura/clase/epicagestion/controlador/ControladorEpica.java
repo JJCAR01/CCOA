@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.epicagestion.contro
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.epica.DtoEpica;
-import com.ccoa.planeacionestrategica.aplicacion.dto.epica.DtoInformacionEpica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.epica.servicio.ServicioAplicacionEliminarEpica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.epica.servicio.ServicioAplicacionGuardarEpica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.epica.servicio.ServicioAplicacionListarEpica;
@@ -31,8 +30,8 @@ public class ControladorEpica {
     }
 
     @PostMapping
-    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoEpica epica, DtoInformacionEpica informacionEpica){
-        return ResponseEntity.ok(this.servicioAplicacionGuardarEpica.ejecutar(epica,informacionEpica));
+    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoEpica epica){
+        return ResponseEntity.ok(this.servicioAplicacionGuardarEpica.ejecutar(epica));
     }
 
     @GetMapping
@@ -45,7 +44,7 @@ public class ControladorEpica {
         return ResponseEntity.ok(this.servicioAplicacionListarEpica.consultarById(codigo));
     }
     @GetMapping("/pat/{codigo}")
-    public ResponseEntity<List<Epica>> listarPorPat(@PathVariable Long codigo){
+    public ResponseEntity<List<DtoEpicaResumen>> listarPorPat(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionListarEpica.consultarByIdpat(codigo));
     }
 

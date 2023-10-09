@@ -20,5 +20,5 @@ public class ServicioAplicacionListarEpica {
 
     public Epica consultarById(Long id){return this.repositorioEpica.consultarPorId(id);}
 
-    public List<Epica> consultarByIdpat(Long id){return this.repositorioEpica.consultarPorIdPat(id);}
+    public List<DtoEpicaResumen> consultarByIdpat(Long id){return this.repositorioEpica.consultarPorIdPat(id);}
 }

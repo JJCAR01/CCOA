@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.epica.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.epica.DtoEpica;
-import com.ccoa.planeacionestrategica.aplicacion.dto.epica.DtoInformacionEpica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.epica.mapeador.MapeadorAplicacionEpica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.epica.mapeador.MapeadorAplicacionInformacionEpica;
 import com.ccoa.planeacionestrategica.dominio.servicio.epica.ServicioGuardarEpica;
@@ -21,9 +20,9 @@ public class ServicioAplicacionGuardarEpica {
     }
 
 
-    public DtoRespuesta<Long> ejecutar(DtoEpica dto, DtoInformacionEpica dtoInfo){
+    public DtoRespuesta<Long> ejecutar(DtoEpica dto){
         var epica = this.mapeadorAplicacionEpica.mapeadorAplicacion(dto);
-        var informacionEpica = this.mapeadorAplicacionInformacionEpica.mapeadorAplicacion(dtoInfo);
+        var informacionEpica = this.mapeadorAplicacionInformacionEpica.mapeadorAplicacion(dto);
 
         return new DtoRespuesta<>(this.servicioGuardarEpica.ejecutarGuardar(epica,informacionEpica));
     }

@@ -24,11 +24,19 @@ public class EntidadInformacionEpica {
     private Boolean estado;
     private Double avance;
 
+    @JoinColumn(name = "id_usuario")
+    private Long idUsuario;
 
-    public EntidadInformacionEpica(Integer duracion, Integer diasRestantes, Boolean estado, Double avance) {
+    @JoinColumn(name = "id_pat")
+    private Long idPat;
+
+
+    public EntidadInformacionEpica(Integer duracion, Integer diasRestantes, Boolean estado, Double avance, Long idUsuario, Long idPat) {
         this.duracion = duracion;
         this.diasRestantes = diasRestantes;
         this.estado = estado;
         this.avance = avance;
+        this.idUsuario = idUsuario;
+        this.idPat = idPat;
     }
 }

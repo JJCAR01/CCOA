@@ -8,12 +8,14 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.JWT_KEY;
+import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.CLAVE;
 
 @Component
 public class JwtUtil {
 
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(JWT_KEY);
+
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(   CLAVE);
+
 
     public String create(String username,String type){
         return JWT.create()

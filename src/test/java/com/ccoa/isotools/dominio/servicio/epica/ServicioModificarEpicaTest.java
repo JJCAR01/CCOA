@@ -2,7 +2,7 @@ package com.ccoa.isotools.dominio.servicio.epica;
 
 import com.ccoa.isotools.dominio.testdatabuilder.tarea.EpicaTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioEpica;
-import com.ccoa.planeacionestrategica.dominio.servicio.epica.ServicioModificarEpica;
+import com.ccoa.planeacionestrategica.dominio.servicio.actividadestrategica.ServicioModificarEpica;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package com.ccoa.isotools.dominio.testdatabuilder.tarea;
 
 
-import com.ccoa.planeacionestrategica.dominio.modelo.epica.Epica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.Epica;
 
 import java.time.LocalDate;
 

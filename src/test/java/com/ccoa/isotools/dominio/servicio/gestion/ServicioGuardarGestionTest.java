@@ -3,7 +3,7 @@ package com.ccoa.isotools.dominio.servicio.gestion;
 import com.ccoa.isotools.dominio.testdatabuilder.GestionTestDataBuilder;
 import com.ccoa.planeacionestrategica.dominio.modelo.Gestion;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioGestion;
-import com.ccoa.planeacionestrategica.dominio.servicio.gestion.ServicioGuardarGestion;
+import com.ccoa.planeacionestrategica.dominio.servicio.actividadgestion.ServicioGuardarGestion;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

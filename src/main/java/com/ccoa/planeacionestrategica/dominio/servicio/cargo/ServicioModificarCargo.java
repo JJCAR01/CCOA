@@ -19,9 +19,7 @@ public class ServicioModificarCargo {
     }
 
     public Long ejecutarModificar(Cargo cargo, Long codigo){
-
         if(this.repositorioCargo.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_NO_EXISTE,MENSAJE_DEFECTO);
-
         return this.repositorioCargo.modificar(cargo,codigo);
     }
 }

@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.adaptador.MapeadorAplicacionUsuario;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioGuardarUsuario;
-import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.mapeador.MapeadorUsuario;
 import org.springframework.stereotype.Component;
 
 @Component

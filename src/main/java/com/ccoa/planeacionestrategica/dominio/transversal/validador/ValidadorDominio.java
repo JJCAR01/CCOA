@@ -31,11 +31,10 @@ public class ValidadorDominio {
     }
 
     public static void validarObligatorioTipoDato(LocalDate valor, String mensajeTecnico) {
-        if(valor == null) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico,MENSAJE_DEFECTO);
+        if (valor == null) {
+            throw new ValorObligatorioExcepcion(mensajeTecnico, MENSAJE_DEFECTO);
         }
     }
-
 
     public static void validadorNoVacio(List<? extends Object> lista, String mensajeTecnico) {
         if(lista == null  || lista.isEmpty()) {
@@ -51,13 +50,6 @@ public class ValidadorDominio {
     }
 
     public static void validadorNumeroEnteroYMayorACero(Integer valor, String mensaje){
-
-        if((valor <= 0) || (valor == null)){
-            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
-        }
-    }
-
-    public static void validadorNumeroDoubleYMayorACero(Double valor, String mensaje) {
 
         if((valor <= 0) || (valor == null)){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
@@ -105,12 +97,6 @@ public class ValidadorDominio {
         if(!aceptacionPatron(correo, PATRON_CORREO))
         {
             throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
-        }
-    }
-
-    public static void validadorIgual(Object value, Object unexpectedValue, String technicalMessage, String humanMessage) {
-        if (unexpectedValue.equals(value)) {
-            throw new ValorInvalidoExcepcion(technicalMessage, humanMessage);
         }
     }
 

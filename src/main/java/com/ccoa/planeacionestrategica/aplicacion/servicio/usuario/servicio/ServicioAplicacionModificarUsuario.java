@@ -3,12 +3,8 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio;
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.adaptador.MapeadorAplicacionUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.servicio.usuario.ServicioModificarUsuario;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class ServicioAplicacionModificarUsuario {

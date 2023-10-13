@@ -1,9 +1,8 @@
 package com.ccoa.isotools.dominio.servicio.gestion;
 
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioGestion;
-import com.ccoa.planeacionestrategica.dominio.servicio.gestion.ServicioEliminarGestion;
+import com.ccoa.planeacionestrategica.dominio.servicio.actividadgestion.ServicioEliminarGestion;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -4,12 +4,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioEliminarProyecto {
-    private static final String MENSAJE_YA_EXISTE = "No existe el proyecto con los datos ingresados";
-
     private final RepositorioProyecto repositorioProyecto;
 
     public ServicioEliminarProyecto(RepositorioProyecto repositorioProyecto) {
@@ -17,7 +16,7 @@ public class ServicioEliminarProyecto {
     }
 
     public Long ejecutarEliminar(Long id){
-        if(this.repositorioProyecto.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioProyecto.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyecto.eliminar(id);
     }
 }

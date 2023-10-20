@@ -17,7 +17,7 @@ public class MapeadorAplicacionPat implements MapeadorAplicacion<DtoPat, Pat> {
 
     @Override
     public Pat mapeadorAplicacion(DtoPat dto) {
-        return new Pat(dto.getIdPat(), dto.getNombre(), FormateadorHora.obtenerFechaAnual(dto.getFechaAnual()), servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()),
+        return new Pat(dto.getIdPat(), dto.getNombre(), dto.getFechaAnual(), servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()),
                 dto.getPorcentaje(), dto.getProceso(), dto.getIdUsuario());
     }
 }

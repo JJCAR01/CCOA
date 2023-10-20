@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class DtoActividadEstrategica {
-    private Long idEpica;
+    private Long idActividadEstrategica;
     private String nombre;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;

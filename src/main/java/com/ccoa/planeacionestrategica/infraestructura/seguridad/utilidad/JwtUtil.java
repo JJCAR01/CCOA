@@ -14,7 +14,7 @@ import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.
 public class JwtUtil {
 
 
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(   CLAVE);
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(CLAVE);
 
 
     public String create(String username,String type){

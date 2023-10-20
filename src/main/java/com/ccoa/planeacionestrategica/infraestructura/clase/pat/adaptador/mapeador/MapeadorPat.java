@@ -33,7 +33,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     }
 
     public void actualizarEntidad(EntidadPat entidad, Pat pat) {
-        entidad.setNombre(pat.getNombre());
+        entidad.setFechaAnual(pat.getFechaAnual());
         entidad.setProceso(pat.getProceso());
     }
 }

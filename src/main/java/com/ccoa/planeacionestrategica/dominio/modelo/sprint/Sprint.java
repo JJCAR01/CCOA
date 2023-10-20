@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.sprint;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.enums.EModalidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Getter;
 import lombok.Setter;

@@ -26,4 +26,5 @@ public class DtoProyecto {
     private Integer duracion;
     private Integer totalSprint;
     private EPlaneacionSprint planeacionSprint;
+    private Long idUsuario;
 }

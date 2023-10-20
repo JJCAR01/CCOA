@@ -50,7 +50,6 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long modificar(Pat pat, Long id) {
-
         var entidad = this.repositorioPatJpa.findById(id).orElse(null);
         assert entidad != null;
         this.mapeadorPat.actualizarEntidad(entidad, pat);

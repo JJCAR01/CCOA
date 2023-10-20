@@ -1,0 +1,7 @@
+package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa;
+
+import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadInformacionActividadGestionActividadEstrategica;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RepositorioInformacionActividadGestionActividadEstrategicaJpa extends JpaRepository<EntidadInformacionActividadGestionActividadEstrategica,Long> {
+}

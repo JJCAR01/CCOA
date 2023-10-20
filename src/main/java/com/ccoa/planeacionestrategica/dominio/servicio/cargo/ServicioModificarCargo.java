@@ -5,13 +5,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioCargo;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_CARGO_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioModificarCargo {
-
-    private static final String MENSAJE_NO_EXISTE = "No existe el Cargo con los datos ingresados";
-
     private final RepositorioCargo repositorioCargo;
 
     public ServicioModificarCargo(RepositorioCargo repositorioCargo) {
@@ -19,7 +17,7 @@ public class ServicioModificarCargo {
     }
 
     public Long ejecutarModificar(Cargo cargo, Long codigo){
-        if(this.repositorioCargo.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_NO_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioCargo.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_CARGO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioCargo.modificar(cargo,codigo);
     }
 }

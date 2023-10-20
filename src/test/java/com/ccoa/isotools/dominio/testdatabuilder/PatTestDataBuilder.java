@@ -7,13 +7,13 @@ import java.time.LocalDate;
 
 public class PatTestDataBuilder {
 
-    private long idPat;
-    private String nombre;
-    private Integer fechaAnual;
-    private LocalDate fechaRegistro;
-    private Double porcentaje;
-    private String proceso;
-    private long idUsuario;
+    private final long idPat;
+    private final String nombre;
+    private final Integer fechaAnual;
+    private final LocalDate fechaRegistro;
+    private final Double porcentaje;
+    private final String proceso;
+    private final long idUsuario;
 
     public PatTestDataBuilder() {
         this.idPat = 1;

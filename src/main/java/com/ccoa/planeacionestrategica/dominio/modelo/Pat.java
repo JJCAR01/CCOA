@@ -5,6 +5,9 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entida
 import lombok.Getter;
 
 import java.time.LocalDate;
+
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
+
 @Getter
 public class Pat {
 
@@ -19,12 +22,12 @@ public class Pat {
 
     public static Pat of(Long idPat,String nombre,Integer fechaAnual,LocalDate fechaRegistro,
                          Double porcentaje,EProceso proceso, Long idUsuario ){
-        ValidadorDominio.validarObligatorio(nombre,"El nombre del PAT NO puede estar vacío");
-        ValidadorDominio.validadorNumeroEnteroYMayorACero(fechaAnual,"El dato fecha de inicio NO puede estar vacío");
-        ValidadorDominio.siEsFechaActualRegistrada(fechaRegistro,"La fecha de registro NO debe ser vacío");
-        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentaje,"Porcentaje no de debe estar nulo o es menor a 0");
-        ValidadorDominio.validarObligatorio(proceso,"El proceso del programa no debe estar vacio");
-        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,"El usuario No puede ser vacío");
+        ValidadorDominio.validarObligatorio(nombre,NOMBRE_DEL_PAT_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroEnteroYMayorACero(fechaAnual,LA_FECHA_ANUAL_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.siEsFechaActualRegistrada(fechaRegistro,LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL);
+        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentaje,EL_PORCENTAJE_DE_AVANCE_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validarObligatorio(proceso,EL_PROCESO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
         return new Pat(idPat, nombre,fechaAnual, fechaRegistro,porcentaje,proceso,idUsuario);
     }
 

@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorProyecto;
@@ -57,6 +56,7 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
 
     @Override
     public Long eliminar(Long id) {
+        this.repositorioInformacionProyectoJpa.deleteById(id);
         this.repositorioProyectoJpa.deleteById(id);
         return id;
     }
@@ -68,7 +68,7 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
 
     @Override
     public List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id) {
-        List<EntidadProyecto> entidades = (List<EntidadProyecto>) this.repositorioProyectoJpa.findByIdActividadEstrategica(id);
+        List<EntidadProyecto> entidades = this.repositorioProyectoJpa.findByIdActividadEstrategica(id);
         return this.mapeadorProyecto.listarDominio(entidades);
     }
 }

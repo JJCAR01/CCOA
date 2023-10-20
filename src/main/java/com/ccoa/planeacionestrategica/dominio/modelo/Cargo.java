@@ -3,6 +3,9 @@ package com.ccoa.planeacionestrategica.dominio.modelo;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Getter;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NOMBRE_DEL_CARGO_NO_PUEDE_ESTAR_VACIO;
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_PUEDE_EXISTIR_SIN_AREA;
+
 @Getter
 public class Cargo {
 
@@ -12,8 +15,8 @@ public class Cargo {
     private final Long idArea;
 
     public static Cargo of(Long idCargo,String nombre,Long idArea){
-        ValidadorDominio.validarObligatorio(nombre,"El nombre del cargo no puede ser vacío");
-        ValidadorDominio.validadorNumeroLongYMayorACero(idArea,"El area NO puede ser vacío");
+        ValidadorDominio.validarObligatorio(nombre,NOMBRE_DEL_CARGO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroLongYMayorACero(idArea,NO_PUEDE_EXISTIR_SIN_AREA);
         return new Cargo(idCargo, nombre,idArea);
     }
 

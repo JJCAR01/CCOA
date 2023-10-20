@@ -43,6 +43,7 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
             dto.setDiasRestantes(entidad.getDiasRestantes());
             dto.setEstado(entidad.getEstado());
             dto.setAvance(entidad.getAvance());
+            dto.setIdUsuario(entidad.getIdUsuario());
             dto.setIdPat(entidad.getIdPat());
 
             var infEntidad = repositorioActividadEstrategicaJpa.findById(entidad.getIdInformacionActividadEstrategica());

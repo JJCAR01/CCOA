@@ -34,6 +34,7 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
         List<DtoProyectoResumen> listaDto = new ArrayList<>();
         for (EntidadProyecto entidad : entidades) {
             DtoProyectoResumen dto = new DtoProyectoResumen();
+            dto.setIdProyecto(entidad.getIdProyecto());
             dto.setNombre(entidad.getNombre());
             dto.setPresupuesto(entidad.getPresupuesto());
             dto.setModalidad(entidad.getModalidad().toString());

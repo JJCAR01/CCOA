@@ -32,11 +32,15 @@ public class EntidadInformacionProyecto {
     @Column(name = "total_sprint")
     private Integer totalSprint;
 
-    public EntidadInformacionProyecto(LocalDate fechaInicial, LocalDate fechaFinal, Integer duracion, EPlaneacionSprint planeacionSprint, Integer totalSprint) {
+    @JoinColumn(name = "id_usuario")
+    private Long idUsuario;
+
+    public EntidadInformacionProyecto(LocalDate fechaInicial, LocalDate fechaFinal, Integer duracion, EPlaneacionSprint planeacionSprint, Integer totalSprint, Long idUsuario) {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.duracion = duracion;
         this.planeacionSprint = planeacionSprint;
         this.totalSprint = totalSprint;
+        this.idUsuario = idUsuario;
     }
 }

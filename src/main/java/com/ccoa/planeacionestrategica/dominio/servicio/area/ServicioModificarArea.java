@@ -5,12 +5,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioModificarArea {
-
-    private static final String MENSAJE_NO_EXISTE = "No existe el Area con los datos ingresados";
 
     private final RepositorioArea repositorioArea;
 
@@ -20,7 +19,7 @@ public class ServicioModificarArea {
 
     public Long ejecutarModificar(Area area, Long codigo){
 
-        if(this.repositorioArea.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_NO_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioArea.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioArea.modificar(area,codigo);
     }

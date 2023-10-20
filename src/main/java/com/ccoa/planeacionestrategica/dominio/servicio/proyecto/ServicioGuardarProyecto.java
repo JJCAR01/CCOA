@@ -6,11 +6,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarProyecto {
-    private static final String MENSAJE_YA_EXISTE = "Ya existe el proyecto con los datos ingresados";
     private final RepositorioProyecto repositorioProyecto;
 
     public ServicioGuardarProyecto(RepositorioProyecto repositorioProyecto) {
@@ -18,7 +18,7 @@ public class ServicioGuardarProyecto {
     }
 
     public Long ejecutarGuardar(Proyecto proyecto, InformacionProyecto informacionProyecto){
-        if(this.repositorioProyecto.existe(proyecto)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioProyecto.existe(proyecto)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyecto.guardar(proyecto,informacionProyecto);
     }
 }

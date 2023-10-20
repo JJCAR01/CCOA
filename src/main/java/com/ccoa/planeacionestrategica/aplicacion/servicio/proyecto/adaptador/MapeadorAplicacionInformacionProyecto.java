@@ -10,6 +10,6 @@ public class MapeadorAplicacionInformacionProyecto implements MapeadorAplicacion
     @Override
     public InformacionProyecto mapeadorAplicacion(DtoProyecto dto) {
         return new InformacionProyecto(dto.getFechaInicial(),dto.getFechaFinal(),dto.getDuracion(),dto.getPlaneacionSprint(),
-                dto.getTotalSprint());
+                dto.getTotalSprint(), dto.getIdUsuario());
     }
 }

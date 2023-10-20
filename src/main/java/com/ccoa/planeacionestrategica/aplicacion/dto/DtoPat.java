@@ -16,7 +16,7 @@ public class DtoPat {
 
     private Long idPat;
     private String nombre;
-    private LocalDate fechaAnual;
+    private Integer fechaAnual;
     private LocalDate fechaRegistro;
     private Double porcentaje;
     private EProceso proceso;

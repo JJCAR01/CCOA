@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadGestion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.entidad.EntidadActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.mapeador.MapeadorActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.mapeador.MapeadorInformacionActividadGestion;
@@ -72,7 +71,7 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
 
     @Override
     public List<DtoActividadGestionResumen> consultarPorIdPat(Long idPat) {
-        List<EntidadActividadGestion> entidades = (List<EntidadActividadGestion>) this.repositorioActividadGestionJpa.findByIdPat(idPat);
+        List<EntidadActividadGestion> entidades = this.repositorioActividadGestionJpa.findByIdPat(idPat);
         return this.mapeadorActividadGestion.listarDominio(entidades);
     }
 }

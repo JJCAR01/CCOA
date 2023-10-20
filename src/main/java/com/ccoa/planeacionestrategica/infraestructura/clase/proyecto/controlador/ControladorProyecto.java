@@ -43,7 +43,7 @@ public class ControladorProyecto {
     public ResponseEntity<Proyecto> listar(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionListarProyecto.consultarById(codigo));
     }
-    @GetMapping("/pat/{codigo}")
+    @GetMapping("/actividad/{codigo}")
     public ResponseEntity<List<DtoProyectoResumen>> listarPorPat(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionListarProyecto.consultarByIdActividadEstrategica(codigo));
     }

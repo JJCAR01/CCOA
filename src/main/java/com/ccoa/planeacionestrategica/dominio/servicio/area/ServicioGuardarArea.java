@@ -5,12 +5,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarArea {
-
-    private static final String MENSAJE_YA_EXISTE = "Ya existe el Area con los datos ingresados";
 
     private final RepositorioArea repositorioArea;
 
@@ -20,7 +19,7 @@ public class ServicioGuardarArea {
 
     public Long ejecutarGuardar(Area area){
 
-        if(this.repositorioArea.existe(area)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioArea.existe(area)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioArea.guardar(area);
     }

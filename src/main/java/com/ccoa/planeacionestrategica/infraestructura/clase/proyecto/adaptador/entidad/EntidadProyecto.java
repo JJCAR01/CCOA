@@ -19,7 +19,9 @@ public class EntidadProyecto {
 
     private String nombre;
     private Double presupuesto;
-    private EModalidad Modalidad;
+
+    @Enumerated(EnumType.STRING)
+    private EModalidad modalidad;
 
     @Column(name = "valor_ejecutado")
     private Double valorEjecutado;
@@ -32,7 +34,7 @@ public class EntidadProyecto {
     public EntidadProyecto(String nombre, Double presupuesto, EModalidad modalidad, Double valorEjecutado, Boolean estado, Long idActividadEstrategica) {
         this.nombre = nombre;
         this.presupuesto = presupuesto;
-        Modalidad = modalidad;
+        this.modalidad = modalidad;
         this.valorEjecutado = valorEjecutado;
         this.estado = estado;
         this.idActividadEstrategica = idActividadEstrategica;

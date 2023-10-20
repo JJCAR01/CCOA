@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class DtoProyectoResumen {
+    private long idProyecto;
     private String nombre;
     private Double presupuesto;
     private String modalidad;

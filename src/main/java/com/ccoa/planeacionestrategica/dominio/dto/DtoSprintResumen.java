@@ -1,7 +1,15 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDate;
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class DtoSprintResumen {
     private Long idSprint;
     private String descripcion;

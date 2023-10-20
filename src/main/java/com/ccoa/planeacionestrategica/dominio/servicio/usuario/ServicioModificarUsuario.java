@@ -5,12 +5,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioModificarUsuario {
-    private static final String MENSAJE_NO_EXISTE = "No existe el Usuario con los datos ingresados";
-
     private final RepositorioUsuario repositorioUsuario;
 
     public ServicioModificarUsuario(RepositorioUsuario repositorioUsuario) {
@@ -19,7 +18,7 @@ public class ServicioModificarUsuario {
 
     public Long ejecutarModificar(Usuario usuario, Long codigo){
 
-        if(this.repositorioUsuario.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(MENSAJE_NO_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioUsuario.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioUsuario.modificar(usuario,codigo);
     }

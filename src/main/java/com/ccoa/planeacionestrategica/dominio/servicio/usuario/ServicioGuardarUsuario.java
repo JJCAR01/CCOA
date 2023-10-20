@@ -5,13 +5,11 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarUsuario {
-
-    private static final String MENSAJE_YA_EXISTE = "Ya existe el Usuario con los datos ingresados";
-
     private final RepositorioUsuario repositorioUsuario;
 
     public ServicioGuardarUsuario(RepositorioUsuario repositorioUsuario) {
@@ -20,7 +18,7 @@ public class ServicioGuardarUsuario {
 
     public Long ejecutarGuardar(Usuario usuario){
 
-        if(this.repositorioUsuario.existe(usuario)) throw new ValorInvalidoExcepcion(MENSAJE_YA_EXISTE,MENSAJE_DEFECTO);
+        if(this.repositorioUsuario.existe(usuario)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioUsuario.guardar(usuario);
     }

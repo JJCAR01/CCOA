@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.modelo.proyecto;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.enums.EModalidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +12,7 @@ public class Proyecto {
     private final Long idProyecto;
     private final String nombre;
     private final Double presupuesto;
-    private final EModalidad Modalidad;
+    private final EModalidad modalidad;
     private final Double valorEjecutado;
     private final Boolean estado;
     private final Long idActividadEstrategica;
@@ -31,7 +30,7 @@ public class Proyecto {
         this.idProyecto = idProyecto;
         this.nombre = nombre;
         this.presupuesto = presupuesto;
-        Modalidad = modalidad;
+        this.modalidad = modalidad;
         this.valorEjecutado = valorEjecutado;
         this.estado = estado;
         this.idActividadEstrategica = idActividadEstrategica;

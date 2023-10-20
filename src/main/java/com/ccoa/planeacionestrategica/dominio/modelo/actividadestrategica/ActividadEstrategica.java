@@ -5,6 +5,8 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
+
 @Getter
 public class ActividadEstrategica {
 
@@ -16,14 +18,12 @@ public class ActividadEstrategica {
     private final LocalDate fechaFinal;
     private final LocalDate fechaRegistro;
 
-
-
     public static ActividadEstrategica of(Long idActividadEstrategica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro){
-        ValidadorDominio.validarObligatorio(nombre,"El Nombre de la Epica NO puede estar vacía");
-        ValidadorDominio.validarObligatorioTipoDato(fechaInicial,"La fecha de inicio del epica NO debe estar vacía");
-        ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,"La fecha inicial no puede ser mayor a la fecha final");
-        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,"La fecha final del epica NO debe estar vacía");
-        ValidadorDominio.validarObjeto(fechaRegistro,"La fecha de registro del epica NO debe estar vacía");
+        ValidadorDominio.validarObligatorio(nombre,NOMBRE_DE_LA_ACTIVIDAD_ESTRATEGICA_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.validarObligatorioTipoDato(fechaInicial,LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL);
+        ValidadorDominio.validarObjeto(fechaRegistro,LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL);
 
         return new ActividadEstrategica(idActividadEstrategica, nombre,fechaInicial,fechaFinal,fechaRegistro);
     }

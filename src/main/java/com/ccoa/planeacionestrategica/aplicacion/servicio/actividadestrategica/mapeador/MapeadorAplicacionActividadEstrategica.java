@@ -16,6 +16,6 @@ public class MapeadorAplicacionActividadEstrategica implements MapeadorAplicacio
 
     @Override
     public ActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
-        return new ActividadEstrategica(dto.getIdEpica(), dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()));
+        return new ActividadEstrategica(dto.getIdActividadEstrategica(), dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()));
     }
 }

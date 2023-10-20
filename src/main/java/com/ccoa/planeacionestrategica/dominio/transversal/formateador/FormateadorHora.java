@@ -18,8 +18,4 @@ public class FormateadorHora {
         return LocalDate.parse(fechaFormateada, patron);
     }
 
-    public static int obtenerFechaAnual(LocalDate fecha) {
-        return fecha.getYear();
-    }
-
 }

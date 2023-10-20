@@ -13,5 +13,5 @@ public interface RepositorioSprint {
     boolean existe(Sprint sprint);
     Long eliminar(Long id);
     Long modificar(Sprint sprint, Long id);
-    List<DtoSprintResumen> consultarPorIdProyecto(Long id);
+    List<DtoSprintResumen> consultarPorIdProyecto(Long idProyecto);
 }

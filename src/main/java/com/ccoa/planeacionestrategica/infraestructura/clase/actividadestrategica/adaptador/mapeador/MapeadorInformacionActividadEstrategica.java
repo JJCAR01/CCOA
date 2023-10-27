@@ -2,12 +2,13 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategic
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
+
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,13 +16,16 @@ import java.util.List;
 
 @Component
 public class MapeadorInformacionActividadEstrategica implements MapeadorInfraestructura<EntidadInformacionActividadEstrategica, InformacionActividadEstrategica> {
+    private final RepositorioPatJpa repositorioPatJpa;
+    private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
 
-    @Autowired
-    private RepositorioPatJpa repositorioPatJpa;
-    @Autowired
-    private RepositorioUsuarioJpa repositorioUsuarioJpa;
-    @Autowired
-    private RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+    public MapeadorInformacionActividadEstrategica(RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
+        this.repositorioPatJpa = repositorioPatJpa;
+        this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+        this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
+    }
+
     @Override
     public InformacionActividadEstrategica mapeadorDominio(EntidadInformacionActividadEstrategica entidad) {
         return new InformacionActividadEstrategica(entidad.getDuracion(), entidad.getDiasRestantes(),entidad.getEstado(),
@@ -57,5 +61,7 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
         }
         return listaDto;
     }
-
+    public EntidadPat obtenerEstrategica(EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica){
+         return this.repositorioPatJpa.findById(entidadInformacionActividadEstrategica.getIdPat()).orElseThrow();
+    }
 }

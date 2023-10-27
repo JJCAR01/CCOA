@@ -9,7 +9,6 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.ada
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.mapeador.MapeadorInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,18 +16,16 @@ import java.util.List;
 public class RepositorioActividadGestionMySQL implements RepositorioActividadGestion {
 
     private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
-
+    private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
+    private final MapeadorActividadGestion mapeadorActividadGestion;
+    private final MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion;
     public RepositorioActividadGestionMySQL(RepositorioActividadGestionJpa repositorioActividadGestionJpa,
-                                            RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa) {
+                                            RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, MapeadorActividadGestion mapeadorActividadGestion, MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion) {
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
+        this.mapeadorActividadGestion = mapeadorActividadGestion;
+        this.mapeadorInformacionActividadGestion = mapeadorInformacionActividadGestion;
     }
-
-    private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
-    @Autowired
-    private MapeadorActividadGestion mapeadorActividadGestion;
-    @Autowired
-    private MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion;
 
     @Override
     public List<DtoActividadGestionResumen> listar() {
@@ -65,8 +62,14 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
     }
 
     @Override
-    public Long modificar(ActividadGestion actividadGestion, Long id) {
-        return null;
+    public Long modificar(ActividadGestion actividadGestion,InformacionActividadGestion informacionActividadGestion, Long id) {
+        var entidad = this.repositorioActividadGestionJpa.findById(id).orElse(null);
+        var entidadInf = this.repositorioInformacionActividadGestionJpa.findById(id).orElse(null);
+        assert entidad != null;
+        assert entidadInf != null;
+        this.mapeadorActividadGestion.actualizarEntidad(entidad, actividadGestion,entidadInf,informacionActividadGestion);
+        this.repositorioInformacionActividadGestionJpa.save(entidadInf);
+        return this.repositorioActividadGestionJpa.save(entidad).getIdActividadGestion();
     }
 
     @Override

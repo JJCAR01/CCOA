@@ -62,7 +62,10 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
 
     @Override
     public Long modificar(Sprint sprint, Long id) {
-        return null;
+        var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorSprint.actualizarEntidad(entidad, sprint);
+        return this.repositorioSprintJpa.save(entidad).getIdSprint();
     }
 
     @Override
@@ -70,4 +73,5 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
         List<EntidadSprint> entidades = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
         return this.mapeadorSprint.listarDominio(entidades);
     }
+
 }

@@ -47,7 +47,7 @@ public class ControladorTarea {
     }
     @GetMapping("/gestion/{codigo}")
     public ResponseEntity<List<DtoTareaResumen>> listarPorActividadGestion(@PathVariable Long codigo){
-        return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdActividadGestion(codigo, ETipoASE.ACTVIDAD_GESTION));
+        return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdActividadGestion(codigo, ETipoASE.ACTIVIDAD_GESTION));
     }
     @GetMapping("/sprint/{codigo}")
     public ResponseEntity<List<DtoTareaResumen>> listarPorSprint(@PathVariable Long codigo){
@@ -55,7 +55,7 @@ public class ControladorTarea {
     }
     @GetMapping("/actividad/{codigo}")
     public ResponseEntity<List<DtoTareaResumen>> listarPorActividadGestionActividadEstrategica(@PathVariable Long codigo){
-        return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdActividadGestionActvidadEstrategica(codigo,ETipoASE.ACTVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA));
+        return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdActividadGestionActvidadEstrategica(codigo,ETipoASE.ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA));
     }
 
     @DeleteMapping("/{codigo}")

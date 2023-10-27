@@ -3,24 +3,26 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDiasRestantes;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class MapeadorAplicacionInformacionActividadEstrategica implements MapeadorAplicacion<DtoActividadEstrategica, InformacionActividadEstrategica> {
-    private final ServicioObtenerDuracion servicioObtenerDuracion;
-    private final ServicioObtenerDiasRestantes servicioObtenerDiasRestantes;
+    private final ServicioCalcularDiasRestantes servicioCalcularDiasRestantes;
+    private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
 
-    public MapeadorAplicacionInformacionActividadEstrategica(ServicioObtenerDuracion servicioObtenerDuracion, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes) {
-        this.servicioObtenerDuracion = servicioObtenerDuracion;
-        this.servicioObtenerDiasRestantes = servicioObtenerDiasRestantes;
+    public MapeadorAplicacionInformacionActividadEstrategica(ServicioCalcularDiasRestantes servicioCalcularDiasRestantes, ServicioCalcularDuracionDias servicioCalcularDuracionDias) {
+        this.servicioCalcularDiasRestantes = servicioCalcularDiasRestantes;
+        this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
     }
 
     @Override
     public InformacionActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
-        return new InformacionActividadEstrategica(servicioObtenerDuracion.ejecutar(dto.getFechaInicial(),dto.getFechaFinal()),
-                servicioObtenerDiasRestantes.ejecutar(dto.getFechaInicial(),dto.getFechaFinal()),dto.getEstado(),
+        return new InformacionActividadEstrategica(servicioCalcularDuracionDias.ejecutar(dto.getFechaInicial(),dto.getFechaFinal()),
+                servicioCalcularDiasRestantes.ejecutar(LocalDate.now(),dto.getFechaFinal()),dto.getEstado(),
                 dto.getAvance(), dto.getIdPat(), dto.getIdUsuario());
     }
 }

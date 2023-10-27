@@ -2,11 +2,14 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.ma
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.repositorio.jpa.RepositorioDocumentoSprintJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.adaptador.entidad.EntidadTarea;
+import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -14,10 +17,19 @@ import java.util.List;
 
 @Configuration
 public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sprint> {
-    @Autowired
-    private RepositorioProyectoJpa repositorioProyectoJpa;
-    @Autowired
-    private RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
+
+    private final RepositorioProyectoJpa repositorioProyectoJpa;
+
+    private final RepositorioTareaJpa repositorioTareaJpa;
+
+    private final RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
+
+    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioTareaJpa repositorioTareaJpa, RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa) {
+        this.repositorioProyectoJpa = repositorioProyectoJpa;
+        this.repositorioTareaJpa = repositorioTareaJpa;
+        this.repositorioDocumentoSprintJpa = repositorioDocumentoSprintJpa;
+    }
+
     @Override
     public Sprint mapeadorDominio(EntidadSprint entidad) {
         return new Sprint(entidad.getIdSprint(), entidad.getDescripcion(),entidad.getFechaInicial(),entidad.getFechaFinal(),
@@ -49,5 +61,20 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             listaDto.add(dto);
         }
         return listaDto;
+    }
+
+    public void actualizarEntidad(EntidadSprint entidad, Sprint sprint) {
+        entidad.setFechaInicial(sprint.getFechaInicial());
+        entidad.setFechaFinal(sprint.getFechaFinal());
+    }
+    public void actualizarPorcentajeAvance(EntidadSprint entidad, Sprint sprint) {
+        List<EntidadTarea> tareasSprint = this.repositorioTareaJpa.findByIdASEAndTipoASE(sprint.getIdSprint(), ETipoASE.SPRINT);
+        long totalTareas = tareasSprint.size();
+        long tareasTerminadas = tareasSprint.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
+
+        if (totalTareas > 0) {
+            int nuevoAvance = (int) ((tareasTerminadas * 100) / totalTareas);
+            entidad.setAvance((double) nuevoAvance);
+        }
     }
 }

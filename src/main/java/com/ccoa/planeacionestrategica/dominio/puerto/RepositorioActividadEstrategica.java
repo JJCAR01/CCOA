@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface RepositorioActividadEstrategica{
     List<DtoActividadEstrategicaResumen> listar();
-    ActividadEstrategica consultarPorId(Long id);
+    DtoActividadEstrategicaResumen consultarPorId(Long id);
     Long guardar(ActividadEstrategica epica, InformacionActividadEstrategica informacionEpica) ;
     boolean existe(ActividadEstrategica epica);
     Long eliminar(Long id);
-    Long modificar(ActividadEstrategica epica , Long id);
+    Long modificar(ActividadEstrategica actividadEstrategica ,InformacionActividadEstrategica informacionActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);
 }

@@ -22,7 +22,6 @@ public class ServicioAplicacionListarTarea {
     public List<DtoTareaResumen> consultarPorIdActividadGestion(Long id,ETipoASE tipoASE) {
         return this.repositorioTarea.consultarPorIdActividadGestion(id,tipoASE);
     }
-
     public List<DtoTareaResumen> consultarPorIdSprint(Long id, ETipoASE tipoASE){return this.repositorioTarea.consultarPorIdSprint(id,tipoASE);}
     public List<DtoTareaResumen> consultarPorIdActividadGestionActvidadEstrategica(Long id, ETipoASE tipoASE){
         return this.repositorioTarea.consultarPorIdActividadGestionActvidadEstrategica(id,tipoASE );}

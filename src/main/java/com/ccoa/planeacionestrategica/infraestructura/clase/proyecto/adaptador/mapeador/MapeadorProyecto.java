@@ -1,12 +1,13 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -14,10 +15,14 @@ import java.util.List;
 
 @Configuration
 public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto, Proyecto> {
-    @Autowired
-    private RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa;
-    @Autowired
-    private RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+    private final RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa;
+    private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+
+    public MapeadorProyecto(RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
+        this.repositorioInformacionProyectoJpa = repositorioInformacionProyectoJpa;
+        this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
+    }
+
     @Override
     public Proyecto mapeadorDominio(EntidadProyecto entidad) {
         return new Proyecto(entidad.getIdProyecto(), entidad.getNombre(), entidad.getPresupuesto(),entidad.getModalidad(),
@@ -52,5 +57,13 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
             listaDto.add(dto);
         }
         return listaDto;
+    }
+    public void actualizarEntidad(EntidadProyecto entidad, Proyecto proyecto,
+                                  EntidadInformacionProyecto entidadInformacionProyecto,
+                                  InformacionProyecto informacionProyecto) {
+        entidad.setPresupuesto(proyecto.getPresupuesto());
+        entidadInformacionProyecto.setFechaInicial(informacionProyecto.getFechaInicial());
+        entidadInformacionProyecto.setFechaFinal(informacionProyecto.getFechaFinal());
+        entidadInformacionProyecto.setDuracion(informacionProyecto.getDuracion());
     }
 }

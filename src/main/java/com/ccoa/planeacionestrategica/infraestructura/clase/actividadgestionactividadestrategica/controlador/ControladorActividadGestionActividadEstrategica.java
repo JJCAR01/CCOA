@@ -44,7 +44,7 @@ public class ControladorActividadGestionActividadEstrategica {
         return ResponseEntity.ok(servicioAplicacionListarActividadGestionActividadEstrategica.consultarById(codigo));
     }
     @GetMapping("/actividad/{codigo}")
-    public ResponseEntity<List<DtoActividadGestionActividadEstrategicaResumen>> listarPorPat(@PathVariable Long codigo){
+    public ResponseEntity<List<DtoActividadGestionActividadEstrategicaResumen>> listarPorActividadEstrategica(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarActividadGestionActividadEstrategica.consultarByIdActividadEstrategica(codigo));
     }
 

@@ -4,16 +4,19 @@ import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyect
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapeadorInformacionProyecto implements MapeadorInfraestructura<EntidadInformacionProyecto, InformacionProyecto> {
-    @Autowired
-    private RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+
+    public MapeadorInformacionProyecto(RepositorioUsuarioJpa repositorioUsuarioJpa) {
+        this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+    }
+
     @Override
     public InformacionProyecto mapeadorDominio(EntidadInformacionProyecto entidad) {
-        return new InformacionProyecto(entidad.getFechaInicial(),entidad.getFechaFinal(),entidad.getDuracion(),entidad.getPlaneacionSprint(),
+        return new InformacionProyecto(entidad.getFechaInicial(),entidad.getFechaFinal(), entidad.getAvance(), entidad.getDuracion(),entidad.getPlaneacionSprint(),
                 entidad.getTotalSprint(), entidad.getIdUsuario());
     }
 

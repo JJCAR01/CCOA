@@ -12,6 +12,7 @@ public interface RepositorioActividadGestionActividadEstrategica {
     Long guardar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, InformacionActividadGestionActividadEstrategica informacionActividadGestionActividadEstrategica);
     boolean existe(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica);
     Long eliminar(Long id);
-    Long modificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, Long id);
+    Long modificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica,
+            InformacionActividadGestionActividadEstrategica informacionActividadGestionActividadEstrategica,Long id);
     List<DtoActividadGestionActividadEstrategicaResumen> consultarPorIdActividadEstrategica(Long idActividadEstrategica);
 }

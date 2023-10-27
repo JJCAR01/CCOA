@@ -9,7 +9,6 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionacti
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.mapeador.MapeadorInformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionActividadEstrategicaJpa;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,17 +17,15 @@ public class RepositorioActividadGestionActividadEstrategicaMySQL implements Rep
 
     private final RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa;
     private final RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa;
-
+    private final MapeadorActividadGestionActividadEstrategica mapeadorActividadGestionActividadEstrategica;
+    private final MapeadorInformacionActividadGestionActividadEstrategica mapeadorInformacionActividadGestionActividadEstrategica;
     public RepositorioActividadGestionActividadEstrategicaMySQL(RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa,
-                                                                RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa) {
+                                                                RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa, MapeadorActividadGestionActividadEstrategica mapeadorActividadGestionActividadEstrategica, MapeadorInformacionActividadGestionActividadEstrategica mapeadorInformacionActividadGestionActividadEstrategica) {
         this.repositorioActividadGestionActividadEstrategicaJpa = repositorioActividadGestionActividadEstrategicaJpa;
         this.repositorioInformacionActividadGestionActividadEstrategicaJpa = repositorioInformacionActividadGestionActividadEstrategicaJpa;
+        this.mapeadorActividadGestionActividadEstrategica = mapeadorActividadGestionActividadEstrategica;
+        this.mapeadorInformacionActividadGestionActividadEstrategica = mapeadorInformacionActividadGestionActividadEstrategica;
     }
-
-    @Autowired
-    private MapeadorActividadGestionActividadEstrategica mapeadorActividadGestionActividadEstrategica;
-    @Autowired
-    private MapeadorInformacionActividadGestionActividadEstrategica mapeadorInformacionActividadGestionActividadEstrategica;
 
     @Override
     public List<DtoActividadGestionActividadEstrategicaResumen> listar() {
@@ -64,14 +61,18 @@ public class RepositorioActividadGestionActividadEstrategicaMySQL implements Rep
     }
 
     @Override
-    public Long modificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, Long id) {
-        return null;
+    public Long modificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, InformacionActividadGestionActividadEstrategica informacionActividadGestionActividadEstrategica, Long id) {
+        var entidad = this.repositorioActividadGestionActividadEstrategicaJpa.findById(id).orElse(null);
+        var entidadInf = this.repositorioInformacionActividadGestionActividadEstrategicaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        assert entidadInf != null;
+        this.mapeadorActividadGestionActividadEstrategica.actualizarEntidad(entidad, actividadGestionActividadEstrategica,entidadInf,informacionActividadGestionActividadEstrategica);
+        this.repositorioInformacionActividadGestionActividadEstrategicaJpa.save(entidadInf);
+        return this.repositorioActividadGestionActividadEstrategicaJpa.save(entidad).getIdActividadGestionActividadEstrategica();
     }
-
     @Override
     public List<DtoActividadGestionActividadEstrategicaResumen> consultarPorIdActividadEstrategica(Long idActividadEstrategica) {
         List<EntidadActividadGestionActividadEstrategica> entidades = this.repositorioActividadGestionActividadEstrategicaJpa.findByIdActividadEstrategica(idActividadEstrategica);
         return this.mapeadorActividadGestionActividadEstrategica.listarDominio(entidades);
     }
-
 }

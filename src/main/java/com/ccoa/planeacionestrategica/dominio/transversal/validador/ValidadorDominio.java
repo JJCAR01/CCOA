@@ -2,7 +2,10 @@ package com.ccoa.planeacionestrategica.dominio.transversal.validador;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 
@@ -118,5 +121,18 @@ public class ValidadorDominio {
             throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
+    public static void siEsLasFechasRegistrasdasSonValidasParaSprint(LocalDate fechaFinal,LocalDate fechaInicio,String mensaje){
+        if (fechaInicio.getDayOfWeek() == DayOfWeek.MONDAY && fechaFinal.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            // Calcula la diferencia en días entre las dos fechas
+            long diferencia = ChronoUnit.DAYS.between(fechaInicio, fechaFinal);
+
+            if (!(diferencia == 7 || diferencia == 14 || diferencia == 28)) {
+                throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
+            }
+        } else {
+            System.out.println("Las fechas no son un lunes y un domingo: " + mensaje);
+        }
+    }
+
 
 }

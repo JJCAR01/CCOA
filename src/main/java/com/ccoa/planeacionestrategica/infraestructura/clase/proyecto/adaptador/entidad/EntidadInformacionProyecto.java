@@ -24,6 +24,7 @@ public class EntidadInformacionProyecto {
     @Column(name = "fecha_final")
     private LocalDate fechaFinal;
 
+    private Double avance;
     private Integer duracion;
 
     @Column(name = "planeacion_sprint")

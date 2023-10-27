@@ -12,6 +12,6 @@ public interface RepositorioProyecto {
     Long guardar(Proyecto proyecto, InformacionProyecto informacionProyecto);
     boolean existe(Proyecto proyecto);
     Long eliminar(Long id);
-    Long modificar(Proyecto proyecto, Long id);
+    Long modificar(Proyecto proyecto,InformacionProyecto informacionProyecto, Long id);
     List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id);
 }

@@ -2,26 +2,33 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.ad
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.entidad.EntidadActividadGestion;
+import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
+import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
 @Configuration
 public class MapeadorActividadGestion implements MapeadorInfraestructura<EntidadActividadGestion, ActividadGestion> {
-    @Autowired
-    private RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
-    @Autowired
-    private RepositorioPatJpa repositorioPatJpa;
-    @Autowired
-    private RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
+    private final RepositorioPatJpa repositorioPatJpa;
+    private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
 
-
+    public MapeadorActividadGestion(RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
+                                    RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,  RepositorioActividadGestionJpa repositorioActividadGestionJpa) {
+        this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
+        this.repositorioPatJpa = repositorioPatJpa;
+        this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+        this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
+    }
 
     @Override
     public ActividadGestion mapeadorDominio(EntidadActividadGestion entidad) {
@@ -59,4 +66,23 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
         }
         return listaDto;
     }
+
+    public void actualizarEntidad(EntidadActividadGestion entidad, ActividadGestion actividadGestion,
+                                  EntidadInformacionActividadGestion entidadInformacionActividadGestion,
+                                  InformacionActividadGestion informacionActividadGestion) {
+        entidad.setFechaInicial(actividadGestion.getFechaInicial());
+        entidad.setFechaFinal(actividadGestion.getFechaFinal());
+        entidadInformacionActividadGestion.setDuracion(informacionActividadGestion.getDuracion());
+        entidadInformacionActividadGestion.setDiasRestantes(informacionActividadGestion.getDiasRestantes());
+    }
+    public EntidadPat obtenerGestion(EntidadInformacionActividadGestion informacionActividadGestion){
+        var entidad = this.repositorioActividadGestionJpa.findById(informacionActividadGestion.getIdInformacionActividad());
+        var entidadPat = this.repositorioPatJpa.findById(entidad.orElseThrow().getIdPat());
+        return obtenerActividadGestionRelacionado(entidadPat.orElseThrow().getIdPat());
+    }
+    private EntidadPat obtenerActividadGestionRelacionado(Long id) {
+        return this.repositorioPatJpa.findById(id).orElse(null);
+    }
+
+
 }

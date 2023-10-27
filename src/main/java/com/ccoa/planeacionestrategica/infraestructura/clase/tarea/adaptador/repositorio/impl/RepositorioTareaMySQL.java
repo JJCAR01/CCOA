@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioTarea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.adaptador.entidad.EntidadTarea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.adaptador.mapeador.MapeadorTarea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,11 +15,11 @@ import java.util.List;
 public class RepositorioTareaMySQL implements RepositorioTarea {
 
     private final RepositorioTareaJpa repositorioTareaJpa;
-    @Autowired
-    private MapeadorTarea mapeadorTarea;
+    private final MapeadorTarea mapeadorTarea;
 
-    public RepositorioTareaMySQL(RepositorioTareaJpa repositorioTareaJpa) {
+    public RepositorioTareaMySQL(RepositorioTareaJpa repositorioTareaJpa, MapeadorTarea mapeadorTarea) {
         this.repositorioTareaJpa = repositorioTareaJpa;
+        this.mapeadorTarea = mapeadorTarea;
     }
 
     @Override
@@ -55,7 +54,10 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
 
     @Override
     public Long modificar(Tarea tarea, Long id) {
-        return null;
+        var entidad = this.repositorioTareaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorTarea.actualizarEntidad(entidad, tarea);
+        return this.repositorioTareaJpa.save(entidad).getIdTarea();
     }
 
     @Override

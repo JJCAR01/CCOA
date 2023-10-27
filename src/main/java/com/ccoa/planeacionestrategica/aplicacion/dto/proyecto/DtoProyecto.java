@@ -23,6 +23,7 @@ public class DtoProyecto {
     private Long idActividadEstrategica;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
+    private Double avance;
     private Integer duracion;
     private Integer totalSprint;
     private EPlaneacionSprint planeacionSprint;

@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.actividadgestionactividadestrategica;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.InformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,11 @@ public class ServicioModificarActividadGestionActividadEstrategica {
         this.repositorioActividadGestionActividadEstrategica = repositorioActividadGestionActividadEstrategica;
     }
 
-    public Long ejecutarModificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, Long codigo){
+    public Long ejecutarModificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica,
+                                  InformacionActividadGestionActividadEstrategica informacionActividadGestionActividadEstrategica, Long codigo){
 
         if(this.repositorioActividadGestionActividadEstrategica.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
-        return this.repositorioActividadGestionActividadEstrategica.modificar(actividadGestionActividadEstrategica,codigo);
+        return this.repositorioActividadGestionActividadEstrategica.modificar(actividadGestionActividadEstrategica,informacionActividadGestionActividadEstrategica , codigo);
     }
 }

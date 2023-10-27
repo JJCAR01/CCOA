@@ -9,7 +9,6 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.m
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,14 +17,13 @@ import java.util.List;
 public class RepositorioProyectoMySQL implements RepositorioProyecto {
     private final RepositorioProyectoJpa repositorioProyectoJpa;
     private final RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa;
-
-    @Autowired
-    private MapeadorProyecto mapeadorProyecto;
-    @Autowired
-    private MapeadorInformacionProyecto mapeadorInformacionProyecto;
-    public RepositorioProyectoMySQL(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa) {
+    private final MapeadorProyecto mapeadorProyecto;
+    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
+    public RepositorioProyectoMySQL(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa, MapeadorProyecto mapeadorProyecto, MapeadorInformacionProyecto mapeadorInformacionProyecto) {
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.repositorioInformacionProyectoJpa = repositorioInformacionProyectoJpa;
+        this.mapeadorProyecto = mapeadorProyecto;
+        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
     }
 
     @Override
@@ -46,7 +44,7 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
         var proyectoEntidad = this.mapeadorProyecto.mapeadorEntidad(proyecto);
         var informacionProyectoEntidad = this.mapeadorInformacionProyecto.mapeadorEntidad(informacionProyecto);
         this.repositorioInformacionProyectoJpa.save(informacionProyectoEntidad);
-        return this.repositorioProyectoJpa.save(proyectoEntidad).getIdActividadEstrategica();
+        return this.repositorioProyectoJpa.save(proyectoEntidad).getIdProyecto();
     }
 
     @Override
@@ -62,8 +60,14 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     }
 
     @Override
-    public Long modificar(Proyecto proyecto, Long id) {
-        return null;
+    public Long modificar(Proyecto proyecto, InformacionProyecto informacionProyecto, Long id) {
+        var entidad = this.repositorioProyectoJpa.findById(id).orElse(null);
+        var entidadInf = this.repositorioInformacionProyectoJpa.findById(id).orElse(null);
+        assert entidad != null;
+        assert entidadInf != null;
+        this.mapeadorProyecto.actualizarEntidad(entidad, proyecto,entidadInf,informacionProyecto);
+        this.repositorioInformacionProyectoJpa.save(entidadInf);
+        return this.repositorioProyectoJpa.save(entidad).getIdProyecto();
     }
 
     @Override

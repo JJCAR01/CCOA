@@ -36,10 +36,12 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
 
 
     @Override
-    public ActividadEstrategica consultarPorId(Long id) {
+    public DtoActividadEstrategicaResumen consultarPorId(Long id) {
         var entidad = this.repositorioActividadEstrategicaJpa.findById(id).orElse(null);
+        var entidadInf = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert entidad != null;
-        return this.mapeadorActividadEstrategica.mapeadorDominio(entidad);
+        assert entidadInf != null;
+        return this.mapeadorActividadEstrategica.listarDominioPorId(entidad,entidadInf);
     }
 
     @Override
@@ -62,10 +64,13 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     }
 
     @Override
-    public Long modificar(ActividadEstrategica actividadEstrategica, Long id) {
+    public Long modificar(ActividadEstrategica actividadEstrategica,InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
         var entidad = this.repositorioActividadEstrategicaJpa.findById(id).orElse(null);
+        var entidadInf = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert entidad != null;
-        this.mapeadorActividadEstrategica.actualizarEntidad(entidad, actividadEstrategica);
+        assert entidadInf != null;
+        this.mapeadorActividadEstrategica.actualizarEntidad(entidad, actividadEstrategica,entidadInf,informacionActividadEstrategica);
+        this.repositorioInformacionActividadEstrategicaJpa.save(entidadInf);
         return this.repositorioActividadEstrategicaJpa.save(entidad).getIdActividadEstrategica();
     }
 

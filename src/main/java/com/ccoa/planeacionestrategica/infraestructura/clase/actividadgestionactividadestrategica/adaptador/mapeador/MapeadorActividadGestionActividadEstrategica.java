@@ -2,24 +2,29 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionact
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.InformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadInformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
 @Configuration
 public class MapeadorActividadGestionActividadEstrategica implements MapeadorInfraestructura<EntidadActividadGestionActividadEstrategica, ActividadGestionActividadEstrategica> {
-    @Autowired
-    private RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa;
-    @Autowired
-    private RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
-    @Autowired
-    private RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa;
+    private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+    private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+
+    public MapeadorActividadGestionActividadEstrategica(RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa,
+                                                        RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioUsuarioJpa repositorioUsuarioJpa) {
+        this.repositorioInformacionActividadGestionActividadEstrategicaJpa = repositorioInformacionActividadGestionActividadEstrategicaJpa;
+        this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
+        this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+    }
 
     @Override
     public ActividadGestionActividadEstrategica mapeadorDominio(EntidadActividadGestionActividadEstrategica entidad) {
@@ -38,7 +43,7 @@ public class MapeadorActividadGestionActividadEstrategica implements MapeadorInf
 
         for (EntidadActividadGestionActividadEstrategica entidad : entidades) {
             DtoActividadGestionActividadEstrategicaResumen dto = new DtoActividadGestionActividadEstrategicaResumen();
-            dto.setIdActividadGestion(entidad.getIdActividadGestionActividadEstrategica());
+            dto.setIdActividadGestionActividadEstrategica(entidad.getIdActividadGestionActividadEstrategica());
             dto.setNombre(entidad.getNombre());
             dto.setFechaInicial(entidad.getFechaInicial());
             dto.setFechaFinal(entidad.getFechaFinal());
@@ -56,8 +61,12 @@ public class MapeadorActividadGestionActividadEstrategica implements MapeadorInf
         }
         return listaDto;
     }
-
-
-
-
+    public void actualizarEntidad(EntidadActividadGestionActividadEstrategica entidad, ActividadGestionActividadEstrategica actividadGestion,
+                                  EntidadInformacionActividadGestionActividadEstrategica entidadInformacionActividadGestion,
+                                  InformacionActividadGestionActividadEstrategica informacionActividadGestion) {
+        entidad.setFechaInicial(actividadGestion.getFechaInicial());
+        entidad.setFechaFinal(actividadGestion.getFechaFinal());
+        entidadInformacionActividadGestion.setDuracion(informacionActividadGestion.getDuracion());
+        entidadInformacionActividadGestion.setDiasRestantes(informacionActividadGestion.getDiasRestantes());
+    }
 }

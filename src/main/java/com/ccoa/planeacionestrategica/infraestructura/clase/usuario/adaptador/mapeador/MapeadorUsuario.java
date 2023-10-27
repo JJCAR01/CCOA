@@ -6,18 +6,16 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.cargo.adaptador.repo
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCifrarTextoEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,Usuario> {
 
-    @Autowired
-    private ServicioCifrarTextoEncoder passwordEncoder;
-
+    private final ServicioCifrarTextoEncoder passwordEncoder;
     private final RepositorioCargoJpa repositorioCargoJpa;
 
-    public MapeadorUsuario(RepositorioCargoJpa repositorioCargoJpa) {
+    public MapeadorUsuario(ServicioCifrarTextoEncoder passwordEncoder, RepositorioCargoJpa repositorioCargoJpa) {
+        this.passwordEncoder = passwordEncoder;
         this.repositorioCargoJpa = repositorioCargoJpa;
     }
 

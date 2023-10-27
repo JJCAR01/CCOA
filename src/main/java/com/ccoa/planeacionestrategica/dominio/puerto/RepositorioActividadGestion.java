@@ -14,7 +14,7 @@ public interface RepositorioActividadGestion {
     Long guardar(ActividadGestion actividadGestion, InformacionActividadGestion informacionActividadGestion);
     boolean existe(ActividadGestion actividadGestion);
     Long eliminar(Long id);
-    Long modificar(ActividadGestion actividadGestion, Long id);
+    Long modificar(ActividadGestion actividadGestion,InformacionActividadGestion informacionActividadGestion, Long id);
     List<DtoActividadGestionResumen> consultarPorIdPat(Long idPat);
 }
 

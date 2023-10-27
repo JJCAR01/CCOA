@@ -21,6 +21,7 @@ public class Mensajes {
     public static final String LA_FECHA_ANUAL_NO_PUEDE_ESTAR_VACIO = "El año no puede estar vacíao";
     public static final String LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA = "La fecha inicial no puede estar vacía";
     public static final String LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA = "La fecha final no puede estar vacía";
+    public static final String LAS_FECHAS_DEBEN_DE_COINCIDIR_CON_LOS_TIEMPOS_VALIDOS_DEL_SPRINT = "La fechas deben de coincidir con los tiempos validos de un sprint";
     public static final String LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL = "La fecha final debe ser mayor a la fecha inicial";
     public static final String LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL = "La fecha de registro debe ser la fecha actual";
     public static final String LA_DURACION_NO_PUEDE_SER_NEGATIVA = "La duracion no puede ser negativa";

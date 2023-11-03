@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.pat.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPat;
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionEliminarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionGuardarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionListarPat;

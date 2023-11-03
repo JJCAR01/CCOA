@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.servicio.tarea.ServicioEliminarTarea;
 import org.springframework.stereotype.Component;
 

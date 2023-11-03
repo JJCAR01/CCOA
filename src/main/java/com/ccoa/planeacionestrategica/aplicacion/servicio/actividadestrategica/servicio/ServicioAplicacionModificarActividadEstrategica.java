@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.mapeador.MapeadorAplicacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.mapeador.MapeadorAplicacionInformacionActividadEstrategica;

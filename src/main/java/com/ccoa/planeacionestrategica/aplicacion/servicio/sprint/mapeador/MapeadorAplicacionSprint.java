@@ -21,7 +21,7 @@ public class MapeadorAplicacionSprint implements MapeadorAplicacion<DtoSprint, S
     @Override
     public Sprint mapeadorAplicacion(DtoSprint dto) {
         List<Tarea> tarea = new ArrayList<>();
-        return new Sprint(dto.getIdSprint(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),
+        return Sprint.of(dto.getIdSprint(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),
                 servicioObtenerPorcentajeAvance.calcularPorcentaje(tarea),
                 dto.getEstado(), dto.getIdProyecto());
     }

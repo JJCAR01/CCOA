@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.sprint.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionEliminarSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionGuardarSprint;

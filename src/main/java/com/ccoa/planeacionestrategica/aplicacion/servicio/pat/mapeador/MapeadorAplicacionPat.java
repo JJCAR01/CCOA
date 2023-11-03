@@ -4,9 +4,9 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class MapeadorAplicacionPat implements MapeadorAplicacion<DtoPat, Pat> {
     private final ServicioObtenerHoraActual servicioObtenerHoraActual;
 
@@ -16,7 +16,7 @@ public class MapeadorAplicacionPat implements MapeadorAplicacion<DtoPat, Pat> {
 
     @Override
     public Pat mapeadorAplicacion(DtoPat dto) {
-        return new Pat(dto.getIdPat(), dto.getNombre(), dto.getFechaAnual(), servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()),
+        return Pat.of(dto.getIdPat(), dto.getNombre(), dto.getFechaAnual(), servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
                 dto.getPorcentaje(), dto.getProceso(), dto.getIdUsuario());
     }
 }

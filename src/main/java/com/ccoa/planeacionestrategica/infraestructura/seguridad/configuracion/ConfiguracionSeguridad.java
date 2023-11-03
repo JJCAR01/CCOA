@@ -21,9 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity(securedEnabled = true)
 public class ConfiguracionSeguridad {
 
-    @Autowired
     private final JwtFilter jwtFilter;
-
     @Autowired
     public ConfiguracionSeguridad(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;

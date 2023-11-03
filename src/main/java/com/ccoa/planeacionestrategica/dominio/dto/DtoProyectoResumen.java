@@ -24,4 +24,5 @@ public class DtoProyectoResumen {
     private Integer duracion;
     private Integer totalSprint;
     private String planeacionSprint;
+    private Long idUsuario;
 }

@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +38,7 @@ public class ValidadorDominio {
         }
     }
 
-    public static void validadorNoVacio(List<? extends Object> lista, String mensajeTecnico) {
+    public static void validadorNoVacio(List<?> lista, String mensajeTecnico) {
         if(lista == null  || lista.isEmpty()) {
             throw new ValorObligatorioExcepcion(mensajeTecnico,MENSAJE_DEFECTO);
         }
@@ -60,6 +59,12 @@ public class ValidadorDominio {
     }
 
     public static void validadorNumeroDoubleYMayorOIgualACero(Double valor, String mensaje) {
+
+        if((valor < 0) || (valor == null)){
+            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
+        }
+    }
+    public static void validadorNumeroDoubleYMayorACero(Double valor, String mensaje) {
 
         if((valor < 0) || (valor == null)){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
@@ -121,17 +126,17 @@ public class ValidadorDominio {
             throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
-    public static void siEsLasFechasRegistrasdasSonValidasParaSprint(LocalDate fechaFinal,LocalDate fechaInicio,String mensaje){
-        if (fechaInicio.getDayOfWeek() == DayOfWeek.MONDAY && fechaFinal.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            // Calcula la diferencia en días entre las dos fechas
-            long diferencia = ChronoUnit.DAYS.between(fechaInicio, fechaFinal);
-
-            if (!(diferencia == 7 || diferencia == 14 || diferencia == 28)) {
-                throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
+    public static void siEsLasFechasRegistrasdasSonValidasParaSprint(LocalDate fechaInicio,LocalDate fechaFinal,String mensaje) {
+        if (!(fechaInicio.getDayOfWeek() == DayOfWeek.MONDAY && fechaFinal.getDayOfWeek() == DayOfWeek.SUNDAY)) {
+            long diferencia = calcularDiferencia(fechaInicio,fechaFinal);
+            if ((diferencia % 7 != 0)) {
+                throw new ValidadorFecha(mensaje, MENSAJE_DEFECTO);
             }
-        } else {
-            System.out.println("Las fechas no son un lunes y un domingo: " + mensaje);
         }
+    }
+
+    private static long calcularDiferencia(LocalDate fechaInicial, LocalDate fechaFinal){
+        return (ChronoUnit.DAYS.between(fechaInicial, fechaFinal));
     }
 
 

@@ -28,15 +28,11 @@ public class EntidadProyecto {
 
     private Boolean estado;
 
-    @JoinColumn(name = "id_actividad_estrategica")
-    private Long idActividadEstrategica;
-
-    public EntidadProyecto(String nombre, Double presupuesto, EModalidad modalidad, Double valorEjecutado, Boolean estado, Long idActividadEstrategica) {
+    public EntidadProyecto(String nombre, Double presupuesto, EModalidad modalidad, Double valorEjecutado, Boolean estado) {
         this.nombre = nombre;
         this.presupuesto = presupuesto;
         this.modalidad = modalidad;
         this.valorEjecutado = valorEjecutado;
         this.estado = estado;
-        this.idActividadEstrategica = idActividadEstrategica;
     }
 }

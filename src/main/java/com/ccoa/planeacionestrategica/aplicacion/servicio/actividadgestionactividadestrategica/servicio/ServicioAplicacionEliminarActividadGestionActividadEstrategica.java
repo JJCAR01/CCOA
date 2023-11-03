@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionactividadestrategica.servicio;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadgestionactividadestrategica.ServicioEliminarActividadGestionActividadEstrategica;
 import org.springframework.stereotype.Component;
 

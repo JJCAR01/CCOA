@@ -4,5 +4,5 @@ import java.time.LocalDate;
 
 public interface ServicioObtenerHora {
 
-    LocalDate ejecutar(LocalDate fecha);
+    LocalDate calcular(LocalDate fecha);
 }

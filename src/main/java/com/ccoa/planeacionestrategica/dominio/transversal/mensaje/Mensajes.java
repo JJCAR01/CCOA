@@ -1,5 +1,8 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.mensaje;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class Mensajes {
     public static final String NOMBRE_DE_LA_ACTIVIDAD_DE_LA_GESTION_DEL_AREA_NO_PUEDE_ESTAR_VACIA = "El nombre de la actividad de la gestión del area no puede estar vacía";
     public static final String NOMBRE_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIA = "El nombre del proyecto no puede estar vacía";
@@ -16,7 +19,7 @@ public class Mensajes {
     public static final String LA_MODALIDAD_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "La modalidad del proyecto no puede ser vacío";
     public static final String EL_VALOR_EJECUTADO_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "El valor ejecutado del proyecto no puede ser vacío";
     public static final String LA_PLANEACION_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "La planeacion del proyecto no puede ser vacío";
-    public static final String EL_NUMERO_TOTAL_DE_SPRINT_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "El numero total de sprint del del proyecto no puede ser vacío";
+    public static final String EL_NUMERO_TOTAL_DE_SPRINT_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "El numero total de sprint del proyecto no puede ser vacío";
     public static final String LA_DESCRIPCION_NO_PUEDE_ESTAR_VACIA = "La descripcion no puede estar vacia";
     public static final String LA_FECHA_ANUAL_NO_PUEDE_ESTAR_VACIO = "El año no puede estar vacíao";
     public static final String LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA = "La fecha inicial no puede estar vacía";

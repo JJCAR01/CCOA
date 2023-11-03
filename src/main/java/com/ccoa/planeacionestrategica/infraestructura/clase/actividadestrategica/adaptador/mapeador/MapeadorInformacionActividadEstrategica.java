@@ -2,13 +2,15 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategic
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
-
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadPat;
+import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDiasRestantes;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,11 +21,21 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
     private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+    private final ServicioCalcularDiasRestantes servicioCalcularDiasRestantes;
+    private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
+    private final RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa;
+    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
 
-    public MapeadorInformacionActividadEstrategica(RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
+    public MapeadorInformacionActividadEstrategica(RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,
+                                                   RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
+                                                   ServicioCalcularDiasRestantes servicioCalcularDiasRestantes, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto) {
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
+        this.servicioCalcularDiasRestantes = servicioCalcularDiasRestantes;
+        this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
+        this.repositorioActividadGestionActividadEstrategicaJpa = repositorioActividadGestionActividadEstrategicaJpa;
+        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
     }
 
     @Override
@@ -44,7 +56,6 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
         for (EntidadInformacionActividadEstrategica entidad : entidades) {
             DtoActividadEstrategicaResumen dto = new DtoActividadEstrategicaResumen();
             dto.setDuracion(entidad.getDuracion());
-            dto.setDiasRestantes(entidad.getDiasRestantes());
             dto.setEstado(entidad.getEstado());
             dto.setAvance(entidad.getAvance());
             dto.setIdUsuario(entidad.getIdUsuario());
@@ -56,12 +67,11 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
             dto.setNombre(infEntidad.orElseThrow().getNombre());
             dto.setFechaInicial(infEntidad.orElseThrow().getFechaInicial());
             dto.setFechaFinal(infEntidad.orElseThrow().getFechaFinal());
+            dto.setDiasRestantes(servicioCalcularDiasRestantes.calcular(infEntidad.orElseThrow().getFechaFinal()));
 
             listaDto.add(dto);
         }
         return listaDto;
     }
-    public EntidadPat obtenerEstrategica(EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica){
-         return this.repositorioPatJpa.findById(entidadInformacionActividadEstrategica.getIdPat()).orElseThrow();
-    }
+
 }

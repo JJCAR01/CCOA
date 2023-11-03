@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta;
+package com.ccoa.planeacionestrategica.aplicacion.dto.respuesta;
 
 
 import lombok.AllArgsConstructor;

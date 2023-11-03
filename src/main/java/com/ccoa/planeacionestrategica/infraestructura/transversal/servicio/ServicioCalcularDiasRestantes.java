@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 @Component
 public class ServicioCalcularDiasRestantes implements ServicioObtenerDiasRestantes {
     @Override
-    public Integer ejecutar(LocalDate fechaInicial, LocalDate fechaFinal) {
-        return Math.toIntExact(ChronoUnit.DAYS.between(fechaInicial, fechaFinal));
+    public Integer calcular(LocalDate fechaFinal) {
+        return Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.now(), fechaFinal));
     }
 }

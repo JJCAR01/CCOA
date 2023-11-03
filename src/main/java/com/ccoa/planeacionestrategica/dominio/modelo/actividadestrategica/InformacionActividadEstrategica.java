@@ -17,7 +17,7 @@ public class InformacionActividadEstrategica {
 
     public static InformacionActividadEstrategica of( Integer duracion, Integer diasRestantes, Boolean estado,
                                                      Double avance, Long idPat,Long idUsuario){
-        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(avance,EL_PORCENTAJE_DE_AVANCE_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(avance,EL_PORCENTAJE_DE_AVANCE_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_PAT);
         ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
         return new InformacionActividadEstrategica(duracion, diasRestantes, estado, avance, idPat,idUsuario);

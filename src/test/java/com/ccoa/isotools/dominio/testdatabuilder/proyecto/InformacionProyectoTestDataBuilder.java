@@ -18,7 +18,7 @@ public class InformacionProyectoTestDataBuilder {
         this.planeacionSprint = EPlaneacionSprint.QUINCENAL;
         this.totalSprint = 1;
     }
-    public InformacionProyecto build() {
+    /*public InformacionProyecto build() {
         return InformacionProyecto.of(fechaInicial,fechaFinal,duracion,planeacionSprint,totalSprint);
-    }
+    }*/
 }

@@ -69,4 +69,6 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
     }
 
+
+
 }

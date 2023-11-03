@@ -31,4 +31,10 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
         return new EntidadUsuario(dominio.getNombre(), dominio.getApellido(), dominio.getCorreo(),passwordEncoder.ejecutar(dominio.getPassword()),
                 idCargo);
     }
+
+    public void actualizarEntidad(EntidadUsuario entidad, Usuario usuario) {
+        entidad.setNombre(usuario.getNombre());
+        entidad.setApellido(usuario.getApellido());
+        entidad.setPassword(usuario.getPassword());
+    }
 }

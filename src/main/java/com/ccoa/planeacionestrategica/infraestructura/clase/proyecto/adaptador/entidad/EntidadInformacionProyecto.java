@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class EntidadInformacionProyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_informacion_actividad_estrategica")
+    @Column(name = "id_informacion_proyecto")
     private Long id;
 
     @Column(name = "fecha_inicial")
@@ -33,15 +33,13 @@ public class EntidadInformacionProyecto {
     @Column(name = "total_sprint")
     private Integer totalSprint;
 
-    @JoinColumn(name = "id_usuario")
-    private Long idUsuario;
-
-    public EntidadInformacionProyecto(LocalDate fechaInicial, LocalDate fechaFinal, Integer duracion, EPlaneacionSprint planeacionSprint, Integer totalSprint, Long idUsuario) {
+    public EntidadInformacionProyecto(LocalDate fechaInicial, LocalDate fechaFinal, Double avance, Integer duracion, EPlaneacionSprint planeacionSprint, Integer totalSprint) {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
+        this.avance = avance;
         this.duracion = duracion;
         this.planeacionSprint = planeacionSprint;
         this.totalSprint = totalSprint;
-        this.idUsuario = idUsuario;
     }
+
 }

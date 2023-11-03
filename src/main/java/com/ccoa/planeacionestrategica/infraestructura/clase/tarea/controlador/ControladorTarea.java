@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.tarea.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.ServicioAplicacionEliminarTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.ServicioAplicacionGuardarTarea;

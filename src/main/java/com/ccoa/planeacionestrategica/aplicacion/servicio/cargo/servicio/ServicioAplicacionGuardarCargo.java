@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.servicio;
 
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoCargo;
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.mapeador.MapeadorAplicacionCargo;
 import com.ccoa.planeacionestrategica.dominio.servicio.cargo.ServicioGuardarCargo;
 import org.springframework.stereotype.Component;

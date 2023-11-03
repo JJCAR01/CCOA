@@ -4,9 +4,9 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoAct
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class MapeadorAplicacionActividadEstrategica implements MapeadorAplicacion<DtoActividadEstrategica, ActividadEstrategica> {
     private final ServicioObtenerHoraActual servicioObtenerHoraActual;
 
@@ -16,6 +16,6 @@ public class MapeadorAplicacionActividadEstrategica implements MapeadorAplicacio
 
     @Override
     public ActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
-        return new ActividadEstrategica(dto.getIdActividadEstrategica(), dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()));
+        return ActividadEstrategica.of(dto.getIdActividadEstrategica(), dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),servicioObtenerHoraActual.calcular(dto.getFechaRegistro()));
     }
 }

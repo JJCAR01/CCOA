@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.cargo.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoCargo;
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.servicio.ServicioAplicacionEliminarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.servicio.ServicioAplicacionGuardarCargo;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.servicio.ServicioAplicacionListarCargo;

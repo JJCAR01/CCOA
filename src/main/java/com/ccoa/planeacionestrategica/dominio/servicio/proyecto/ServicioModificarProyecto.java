@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.proyecto;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
@@ -17,8 +18,8 @@ public class ServicioModificarProyecto {
         this.repositorioProyecto = repositorioProyecto;
     }
 
-    public Long ejecutarModificar(Proyecto proyecto, InformacionProyecto informacionProyecto, Long codigo){
+    public Long ejecutarModificar(Proyecto proyecto, InformacionProyecto informacionProyecto, DetalleProyecto detalleProyecto, Long codigo){
         if(this.repositorioProyecto.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioProyecto.modificar(proyecto, informacionProyecto, codigo);
+        return this.repositorioProyecto.modificar(proyecto, informacionProyecto,detalleProyecto , codigo);
     }
 }

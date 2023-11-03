@@ -3,6 +3,7 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.ad
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.entidad.EntidadActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
@@ -21,13 +22,16 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
     private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
+    private final ServicioObtenerDiasRestantes servicioObtenerDiasRestantes;
 
     public MapeadorActividadGestion(RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
-                                    RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,  RepositorioActividadGestionJpa repositorioActividadGestionJpa) {
+                                    RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,
+                                    RepositorioActividadGestionJpa repositorioActividadGestionJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes) {
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
+        this.servicioObtenerDiasRestantes = servicioObtenerDiasRestantes;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
 
             dto.setFechaRegistro(infEntidad.orElseThrow().getFechaRegistro());
             dto.setDuracion(infEntidad.orElseThrow().getDuracion());
-            dto.setDiasRestantes(infEntidad.orElseThrow().getDiasRestantes());
+            dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
             dto.setAvance(infEntidad.orElseThrow().getAvance());
 
             listaDto.add(dto);

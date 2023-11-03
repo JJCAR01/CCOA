@@ -7,11 +7,10 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.ada
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
-
-import static com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensajes.PORCENTAJE;
 
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
@@ -47,12 +46,12 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         List<EntidadInformacionActividadGestion> actividadGestiones = this.repositorioInformacionActividadGestionJpa.findAll();
         List<EntidadInformacionActividadEstrategica> actividadEstrategicas = this.repositorioInformacionActividadEstrategicaJpa.findAll();
 
-        double porcentajeActividades = (double) PORCENTAJE / (actividadGestiones.size() + actividadEstrategicas.size());
+        double porcentajeActividades = (double) Mensaje.PORCENTAJE / (actividadGestiones.size() + actividadEstrategicas.size());
 
         double sumaActGestion = actividadGestiones.stream().mapToDouble(eGestion -> eGestion.getAvance() * porcentajeActividades).sum();
         double sumaActEstrategica = actividadEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getAvance() * porcentajeActividades).sum();
 
-        double avanceTotal = (sumaActGestion + sumaActEstrategica)/PORCENTAJE;
+        double avanceTotal = (sumaActGestion + sumaActEstrategica)/ Mensaje.PORCENTAJE;
         entidad.setPorcentaje(avanceTotal);
     }
 

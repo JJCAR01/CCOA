@@ -31,7 +31,7 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
 
     @Override
     public EntidadInformacionActividadGestion mapeadorEntidad(InformacionActividadGestion dominio) {
-        return new EntidadInformacionActividadGestion(dominio.getFechaRegistro(),dominio.getDuracion(),dominio.getDiasRestantes(),dominio.getAvance());
+        return new EntidadInformacionActividadGestion(dominio.getFechaRegistro(),dominio.getDuracion(),dominio.getDiasRestantes(), dominio.getAvance());
     }
 
     public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad, InformacionActividadGestion actividadGestion) {

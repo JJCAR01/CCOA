@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionEliminarProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionGuardarProyecto;

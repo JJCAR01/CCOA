@@ -28,7 +28,7 @@ public class MapeadorInformacionActividadGestionActividadEstrategica implements 
 
     @Override
     public EntidadInformacionActividadGestionActividadEstrategica mapeadorEntidad(InformacionActividadGestionActividadEstrategica dominio) {
-        return new EntidadInformacionActividadGestionActividadEstrategica(dominio.getFechaRegistro(),dominio.getDuracion(),dominio.getDiasRestantes(),dominio.getAvance());
+        return new EntidadInformacionActividadGestionActividadEstrategica(dominio.getFechaRegistro(),dominio.getDuracion(),dominio.getDiasRestantes(), dominio.getAvance());
     }
     public void actualizarPorcentajeAvance(EntidadInformacionActividadGestionActividadEstrategica entidad, InformacionActividadGestionActividadEstrategica actividadGestionActividadEstrategicaactividadGestion) {
         List<EntidadTarea> actividades = this.repositorioTareaJpa.findByIdASEAndTipoASE(actividadGestionActividadEstrategicaactividadGestion.getIdInformacionActividad(),

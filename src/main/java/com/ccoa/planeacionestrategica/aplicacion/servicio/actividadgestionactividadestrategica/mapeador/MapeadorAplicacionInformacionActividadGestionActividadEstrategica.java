@@ -8,8 +8,6 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.Servi
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
-
 @Configuration
 public class MapeadorAplicacionInformacionActividadGestionActividadEstrategica implements MapeadorAplicacion<DtoActividadGestionActividadEstrategica,
         InformacionActividadGestionActividadEstrategica> {
@@ -25,8 +23,8 @@ public class MapeadorAplicacionInformacionActividadGestionActividadEstrategica i
 
     @Override
     public InformacionActividadGestionActividadEstrategica mapeadorAplicacion(DtoActividadGestionActividadEstrategica dto) {
-        return new InformacionActividadGestionActividadEstrategica(dto.getIdActividadGestionActividadEstrategica(), servicioObtenerHoraActual.ejecutar(dto.getFechaRegistro()),
-                servicioCalcularDuracionDias.ejecutar(dto.getFechaInicial(),dto.getFechaFinal()) ,
-                servicioCalcularDiasRestantes.ejecutar(LocalDate.now(),dto.getFechaFinal()),dto.getAvance());
+        return InformacionActividadGestionActividadEstrategica.of(dto.getIdActividadGestionActividadEstrategica(), servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
+                servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()) ,
+                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),dto.getAvance());
     }
 }

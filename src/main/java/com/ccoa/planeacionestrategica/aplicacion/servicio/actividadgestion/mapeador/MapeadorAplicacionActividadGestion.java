@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionActividadGestion implements MapeadorAplicacion<DtoActividadGestion, ActividadGestion> {
     @Override
     public ActividadGestion mapeadorAplicacion(DtoActividadGestion dto) {
-        return new ActividadGestion(dto.getIdActividadGestion(),dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),
+        return ActividadGestion.of(dto.getIdActividadGestion(),dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),
                 dto.getIdUsuario(), dto.getIdPat());
     }
 }

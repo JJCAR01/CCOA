@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoArea;
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.mapeador.MapeadorAplicacionArea;
 import com.ccoa.planeacionestrategica.dominio.servicio.area.ServicioGuardarArea;
 import org.springframework.stereotype.Component;

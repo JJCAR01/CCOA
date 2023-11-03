@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Component
 public class ServicioCalcularDuracionDias implements ServicioObtenerDuracion {
     @Override
-    public Integer ejecutar(LocalDate fechaIncial, LocalDate fechaFinal) {
+    public Integer calcular(LocalDate fechaIncial, LocalDate fechaFinal) {
         return Math.toIntExact(Duration.between(fechaIncial.atStartOfDay(), fechaFinal.atStartOfDay()).toDays());
     }
 }

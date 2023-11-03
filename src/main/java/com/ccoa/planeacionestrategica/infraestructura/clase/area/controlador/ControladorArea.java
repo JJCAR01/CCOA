@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.area.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoArea;
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionEliminarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionGuardarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionListarArea;

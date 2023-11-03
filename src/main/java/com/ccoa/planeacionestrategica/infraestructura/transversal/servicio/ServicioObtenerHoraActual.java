@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Component
 public class ServicioObtenerHoraActual implements ServicioObtenerHora {
     @Override
-    public LocalDate ejecutar(LocalDate fecha) {
+    public LocalDate calcular(LocalDate fecha) {
         return LocalDate.now();
     }
 }

@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.CLAVE;
+import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.INPUTSTRING;
 
 @Component
 public class JwtUtil {
 
 
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(CLAVE);
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(INPUTSTRING);
 
 
     public String create(String username,String type){

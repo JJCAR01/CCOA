@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.Respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestion.servicio.ServicioAplicacionEliminarActividadGestion;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestion.servicio.ServicioAplicacionGuardarActividadGestion;

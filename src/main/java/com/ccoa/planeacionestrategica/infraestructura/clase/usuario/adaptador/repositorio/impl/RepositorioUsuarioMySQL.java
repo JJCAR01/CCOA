@@ -20,13 +20,12 @@ import java.util.Optional;
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
-    private final RepositorioCargoJpa repositorioCargoJpa;
+
     private final RepositorioRolJpa repositorioRolJpa;
     private final MapeadorUsuario mapeadorUsuario;
 
-    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioCargoJpa repositorioCargoJpa, RepositorioRolJpa repositorioRolJpa, MapeadorUsuario mapeadorUsuario) {
+    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioRolJpa repositorioRolJpa, MapeadorUsuario mapeadorUsuario) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
-        this.repositorioCargoJpa = repositorioCargoJpa;
         this.repositorioRolJpa = repositorioRolJpa;
         this.mapeadorUsuario = mapeadorUsuario;
     }
@@ -88,19 +87,9 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long modificar(Usuario usuario, Long id) {
-
-        Optional<EntidadCargo> entidadCargo =this.repositorioCargoJpa.findById(usuario.getIdCargo());
-
-        repositorioUsuarioJpa.findById(id);
-        EntidadUsuario entidadUsuario = new EntidadUsuario();
-        entidadUsuario.setIdUsuario(id);
-        entidadUsuario.setNombre(usuario.getNombre());
-        entidadUsuario.setApellido(usuario.getApellido());
-        entidadUsuario.setPassword(usuario.getPassword());
-
-        entidadUsuario.setIdCargo(entidadCargo.get().getIdCargo());
-
-        repositorioUsuarioJpa.save(entidadUsuario);
-        return id;
+        var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorUsuario.actualizarEntidad(entidad, usuario);
+        return this.repositorioUsuarioJpa.save(entidad).getIdUsuario();
     }
 }

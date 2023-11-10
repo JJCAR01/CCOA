@@ -63,6 +63,7 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
     public void actualizarEntidad(EntidadActividadEstrategica entidad, ActividadEstrategica actividadEstrategica,
                                   EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica,
                                   InformacionActividadEstrategica informacionActividadEstrategica) {
+        entidad.setNombre(actividadEstrategica.getNombre());
         entidad.setFechaInicial(actividadEstrategica.getFechaInicial());
         entidad.setFechaFinal(actividadEstrategica.getFechaFinal());
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());

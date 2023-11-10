@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
+import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionEliminarProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionGuardarProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionListarProyecto;
@@ -40,7 +40,7 @@ public class ControladorProyecto {
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<Proyecto> listar(@PathVariable Long codigo){
+    public ResponseEntity<DtoProyectoResumen> listar(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionListarProyecto.consultarById(codigo));
     }
     @GetMapping("/actividad/{codigo}")

@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.respuesta;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

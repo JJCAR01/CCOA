@@ -16,7 +16,7 @@ public class InformacionActividadGestionTestDataBuilder {
         this.avance = 15.4;
     }
 
-    public InformacionActividadGestion build() {
+    /*public InformacionActividadGestion build() {
         return InformacionActividadGestion.of(fechaRegistro,duracion,diasRestantes,avance);
-    }
+    }*/
 }

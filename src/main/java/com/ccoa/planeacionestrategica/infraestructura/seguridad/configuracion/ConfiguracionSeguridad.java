@@ -20,12 +20,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class ConfiguracionSeguridad {
-
-    private final JwtFilter jwtFilter;
     @Autowired
-    public ConfiguracionSeguridad(JwtFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
-    }
+    private JwtFilter jwtFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);

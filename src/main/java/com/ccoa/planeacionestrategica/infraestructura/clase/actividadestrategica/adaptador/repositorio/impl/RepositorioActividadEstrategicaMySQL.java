@@ -59,8 +59,9 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
 
     @Override
     public Long eliminar(Long id) {
-            this.repositorioActividadEstrategicaJpa.deleteById(id);
-            return id;
+        this.repositorioInformacionActividadEstrategicaJpa.deleteById(id);
+        this.repositorioActividadEstrategicaJpa.deleteById(id);
+        return id;
     }
 
     @Override

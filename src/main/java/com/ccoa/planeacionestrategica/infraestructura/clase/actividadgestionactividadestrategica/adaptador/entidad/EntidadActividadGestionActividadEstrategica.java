@@ -24,16 +24,18 @@ public class EntidadActividadGestionActividadEstrategica {
 
     @Column(name = "fecha_final")
     private LocalDate fechaFinal;
+    private Double avance;
 
     @JoinColumn(name = "id_usuario")
     private Long idUsuario;
     @JoinColumn(name = "id_actividad_estrategica")
     private Long idActividadEstrategica;
 
-    public EntidadActividadGestionActividadEstrategica(String nombre, LocalDate fechaInicial, LocalDate fechaFinal, Long idUsuario, Long idActividadEstrategica) {
+    public EntidadActividadGestionActividadEstrategica(String nombre, LocalDate fechaInicial, LocalDate fechaFinal, Double avance, Long idUsuario, Long idActividadEstrategica) {
         this.nombre = nombre;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
+        this.avance = avance;
         this.idUsuario = idUsuario;
         this.idActividadEstrategica = idActividadEstrategica;
     }

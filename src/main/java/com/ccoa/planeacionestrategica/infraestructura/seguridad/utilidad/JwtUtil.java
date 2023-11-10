@@ -3,19 +3,19 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.INPUTSTRING;
+import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.CLAVE;
 
 @Component
 public class JwtUtil {
 
-
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(INPUTSTRING);
-
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(CLAVE);
 
     public String create(String username,String type){
         return JWT.create()

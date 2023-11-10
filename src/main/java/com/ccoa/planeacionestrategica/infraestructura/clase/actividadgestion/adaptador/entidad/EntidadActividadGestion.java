@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "actividad")
+@Table(name = "actividad_gestion")
 public class EntidadActividadGestion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

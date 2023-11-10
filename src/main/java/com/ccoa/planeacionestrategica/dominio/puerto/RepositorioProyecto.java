@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RepositorioProyecto {
     List<DtoProyectoResumen> listar();
-    Proyecto consultarPorId(Long id);
+    DtoProyectoResumen consultarPorId(Long id);
     Long guardar(Proyecto proyecto, InformacionProyecto informacionProyecto, DetalleProyecto detalleProyecto);
     boolean existe(Proyecto proyecto);
     Long eliminar(Long id);

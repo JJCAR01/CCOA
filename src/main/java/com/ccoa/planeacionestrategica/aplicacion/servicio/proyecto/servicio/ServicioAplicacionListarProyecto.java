@@ -17,6 +17,6 @@ public class ServicioAplicacionListarProyecto {
 
     public List<DtoProyectoResumen> ejecutar(){return this.repositorioProyecto.listar();}
 
-    public Proyecto consultarById(Long id){return this.repositorioProyecto.consultarPorId(id);}
+    public DtoProyectoResumen consultarById(Long id){return this.repositorioProyecto.consultarPorId(id);}
     public List<DtoProyectoResumen> consultarByIdActividadEstrategica(Long id){return this.repositorioProyecto.consultarPorIdActividadEstrategica(id);}
 }

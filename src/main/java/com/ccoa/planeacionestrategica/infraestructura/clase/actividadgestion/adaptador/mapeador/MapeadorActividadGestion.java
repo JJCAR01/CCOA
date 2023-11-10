@@ -74,6 +74,7 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
     public void actualizarEntidad(EntidadActividadGestion entidad, ActividadGestion actividadGestion,
                                   EntidadInformacionActividadGestion entidadInformacionActividadGestion,
                                   InformacionActividadGestion informacionActividadGestion) {
+        entidad.setNombre(actividadGestion.getNombre());
         entidad.setFechaInicial(actividadGestion.getFechaInicial());
         entidad.setFechaFinal(actividadGestion.getFechaFinal());
         entidadInformacionActividadGestion.setDuracion(informacionActividadGestion.getDuracion());

@@ -41,10 +41,14 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     }
 
     @Override
-    public Proyecto consultarPorId(Long id) {
+    public DtoProyectoResumen consultarPorId(Long id) {
         var entidad = this.repositorioProyectoJpa.findById(id).orElse(null);
+        var entidadInf = this.repositorioInformacionProyectoJpa.findById(id).orElse(null);
+        var entidadDetalle = this.repositorioDetalleProyectoJpa.findById(id).orElse(null);
         assert entidad != null;
-        return this.mapeadorProyecto.mapeadorDominio(entidad);
+        assert entidadInf != null;
+        assert entidadDetalle != null;
+        return this.mapeadorProyecto.mapeadorDominioProyecto(entidad,entidadDetalle,entidadInf);
     }
 
     @Override

@@ -1,13 +1,14 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObjetoExcepcion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadInformacionProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadDetalleProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorDetalleProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.entidad.EntidadSprint;
@@ -21,26 +22,30 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
+import static com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje.EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO;
+
 
 @Configuration
 public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sprint> {
 
     private final RepositorioProyectoJpa repositorioProyectoJpa;
+    private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
     private final RepositorioTareaJpa repositorioTareaJpa;
     private final RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
-    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
-    private final RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa;
     private final RepositorioSprintJpa repositorioSprintJpa;
+    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
+    private final MapeadorDetalleProyecto mapeadorDetalleProyecto;
 
-    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioTareaJpa repositorioTareaJpa, RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto,
-                          RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa,
-                          RepositorioSprintJpa repositorioSprintJpa) {
+    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioTareaJpa repositorioTareaJpa, RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa,
+                          RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, MapeadorDetalleProyecto mapeadorDetalleProyecto) {
         this.repositorioProyectoJpa = repositorioProyectoJpa;
+        this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
         this.repositorioTareaJpa = repositorioTareaJpa;
         this.repositorioDocumentoSprintJpa = repositorioDocumentoSprintJpa;
-        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
-        this.repositorioInformacionProyectoJpa = repositorioInformacionProyectoJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;
+        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
+        this.mapeadorDetalleProyecto = mapeadorDetalleProyecto;
     }
 
     @Override
@@ -53,16 +58,16 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     public EntidadSprint mapeadorEntidad(Sprint dominio) {
         var proyecto = this.repositorioProyectoJpa.findById(dominio.getIdProyecto()).orElseThrow().getIdProyecto();
 
-        //long totalSprintEnProyecto = mapeadorInformacionProyecto.obtenerTotalSprint(dominio.getIdProyecto());
+        long totalSprintEnProyecto = mapeadorInformacionProyecto.obtenerTotalSprint(dominio.getIdProyecto());
         long totalSprintCreados = obtenerTotalSprints(dominio.getIdProyecto());
 
-        //if(totalSprintCreados < totalSprintEnProyecto ){
+        if(totalSprintCreados <= totalSprintEnProyecto ){
             return new EntidadSprint(dominio.getDescripcion(),dominio.getFechaInicial(),dominio.getFechaFinal(), dominio.getAvance(),
                     dominio.getEstado(), proyecto);
-        //}
-        //else {
-          //  throw new ValorObjetoExcepcion(EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO,MENSAJE_DEFECTO);
-        //}
+        }
+        else {
+            throw new ValorObjetoExcepcion(EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO,MENSAJE_DEFECTO);
+        }
     }
     public List<DtoSprintResumen> listarDominio(List<EntidadSprint> entidades){
         List<DtoSprintResumen> listaDto = new ArrayList<>();
@@ -86,6 +91,7 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     }
 
     public void actualizarEntidad(EntidadSprint entidad, Sprint sprint) {
+        entidad.setDescripcion(sprint.getDescripcion());
         entidad.setFechaInicial(sprint.getFechaInicial());
         entidad.setFechaFinal(sprint.getFechaFinal());
     }
@@ -97,27 +103,15 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
         if (totalTareas > 0) {
             int nuevoAvance = (int) ((tareasTerminadas * 100) / totalTareas);
             entidad.setAvance((double) nuevoAvance);
-            var entidadInformacionProyecto = obtenerProyectoRelacionado(entidad.getIdProyecto());
-            if (entidadInformacionProyecto != null) {
-                var informacionProyecto = obtenerproyectoDesdeEntidadProyecto(entidadInformacionProyecto);
-                //mapeadorInformacionProyecto.actualizarPorcentajeAvance(entidadInformacionProyecto, informacionProyecto);
-            }
+            mapeadorDetalleProyecto.actualizarPorcentajeAvance(obtenerProyectoRelacionado(sprint.getIdProyecto()));
+
         }
     }
-
-    private EntidadInformacionProyecto obtenerProyectoRelacionado(Long id) {
-        return this.repositorioInformacionProyectoJpa.findById(id).orElse(null);
-    }
-
-    private InformacionProyecto obtenerproyectoDesdeEntidadProyecto(EntidadInformacionProyecto proyecto) {
-        return new InformacionProyecto(proyecto.getId(), proyecto.getFechaInicial(), proyecto.getFechaFinal(), proyecto.getAvance(),
-                proyecto.getDuracion(), proyecto.getPlaneacionSprint(),proyecto.getTotalSprint());
-    }
-
     public long obtenerTotalSprints(Long id){
-        var e = this.repositorioSprintJpa.findByIdProyecto(id);
-        return e.stream().map(EntidadSprint::getIdSprint).count();
+        var entidad = this.repositorioSprintJpa.findByIdProyecto(id);
+        return entidad.stream().map(EntidadSprint::getIdSprint).count();
     }
-
-
+    public EntidadDetalleProyecto obtenerProyectoRelacionado(Long id){
+        return this.repositorioDetalleProyectoJpa.findById(id).orElseThrow();
+    }
 }

@@ -4,9 +4,12 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadPat;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.mapeador.MapeadorPat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
-import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadDetalleProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
@@ -24,18 +27,19 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
     private final ServicioCalcularDiasRestantes servicioCalcularDiasRestantes;
     private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
     private final RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa;
-    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
-
+    private final MapeadorPat mapeadorPat;
     public MapeadorInformacionActividadEstrategica(RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,
                                                    RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
-                                                   ServicioCalcularDiasRestantes servicioCalcularDiasRestantes, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto) {
+                                                   ServicioCalcularDiasRestantes servicioCalcularDiasRestantes,
+                                                   RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa,
+                                                   RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa, MapeadorPat mapeadorPat) {
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.servicioCalcularDiasRestantes = servicioCalcularDiasRestantes;
         this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
         this.repositorioActividadGestionActividadEstrategicaJpa = repositorioActividadGestionActividadEstrategicaJpa;
-        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
+        this.mapeadorPat = mapeadorPat;
     }
 
     @Override
@@ -73,5 +77,22 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
         }
         return listaDto;
     }
+    public void actualizarPorcentajeAvance(EntidadInformacionActividadEstrategica entidad) {
+        List<EntidadDetalleProyecto> proyectos = this.repositorioDetalleProyectoJpa.findByIdActividadEstrategica(entidad.getIdInformacionActividadEstrategica());
+        List<EntidadActividadGestionActividadEstrategica> actividadGestionActividadEstrategicas = this.repositorioActividadGestionActividadEstrategicaJpa.findByIdActividadEstrategica(entidad.getIdInformacionActividadEstrategica());
 
+        long totalProyectos = proyectos.size();
+        long totalActividadesGestion = actividadGestionActividadEstrategicas.size();
+
+        double sumaProyectos = proyectos.stream().mapToDouble(EntidadDetalleProyecto::getAvance).sum();
+        double sumaActividadesGestion = actividadGestionActividadEstrategicas.stream().mapToDouble(EntidadActividadGestionActividadEstrategica::getAvance).sum();
+
+        int nuevoAvance = (int) ((sumaProyectos + sumaActividadesGestion)/ (totalProyectos + totalActividadesGestion));
+        entidad.setAvance((double) nuevoAvance);
+        mapeadorPat.actualizarPorcentajeAvance(obtenerPatRelacionado(entidad.getIdPat()));
+    }
+
+    public EntidadPat obtenerPatRelacionado(Long id){
+        return this.repositorioPatJpa.findById(id).orElseThrow();
+    }
 }

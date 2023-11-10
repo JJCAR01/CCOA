@@ -24,7 +24,6 @@ public class EntidadInformacionProyecto {
     @Column(name = "fecha_final")
     private LocalDate fechaFinal;
 
-    private Double avance;
     private Integer duracion;
 
     @Column(name = "planeacion_sprint")
@@ -33,10 +32,9 @@ public class EntidadInformacionProyecto {
     @Column(name = "total_sprint")
     private Integer totalSprint;
 
-    public EntidadInformacionProyecto(LocalDate fechaInicial, LocalDate fechaFinal, Double avance, Integer duracion, EPlaneacionSprint planeacionSprint, Integer totalSprint) {
+    public EntidadInformacionProyecto(LocalDate fechaInicial, LocalDate fechaFinal, Integer duracion, EPlaneacionSprint planeacionSprint, Integer totalSprint) {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
-        this.avance = avance;
         this.duracion = duracion;
         this.planeacionSprint = planeacionSprint;
         this.totalSprint = totalSprint;

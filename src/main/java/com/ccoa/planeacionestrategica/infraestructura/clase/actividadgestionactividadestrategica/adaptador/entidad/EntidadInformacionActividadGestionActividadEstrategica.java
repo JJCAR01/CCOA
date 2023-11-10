@@ -25,12 +25,10 @@ public class EntidadInformacionActividadGestionActividadEstrategica {
     private Integer duracion;
     @Column(name = "dias_restantes")
     private Integer diasRestantes;
-    private Double avance;
 
-    public EntidadInformacionActividadGestionActividadEstrategica(LocalDate fechaRegistro, Integer duracion, Integer diasRestantes, Double avance) {
+    public EntidadInformacionActividadGestionActividadEstrategica(LocalDate fechaRegistro, Integer duracion, Integer diasRestantes) {
         this.fechaRegistro = fechaRegistro;
         this.duracion = duracion;
         this.diasRestantes = diasRestantes;
-        this.avance = avance;
     }
 }

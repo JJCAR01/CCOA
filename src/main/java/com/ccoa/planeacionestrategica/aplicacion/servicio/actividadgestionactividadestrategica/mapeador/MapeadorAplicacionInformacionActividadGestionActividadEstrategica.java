@@ -25,6 +25,6 @@ public class MapeadorAplicacionInformacionActividadGestionActividadEstrategica i
     public InformacionActividadGestionActividadEstrategica mapeadorAplicacion(DtoActividadGestionActividadEstrategica dto) {
         return InformacionActividadGestionActividadEstrategica.of(dto.getIdActividadGestionActividadEstrategica(), servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
                 servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()) ,
-                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),dto.getAvance());
+                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()));
     }
 }

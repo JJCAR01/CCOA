@@ -44,7 +44,7 @@ public class TestFactory {
     }
 
     public static String getJwt(String role) {
-        SecretKey key = Keys.hmacShaKeyFor(ConstantesSeguridad.JWT_KEY.getBytes(StandardCharsets.UTF_8));
+            SecretKey key = Keys.hmacShaKeyFor(ConstantesSeguridad.CLAVE.getBytes(StandardCharsets.UTF_8));
         String jwt = Jwts.builder().setIssuer("CCOA").setSubject("JWT Token")
                 .claim("username", "juan@ccoa.org.co")
                 .claim("authorities", role)

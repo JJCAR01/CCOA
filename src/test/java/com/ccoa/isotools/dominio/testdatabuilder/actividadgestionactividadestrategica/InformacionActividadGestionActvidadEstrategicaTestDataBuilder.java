@@ -16,7 +16,4 @@ public class InformacionActividadGestionActvidadEstrategicaTestDataBuilder {
         this.diasRestantes = 5;
         this.avance = 15.4;
     }
-    public InformacionActividadGestionActividadEstrategica build() {
-        return InformacionActividadGestionActividadEstrategica.of(fechaRegistro,duracion,diasRestantes,avance);
-    }
 }

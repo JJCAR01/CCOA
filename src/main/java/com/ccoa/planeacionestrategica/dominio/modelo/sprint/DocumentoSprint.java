@@ -13,7 +13,6 @@ public class DocumentoSprint {
         ValidadorDominio.validarObligatorio(rutaArchivo,RUTA_ARCHIVO_DEL_DOCUMENTO_NO_PUEDE_ESTAR_VACIO);
         return new DocumentoSprint(rutaArchivo);
     }
-
     public DocumentoSprint(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
     }

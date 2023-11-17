@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioA
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionModificarPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,9 +34,9 @@ public class ControladorPat {
         return this.servicioAplicacionGuardarPat.ejecutar(pat);
     }
 
-
+    @PreAuthorize("hasRole('ROLE_OPERADOR')")
     @GetMapping
-    public List<Pat> listar(){
+        public List<Pat> listar(){
         return this.servicioAplicacionListarPat.ejecutar();
     }
 

@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.sprint.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoRutaArchivo;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionEliminarSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionGuardarSprint;
@@ -33,7 +34,10 @@ public class ControladorSprint {
     public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoSprint sprint){
         return ResponseEntity.ok(this.servicioAplicacionGuardarSprint.ejecutar(sprint));
     }
-
+    @PostMapping("/archivo")
+    public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoRutaArchivo rutaArchivo){
+        return ResponseEntity.ok(this.servicioAplicacionGuardarSprint.guardarRutaArchivo(rutaArchivo));
+    }
     @GetMapping
     public ResponseEntity<List<DtoSprintResumen>> listar(){
         return ResponseEntity.ok(this.servicioAplicacionListarSprint.ejecutar());

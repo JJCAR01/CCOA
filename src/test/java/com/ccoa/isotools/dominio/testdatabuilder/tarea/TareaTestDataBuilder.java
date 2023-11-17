@@ -1,6 +1,5 @@
 package com.ccoa.isotools.dominio.testdatabuilder.tarea;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
 public class TareaTestDataBuilder {
@@ -17,8 +16,5 @@ public class TareaTestDataBuilder {
         this.observacion = "En finalizacion";
         this.tipoASE = ETipoASE.SPRINT;
         this.idASE = 1;
-    }
-    public Tarea build() {
-        return Tarea.of(idTarea,nombre,estado,observacion,tipoASE, idASE);
     }
 }

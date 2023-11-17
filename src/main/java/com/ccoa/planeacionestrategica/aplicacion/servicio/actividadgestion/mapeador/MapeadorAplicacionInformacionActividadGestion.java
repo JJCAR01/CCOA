@@ -3,6 +3,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestion.mape
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDiasRestantes;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
@@ -24,6 +25,6 @@ public class MapeadorAplicacionInformacionActividadGestion implements MapeadorAp
     public InformacionActividadGestion mapeadorAplicacion(DtoActividadGestion dto) {
         return InformacionActividadGestion.of(dto.getIdActividadGestion(),servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
                 servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
-                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),dto.getAvance());
+                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()), Mensaje.POR_DEFECTO_AVANCE);
     }
 }

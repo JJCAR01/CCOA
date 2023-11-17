@@ -9,7 +9,8 @@ import java.util.List;
 public interface RepositorioSprint {
     List<DtoSprintResumen> listar();
     Sprint consultarPorId(Long id);
-    Long guardar(Sprint sprint, DocumentoSprint documentoSprint);
+    Long guardar(Sprint sprint);
+    Long guardarDocumento(DocumentoSprint documentoSprint);
     boolean existe(Sprint sprint);
     Long eliminar(Long id);
     Long modificar(Sprint sprint, Long id);

@@ -22,7 +22,4 @@ public class ProyectoTestDataBuilder {
         this.estado = true;
         this.idActividadEstrategica = 1;
     }
-    public Proyecto build() {
-        return Proyecto.of(idProyecto,nombre,presupuesto,modalidad,valorEjecutado,estado,idActividadEstrategica);
-    }
 }

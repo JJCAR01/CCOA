@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoRutaArchivo;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.MapeadorAplicacionDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.MapeadorAplicacionSprint;
@@ -22,8 +23,12 @@ public class ServicioAplicacionGuardarSprint {
 
     public DtoRespuesta<Long> ejecutar(DtoSprint dto){
         var sprint = this.mapeadorAplicacionSprint.mapeadorAplicacion(dto);
+
+        return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardar(sprint));
+    }
+    public DtoRespuesta<Long> guardarRutaArchivo(DtoRutaArchivo dto){
         var docSprint = this.mapeadorAplicacionDocumentoSprint.mapeadorAplicacion(dto);
 
-        return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardar(sprint,docSprint));
+        return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardarDocumento(docSprint));
     }
 }

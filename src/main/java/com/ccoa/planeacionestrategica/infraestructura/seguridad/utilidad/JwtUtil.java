@@ -3,8 +3,6 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -23,7 +21,7 @@ public class JwtUtil {
                 .withClaim("type",type)
                 .withIssuer("CCOA")
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(15)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1)))
                 .sign(ALGORITHM);
     }
 

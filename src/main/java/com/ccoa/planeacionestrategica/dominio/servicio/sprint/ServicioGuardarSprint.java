@@ -17,8 +17,13 @@ public class ServicioGuardarSprint {
         this.repositorioSprint = repositorioSprint;
     }
 
-    public Long ejecutarGuardar(Sprint sprint, DocumentoSprint documentoSprint){
+    public Long ejecutarGuardar(Sprint sprint){
         if(this.repositorioSprint.existe(sprint)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioSprint.guardar(sprint,documentoSprint);
+        return this.repositorioSprint.guardar(sprint);
     }
+
+    public Long ejecutarGuardarDocumento(DocumentoSprint documentoSprint){
+        return this.repositorioSprint.guardarDocumento(documentoSprint);
+    }
+
 }

@@ -21,7 +21,4 @@ public class ActividadGestionActividadEstrategicaTestDataBuilder {
         this.idUsuario = 1;
         this.idActividadEstrategica = 1;
     }
-    public ActividadGestionActividadEstrategica build() {
-        return ActividadGestionActividadEstrategica.of(idActividadGestionActividadEstrategica,nombre,fechaInicial,fechaFinal,idUsuario,idActividadEstrategica);
-    }
 }

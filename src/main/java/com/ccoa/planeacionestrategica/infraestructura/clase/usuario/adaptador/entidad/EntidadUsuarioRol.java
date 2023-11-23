@@ -26,9 +26,4 @@ public class EntidadUsuarioRol {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", insertable = false, updatable = false)
     private EntidadUsuario usuario;
 
-
-    public EntidadUsuarioRol(Long idUsuario, String rol) {
-        this.idUsuario = idUsuario;
-        this.rol = rol;
-    }
 }

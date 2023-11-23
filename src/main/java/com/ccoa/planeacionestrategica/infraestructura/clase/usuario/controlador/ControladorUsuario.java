@@ -33,8 +33,6 @@ public class ControladorUsuario {
     public DtoRespuesta<Long> crear(@RequestBody DtoUsuario usuario){
         return this.servicioAplicacionGuardarUsuario.ejecutar(usuario);
     }
-
-
     @GetMapping
     public List<DtoUsuarioResumen> listar(){
         return this.servicioAplicacionListarUsuario.ejecutar();

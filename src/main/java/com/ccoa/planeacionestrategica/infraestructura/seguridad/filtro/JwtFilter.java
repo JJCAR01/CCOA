@@ -39,11 +39,16 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-
         //2.Validar que el JWT sea valido
-        String jwt = authHeader.split(" ")[1].trim();
-        if(!this.jwtUtil.esValido(jwt)){
-            filterChain.doFilter(request,response);
+        String[] authHeaderParts = authHeader.split(" ");
+        if (authHeaderParts.length != 2) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String jwt = authHeaderParts[1].trim();
+        if (!this.jwtUtil.esValido(jwt)) {
+            filterChain.doFilter(request, response);
             return;
         }
 

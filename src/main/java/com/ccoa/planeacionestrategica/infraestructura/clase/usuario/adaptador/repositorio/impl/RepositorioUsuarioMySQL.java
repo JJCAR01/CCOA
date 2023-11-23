@@ -4,9 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
-import com.ccoa.planeacionestrategica.infraestructura.clase.cargo.adaptador.entidad.EntidadCargo;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
-import com.ccoa.planeacionestrategica.infraestructura.clase.cargo.adaptador.repositorio.jpa.RepositorioCargoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.mapeador.MapeadorUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioRolJpa;
@@ -14,7 +12,6 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.re
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
@@ -45,24 +42,25 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public Long guardar(Usuario usuario) {
-        Long idUsuario = this.repositorioUsuarioJpa.save(this.mapeadorUsuario.mapeadorEntidad(usuario)).getIdUsuario();
-        usuario.getRoles().stream()
-                .map(rol -> {
-                    EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
-                    entidadUsuarioRol.setIdUsuario(idUsuario);
-                    entidadUsuarioRol.setRol(rol.getNombre());
-                    return entidadUsuarioRol;
-                })
-                .forEach(repositorioRolJpa::save);
-        return idUsuario;
+    public Long guardar(Usuario usuario, Rol rol) {
+        var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
+
+        this.repositorioUsuarioJpa.save(usuarioEntidad);
+
+        EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
+        entidadUsuarioRol.setUsuario(usuarioEntidad);
+        entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());  // Utilizar el ID generado
+        entidadUsuarioRol.setRol(rol.getRol());
+
+        this.repositorioRolJpa.save(entidadUsuarioRol);
+        return usuarioEntidad.getIdUsuario();
     }
 
 
     @Override
     public boolean existe(Usuario usuario) {
-
-        return this.repositorioUsuarioJpa.findByCorreo(usuario.getCorreo()) != null;    }
+        return this.repositorioUsuarioJpa.findByCorreo(usuario.getCorreo()) != null;
+    }
 
     @Override
     public Long eliminar(Long id) {

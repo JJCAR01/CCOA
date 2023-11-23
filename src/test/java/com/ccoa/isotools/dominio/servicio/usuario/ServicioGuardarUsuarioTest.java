@@ -38,12 +38,12 @@ class ServicioGuardarUsuarioTest {
         var repositorio = Mockito.mock(RepositorioUsuario.class);
         var servicio = new ServicioGuardarUsuario(repositorio);
 
-        Mockito.when(repositorio.guardar(Mockito.any(Usuario.class))).thenReturn(1L);
+        Mockito.when(repositorio.guardar(Mockito.any(Usuario.class), )).thenReturn(1L);
         // act
         var id = servicio.ejecutarGuardar(usuario);
 
         // assert
-        Mockito.verify(repositorio, Mockito.times(1)).guardar(usuario);
+        Mockito.verify(repositorio, Mockito.times(1)).guardar(usuario, );
         Assertions.assertEquals(1L, id);
 
     }

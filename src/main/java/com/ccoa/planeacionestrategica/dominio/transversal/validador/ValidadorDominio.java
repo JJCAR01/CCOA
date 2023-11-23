@@ -13,7 +13,7 @@ public class ValidadorDominio {
     private ValidadorDominio() {
     }
 
-    private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,15}";
+            private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{10,20}";
     private static final String PATRON_CORREO = "^[a-zA-Z]+@ccoa\\.org\\.co$";
 
     private static final String CAMPO_OBLIGATORIO = "El campo %s es obligatorio.";

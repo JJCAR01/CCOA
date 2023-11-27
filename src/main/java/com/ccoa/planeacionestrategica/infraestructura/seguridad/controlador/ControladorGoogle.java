@@ -22,15 +22,10 @@ public class ControladorGoogle {
 
     @PostMapping("/google")
     public ResponseEntity<AuthResponse> loginWithGoogle(@RequestBody DtoLoginGoogle dtoGoogleLogin) {
-        // Asumiendo que DtoGoogleLogin contiene los atributos relevantes de Google, como el token o el ID del usuario
-        // Aquí debes manejar la lógica de autenticación con Google y generar el token JWT
-        String googleIdToken = dtoGoogleLogin.getGoogleEmail();
-        // ... Lógica para validar y autenticar al usuario con Google
 
-        // Generar el token JWT
+        String googleIdToken = dtoGoogleLogin.getGoogleEmail();
         String jwt = this.jwtUtil.create(googleIdToken, "GOOGLE_USER_TYPE");
 
-        // Devolver la respuesta con el token JWT
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
 

@@ -10,4 +10,5 @@ import lombok.*;
 public class DtoLoginGoogle {
 
     private String googleEmail;
+    private String googleToken;
 }

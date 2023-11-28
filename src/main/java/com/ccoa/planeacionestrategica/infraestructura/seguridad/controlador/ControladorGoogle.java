@@ -24,9 +24,9 @@ public class ControladorGoogle {
     public ResponseEntity<AuthResponse> loginWithGoogle(@RequestBody DtoLoginGoogle dtoGoogleLogin) {
 
         String googleIdToken = dtoGoogleLogin.getGoogleEmail();
-        String jwt = this.jwtUtil.create(googleIdToken, "GOOGLE_USER_TYPE");
 
-        return ResponseEntity.ok(new AuthResponse(jwt));
+
+        return ResponseEntity.ok(new AuthResponse(dtoGoogleLogin.getGoogleToken()));
     }
 
 

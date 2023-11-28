@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.configuracion;
 
+import com.ccoa.planeacionestrategica.infraestructura.seguridad.filtro.FirebaseFilter;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.filtro.JwtFilter;
 
 import org.springframework.context.annotation.Bean;
@@ -15,15 +16,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class ConfiguracionSeguridad {
     private final JwtFilter jwtFilter;
+    private final FirebaseFilter firebaseFilter;
 
-    public ConfiguracionSeguridad(JwtFilter jwtFilter) {
+    public ConfiguracionSeguridad(JwtFilter jwtFilter, FirebaseFilter firebaseFilter) {
         this.jwtFilter = jwtFilter;
+        this.firebaseFilter = firebaseFilter;
     }
 
     @Bean
@@ -39,6 +43,7 @@ public class ConfiguracionSeguridad {
                                 anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(firebaseFilter, BasicAuthenticationFilter.class);
         http.httpBasic(Customizer.withDefaults());
 
         return http.build();

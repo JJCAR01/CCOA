@@ -8,7 +8,5 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class DtoLoginGoogle {
-
-    private String googleEmail;
     private String googleToken;
 }

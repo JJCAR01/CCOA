@@ -35,8 +35,7 @@ public class ControladorPat {
     }
 
     @PreAuthorize("hasRole('ROLE_OPERADOR')")
-    @GetMapping
-        public List<Pat> listar(){
+    @GetMapping public List<Pat> listar(){
         return this.servicioAplicacionListarPat.ejecutar();
     }
 

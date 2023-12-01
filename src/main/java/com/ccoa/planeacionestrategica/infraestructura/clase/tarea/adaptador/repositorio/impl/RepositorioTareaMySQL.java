@@ -38,6 +38,10 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     @Override
     public Long guardar(Tarea tarea) {
         var tareaEntidad = this.mapeadorTarea.mapeadorEntidad(tarea);
+        var id = this.repositorioTareaJpa.save(tareaEntidad).getIdTarea();
+        var entidad = this.repositorioTareaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorTarea.actualizarEntidad(tareaEntidad, tarea);
         return this.repositorioTareaJpa.save(tareaEntidad).getIdTarea();
     }
 

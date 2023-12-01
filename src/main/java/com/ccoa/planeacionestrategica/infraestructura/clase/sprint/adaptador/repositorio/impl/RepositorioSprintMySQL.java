@@ -43,6 +43,10 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     @Override
     public Long guardar(Sprint sprint) {
         var sprintEntidad = this.mapeadorSprint.mapeadorEntidad(sprint);
+        var id = this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
+        var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorSprint.actualizarPorcentajeAvance(sprintEntidad, sprint);
         return this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
     }
 

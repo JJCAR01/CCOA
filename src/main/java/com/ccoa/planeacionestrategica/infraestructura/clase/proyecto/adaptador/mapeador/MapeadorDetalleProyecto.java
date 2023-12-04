@@ -18,8 +18,6 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje.PORCENTAJE;
-
 @Configuration
 public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadDetalleProyecto, DetalleProyecto> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;

@@ -4,6 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioSprint;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.mapeador.MapeadorDocumentoSprint;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.mapeador.MapeadorSprint;
@@ -19,13 +20,15 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     private final RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
     private final MapeadorSprint mapeadorSprint;
     private final MapeadorDocumentoSprint mapeadorDocumentoSprint;
+    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
 
     public RepositorioSprintMySQL(RepositorioSprintJpa repositorioSprintJpa, RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa,
-                                  MapeadorSprint mapeadorSprint, MapeadorDocumentoSprint mapeadorDocumentoSprint) {
+                                  MapeadorSprint mapeadorSprint, MapeadorDocumentoSprint mapeadorDocumentoSprint, MapeadorInformacionProyecto mapeadorInformacionProyecto) {
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.repositorioDocumentoSprintJpa = repositorioDocumentoSprintJpa;
         this.mapeadorSprint = mapeadorSprint;
         this.mapeadorDocumentoSprint = mapeadorDocumentoSprint;
+        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
     }
     @Override
     public List<DtoSprintResumen> listar() {
@@ -41,13 +44,25 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     }
 
     @Override
-    public Long guardar(Sprint sprint) {
+    public Long guardar(Sprint sprint)   {
         var sprintEntidad = this.mapeadorSprint.mapeadorEntidad(sprint);
-        var id = this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
-        var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
-        assert entidad != null;
-        this.mapeadorSprint.actualizarPorcentajeAvance(sprintEntidad, sprint);
-        return this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
+
+            long totalSprintsProyecto = mapeadorInformacionProyecto.obtenerTotalSprints(sprint.getIdProyecto());
+            long totalSprintActuales = mapeadorSprint.obtenerTotalSprints(sprint.getIdProyecto());
+
+            if ( totalSprintActuales < totalSprintsProyecto ) {
+                var id = this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
+                var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
+
+                if (entidad != null) {
+                    this.mapeadorSprint.actualizarPorcentajeAvance(sprintEntidad, sprint);
+                    return this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
+                } else {
+                    throw new IllegalArgumentException("No se pudo encontrar la entidad después de guardar.");
+                }
+            } else {
+                throw new IllegalArgumentException("El total de sprints en el proyecto ya es mayor que el actual.");
+            }
     }
 
     @Override

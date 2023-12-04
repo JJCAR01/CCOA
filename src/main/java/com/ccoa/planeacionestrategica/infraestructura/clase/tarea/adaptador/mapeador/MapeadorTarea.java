@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.tarea.adaptador.map
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.InformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
@@ -12,9 +11,7 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.ada
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadActividadGestionActividadEstrategica;
-import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadInformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.mapeador.MapeadorActividadGestionActividadEstrategica;
-import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.mapeador.MapeadorInformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.sprint.adaptador.entidad.EntidadSprint;
@@ -40,7 +37,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
     private final MapeadorActividadGestionActividadEstrategica mapeadorActividadGestionActividadEstrategica;
 
     public MapeadorTarea(RepositorioActividadGestionJpa repositorioActividadGestionJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioSprintJpa repositorioSprintJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,
-                         RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa, MapeadorSprint mapeadorSprint, MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion, MapeadorInformacionActividadGestionActividadEstrategica mapeadorInformacionActividadGestionActividadEstrategica, MapeadorActividadGestionActividadEstrategica mapeadorActividadGestionActividadEstrategica, RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa) {
+                         RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa, MapeadorSprint mapeadorSprint, MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion, MapeadorActividadGestionActividadEstrategica mapeadorActividadGestionActividadEstrategica, RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa) {
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;

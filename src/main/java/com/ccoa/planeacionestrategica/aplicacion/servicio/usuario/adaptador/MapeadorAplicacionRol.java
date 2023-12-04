@@ -5,14 +5,13 @@ import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAp
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
 public class MapeadorAplicacionRol implements MapeadorAplicacion<DtoUsuario, Rol> {
     @Override
     public Rol mapeadorAplicacion(DtoUsuario dto) {
-        String rolesString = dto.getRoles().stream().map(Rol::getRol).collect(Collectors.joining(","));
+        String rolesString = dto.getRoles().stream().map(Rol::getNombreRol).collect(Collectors.joining(","));
         return new Rol(dto.getIdUsuario(), rolesString);
     }
 }

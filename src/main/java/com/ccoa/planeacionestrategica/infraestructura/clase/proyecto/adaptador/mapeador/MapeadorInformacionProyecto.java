@@ -6,6 +6,8 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.r
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.NoSuchElementException;
+
 @Configuration
 public class MapeadorInformacionProyecto implements MapeadorInfraestructura<EntidadInformacionProyecto, InformacionProyecto> {
     private final RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa;
@@ -15,7 +17,7 @@ public class MapeadorInformacionProyecto implements MapeadorInfraestructura<Enti
     }
     @Override
     public InformacionProyecto mapeadorDominio(EntidadInformacionProyecto entidad) {
-        return new InformacionProyecto(entidad.getId(), entidad.getFechaInicial(),entidad.getFechaFinal(), entidad.getDuracion(),entidad.getPlaneacionSprint(),
+        return new InformacionProyecto(entidad.getIdInformacionProyecto(), entidad.getFechaInicial(),entidad.getFechaFinal(), entidad.getDuracion(),entidad.getPlaneacionSprint(),
                 entidad.getTotalSprint());
     }
     @Override
@@ -24,6 +26,12 @@ public class MapeadorInformacionProyecto implements MapeadorInfraestructura<Enti
                 dominio.getTotalSprint());
     }
     public long obtenerTotalSprint(Long id){
-        return this.repositorioInformacionProyectoJpa.findById(id).orElseThrow().getId();
+        return this.repositorioInformacionProyectoJpa.findById(id).orElseThrow().getIdInformacionProyecto();
+    }
+
+    public long obtenerTotalSprints(Long id){
+        return this.repositorioInformacionProyectoJpa.findById(id)
+                .map(EntidadInformacionProyecto::getTotalSprint)
+                .orElseThrow(() -> new NoSuchElementException("No se encontró información para el proyecto con ID: " + id));
     }
 }

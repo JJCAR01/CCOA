@@ -44,6 +44,7 @@ public class RepositorioActividadGestionActividadEstrategicaMySQL implements Rep
     public Long guardar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, InformacionActividadGestionActividadEstrategica informacionActividadGestionActividadEstrategica) {
         var actividadEntidad = this.mapeadorActividadGestionActividadEstrategica.mapeadorEntidad(actividadGestionActividadEstrategica);
         var informacionActividadEntidad = this.mapeadorInformacionActividadGestionActividadEstrategica.mapeadorEntidad(informacionActividadGestionActividadEstrategica);
+        mapeadorActividadGestionActividadEstrategica.actualizarPorcentajeAvance(actividadEntidad,actividadGestionActividadEstrategica);
         this.repositorioInformacionActividadGestionActividadEstrategicaJpa.save(informacionActividadEntidad);
         return this.repositorioActividadGestionActividadEstrategicaJpa.save(actividadEntidad).getIdActividadGestionActividadEstrategica();
     }

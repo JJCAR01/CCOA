@@ -48,6 +48,7 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     public Long guardar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica) {
         var epicaEntidad = this.mapeadorActividadEstrategica.mapeadorEntidad(actividadEstrategica);
         var informacionGestionEntidad = this.mapeadorInformacionActividadEstrategica.mapeadorEntidad(informacionActividadEstrategica);
+        mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(informacionGestionEntidad);
         this.repositorioInformacionActividadEstrategicaJpa.save(informacionGestionEntidad);
         return this.repositorioActividadEstrategicaJpa.save(epicaEntidad).getIdActividadEstrategica();
     }

@@ -16,7 +16,7 @@ public class EntidadInformacionProyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_proyecto")
-    private Long id;
+    private Long idInformacionProyecto;
 
     @Column(name = "fecha_inicial")
     private LocalDate fechaInicial;

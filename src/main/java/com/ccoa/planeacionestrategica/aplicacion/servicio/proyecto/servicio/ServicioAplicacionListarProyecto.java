@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
 import org.springframework.stereotype.Component;
 

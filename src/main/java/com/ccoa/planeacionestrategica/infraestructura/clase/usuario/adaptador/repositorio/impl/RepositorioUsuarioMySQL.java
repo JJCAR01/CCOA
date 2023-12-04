@@ -50,7 +50,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
         entidadUsuarioRol.setUsuario(usuarioEntidad);
         entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());  // Utilizar el ID generado
-        entidadUsuarioRol.setRol(rol.getRol());
+        entidadUsuarioRol.setRol(rol.getNombreRol());
 
         this.repositorioRolJpa.save(entidadUsuarioRol);
         return usuarioEntidad.getIdUsuario();

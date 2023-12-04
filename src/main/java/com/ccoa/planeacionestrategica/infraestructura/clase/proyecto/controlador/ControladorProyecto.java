@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.Serv
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionListarProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionModificarProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -5,8 +5,6 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionacti
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
-
 @Configuration
 public class MapeadorInformacionActividadGestionActividadEstrategica implements MapeadorInfraestructura<EntidadInformacionActividadGestionActividadEstrategica,
         InformacionActividadGestionActividadEstrategica> {

@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.pat.mapeador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
-import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
 import org.springframework.context.annotation.Configuration;

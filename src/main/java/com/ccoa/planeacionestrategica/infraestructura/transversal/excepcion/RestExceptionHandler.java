@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestControllerAdvice
@@ -27,6 +28,8 @@ public class RestExceptionHandler {
         STATES.put(ValorObjetoExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
         STATES.put(ValidadorFecha.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(AccessDeniedExcepcion.class.getSimpleName(),HttpStatus.INTERNAL_SERVER_ERROR);
+        STATES.put(BadRequestExcepcion.class.getSimpleName(),HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BaseExcepcion.class)

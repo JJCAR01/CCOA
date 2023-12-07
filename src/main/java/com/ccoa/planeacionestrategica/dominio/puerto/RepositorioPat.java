@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 
 import java.util.List;
 

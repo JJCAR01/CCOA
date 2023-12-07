@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionProyecto implements MapeadorAplicacion<DtoProyecto, Proyecto> {
     @Override
     public Proyecto mapeadorAplicacion(DtoProyecto dto) {
-        return Proyecto.of(dto.getIdProyecto(),dto.getNombre(), dto.getPresupuesto(),dto.getModalidad(),
+        return new Proyecto(dto.getIdProyecto(),dto.getNombre(), dto.getPresupuesto(),dto.getModalidad(),
                 dto.getValorEjecutado(), dto.getEstado());
     }
 }

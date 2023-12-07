@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.dominio.modelo.area.Area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.impl;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.*;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.mapeador.MapeadorPat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.jpa.RepositorioPatJpa;

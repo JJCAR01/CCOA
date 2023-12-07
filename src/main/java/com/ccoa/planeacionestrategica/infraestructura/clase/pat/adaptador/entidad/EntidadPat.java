@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad;
 
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.enums.EProceso;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

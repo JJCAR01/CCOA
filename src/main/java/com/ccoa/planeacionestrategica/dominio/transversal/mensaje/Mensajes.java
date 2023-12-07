@@ -14,6 +14,7 @@ public class Mensajes {
     public static final String NOMBRE_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO = "El nombre del usuario no puede estar vacío";
     public static final String LOS_APELLIDO_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO = "Los apellidos del usuario no puede estar vacío";
     public static final String EL_PROCESO_NO_PUEDE_ESTAR_VACIO = "El proceso no puede estar vacía";
+    public static final String LA_DIRECCION_NO_PUEDE_ESTAR_VACIA = "La dirección no puede estar vacía";
     public static final String EL_ESTADO_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIO = "El estado de la tarea no puede estar vacía";
     public static final String EL_PRESUPUESTO_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "El presupuesto del proyecto no puede ser vacío";
     public static final String LA_MODALIDAD_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO = "La modalidad del proyecto no puede ser vacío";

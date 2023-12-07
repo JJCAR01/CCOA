@@ -6,7 +6,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioA
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionGuardarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionModificarPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.Pat;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

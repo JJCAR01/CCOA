@@ -6,7 +6,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.Servicio
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionGuardarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionListarArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionModificarArea;
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.dominio.modelo.area.Area;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +31,11 @@ public class ControladorArea {
     }
 
 
-    @Secured({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoArea area){
         return ResponseEntity.ok(this.servicioAplicacionGuardarArea.ejecutar(area));
     }
 
-    @Secured({"ROLE_ADMIN"})
     @GetMapping
     public List<Area> listar(){
         return this.servicioAplicacionListarArea.ejecutar();

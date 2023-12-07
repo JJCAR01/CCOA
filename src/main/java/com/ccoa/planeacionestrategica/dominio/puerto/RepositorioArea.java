@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.dominio.modelo.area.Area;
 
 import java.util.List;
 

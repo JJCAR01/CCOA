@@ -27,6 +27,8 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
                                   InformacionProyecto informacionProyecto) {
         entidad.setNombre(proyecto.getNombre());
         entidad.setPresupuesto(proyecto.getPresupuesto());
+        entidad.setModalidad(proyecto.getModalidad());
+        entidadInformacionProyecto.setPlaneacionSprint(informacionProyecto.getPlaneacionSprint());
         entidadInformacionProyecto.setFechaInicial(informacionProyecto.getFechaInicial());
         entidadInformacionProyecto.setFechaFinal(informacionProyecto.getFechaFinal());
         entidadInformacionProyecto.setDuracion(informacionProyecto.getDuracion());

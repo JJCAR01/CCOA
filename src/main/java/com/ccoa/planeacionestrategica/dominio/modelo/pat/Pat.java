@@ -1,7 +1,7 @@
-package com.ccoa.planeacionestrategica.dominio.modelo;
+package com.ccoa.planeacionestrategica.dominio.modelo.pat;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.enums.EProceso;
 import lombok.Getter;
 
 import java.time.LocalDate;

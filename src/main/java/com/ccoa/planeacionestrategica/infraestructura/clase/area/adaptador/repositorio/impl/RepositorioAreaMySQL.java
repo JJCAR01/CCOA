@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.repositorio.impl;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.Area;
+import com.ccoa.planeacionestrategica.dominio.modelo.area.Area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.entidad.EntidadArea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.mapeador.MapeadorArea;
@@ -22,8 +22,8 @@ public class RepositorioAreaMySQL implements RepositorioArea{
 
     @Override
     public List<Area> listar() {
-        List<EntidadArea> entidadAreas =this.repositorioAreaJpa.findAll();
-        return entidadAreas.stream().map(entidadArea -> Area.of(entidadArea.getIdArea(), entidadArea.getNombre())).toList();
+        var entidadArea =this.repositorioAreaJpa.findAll();
+        return this.mapeadorArea.listarDominio(entidadArea);
     }
 
     @Override

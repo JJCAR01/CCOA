@@ -1,11 +1,12 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.pat.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoPat;
+import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionEliminarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionGuardarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionModificarPat;
+import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +35,8 @@ public class ControladorPat {
         return this.servicioAplicacionGuardarPat.ejecutar(pat);
     }
 
-    @PreAuthorize("hasRole('ROLE_OPERADOR')")
-    @GetMapping public List<Pat> listar(){
+    //@PreAuthorize("hasRole('ROLE_OPERADOR')")
+    @GetMapping public List<DtoPatResumen> listar(){
         return this.servicioAplicacionListarPat.ejecutar();
     }
 

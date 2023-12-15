@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.repo
 
 import com.ccoa.planeacionestrategica.dominio.modelo.area.Area;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
-import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.entidad.EntidadArea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.mapeador.MapeadorArea;
 import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.repositorio.jpa.RepositorioAreaJpa;
 import org.springframework.stereotype.Repository;

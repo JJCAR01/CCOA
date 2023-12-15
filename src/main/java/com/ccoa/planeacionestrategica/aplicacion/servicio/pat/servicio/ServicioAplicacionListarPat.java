@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio;
 
+import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public class ServicioAplicacionListarPat {
         this.repositorioPat = repositorioPat;
     }
 
-    public List<Pat> ejecutar(){return this.repositorioPat.listar();}
+    public List<DtoPatResumen> ejecutar(){return this.repositorioPat.listar();}
 
     public Pat consultarById(Long id){return this.repositorioPat.consultarPorId(id);}
 }

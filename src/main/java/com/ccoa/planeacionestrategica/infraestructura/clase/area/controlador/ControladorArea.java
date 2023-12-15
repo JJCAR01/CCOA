@@ -8,7 +8,6 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.Servicio
 import com.ccoa.planeacionestrategica.aplicacion.servicio.area.servicio.ServicioAplicacionModificarArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.area.Area;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

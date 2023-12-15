@@ -1,6 +1,8 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +19,8 @@ public class ServicioAplicacionListarUsuario {
 
     public List<DtoUsuarioResumen> ejecutar(){return this.repositorioUsuario.listar();}
 
-    public DtoUsuarioResumen consultarById(Long id){return this.repositorioUsuario.consultarPorId(id);}
+    public Usuario consultarById(Long id){return this.repositorioUsuario.consultarPorId(id);}
+
+    public String consultarByCorreoParaDireccion(String correo){return this.repositorioUsuario.obtenerDireccionDelUsuario(correo);}
+    public String consultarByCorreoParaProceso(String correo){return this.repositorioUsuario.obtenerProcesoDelUsuario(correo);}
 }

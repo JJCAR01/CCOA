@@ -1,26 +1,31 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.mapeador;
+import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
+import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadPat;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
     private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
 
-    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa) {
+    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
-
+        this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
     }
@@ -37,9 +42,24 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         return new EntidadPat(dominio.getNombre(), dominio.getFechaAnual(),dominio.getFechaRegistro(),
                 dominio.getPorcentaje(),dominio.getProceso(),idUsuario);
     }
-    public List<Pat> listarDominio(List<EntidadPat> entidades){
-        return entidades.stream().map(entidad -> new Pat(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro(),
-                entidad.getPorcentaje(),entidad.getProceso(), entidad.getIdUsuario())).toList();
+    public List<DtoPatResumen> listarDominio(List<EntidadPat> entidades){
+        List<DtoPatResumen> listaDto = new ArrayList<>();
+        for (EntidadPat entidad : entidades) {
+            DtoPatResumen dto = new DtoPatResumen();
+            dto.setIdPat(entidad.getIdPat());
+            dto.setNombre(entidad.getNombre());
+            dto.setFechaAnual(entidad.getFechaAnual());
+            dto.setPorcentaje(entidad.getPorcentaje());
+            dto.setProceso(entidad.getProceso());
+            dto.setIdUsuario(entidad.getIdUsuario());
+
+            var infEntidad = repositorioInformacionPatJpa.findById(entidad.getIdPat());
+
+            dto.setDireccion(infEntidad.orElseThrow().getDireccion());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
     }
 
     public void actualizarPorcentajeAvance(EntidadPat entidad) {

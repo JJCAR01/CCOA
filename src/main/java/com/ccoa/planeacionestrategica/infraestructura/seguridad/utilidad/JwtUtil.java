@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.CLAVE;
@@ -15,10 +16,12 @@ public class JwtUtil {
 
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(CLAVE);
 
-    public String create(String username,String type){
+    public String create(String username, String type, String direcciones,String procesos){
         return JWT.create()
                 .withSubject(username)
                 .withClaim("type",type)
+                .withClaim("direccion", direcciones)
+                .withClaim("proceso", procesos)
                 .withIssuer("CCOA")
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1)))
@@ -26,7 +29,6 @@ public class JwtUtil {
     }
 
     public boolean esValido(String jwt){
-
         try {
             JWT.require(ALGORITHM).build().verify(jwt);
             return true;

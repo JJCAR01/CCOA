@@ -1,12 +1,15 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.impl;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuarioRol;
+import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.mapeador.MapeadorUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioRolJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import org.springframework.stereotype.Repository;
@@ -20,29 +23,32 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     private final RepositorioRolJpa repositorioRolJpa;
     private final MapeadorUsuario mapeadorUsuario;
+    private final MapeadorInformacionUsuario mapeadorInformacionUsuario;
+    private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
 
-    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioRolJpa repositorioRolJpa, MapeadorUsuario mapeadorUsuario) {
+    public RepositorioUsuarioMySQL(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioRolJpa repositorioRolJpa,
+                                   MapeadorUsuario mapeadorUsuario, MapeadorInformacionUsuario mapeadorInformacionUsuario,
+                                   RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioRolJpa = repositorioRolJpa;
         this.mapeadorUsuario = mapeadorUsuario;
+        this.mapeadorInformacionUsuario = mapeadorInformacionUsuario;
+        this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
     }
 
     public List<DtoUsuarioResumen> listar() {
-        List<EntidadUsuario> entidadUsuarios =this.repositorioUsuarioJpa.findAll();
-        return entidadUsuarios.stream().map(entidad -> new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),entidad.getCorreo(), entidad.getIdCargo())).toList();
-
+        var entidadUsuarios =this.repositorioUsuarioJpa.findAll();
+        return this.mapeadorUsuario.listarDominio(entidadUsuarios);
     }
     @Override
-    public DtoUsuarioResumen consultarPorId(Long id) {
-
-        return this.repositorioUsuarioJpa
-                .findById(id)
-                .map(entidad -> new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(), entidad.getCorreo(), entidad.getIdCargo()))
-                .orElse(null);
+    public Usuario consultarPorId(Long id) {
+        var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        return this.mapeadorUsuario.mapeadorDominio(entidad);
     }
 
     @Override
-    public Long guardar(Usuario usuario, Rol rol) {
+    public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
         var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
 
         this.repositorioUsuarioJpa.save(usuarioEntidad);
@@ -52,6 +58,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());  // Utilizar el ID generado
         entidadUsuarioRol.setRol(rol.getNombreRol());
 
+        this.repositorioInformacionUsuarioJpa.save(mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario));
         this.repositorioRolJpa.save(entidadUsuarioRol);
         return usuarioEntidad.getIdUsuario();
     }
@@ -84,10 +91,20 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public Long modificar(Usuario usuario, Long id) {
+    public Long modificar(Usuario usuario, InformacionUsuario informacionUsuario, Long id) {
         var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
         assert entidad != null;
         this.mapeadorUsuario.actualizarEntidad(entidad, usuario);
         return this.repositorioUsuarioJpa.save(entidad).getIdUsuario();
+    }
+
+    @Override
+    public String obtenerDireccionDelUsuario(String correo) {
+        return this.mapeadorInformacionUsuario.obtenerDirecccion(correo);
+    }
+
+    @Override
+    public String obtenerProcesoDelUsuario(String correo) {
+        return this.mapeadorInformacionUsuario.obtenerProceso(correo);
     }
 }

@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto;
+package com.ccoa.planeacionestrategica.aplicacion.dto.login;
 
 import lombok.*;
 

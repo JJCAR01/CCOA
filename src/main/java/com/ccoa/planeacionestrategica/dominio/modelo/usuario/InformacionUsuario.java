@@ -20,6 +20,17 @@ public class InformacionUsuario {
 
     public static InformacionUsuario of(Long idInformacionUsuario, List<EDireccion> direcciones, List<EProceso> procesos ){
         ValidadorDominio.validarObligatorio(direcciones,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.validarObligatorio(procesos,EL_PROCESO_NO_PUEDE_ESTAR_VACIO);
+        return new InformacionUsuario(idInformacionUsuario, direcciones,procesos);
+    }
+
+    public static InformacionUsuario direcciones(Long idInformacionUsuario, List<EDireccion> direcciones, List<EProceso> procesos ){
+        ValidadorDominio.validarObligatorio(direcciones,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
+        return new InformacionUsuario(idInformacionUsuario, direcciones,procesos);
+    }
+
+    public static InformacionUsuario procesos(Long idInformacionUsuario, List<EDireccion> direcciones, List<EProceso> procesos ){
+        ValidadorDominio.validarObligatorio(procesos,EL_PROCESO_NO_PUEDE_ESTAR_VACIO);
         return new InformacionUsuario(idInformacionUsuario, direcciones,procesos);
     }
 

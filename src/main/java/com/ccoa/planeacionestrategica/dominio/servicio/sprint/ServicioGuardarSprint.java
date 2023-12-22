@@ -22,8 +22,8 @@ public class ServicioGuardarSprint {
         return this.repositorioSprint.guardar(sprint);
     }
 
-    public Long ejecutarGuardarDocumento(DocumentoSprint documentoSprint){
-        return this.repositorioSprint.guardarDocumento(documentoSprint);
+    public Long ejecutarGuardarDocumento(DocumentoSprint documentoSprint,Long codigo){
+        return this.repositorioSprint.guardarDocumento(documentoSprint,codigo);
     }
 
 }

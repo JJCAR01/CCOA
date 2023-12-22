@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.CLAVE;

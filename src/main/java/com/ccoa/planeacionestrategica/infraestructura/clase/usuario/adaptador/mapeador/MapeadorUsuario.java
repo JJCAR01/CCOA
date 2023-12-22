@@ -1,20 +1,21 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
-import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.repositorio.jpa.RepositorioAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.cargo.adaptador.repositorio.jpa.RepositorioCargoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadDetalleProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadInformacionProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.entidad.EntidadProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
-import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCifrarTextoEncoder;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -22,16 +23,13 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
 
     private final ServicioCifrarTextoEncoder passwordEncoder;
     private final RepositorioCargoJpa repositorioCargoJpa;
-    private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
-    private final RepositorioAreaJpa repositorioAreaJpa;
 
-    public MapeadorUsuario(ServicioCifrarTextoEncoder passwordEncoder, RepositorioCargoJpa repositorioCargoJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa, RepositorioAreaJpa repositorioAreaJpa) {
+    public MapeadorUsuario(ServicioCifrarTextoEncoder passwordEncoder, RepositorioCargoJpa repositorioCargoJpa,
+                           RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.passwordEncoder = passwordEncoder;
         this.repositorioCargoJpa = repositorioCargoJpa;
-        this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
-        this.repositorioAreaJpa = repositorioAreaJpa;
     }
 
     @Override
@@ -66,10 +64,15 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
             var infEntidad = this.repositorioInformacionUsuarioJpa.findById(entidad.getIdUsuario());
 
             dto.setDirecciones(infEntidad.orElseThrow().getDireccion());
-            dto.setProcesos(infEntidad.orElseThrow().getProceso());
+            dto.setProcesos(infEntidad.orElseThrow().getProcesos());
 
             listaDto.add(dto);
         }
         return listaDto;
+    }
+
+    public DtoUsuarioResumen mapeadorDominioUsuario(EntidadUsuario entidad, EntidadInformacionUsuario informacionUsuario) {
+        return new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),entidad.getCorreo(),
+                informacionUsuario.getDireccion(), informacionUsuario.getProcesos(), entidad.getIdCargo());
     }
 }

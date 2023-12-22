@@ -80,10 +80,6 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             dto.setEstado(entidad.getEstado());
             dto.setIdProyecto(entidad.getIdProyecto());
 
-            var infEntidad = repositorioDocumentoSprintJpa.findById(entidad.getIdSprint());
-
-            //dto.setRutaArchivo(infEntidad.orElseThrow().getRutaArchivo());
-
             listaDto.add(dto);
         }
         return listaDto;

@@ -40,7 +40,7 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/{codigo}")
-    public Usuario listar(@PathVariable Long codigo){
+    public DtoUsuarioResumen listar(@PathVariable Long codigo){
         return servicioAplicacionListarUsuario.consultarById(codigo);
     }
 
@@ -52,6 +52,24 @@ public class ControladorUsuario {
     @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
         return this.servicioAplicacionModificarUsuario.ejecutarModificar(usuario,codigo);
+    }
+
+    @PutMapping("/direcciones/{codigo}")
+    public DtoRespuesta<Long> modificarDirecciones(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarModificarDirecciones(usuario,codigo);
+    }
+    @PutMapping("/direcciones/del/{codigo}")
+    public DtoRespuesta<Long> eliminarDirecciones(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarEliminarDirecciones(usuario,codigo);
+    }
+
+    @PutMapping("/procesos/{codigo}")
+    public DtoRespuesta<Long> modificarProcesos(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarModificarProcesos(usuario,codigo);
+    }
+    @PutMapping("/procesos/del/{codigo}")
+    public DtoRespuesta<Long> eliminarProcesos(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarEliminarProcesos(usuario,codigo);
     }
 
 

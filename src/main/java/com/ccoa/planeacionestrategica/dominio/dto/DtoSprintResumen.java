@@ -18,5 +18,4 @@ public class DtoSprintResumen {
     private Double avance;
     private Boolean estado;
     private Long idProyecto;
-    private String rutaArchivo;
 }

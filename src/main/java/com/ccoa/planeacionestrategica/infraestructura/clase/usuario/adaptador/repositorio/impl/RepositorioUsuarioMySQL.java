@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.r
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
@@ -41,15 +42,26 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         return this.mapeadorUsuario.listarDominio(entidadUsuarios);
     }
     @Override
-    public Usuario consultarPorId(Long id) {
+    public DtoUsuarioResumen consultarPorId(Long id) {
         var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
+        var informacionEntidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
         assert entidad != null;
-        return this.mapeadorUsuario.mapeadorDominio(entidad);
+        assert informacionEntidad != null;
+        return this.mapeadorUsuario.mapeadorDominioUsuario(entidad,informacionEntidad);
+    }
+
+    @Override
+    public InformacionUsuario consultarPorIdParaMofdificar(Long id) {
+        var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        return this.mapeadorInformacionUsuario.mapeadorDominio(entidad);
     }
 
     @Override
     public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
         var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
+        var infusuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
+
 
         this.repositorioUsuarioJpa.save(usuarioEntidad);
 
@@ -58,7 +70,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());  // Utilizar el ID generado
         entidadUsuarioRol.setRol(rol.getNombreRol());
 
-        this.repositorioInformacionUsuarioJpa.save(mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario));
+        this.repositorioInformacionUsuarioJpa.save(infusuarioEntidad);
         this.repositorioRolJpa.save(entidadUsuarioRol);
         return usuarioEntidad.getIdUsuario();
     }
@@ -96,6 +108,38 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         assert entidad != null;
         this.mapeadorUsuario.actualizarEntidad(entidad, usuario);
         return this.repositorioUsuarioJpa.save(entidad).getIdUsuario();
+    }
+
+    @Override
+    public Long modificarDireciones(InformacionUsuario informacionUsuario, Long id) {
+        var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorInformacionUsuario.actualizarDirecciones(entidad,informacionUsuario);
+        return this.repositorioInformacionUsuarioJpa.save(entidad).getIdInformacionUsuario();
+    }
+
+    @Override
+    public Long modificarDirecionesParaEliminar(InformacionUsuario informacionUsuario, Long id) {
+        var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorInformacionUsuario.eliminarDirecciones(entidad,informacionUsuario);
+        return this.repositorioInformacionUsuarioJpa.save(entidad).getIdInformacionUsuario();
+    }
+
+    @Override
+    public Long modificarProcesos(InformacionUsuario informacionUsuario, Long id) {
+        var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorInformacionUsuario.actualizarProcesos(entidad,informacionUsuario);
+        return this.repositorioInformacionUsuarioJpa.save(entidad).getIdInformacionUsuario();
+    }
+
+    @Override
+    public Long modificarProcesosParaEliminar(InformacionUsuario informacionUsuario, Long id) {
+        var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorInformacionUsuario.eliminarProcesos(entidad,informacionUsuario);
+        return this.repositorioInformacionUsuarioJpa.save(entidad).getIdInformacionUsuario();
     }
 
     @Override

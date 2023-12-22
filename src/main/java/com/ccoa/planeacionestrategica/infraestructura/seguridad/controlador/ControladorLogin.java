@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.login.DtoLogin;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio.ServicioAplicacionListarUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.AuthResponse;
 import com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

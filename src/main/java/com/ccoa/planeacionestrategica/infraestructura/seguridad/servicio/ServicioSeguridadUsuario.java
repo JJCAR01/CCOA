@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
@@ -20,8 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion.*;
 
 @Service
 @Transactional
@@ -51,7 +50,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
         for (var informacionUsuario : todasLasInformaciones) {
             if (entidadUsuario.getIdUsuario().equals(informacionUsuario.getIdInformacionUsuario())) {
                 direcciones.addAll(informacionUsuario.getDireccion());
-                procesos.addAll(informacionUsuario.getProceso());
+                procesos.addAll(informacionUsuario.getProcesos());
             }
         }
         String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);

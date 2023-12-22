@@ -23,12 +23,11 @@ public class ServicioAplicacionGuardarSprint {
 
     public DtoRespuesta<Long> ejecutar(DtoSprint dto){
         var sprint = this.mapeadorAplicacionSprint.mapeadorAplicacion(dto);
-
         return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardar(sprint));
     }
-    public DtoRespuesta<Long> guardarRutaArchivo(DtoRutaArchivo dto){
-        var docSprint = this.mapeadorAplicacionDocumentoSprint.mapeadorAplicacion(dto);
+    public DtoRespuesta<Long> guardarRutaArchivo(DtoRutaArchivo dto, Long codigo){
+        var docSprint = this.mapeadorAplicacionDocumentoSprint.mapeadorAplicacionCrear(dto,codigo);
 
-        return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardarDocumento(docSprint));
+        return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardarDocumento(docSprint,codigo));
     }
 }

@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.puerto;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;

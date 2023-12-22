@@ -9,11 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorDocumentoSprint implements MapeadorInfraestructura<EntidadDocumentoSprint, DocumentoSprint> {
     @Override
     public DocumentoSprint mapeadorDominio(EntidadDocumentoSprint entidad) {
-        return new DocumentoSprint(entidad.getRutaArchivo());
+        return new DocumentoSprint(entidad.getIdDocumentoSprint(), entidad.getRutaArchivo());
     }
 
     @Override
     public EntidadDocumentoSprint mapeadorEntidad(DocumentoSprint dominio) {
         return new EntidadDocumentoSprint(dominio.getRutaArchivo());
     }
+
 }

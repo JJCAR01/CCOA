@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.usuario;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
@@ -22,6 +23,6 @@ public class ServicioGuardarUsuario {
 
         if(this.repositorioUsuario.existe(usuario)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
-        return this.repositorioUsuario.guardar(usuario,rol,informacionUsuario );
+        return this.repositorioUsuario.guardar(usuario,rol, informacionUsuario );
     }
 }

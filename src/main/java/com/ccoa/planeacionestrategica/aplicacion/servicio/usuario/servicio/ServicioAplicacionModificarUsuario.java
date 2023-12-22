@@ -25,4 +25,21 @@ public class ServicioAplicacionModificarUsuario {
         var informacionUsuario = mapeadorAplicacionInformacionUsuario.mapeadorAplicacion(dto);
         return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,informacionUsuario,codigo));
     }
+    public DtoRespuesta<Long> ejecutarModificarDirecciones(DtoUsuario dto, Long codigo){
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarDireccion(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificarDirecciones(informacionUsuario,codigo));
+    }
+    public DtoRespuesta<Long> ejecutarEliminarDirecciones(DtoUsuario dto, Long codigo){
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarDireccion(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarEliminarDirecciones(informacionUsuario,codigo));
+    }
+    public DtoRespuesta<Long> ejecutarModificarProcesos(DtoUsuario dto, Long codigo){
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarProceso(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificarProcesos(informacionUsuario,codigo));
+    }
+    public DtoRespuesta<Long> ejecutarEliminarProcesos(DtoUsuario dto, Long codigo){
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarProceso(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarEliminarProcesos(informacionUsuario,codigo));
+    }
+
 }

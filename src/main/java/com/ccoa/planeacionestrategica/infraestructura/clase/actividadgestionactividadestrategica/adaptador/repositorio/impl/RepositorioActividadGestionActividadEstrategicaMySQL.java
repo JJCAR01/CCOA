@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class RepositorioActividadGestionActividadEstrategicaMySQL implements RepositorioActividadGestionActividadEstrategica {
+public class    RepositorioActividadGestionActividadEstrategicaMySQL implements RepositorioActividadGestionActividadEstrategica {
 
     private final RepositorioActividadGestionActividadEstrategicaJpa repositorioActividadGestionActividadEstrategicaJpa;
     private final RepositorioInformacionActividadGestionActividadEstrategicaJpa repositorioInformacionActividadGestionActividadEstrategicaJpa;

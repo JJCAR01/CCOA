@@ -66,7 +66,7 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     }
 
     @Override
-    public Long guardarDocumento(DocumentoSprint documentoSprint) {
+    public Long guardarDocumento(DocumentoSprint documentoSprint, Long codigo) {
         var docSprintEntidad = this.mapeadorDocumentoSprint.mapeadorEntidad(documentoSprint);
         return this.repositorioDocumentoSprintJpa.save(docSprintEntidad).getIdDocumentoSprint();
     }

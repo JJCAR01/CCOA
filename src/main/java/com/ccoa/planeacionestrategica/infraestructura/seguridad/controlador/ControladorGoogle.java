@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.login.DtoLoginGoogle;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio.ServicioAplicacionListarUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.NoDatoExcepcion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuarioRol;

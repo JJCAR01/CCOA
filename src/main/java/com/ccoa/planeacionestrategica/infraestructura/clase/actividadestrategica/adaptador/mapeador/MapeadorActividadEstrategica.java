@@ -54,7 +54,7 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
             dto.setEstado(infEntidad.orElseThrow().getEstado());
             dto.setAvance(infEntidad.orElseThrow().getAvance());
             dto.setIdUsuario(infEntidad.orElseThrow().getIdUsuario());
-
+            dto.setIdPat(infEntidad.orElseThrow().getIdPat());
             listaDto.add(dto);
         }
         return listaDto;

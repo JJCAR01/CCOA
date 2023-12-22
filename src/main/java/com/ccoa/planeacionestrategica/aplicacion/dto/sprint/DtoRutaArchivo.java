@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 public class DtoRutaArchivo {
 
-    public Long idRutaArchivo;
+    private Long idRutaArchivo;
     private String rutaArchivo;
 }

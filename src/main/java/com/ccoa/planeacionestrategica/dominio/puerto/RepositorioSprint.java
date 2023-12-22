@@ -10,7 +10,7 @@ public interface RepositorioSprint {
     List<DtoSprintResumen> listar();
     Sprint consultarPorId(Long id);
     Long guardar(Sprint sprint);
-    Long guardarDocumento(DocumentoSprint documentoSprint);
+    Long guardarDocumento(DocumentoSprint documentoSprint,Long codigo);
     boolean existe(Sprint sprint);
     Long eliminar(Long id);
     Long modificar(Sprint sprint, Long id);

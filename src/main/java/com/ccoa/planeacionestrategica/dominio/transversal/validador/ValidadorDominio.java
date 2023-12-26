@@ -10,13 +10,10 @@ import java.util.Objects;
 
 public class ValidadorDominio {
 
-    private ValidadorDominio() {
-    }
-
-            private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{10,20}";
+    private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{10,20}";
     private static final String PATRON_CORREO = "^[a-zA-Z]+@ccoa\\.org\\.co$";
-
     private static final String CAMPO_OBLIGATORIO = "El campo es obligatorio.";
+    private static final String URL = "^(ftp|http|https):\\/\\/[^ \"]+$";
     public static final String MENSAJE_DEFECTO = "Ocurrió un error procesando la solicitud. Por favor contacta al administrador del sistema.";
 
 
@@ -37,6 +34,7 @@ public class ValidadorDominio {
             throw new ValorObligatorioExcepcion(mensajeTecnico, MENSAJE_DEFECTO);
         }
     }
+
 
     public static void validadorNoVacio(List<?> lista, String mensajeTecnico) {
         if(lista == null  || lista.isEmpty()) {
@@ -139,5 +137,19 @@ public class ValidadorDominio {
         return (ChronoUnit.DAYS.between(fechaInicial, fechaFinal));
     }
 
+    public static void validarPatronURLEsValido(String valor, String mensaje) {
+        if (!cadenaURL(valor)) {
+            throw new ValorObjetoExcepcion(mensaje,MENSAJE_DEFECTO);
+        }
+    }
+    public static boolean cadenaURL(String string) {
+        return cadenaAceptaElPatron(string, URL);
+    }
+    public static boolean cadenaAceptaElPatron(String string, String pattern) {
+        return aplicarTrim(string).matches(pattern);
+    }
+    public static String aplicarTrim(String string) {
+        return string.trim();
+    }
 
 }

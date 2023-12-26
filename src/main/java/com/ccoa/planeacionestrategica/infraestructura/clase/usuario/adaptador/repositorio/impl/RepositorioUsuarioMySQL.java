@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.r
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;

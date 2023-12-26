@@ -8,7 +8,6 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio.Servi
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio.ServicioAplicacionListarUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio.ServicioAplicacionModificarUsuario;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

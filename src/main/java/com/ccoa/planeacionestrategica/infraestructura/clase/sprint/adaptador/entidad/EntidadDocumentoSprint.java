@@ -13,7 +13,6 @@ import lombok.Setter;
 @Table(name = "documento_sprint")
 public class EntidadDocumentoSprint {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_documneto_sprint")
     private Long idDocumentoSprint;
 
@@ -21,6 +20,11 @@ public class EntidadDocumentoSprint {
     private String rutaArchivo;
 
     public EntidadDocumentoSprint(String rutaArchivo) {
+        this.rutaArchivo = rutaArchivo;
+    }
+
+    public EntidadDocumentoSprint(Long idDocumentoSprint, String rutaArchivo) {
+        this.idDocumentoSprint = idDocumentoSprint;
         this.rutaArchivo = rutaArchivo;
     }
 }

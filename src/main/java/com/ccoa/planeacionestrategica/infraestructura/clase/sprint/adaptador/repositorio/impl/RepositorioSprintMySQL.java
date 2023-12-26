@@ -44,6 +44,13 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     }
 
     @Override
+    public DocumentoSprint consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoSprintJpa.findById(id).orElse(null);
+        assert entidad != null;
+        return this.mapeadorDocumentoSprint.mapeadorDominio(entidad);
+    }
+
+    @Override
     public Long guardar(Sprint sprint)   {
         var sprintEntidad = this.mapeadorSprint.mapeadorEntidad(sprint);
 
@@ -67,13 +74,18 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
 
     @Override
     public Long guardarDocumento(DocumentoSprint documentoSprint, Long codigo) {
-        var docSprintEntidad = this.mapeadorDocumentoSprint.mapeadorEntidad(documentoSprint);
+        var docSprintEntidad = this.mapeadorDocumentoSprint.mapeadorEntidadDocumento(documentoSprint,codigo);
         return this.repositorioDocumentoSprintJpa.save(docSprintEntidad).getIdDocumentoSprint();
     }
 
     @Override
     public boolean existe(Sprint sprint) {
         return this.repositorioSprintJpa.findByDescripcion(sprint.getDescripcion())!=null;
+    }
+
+    @Override
+    public boolean existeDocumento(DocumentoSprint sprint) {
+        return this.repositorioDocumentoSprintJpa.findById(sprint.getIdRutaArchivo()).isPresent();
     }
 
     @Override

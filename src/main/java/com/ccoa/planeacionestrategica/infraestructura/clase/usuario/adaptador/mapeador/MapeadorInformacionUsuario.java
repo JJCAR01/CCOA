@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.m
 import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
@@ -14,7 +13,6 @@ import java.util.List;
 
 @Configuration
 public class MapeadorInformacionUsuario implements MapeadorInfraestructura<EntidadInformacionUsuario, InformacionUsuario> {
-
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
 
@@ -86,7 +84,7 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
         entidadInformacionUsuario.setDireccion(direccionesActuales);
     }
     public void eliminarDirecciones(EntidadInformacionUsuario entidadInformacionUsuario,
-                                      InformacionUsuario informacionUsuario){
+                                    InformacionUsuario informacionUsuario){
         // Obtén la lista actual de direcciones de la entidad
         List<EDireccion> direccionesActuales = entidadInformacionUsuario.getDireccion();
 
@@ -103,7 +101,7 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
     }
 
     public void actualizarProcesos(EntidadInformacionUsuario entidadInformacionUsuario,
-                                      InformacionUsuario informacionUsuario){
+                                   InformacionUsuario informacionUsuario){
 
         List<EProceso> procesosActuales = entidadInformacionUsuario.getProcesos();
 
@@ -118,7 +116,7 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
         entidadInformacionUsuario.setProcesos(procesosActuales);
     }
     public void eliminarProcesos(EntidadInformacionUsuario entidadInformacionUsuario,
-                                    InformacionUsuario informacionUsuario){
+                                 InformacionUsuario informacionUsuario) {
 
         List<EProceso> procesosActuales = entidadInformacionUsuario.getProcesos();
 
@@ -130,5 +128,4 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
 
         entidadInformacionUsuario.setProcesos(procesosActuales);
     }
-
 }

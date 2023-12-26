@@ -8,6 +8,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.Servic
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionListarSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionModificarSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +36,13 @@ public class ControladorSprint {
     public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoSprint sprint){
         return ResponseEntity.ok(this.servicioAplicacionGuardarSprint.ejecutar(sprint));
     }
-    @PostMapping(value = "/ccoa/sprints/archivo/{codigo}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping("/archivo/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoRutaArchivo rutaArchivo, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionGuardarSprint.guardarRutaArchivo(rutaArchivo,codigo));
+    }
+    @GetMapping("/archivo/{codigo}")
+    public ResponseEntity<DocumentoSprint> obtenerDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(servicioAplicacionListarSprint.consultarByIdDocumento(codigo));
     }
     @GetMapping
     public ResponseEntity<List<DtoSprintResumen>> listar(){

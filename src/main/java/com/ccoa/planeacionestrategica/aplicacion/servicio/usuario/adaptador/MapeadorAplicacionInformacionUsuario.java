@@ -5,7 +5,6 @@ import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAp
 import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;

@@ -16,5 +16,8 @@ public class MapeadorDocumentoSprint implements MapeadorInfraestructura<EntidadD
     public EntidadDocumentoSprint mapeadorEntidad(DocumentoSprint dominio) {
         return new EntidadDocumentoSprint(dominio.getRutaArchivo());
     }
+    public EntidadDocumentoSprint mapeadorEntidadDocumento(DocumentoSprint dominio,Long id) {
+        return new EntidadDocumentoSprint(id,dominio.getRutaArchivo());
+    }
 
 }

@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInval
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS;
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
@@ -23,6 +24,7 @@ public class ServicioGuardarSprint {
     }
 
     public Long ejecutarGuardarDocumento(DocumentoSprint documentoSprint,Long codigo){
+        if(this.repositorioSprint.existeDocumento(documentoSprint)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT,MENSAJE_DEFECTO);
         return this.repositorioSprint.guardarDocumento(documentoSprint,codigo);
     }
 

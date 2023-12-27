@@ -1,13 +1,14 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.validador;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
+import lombok.AllArgsConstructor;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
-
+@AllArgsConstructor
 public class ValidadorDominio {
 
     private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{10,20}";
@@ -51,27 +52,27 @@ public class ValidadorDominio {
 
     public static void validadorNumeroEnteroYMayorACero(Integer valor, String mensaje){
 
-        if((valor <= 0) || (valor == null)){
+        if(valor <= 0){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroDoubleYMayorOIgualACero(Double valor, String mensaje) {
 
-        if((valor < 0) || (valor == null)){
+        if(valor < 0){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static void validadorNumeroDoubleYMayorACero(Double valor, String mensaje) {
 
-        if((valor < 0) || (valor == null)){
+        if(valor < 0){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroLongYMayorACero(Long valor, String mensaje) {
 
-        if((valor < 0) || (valor == null)){
+        if(valor < 0){
             throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
         }
     }
@@ -84,12 +85,12 @@ public class ValidadorDominio {
 
     public static boolean aceptacionPatron(String cadena, String patron)
     {
-        return cadena.matches(patron);
+        return !cadena.matches(patron);
     }
 
     public static void validadorCaracteresEspecialesPassword(String password, String mensaje)
     {
-        if(!aceptacionPatron(password, PATRON_CLAVE))
+        if(aceptacionPatron(password, PATRON_CLAVE))
         {
             throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
         }
@@ -100,7 +101,7 @@ public class ValidadorDominio {
 
     public static void validadorCaracteresEspecialesCorreo(String correo, String mensaje)
     {
-        if(!aceptacionPatron(correo, PATRON_CORREO))
+        if(aceptacionPatron(correo, PATRON_CORREO))
         {
             throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
         }

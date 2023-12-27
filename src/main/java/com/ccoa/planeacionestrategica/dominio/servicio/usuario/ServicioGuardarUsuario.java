@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.usuario;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.ProcesosUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;

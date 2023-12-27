@@ -31,17 +31,15 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     private final RepositorioProyectoJpa repositorioProyectoJpa;
     private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
     private final RepositorioTareaJpa repositorioTareaJpa;
-    private final RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
     private final MapeadorDetalleProyecto mapeadorDetalleProyecto;
 
-    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioTareaJpa repositorioTareaJpa, RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa,
+    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioTareaJpa repositorioTareaJpa,
                           RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, MapeadorDetalleProyecto mapeadorDetalleProyecto) {
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
         this.repositorioTareaJpa = repositorioTareaJpa;
-        this.repositorioDocumentoSprintJpa = repositorioDocumentoSprintJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
         this.mapeadorDetalleProyecto = mapeadorDetalleProyecto;

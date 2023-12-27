@@ -21,6 +21,7 @@ public class MapeadorArea implements MapeadorInfraestructura<EntidadArea, Area> 
 
     public void actualizarEntidad(EntidadArea entidad, Area area) {
         entidad.setNombre(area.getNombre());
+        entidad.setDireccion(area.getDireccion());
     }
 
     public List<Area> listarDominio(List<EntidadArea> entidades){

@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import org.springframework.stereotype.Component;
 

@@ -20,7 +20,6 @@ import java.util.List;
 public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
-
     private final RepositorioRolJpa repositorioRolJpa;
     private final MapeadorUsuario mapeadorUsuario;
     private final MapeadorInformacionUsuario mapeadorInformacionUsuario;
@@ -59,17 +58,23 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     @Override
     public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
         var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
-        var infusuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
+        var infUsuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
 
+        // Guardar la entidad de usuario y obtener el ID generado
+        var id = this.repositorioUsuarioJpa.save(usuarioEntidad).getIdUsuario();
 
-        this.repositorioUsuarioJpa.save(usuarioEntidad);
+        // Utilizar el mismo ID generado para la entidad de información de usuario
+        infUsuarioEntidad.setIdInformacionUsuario(id);
+
+        // Guardar la entidad de información de usuario
+        this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
 
         EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
         entidadUsuarioRol.setUsuario(usuarioEntidad);
         entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());  // Utilizar el ID generado
         entidadUsuarioRol.setRol(rol.getNombreRol());
 
-        this.repositorioInformacionUsuarioJpa.save(infusuarioEntidad);
+        this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
         this.repositorioRolJpa.save(entidadUsuarioRol);
         return usuarioEntidad.getIdUsuario();
     }
@@ -82,7 +87,10 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long eliminar(Long id) {
-        this.repositorioRolJpa.deleteById(id);
+        // Elimina la entidad de roles del usuario
+        this.repositorioRolJpa.eliminarRolesPorUsuarioId(id);
+
+        // Ahora puedes eliminar el usuario
         this.repositorioUsuarioJpa.deleteById(id);
         return id;
     }

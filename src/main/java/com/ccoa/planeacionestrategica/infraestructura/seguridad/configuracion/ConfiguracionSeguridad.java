@@ -28,18 +28,38 @@ public class ConfiguracionSeguridad {
         this.jwtFilter = jwtFilter;
     }
 
+    /*@Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth ->
+                        auth
+                                .requestMatchers("/assets/**").permitAll()
+                                .requestMatchers("/ccoa/auth/**").permitAll() // Permitir acceso sin autenticación a estas rutas
+                                .requestMatchers("/", "/index.html", "/runtime*.js", "/polyfills*.js",
+                                        "/main*.js", "/scripts*.js", "/styles*.css", "/favicon.ico").permitAll()
+                                .anyRequest().authenticated() // Requiere autenticación para otras rutas
+                )
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable);
+
+        return http.build();
+    }*/
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(Customizer.withDefaults());
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http
                 .authorizeHttpRequests(auth ->
-                        auth.
-                                requestMatchers("/ccoa/auth/**").permitAll().
-                                anyRequest().authenticated()
+                        auth
+                                .anyRequest().permitAll()
                 );
+
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.httpBasic(Customizer.withDefaults());

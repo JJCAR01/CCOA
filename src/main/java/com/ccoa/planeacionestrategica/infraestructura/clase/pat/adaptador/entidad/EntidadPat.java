@@ -35,7 +35,7 @@ public class EntidadPat {
     @Column(nullable = false)
     private EProceso proceso;
 
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "id_usuario")
     private Long idUsuario;
 
 

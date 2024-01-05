@@ -2,6 +2,8 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.e
 
 import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadProceso;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +20,7 @@ import java.util.List;
 @Table(name = "informacion_usuario")
 public class EntidadInformacionUsuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_usuario", nullable = false)
     private Long idInformacionUsuario;
 
@@ -28,7 +31,6 @@ public class EntidadInformacionUsuario {
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private List<EProceso> procesos;
-
     public EntidadInformacionUsuario(List<EDireccion> direccion, List<EProceso> procesos) {
         this.direccion = direccion;
         this.procesos = procesos;

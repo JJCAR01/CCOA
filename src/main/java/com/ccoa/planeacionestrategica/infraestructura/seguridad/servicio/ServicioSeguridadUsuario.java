@@ -60,7 +60,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
                 .build();
     }
 
-    private List<GrantedAuthority> grantedAuthorities(String[] roles,List<EDireccion> direcciones,List<EProceso> procesos) {
+    private List<GrantedAuthority> grantedAuthorities(String[] roles, List<EDireccion> direcciones, List<EProceso> procesos) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
 
         for (String role: roles) {

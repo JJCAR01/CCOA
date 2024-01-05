@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.modelo.pat;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
+import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
 import lombok.Getter;
 
 

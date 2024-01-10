@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto;
+package com.ccoa.planeacionestrategica.aplicacion.dto.cargo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

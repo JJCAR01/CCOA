@@ -1,10 +1,8 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadProceso;
+import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
+import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ public class DtoUsuarioResumen {
     private String nombre;
     private String apellidos;
     private String correo;
-    private List<EDireccion> direcciones;
-    private List<EProceso> procesos;
+    private List<DtoDireccion> direcciones;
+    private List<DtoProceso> procesos;
     private Long idCargo;
 }

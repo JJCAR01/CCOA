@@ -1,9 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadProceso;
+import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
+import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +18,7 @@ public class DtoPatResumen {
     private Integer fechaAnual;
     private LocalDate fechaRegistro;
     private Double porcentaje;
-    private EProceso proceso;
-    private EDireccion direccion;
+    private DtoProceso proceso;
+    private DtoDireccion direccion;
     private Long idUsuario;
 }

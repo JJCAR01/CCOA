@@ -40,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
 
-            //2.Validar que el JWT sea valido
+            //2. Validar que el JWT sea válido
             String[] authHeaderParts = authHeader.split(" ");
             if (authHeaderParts.length != 2) {
                 filterChain.doFilter(request, response);
@@ -57,7 +57,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String username = this.jwtUtil.getUsername(jwt);
             User user = (User) this.userDetailsService.loadUserByUsername(username);
 
-            //4.Cargar el usuario en el contexto de seguridad
+            //4. Cargar el usuario en el contexto de seguridad
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(),
                     user.getPassword(),user.getAuthorities());
 

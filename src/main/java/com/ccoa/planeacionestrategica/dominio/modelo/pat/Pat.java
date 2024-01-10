@@ -1,28 +1,29 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.pat;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
+import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadProceso;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
 
 @Getter
+@Setter
 public class Pat {
 
     //Clase de de asignacion de atributos y se validan entradas
-    private final Long idPat;
-    private final String nombre;
-    private final Integer fechaAnual;
-    private final LocalDate fechaRegistro;
-    private final Double porcentaje;
-    private final EProceso proceso;
-    private final Long idUsuario;
+    private  Long idPat;
+    private  String nombre;
+    private  Integer fechaAnual;
+    private  LocalDate fechaRegistro;
+    private  Double porcentaje;
+    private Proceso proceso;
+    private  Long idUsuario;
 
     public static Pat of(Long idPat,String nombre,Integer fechaAnual,LocalDate fechaRegistro,
-                         Double porcentaje,EProceso proceso, Long idUsuario ){
+                         Double porcentaje,Proceso proceso, Long idUsuario ){
         ValidadorDominio.validarObligatorio(nombre,NOMBRE_DEL_PAT_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroEnteroYMayorACero(fechaAnual,LA_FECHA_ANUAL_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.siEsFechaActualRegistrada(fechaRegistro,LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL);
@@ -33,7 +34,7 @@ public class Pat {
     }
 
 
-    public Pat(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, EProceso proceso, Long idUsuario) {
+    public Pat(Long idPat, String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentaje, Proceso proceso, Long idUsuario) {
         this.idPat = idPat;
         this.nombre = nombre;
         this.fechaAnual = fechaAnual;

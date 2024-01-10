@@ -1,10 +1,8 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.usuario;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
+import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
+import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadProceso;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ public class DtoUsuario {
     private String password;
     private String correo;
     private Long idCargo;
-    private List<EDireccion> direcciones;
-    private List<EProceso> procesos;
+    private List<DtoDireccion> direcciones;
+    private List<DtoProceso> procesos;
     private List<Rol> roles;
 }

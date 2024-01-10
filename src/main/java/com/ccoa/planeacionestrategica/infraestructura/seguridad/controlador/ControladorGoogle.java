@@ -64,10 +64,10 @@ public class ControladorGoogle {
     private String getTipo(List<EntidadUsuarioRol> roles) {
          return roles.stream().anyMatch(aut -> aut.getRol().equals("OPERADOR"))? "OPERADOR" : "ADMIN";
     }
-    private String obtenerDireccionDelUsuario(String correo) {
+    private List<String> obtenerDireccionDelUsuario(String correo) {
         return servicioAplicacionListarUsuario.consultarByCorreoParaDireccion(correo);
     }
-    private String obtenerProcesoDelUsuario(String correo) {
+    private List<String> obtenerProcesoDelUsuario(String correo) {
         return servicioAplicacionListarUsuario.consultarByCorreoParaProceso(correo);
     }
 }

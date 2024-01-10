@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.entidad.EntidadDireccion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,15 +14,15 @@ import lombok.Setter;
 public class EntidadInformacionPat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_informacion_pat")
     private Long idInformacionPat;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private EDireccion direccion;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_direccion")
+    private EntidadDireccion direccion;
 
-    public EntidadInformacionPat(EDireccion direccion) {
+    public EntidadInformacionPat(EntidadDireccion direccion) {
         this.direccion = direccion;
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public class EntidadUsuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_usuario", nullable = false)
     private Long idUsuario;
 

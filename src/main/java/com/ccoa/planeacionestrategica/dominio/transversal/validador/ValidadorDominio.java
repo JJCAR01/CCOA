@@ -126,11 +126,9 @@ public class ValidadorDominio {
         }
     }
     public static void siEsLasFechasRegistrasdasSonValidasParaSprint(LocalDate fechaInicio,LocalDate fechaFinal,String mensaje) {
-        if (!(fechaInicio.getDayOfWeek() == DayOfWeek.MONDAY && fechaFinal.getDayOfWeek() == DayOfWeek.SUNDAY)) {
-            long diferencia = calcularDiferencia(fechaInicio,fechaFinal);
-            if ((diferencia % 7 != 0)) {
-                throw new ValidadorFecha(mensaje, MENSAJE_DEFECTO);
-            }
+        long diferencia = calcularDiferencia(fechaInicio,fechaFinal);
+        if ((diferencia <= 7)) {
+            throw new ValidadorFecha(mensaje, MENSAJE_DEFECTO);
         }
     }
 

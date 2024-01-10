@@ -1,15 +1,14 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadProceso;
+import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proceso.adaptador.entidad.EntidadProceso;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,14 +23,12 @@ public class EntidadInformacionUsuario {
     @Column(name = "id_informacion_usuario", nullable = false)
     private Long idInformacionUsuario;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
-    private List<EDireccion> direccion;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<EntidadDireccion> direccion = new ArrayList<>();
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
-    private List<EProceso> procesos;
-    public EntidadInformacionUsuario(List<EDireccion> direccion, List<EProceso> procesos) {
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<EntidadProceso> procesos = new ArrayList<>();
+    public EntidadInformacionUsuario(List<EntidadDireccion> direccion, List<EntidadProceso> procesos) {
         this.direccion = direccion;
         this.procesos = procesos;
     }

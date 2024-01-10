@@ -14,7 +14,6 @@ public class ServicioAplicacionEliminarArea {
         this.servicioEliminarArea = servicioEliminarArea;
     }
 
-    @Secured("ROLE_ADMIN")
     public DtoRespuesta<Long> ejecutarEliminar(Long codigo){
         return new DtoRespuesta<>(this.servicioEliminarArea.ejecutarEliminar(codigo));
     }

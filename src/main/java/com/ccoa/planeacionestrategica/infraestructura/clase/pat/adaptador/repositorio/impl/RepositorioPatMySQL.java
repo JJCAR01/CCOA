@@ -41,8 +41,16 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long guardar(Pat pat, InformacionPat informacionPat) {
-        this.repositorioInformacionPatJpa.save(this.mapeadorInformacionPat.mapeadorEntidad(informacionPat));
-        return this.repositorioPatJpa.save(mapeadorPat.mapeadorEntidad(pat)).getIdPat();
+        // Guardar InformacionPat
+        var informacionPatEntity = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
+        this.repositorioInformacionPatJpa.save(informacionPatEntity);
+
+        // Asignar el mismo identificador a Pat que tiene InformacionPat
+        pat.setIdPat(informacionPatEntity.getIdInformacionPat());
+
+        // Guardar Pat
+        var patEntity = mapeadorPat.mapeadorEntidad(pat);
+        return this.repositorioPatJpa.save(patEntity).getIdPat();
     }
 
     @Override

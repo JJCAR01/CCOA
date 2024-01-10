@@ -49,7 +49,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public InformacionUsuario consultarPorIdParaMofdificar(Long id) {
+    public InformacionUsuario consultarPorIdParaModificar(Long id) {
         var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
         assert entidad != null;
         return this.mapeadorInformacionUsuario.mapeadorDominio(entidad);
@@ -57,26 +57,31 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
 
     @Override
     public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
-        var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
-        var infUsuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
+        try {
+            // Guardar la entidad de usuario y obtener el ID generado
+            var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
+            usuarioEntidad = this.repositorioUsuarioJpa.save(usuarioEntidad);
+            var idUsuarioGenerado = usuarioEntidad.getIdUsuario();
 
-        // Guardar la entidad de usuario y obtener el ID generado
-        var id = this.repositorioUsuarioJpa.save(usuarioEntidad).getIdUsuario();
+            // Utilizar el mismo ID generado para la entidad de información de usuario
+            var infUsuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
+            infUsuarioEntidad.setIdInformacionUsuario(idUsuarioGenerado);
 
-        // Utilizar el mismo ID generado para la entidad de información de usuario
-        infUsuarioEntidad.setIdInformacionUsuario(id);
+            // Guardar la entidad de información de usuario
+            this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
 
-        // Guardar la entidad de información de usuario
-        this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
+            // Crear y guardar la entidad de UsuarioRol
+            EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
+            entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());
+            entidadUsuarioRol.setUsuario(usuarioEntidad);  // Asignar el usuario antes de guardarlo
+            entidadUsuarioRol.setRol(rol.getNombreRol());
+            this.repositorioRolJpa.save(entidadUsuarioRol);
 
-        EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
-        entidadUsuarioRol.setUsuario(usuarioEntidad);
-        entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());  // Utilizar el ID generado
-        entidadUsuarioRol.setRol(rol.getNombreRol());
-
-        this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
-        this.repositorioRolJpa.save(entidadUsuarioRol);
-        return usuarioEntidad.getIdUsuario();
+            return idUsuarioGenerado; // Devolver el ID generado
+        } catch (Exception e) {
+            // Manejar cualquier excepción lanzada durante el proceso
+            throw new RuntimeException("Error al guardar el usuario", e);
+        }
     }
 
 
@@ -150,12 +155,12 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public String obtenerDireccionDelUsuario(String correo) {
-        return this.mapeadorInformacionUsuario.obtenerDirecccion(correo);
+    public List<String> obtenerDireccionDelUsuario(String correo) {
+        return this.mapeadorInformacionUsuario.obtenerDirecciones(correo);
     }
 
     @Override
-    public String obtenerProcesoDelUsuario(String correo) {
-        return this.mapeadorInformacionUsuario.obtenerProceso(correo);
+    public List<String> obtenerProcesoDelUsuario(String correo) {
+        return this.mapeadorInformacionUsuario.obtenerProcesos(correo);
     }
 }

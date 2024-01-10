@@ -49,6 +49,8 @@ public class Mensajes {
     public static final String NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS = "No existe el area con los datos ingresados";
     public static final String NO_EXISTE_EL_CARGO_CON_LOS_DATOS_INGRESADOS = "No existe el cargo con los datos ingresados";
     public static final String NO_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS = "No existe el pat con los datos ingresados";
+    public static final String NO_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS = "No existe el proceso con los datos ingresados";
+    public static final String NO_EXISTE_LA_DIRECCION_CON_LOS_DATOS_INGRESADOS = "No existe la direccion con los datos ingresados";
     public static final String NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS = "No existe el proyecto con los datos ingresados";
     public static final String NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS = "No existe el usuario con los datos ingresados";
     public static final String NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "No existe la actividad de gestion de la actividad estrategica con los datos ingresados";
@@ -57,6 +59,8 @@ public class Mensajes {
     public static final String YA_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe el area con los datos ingresados";
     public static final String YA_EXISTE_EL_CARGO_CON_LOS_DATOS_INGRESADOS = "Ya existe el cargo con los datos ingresados";
     public static final String YA_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS = "Ya existe el pat con los datos ingresados";
+    public static final String YA_EXISTE_LA_DIRECCION_CON_LOS_DATOS_INGRESADOS = "Ya existe la direccion con los datos ingresados";
+    public static final String YA_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS = "Ya existe el proceso con los datos ingresados";
     public static final String YA_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS = "Ya existe el proyecto con los datos ingresados";
     public static final String YA_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS = "Ya existe el usuario con los datos ingresados";
     public static final String YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS = "Ya existe el sprint con los datos ingresados";

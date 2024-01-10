@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.enums.EProceso;
+import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.clase.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
@@ -41,8 +41,8 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
 
         if (entidadUsuario == null) throw new AutorizacionExcepcion(Mensaje.USUARIO_O_CLAVE_INCORRECTOS);
 
-        List<EDireccion> direcciones = new ArrayList<>();
-        List<EProceso> procesos = new ArrayList<>();
+        List<EntidadDireccion> direcciones = new ArrayList<>();
+        List<EntidadProceso> procesos = new ArrayList<>();
 
         var todasLasInformaciones = this.repositorioInformacionUsuarioJpa.findAll();
 
@@ -60,7 +60,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
                 .build();
     }
 
-    private List<GrantedAuthority> grantedAuthorities(String[] roles, List<EDireccion> direcciones, List<EProceso> procesos) {
+    private List<GrantedAuthority> grantedAuthorities(String[] roles, List<EntidadDireccion> direcciones, List<EntidadProceso> procesos) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
 
         for (String role: roles) {
@@ -75,26 +75,29 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
         }
         return authorities;
     }
-    private String[] getDirecciones(List<EDireccion> direcciones) {
+    private String[] getDirecciones(List<EntidadDireccion> direcciones) {
         if (direcciones == null || direcciones.isEmpty()) {
             return new String[]{};
         }
 
-        // Suponiendo que toString() devuelve el nombre de la dirección en minúsculas
-        String primeraDireccion = direcciones.get(0).toString().toLowerCase();
+        List<String> nombresDirecciones = direcciones.stream()
+                .map(EntidadDireccion::getNombre)
+                .toList();
 
-        return new String[]{primeraDireccion};
+        return nombresDirecciones.toArray(new String[0]);
     }
 
-    private String[] getProcesos(List<EProceso> procesos) {
+
+    private String[] getProcesos(List<EntidadProceso> procesos) {
         if (procesos == null || procesos.isEmpty()) {
             return new String[]{};
         }
 
-        // Suponiendo que toString() devuelve el nombre de la dirección en minúsculas
-        String primeraDireccion = procesos.get(0).toString().toLowerCase();
+        List<String> nombresProcesos = procesos.stream()
+                .map(EntidadProceso::getNombre)
+                .toList();
 
-        return new String[]{primeraDireccion};
+        return nombresProcesos.toArray(new String[0]);
     }
 
 

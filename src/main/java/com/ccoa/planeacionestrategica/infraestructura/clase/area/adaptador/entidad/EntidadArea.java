@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.entidad;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,11 +19,11 @@ public class EntidadArea {
 
     private String nombre;
 
-    @Enumerated(EnumType.STRING)
-    private EDireccion direccion;
+    @JoinColumn(name = "id_direccion")
+    private Long idDireccion;
 
-    public EntidadArea(String nombre, EDireccion direccion) {
+    public EntidadArea(String nombre, Long idDireccion) {
         this.nombre = nombre;
-        this.direccion = direccion;
+        this.idDireccion = idDireccion;
     }
 }

@@ -11,7 +11,7 @@ public interface RepositorioUsuario {
 
     List<DtoUsuarioResumen> listar();
     DtoUsuarioResumen consultarPorId(Long id);
-    InformacionUsuario consultarPorIdParaMofdificar(Long id);
+    InformacionUsuario consultarPorIdParaModificar(Long id);
     Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario);
     boolean existe(Usuario usuario);
     Long eliminar(Long id);
@@ -21,6 +21,6 @@ public interface RepositorioUsuario {
     Long modificarDirecionesParaEliminar(InformacionUsuario informacionUsuario,Long id);
     Long modificarProcesos(InformacionUsuario informacionUsuario,Long id);
     Long modificarProcesosParaEliminar(InformacionUsuario informacionUsuario,Long id);
-    String obtenerDireccionDelUsuario(String correo);
-    String obtenerProcesoDelUsuario(String correo);
+    List<String> obtenerDireccionDelUsuario(String correo);
+    List<String> obtenerProcesoDelUsuario(String correo);
 }

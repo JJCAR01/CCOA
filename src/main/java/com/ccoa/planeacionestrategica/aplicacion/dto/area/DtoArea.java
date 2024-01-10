@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto;
+package com.ccoa.planeacionestrategica.aplicacion.dto.area;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import lombok.AllArgsConstructor;
@@ -14,5 +14,5 @@ public class DtoArea {
 
     private Long idArea;
     private String nombre;
-    private EDireccion direccion;
+    private Long direccion;
 }

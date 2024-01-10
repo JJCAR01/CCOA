@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.cargo.mapeador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.DtoCargo;
+import com.ccoa.planeacionestrategica.aplicacion.dto.cargo.DtoCargo;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.Cargo;
 import org.springframework.context.annotation.Configuration;

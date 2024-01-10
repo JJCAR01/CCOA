@@ -46,10 +46,10 @@ public class ControladorLogin {
                 map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"ADMIN":"OPERADOR").orElse("O");
     }
 
-    private String obtenerDireccionDelUsuario(String correo) {
+    private List<String> obtenerDireccionDelUsuario(String correo) {
         return servicioAplicacionListarUsuario.consultarByCorreoParaDireccion(correo);
     }
-    private String obtenerProcesoDelUsuario(String correo) {
+    private List<String> obtenerProcesoDelUsuario(String correo) {
         return servicioAplicacionListarUsuario.consultarByCorreoParaProceso(correo);
     }
 

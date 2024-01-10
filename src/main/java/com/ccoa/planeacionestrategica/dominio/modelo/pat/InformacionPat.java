@@ -1,8 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.pat;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
+import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
-import com.ccoa.planeacionestrategica.infraestructura.clase.pat.adaptador.entidad.EntidadDireccion;
 import lombok.Getter;
 
 
@@ -12,14 +11,14 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensaje
 public class InformacionPat {
 
     private final Long idInformacionPat;
-    private final EDireccion direccion;
+    private final Direccion direccion;
 
-    public static InformacionPat of(Long idInformacionPat,EDireccion direccion ){
+    public static InformacionPat of(Long idInformacionPat,Direccion direccion ){
         ValidadorDominio.validarObligatorio(direccion,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
         return new InformacionPat(idInformacionPat, direccion);
     }
 
-    public InformacionPat(Long idInformacionPat, EDireccion direccion) {
+    public InformacionPat(Long idInformacionPat, Direccion direccion) {
         this.idInformacionPat = idInformacionPat;
         this.direccion = direccion;
     }

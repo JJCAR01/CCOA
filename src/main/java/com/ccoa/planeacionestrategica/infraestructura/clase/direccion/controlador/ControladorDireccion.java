@@ -6,7 +6,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.Ser
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.ServicioAplicacionGuardarDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.ServicioAplicacionListarDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.ServicioAplicacionModificarDireccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
+import com.ccoa.planeacionestrategica.dominio.dto.DtoDireccionResumen;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +33,12 @@ public class ControladorDireccion {
     }
 
     @GetMapping
-    public List<Direccion> listar(){
+    public List<DtoDireccionResumen> listar(){
         return this.servicioAplicacionListarDireccion.ejecutar();
     }
 
     @GetMapping("/{codigo}")
-    public Direccion listar(@PathVariable Long codigo){
+    public DtoDireccionResumen listar(@PathVariable Long codigo){
         return servicioAplicacionListarDireccion.consultarById(codigo);
     }
 

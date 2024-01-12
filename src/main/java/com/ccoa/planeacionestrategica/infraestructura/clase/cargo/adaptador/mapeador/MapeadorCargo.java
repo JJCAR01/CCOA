@@ -26,5 +26,6 @@ public class MapeadorCargo implements MapeadorInfraestructura<EntidadCargo, Carg
     }
     public void actualizarEntidad(EntidadCargo entidad, Cargo cargo) {
         entidad.setNombre(cargo.getNombre());
+        entidad.setIdArea(cargo.getIdArea());
     }
 }

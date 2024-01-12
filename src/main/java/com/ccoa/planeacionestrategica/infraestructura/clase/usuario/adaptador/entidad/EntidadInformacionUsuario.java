@@ -19,7 +19,6 @@ import java.util.List;
 @Table(name = "informacion_usuario")
 public class EntidadInformacionUsuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_usuario", nullable = false)
     private Long idInformacionUsuario;
 

@@ -14,7 +14,7 @@ import lombok.Setter;
 public class EntidadInformacionPat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_pat")
     private Long idInformacionPat;
 

@@ -12,8 +12,7 @@ import lombok.Setter;
 @Table(name = "informacion_actividad_estrategica")
 public class EntidadInformacionActividadEstrategica{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "actividad_estrategica_seq")
-    @SequenceGenerator(name = "actividad_estrategica_seq", sequenceName = "actividad_estrategica_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_actividad_estrategica")
     private Long idInformacionActividadEstrategica;
 

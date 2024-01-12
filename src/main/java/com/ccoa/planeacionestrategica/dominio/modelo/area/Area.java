@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.area;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.area.enums.EDireccion;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Getter;
 

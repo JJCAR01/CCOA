@@ -16,7 +16,8 @@ public class ConfiguracionFirebase {
     public FirebaseApp firebaseApp() throws IOException {
         FileInputStream serviceAccount =
                 new FileInputStream("C:/Users/j.cardona/PACCOA/PACCOAB/CCOA/src/main/resources/pat-ccoa-firebase-adminsdk-yk30n-7125cba998.json");
-
+                //C:/Users/j.cardona/PACCOA/PACCOAB/CCOA/src/main/resources/
+                ///home/administrador/PAT/src/main/resources/
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();

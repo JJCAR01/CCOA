@@ -1,9 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.dominio.dto.DtoDireccionResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.mapeador.MapeadorArea;
-import com.ccoa.planeacionestrategica.infraestructura.clase.area.adaptador.repositorio.jpa.RepositorioAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.mapeador.MapeadorDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
 import org.springframework.stereotype.Repository;
@@ -21,16 +20,16 @@ public class RepositorioDireccionMySQL implements RepositorioDireccion {
     }
 
     @Override
-    public List<Direccion> listar() {
+    public List<DtoDireccionResumen> listar() {
         var entidad =this.repositorioDireccionJpa.findAll();
         return this.mapeadorDireccion.listarDominio(entidad);
     }
 
     @Override
-    public Direccion consultarPorId(Long id) {
+    public DtoDireccionResumen consultarPorId(Long id) {
         var entidad = this.repositorioDireccionJpa.findById(id).orElse(null);
         assert entidad != null;
-        return this.mapeadorDireccion.mapeadorDominio(entidad);
+        return this.mapeadorDireccion.listarDtoResumen(entidad);
     }
 
     @Override

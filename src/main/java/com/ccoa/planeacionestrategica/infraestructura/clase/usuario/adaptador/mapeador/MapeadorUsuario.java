@@ -96,7 +96,7 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
         List<DtoProceso> dtoProcesos = informacionUsuario.getProcesos()
                 .stream()
                 .map(this::mapearProceso)
-                .collect(Collectors.toList());
+                .toList();
         return new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),entidad.getCorreo(),
                 dtoDirecciones, dtoProcesos, entidad.getIdCargo());
     }

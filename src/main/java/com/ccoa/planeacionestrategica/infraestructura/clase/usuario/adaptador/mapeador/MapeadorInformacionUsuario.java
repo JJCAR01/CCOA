@@ -23,15 +23,13 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
     private final RepositorioDireccionJpa repositorioDireccionJpa;
     private final RepositorioProcesoJpa repositorioProcesoJpa;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
-    private final MapeadorDireccion mapeadorDireccion;
 
     public MapeadorInformacionUsuario(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioDireccionJpa repositorioDireccionJpa,
-                                      RepositorioProcesoJpa repositorioProcesoJpa, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa, MapeadorDireccion mapeadorDireccion) {
+                                      RepositorioProcesoJpa repositorioProcesoJpa, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioDireccionJpa = repositorioDireccionJpa;
         this.repositorioProcesoJpa = repositorioProcesoJpa;
         this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
-        this.mapeadorDireccion = mapeadorDireccion;
     }
 
     @Override
@@ -201,7 +199,7 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
 
         List<Proceso> procesosAEliminar = informacionUsuario.getProcesos();
 
-        procesosAEliminar.removeIf(entidad ->
+        procesosActuales.removeIf(entidad ->
                 procesosAEliminar.stream().anyMatch(proceso ->
                         proceso.getNombre().equals(entidad.getNombre())
                 )

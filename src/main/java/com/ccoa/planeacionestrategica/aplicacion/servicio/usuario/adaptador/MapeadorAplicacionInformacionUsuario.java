@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration

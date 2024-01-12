@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
+import com.ccoa.planeacionestrategica.dominio.dto.DtoDireccionResumen;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioDireccion;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class ServicioAplicacionListarDireccion {
         this.repositorioDireccion = repositorioDireccion;
     }
 
-    public List<Direccion> ejecutar(){return this.repositorioDireccion.listar();}
+    public List<DtoDireccionResumen> ejecutar(){return this.repositorioDireccion.listar();}
 
-    public Direccion consultarById(Long id){return this.repositorioDireccion.consultarPorId(id);}
+    public DtoDireccionResumen consultarById(Long id){return this.repositorioDireccion.consultarPorId(id);}
 }

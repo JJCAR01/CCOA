@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.dto.area;
+package com.ccoa.planeacionestrategica.dominio.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DtoArea {
-
-    private Long idArea;
+public class DtoDireccionResumen {
+    private Long idDireccion;
     private String nombre;
-    private Long direccion;
 }

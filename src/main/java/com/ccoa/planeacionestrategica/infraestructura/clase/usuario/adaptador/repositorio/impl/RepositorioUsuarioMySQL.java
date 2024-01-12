@@ -67,8 +67,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
             var infUsuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
             infUsuarioEntidad.setIdInformacionUsuario(idUsuarioGenerado);
 
-            // Guardar la entidad de información de usuario
-            this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
+
 
             // Crear y guardar la entidad de UsuarioRol
             EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
@@ -77,13 +76,15 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
             entidadUsuarioRol.setRol(rol.getNombreRol());
             this.repositorioRolJpa.save(entidadUsuarioRol);
 
+            // Guardar la entidad de información de usuario
+            this.repositorioInformacionUsuarioJpa.save(infUsuarioEntidad);
+
             return idUsuarioGenerado; // Devolver el ID generado
         } catch (Exception e) {
             // Manejar cualquier excepción lanzada durante el proceso
             throw new RuntimeException("Error al guardar el usuario", e);
         }
     }
-
 
     @Override
     public boolean existe(Usuario usuario) {

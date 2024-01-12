@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.dominio.dto.DtoDireccionResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.entidad.EntidadDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
@@ -18,8 +19,12 @@ public class MapeadorDireccion implements MapeadorInfraestructura<EntidadDirecci
         return new EntidadDireccion(dominio.getNombre());
     }
 
-    public List<Direccion> listarDominio(List<EntidadDireccion> entidades){
-        return entidades.stream().map(entidad -> new Direccion( entidad.getNombre())).toList();
+    public List<DtoDireccionResumen> listarDominio(List<EntidadDireccion> entidades){
+        return entidades.stream().map(entidad -> new DtoDireccionResumen(entidad.getIdDireccion() ,entidad.getNombre())).toList();
+    }
+
+    public DtoDireccionResumen listarDtoResumen(EntidadDireccion entidad) {
+        return new DtoDireccionResumen(entidad.getIdDireccion(), entidad.getNombre());
     }
 
     public void actualizarEntidad(EntidadDireccion entidad, Direccion  direccion) {

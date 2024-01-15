@@ -12,7 +12,6 @@ import lombok.Setter;
 @Table(name = "informacion_actividad_estrategica")
 public class EntidadInformacionActividadEstrategica{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_actividad_estrategica")
     private Long idInformacionActividadEstrategica;
 

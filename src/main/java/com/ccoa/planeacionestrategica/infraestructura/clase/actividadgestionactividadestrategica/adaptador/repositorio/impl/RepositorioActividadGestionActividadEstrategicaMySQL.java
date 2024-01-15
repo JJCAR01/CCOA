@@ -45,8 +45,9 @@ public class    RepositorioActividadGestionActividadEstrategicaMySQL implements 
         var actividadEntidad = this.mapeadorActividadGestionActividadEstrategica.mapeadorEntidad(actividadGestionActividadEstrategica);
         var informacionActividadEntidad = this.mapeadorInformacionActividadGestionActividadEstrategica.mapeadorEntidad(informacionActividadGestionActividadEstrategica);
         mapeadorActividadGestionActividadEstrategica.actualizarPorcentajeAvance(actividadEntidad,actividadGestionActividadEstrategica);
-        this.repositorioInformacionActividadGestionActividadEstrategicaJpa.save(informacionActividadEntidad);
-        return this.repositorioActividadGestionActividadEstrategicaJpa.save(actividadEntidad).getIdActividadGestionActividadEstrategica();
+        var id = this.repositorioActividadGestionActividadEstrategicaJpa.save(actividadEntidad).getIdActividadGestionActividadEstrategica();
+        informacionActividadEntidad.setIdInformacionActividadActividadEstrategica(id);
+        return this.repositorioInformacionActividadGestionActividadEstrategicaJpa.save(informacionActividadEntidad).getIdInformacionActividadActividadEstrategica() ;
     }
 
     @Override

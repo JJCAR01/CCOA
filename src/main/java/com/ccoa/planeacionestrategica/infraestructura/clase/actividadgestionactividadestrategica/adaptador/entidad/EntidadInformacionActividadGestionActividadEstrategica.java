@@ -15,7 +15,6 @@ import java.time.LocalDate;
 public class EntidadInformacionActividadGestionActividadEstrategica {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_actividad_gestion_actividad_estrategica")
     private Long idInformacionActividadActividadEstrategica;
 

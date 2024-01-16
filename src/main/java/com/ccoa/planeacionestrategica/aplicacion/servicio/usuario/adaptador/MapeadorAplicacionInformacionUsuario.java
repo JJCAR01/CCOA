@@ -18,6 +18,20 @@ public class MapeadorAplicacionInformacionUsuario implements MapeadorAplicacion<
         return InformacionUsuario.of(dto.getIdUsuario(), direcciones,procesos);
     }
 
+    public InformacionUsuario mapeadorActualizarPass(DtoUsuario dto) {
+        List<Direccion> direcciones = (dto.getDirecciones() != null)
+                ? dto.getDirecciones().stream()
+                .map(dtoDireccion -> new Direccion(dtoDireccion.getNombre()))
+                .toList()
+                : List.of();
+        List<Proceso> procesos = (dto.getProcesos() != null)
+                ? dto.getProcesos().stream()
+                .map(dtoProceso -> new Proceso(dtoProceso.getNombre()))
+                .toList()
+                : List.of();
+        return InformacionUsuario.of(dto.getIdUsuario(), direcciones,procesos);
+    }
+
     public InformacionUsuario actualizarDireccion(DtoUsuario dto) {
         List<Direccion> direcciones = dto.getDirecciones().stream().map(e -> new Direccion(e.getNombre())).toList();
         List<Proceso> procesos = (dto.getProcesos() != null)

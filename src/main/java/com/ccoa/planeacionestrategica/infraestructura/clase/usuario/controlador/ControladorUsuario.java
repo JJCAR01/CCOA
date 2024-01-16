@@ -53,6 +53,11 @@ public class ControladorUsuario {
         return this.servicioAplicacionModificarUsuario.ejecutarModificar(usuario,codigo);
     }
 
+    @PutMapping("/pass/{codigo}")
+    public DtoRespuesta<Long> agregarPass(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarAgregarPass(usuario,codigo);
+    }
+
     @PutMapping("/direcciones/{codigo}")
     public DtoRespuesta<Long> modificarDirecciones(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
         return this.servicioAplicacionModificarUsuario.ejecutarModificarDirecciones(usuario,codigo);

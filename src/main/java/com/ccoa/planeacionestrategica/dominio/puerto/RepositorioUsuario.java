@@ -17,6 +17,7 @@ public interface RepositorioUsuario {
     Long eliminar(Long id);
     Usuario consultar(String correo, String password);
     Long modificar(Usuario usuario,InformacionUsuario informacionUsuario,Long id);
+    Long modificarAgregarPass(Usuario usuario,InformacionUsuario informacionUsuario,Long id);
     Long modificarDireciones(InformacionUsuario informacionUsuario,Long id);
     Long modificarDirecionesParaEliminar(InformacionUsuario informacionUsuario,Long id);
     Long modificarProcesos(InformacionUsuario informacionUsuario,Long id);

@@ -26,7 +26,7 @@ public class ServicioAplicacionGuardarUsuario {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoUsuario dto){
-        var usuario = this.mapeadorAplicacionUsuario.mapeadorAplicacion(dto);
+        var usuario = this.mapeadorAplicacionUsuario.mapaeadorCrearUsuarioSinPass(dto);
         var rol = this.mapeadorAplicacionRol.mapeadorAplicacion(dto);
         var informacionUsuario = this.mapeadorAplicacionInformacionUsuario.mapeadorAplicacion(dto);
 

@@ -22,8 +22,13 @@ public class ServicioAplicacionModificarUsuario {
 
     public DtoRespuesta<Long> ejecutarModificar(DtoUsuario dto, Long codigo){
         var usuario = mapeadorAplicacionUsuario.actualizarAplicacion(dto);
-        var informacionUsuario = mapeadorAplicacionInformacionUsuario.mapeadorAplicacion(dto);
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.mapeadorActualizarPass(dto);
         return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,informacionUsuario,codigo));
+    }
+    public DtoRespuesta<Long> ejecutarAgregarPass(DtoUsuario dto, Long codigo){
+        var usuario = mapeadorAplicacionUsuario.mapeadorAplicacionSoloPass(dto);
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.mapeadorActualizarPass(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarAgregarPass(usuario,informacionUsuario,codigo));
     }
     public DtoRespuesta<Long> ejecutarModificarDirecciones(DtoUsuario dto, Long codigo){
         var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarDireccion(dto);

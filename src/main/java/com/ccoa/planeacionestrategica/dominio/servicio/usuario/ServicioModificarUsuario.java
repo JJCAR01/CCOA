@@ -23,6 +23,12 @@ public class ServicioModificarUsuario {
 
         return this.repositorioUsuario.modificar(usuario,informacionUsuario , codigo);
     }
+    public Long ejecutarAgregarPass(Usuario usuario, InformacionUsuario informacionUsuario,Long codigo){
+
+        if(this.repositorioUsuario.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+
+        return this.repositorioUsuario.modificarAgregarPass(usuario,informacionUsuario , codigo);
+    }
     public Long ejecutarModificarDirecciones(InformacionUsuario informacionUsuario,Long codigo){
 
         if(this.repositorioUsuario.consultarPorIdParaModificar(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);

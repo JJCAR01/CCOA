@@ -32,6 +32,21 @@ public class Usuario {
         return new Usuario(idUsuario, nombre,apellido,password,correo,idCargo,roles);
     }
 
+    public static Usuario crear(Long idUsuario,String nombre,String apellido,String password,String correo,Long idCargo, List<Rol> roles){
+        ValidadorDominio.validarObligatorio(nombre,NOMBRE_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validarObligatorio(apellido,LOS_APELLIDO_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorCaracteresEspecialesCorreo(correo,EL_CORREO_NO_CUENTA_CON_EL_FORMATO_CORRRECTO);
+        ValidadorDominio.validadorNumeroLongYMayorACero(idCargo,NO_PUEDE_EXISTIR_SIN_CARGO);
+        ValidadorDominio.validadorNoVacio(roles,EL_USUARIO_NO_PUEDE_EXISTIR_SIN_UN_ROL);
+        return new Usuario(idUsuario, nombre,apellido,password,correo,idCargo,roles);
+    }
+    public static Usuario agregarPass(Long idUsuario,String nombre,String apellido,String password,String correo,Long idCargo, List<Rol> roles){
+        ValidadorDominio.validadorCaracteresEspecialesPassword(password, LA_CONTRASENA_NO_CUENTA_CON_EL_PATRON_DE_SEGURIDAD_CORRRECTO);
+        return new Usuario(idUsuario, nombre,apellido,password,correo,idCargo,roles);
+    }
+
+
+
     public Usuario(Long idUsuario, String nombre, String apellido, String password, String correo, Long idCargo, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;

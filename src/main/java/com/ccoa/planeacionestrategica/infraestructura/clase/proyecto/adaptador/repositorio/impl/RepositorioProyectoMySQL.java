@@ -54,12 +54,18 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     @Override
     public Long guardar(Proyecto proyecto, InformacionProyecto informacionProyecto,DetalleProyecto detalleProyecto) {
         var proyectoEntidad = this.mapeadorProyecto.mapeadorEntidad(proyecto);
+        var idProyecto = this.repositorioProyectoJpa.save(proyectoEntidad).getIdProyecto();
+
         var informacionProyectoEntidad = this.mapeadorInformacionProyecto.mapeadorEntidad(informacionProyecto);
+        informacionProyectoEntidad.setIdInformacionProyecto(idProyecto);
+        this.repositorioInformacionProyectoJpa.save(informacionProyectoEntidad);
+
         var detalleProyectoEntidad = this.mapeadorDetalleProyecto.mapeadorEntidad(detalleProyecto);
+        detalleProyectoEntidad.setIdDetalleProyecto(idProyecto);
         mapeadorDetalleProyecto.actualizarPorcentajeAvance(detalleProyectoEntidad);
         this.repositorioDetalleProyectoJpa.save(detalleProyectoEntidad);
-        this.repositorioInformacionProyectoJpa.save(informacionProyectoEntidad);
-        return this.repositorioProyectoJpa.save(proyectoEntidad).getIdProyecto();
+
+        return idProyecto;
     }
 
     @Override

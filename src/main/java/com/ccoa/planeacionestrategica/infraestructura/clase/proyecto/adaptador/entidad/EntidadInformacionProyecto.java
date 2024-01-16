@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Table(name = "informacion_proyecto")
 public class EntidadInformacionProyecto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_informacion_proyecto")
     private Long idInformacionProyecto;
 

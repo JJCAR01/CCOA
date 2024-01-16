@@ -12,10 +12,10 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensaje
 @Setter
 public class DetalleProyecto {
 
-    private final Long idDetalleProyecto;
-    private final Double avance;
-    private final Long idActividadEstrategica;
-    private final Long idUsuario;
+    private Long idDetalleProyecto;
+    private Double avance;
+    private Long idActividadEstrategica;
+    private Long idUsuario;
 
     public static DetalleProyecto of(Long idDetalleProyecto,Double avance, Long idActividadEstrategica, Long idUsuario){
         ValidadorDominio.validarObligatorio(idActividadEstrategica,NO_PUEDE_EXISTIR_SIN_ACTIVIDAD_ESTRATEGICA);

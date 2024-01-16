@@ -59,7 +59,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
         try {
             // Guardar la entidad de usuario y obtener el ID generado
-            var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
+            var usuarioEntidad = this.mapeadorUsuario.mapeadorCrearSinPass(usuario);
             usuarioEntidad = this.repositorioUsuarioJpa.save(usuarioEntidad);
             var idUsuarioGenerado = usuarioEntidad.getIdUsuario();
 
@@ -120,6 +120,14 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
         assert entidad != null;
         this.mapeadorUsuario.actualizarEntidad(entidad, usuario);
+        return this.repositorioUsuarioJpa.save(entidad).getIdUsuario();
+    }
+
+    @Override
+    public Long modificarAgregarPass(Usuario usuario, InformacionUsuario informacionUsuario, Long id) {
+        var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorUsuario.actualizarPass(entidad, usuario);
         return this.repositorioUsuarioJpa.save(entidad).getIdUsuario();
     }
 

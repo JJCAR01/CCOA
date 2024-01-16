@@ -46,10 +46,20 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
                 idCargo);
     }
 
+    public EntidadUsuario mapeadorCrearSinPass(Usuario dominio) {
+        var idCargo = this.repositorioCargoJpa.findById(dominio.getIdCargo()).orElseThrow().getIdCargo();
+        return new EntidadUsuario(dominio.getNombre(), dominio.getApellido(), dominio.getCorreo(), dominio.getPassword(),
+                idCargo);
+    }
+    public void actualizarPass(EntidadUsuario entidad, Usuario usuario) {
+        entidad.setPassword(passwordEncoder.ejecutar(usuario.getPassword()));
+    }
+
     public void actualizarEntidad(EntidadUsuario entidad, Usuario usuario) {
         entidad.setNombre(usuario.getNombre());
         entidad.setApellido(usuario.getApellido());
-        entidad.setPassword(usuario.getPassword());
+        entidad.setCorreo(usuario.getCorreo());
+        entidad.setIdCargo(usuario.getIdCargo());
     }
 
     public List<DtoUsuarioResumen> listarDominio(List<EntidadUsuario> entidades) {

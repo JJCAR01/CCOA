@@ -21,4 +21,10 @@ public class ServicioEliminarActividadGestionActividadEstrategica {
 
         return this.repositorioActividadGestionActividadEstrategica.eliminar(id);
     }
+    public Long ejecutarEliminarPorActEstrategica(Long id){
+
+        if(this.repositorioActividadGestionActividadEstrategica.consultarPorIdActividadEstrategicaAEliminar(id)== null) throw new ValorInvalidoExcepcion(NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+
+        return this.repositorioActividadGestionActividadEstrategica.eliminarPorActividadEstrategica(id);
+    }
 }

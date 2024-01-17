@@ -43,7 +43,7 @@ public class ValidadorDominio {
     }
     public static void longitudPassword(String valor, String mensaje)
     {
-        if(!(valor.length()>=8 && valor.length()<=15))
+        if(!(valor.length()>=13 && valor.length()<=20))
         {
             throw new LongitudMaxExcepcion(mensaje,MENSAJE_DEFECTO);
         }

@@ -2,6 +2,9 @@ package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionact
 
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.entidad.EntidadInformacionActividadGestionActividadEstrategica;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RepositorioInformacionActividadGestionActividadEstrategicaJpa extends JpaRepository<EntidadInformacionActividadGestionActividadEstrategica,Long> {
+
 }

@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioProyectoJpa extends JpaRepository<EntidadProyecto,Long> {
     EntidadProyecto findByNombre(String nombre);
-
 }

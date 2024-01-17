@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
@@ -72,6 +73,22 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
             dto.setFechaInicial(infEntidad.orElseThrow().getFechaInicial());
             dto.setFechaFinal(infEntidad.orElseThrow().getFechaFinal());
             dto.setDiasRestantes(servicioCalcularDiasRestantes.calcular(infEntidad.orElseThrow().getFechaFinal()));
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+
+    public List<DtoIdsActividadEstrategica> listarPorIds(List<EntidadInformacionActividadEstrategica> entidades){
+        List<DtoIdsActividadEstrategica> listaDto = new ArrayList<>();
+        for (EntidadInformacionActividadEstrategica entidad : entidades) {
+            DtoIdsActividadEstrategica dto = new DtoIdsActividadEstrategica();
+            dto.setIdPat(entidad.getIdPat());
+            dto.setIdInformacionActividadEstrategica(entidad.getIdInformacionActividadEstrategica());
+
+            var infEntidad = repositorioActividadEstrategicaJpa.findById(entidad.getIdInformacionActividadEstrategica());
+
+            dto.setIdActividadEstrategica(infEntidad.orElseThrow().getIdActividadEstrategica());
 
             listaDto.add(dto);
         }

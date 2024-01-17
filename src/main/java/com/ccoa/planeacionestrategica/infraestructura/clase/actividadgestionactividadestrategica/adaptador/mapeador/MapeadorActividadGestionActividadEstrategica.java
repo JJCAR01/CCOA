@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionActividadEstrategicaResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.InformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
@@ -74,6 +75,22 @@ public class MapeadorActividadGestionActividadEstrategica implements MapeadorInf
             dto.setFechaRegistro(infEntidad.orElseThrow().getFechaRegistro());
             dto.setDuracion(infEntidad.orElseThrow().getDuracion());
             dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoIdsActividadGestionActividadEstrategica> listarPorIds(List<EntidadActividadGestionActividadEstrategica> entidades){
+        List<DtoIdsActividadGestionActividadEstrategica> listaDto = new ArrayList<>();
+
+        for (EntidadActividadGestionActividadEstrategica entidad : entidades) {
+            DtoIdsActividadGestionActividadEstrategica dto = new DtoIdsActividadGestionActividadEstrategica();
+            dto.setIdActividadGestionActividadEstrategica(entidad.getIdActividadGestionActividadEstrategica());
+            dto.setIdActividadEstrategica(entidad.getIdActividadEstrategica());
+
+            var infEntidad = repositorioInformacionActividadGestionActividadEstrategicaJpa.findById(entidad.getIdActividadGestionActividadEstrategica());
+
+            dto.setIdInformacionActividadActividadEstrategica(infEntidad.orElseThrow().getIdInformacionActividadActividadEstrategica());
 
             listaDto.add(dto);
         }

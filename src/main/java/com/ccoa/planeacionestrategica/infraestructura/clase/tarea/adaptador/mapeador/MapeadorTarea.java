@@ -118,7 +118,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
         return this.repositorioActividadGestionActividadEstrategicaJpa.findById(id).orElse(null);
     }
     private InformacionActividadGestion obtenerActividadGestionDesdeEntidadActividadGestion(EntidadInformacionActividadGestion actividadGestion) {
-        return new InformacionActividadGestion(actividadGestion.getIdInformacionActividad(), actividadGestion.getFechaRegistro(),actividadGestion.getDiasRestantes(),
+        return new InformacionActividadGestion(actividadGestion.getIdInformacionActividadGestion(), actividadGestion.getFechaRegistro(),actividadGestion.getDiasRestantes(),
                 actividadGestion.getDuracion(),actividadGestion.getAvance());
     }
     private Sprint obtenerSprintDesdeEntidadSprint(EntidadSprint entidadSprint) {

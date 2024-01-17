@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionDetalleProyecto implements MapeadorAplicacion<DtoProyecto, DetalleProyecto> {
     @Override
     public DetalleProyecto mapeadorAplicacion(DtoProyecto dto) {
-        return DetalleProyecto.of(dto.getIdProyecto(), Mensaje.POR_DEFECTO_AVANCE,dto.getIdActividadEstrategica(), dto.getIdActividadEstrategica());
+        return DetalleProyecto.of(dto.getIdProyecto(), Mensaje.POR_DEFECTO_AVANCE,dto.getIdActividadEstrategica(), dto.getIdUsuario());
     }
 }

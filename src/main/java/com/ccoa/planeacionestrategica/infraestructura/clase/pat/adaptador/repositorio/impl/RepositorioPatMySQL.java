@@ -60,8 +60,8 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long eliminar(Long id) {
-        this.repositorioPatJpa.deleteById(id);
         this.repositorioInformacionPatJpa.deleteById(id);
+        this.repositorioPatJpa.deleteById(id);
         return id;
     }
 

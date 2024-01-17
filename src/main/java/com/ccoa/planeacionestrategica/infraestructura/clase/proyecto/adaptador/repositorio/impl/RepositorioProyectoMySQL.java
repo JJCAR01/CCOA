@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
@@ -12,6 +13,7 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.m
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -80,6 +82,15 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
         this.repositorioDetalleProyectoJpa.deleteById(id);
         return id;
     }
+    @Transactional
+    @Override
+    public Long eliminarPorActividadEstrategica(Long id) {
+        var entidades = consultarPorIdActividadEstrategicaAEliminar(id);
+        entidades.forEach(entidad -> repositorioInformacionProyectoJpa.deleteById(entidad.getIdInformacionProyecto()));
+        entidades.forEach(entidad -> repositorioProyectoJpa.deleteById(entidad.getIdProyecto()));
+        repositorioDetalleProyectoJpa.deleteByIdActividadEstrategica(id);
+        return id;
+    }
 
     @Override
     public Long modificar(Proyecto proyecto, InformacionProyecto informacionProyecto, DetalleProyecto detalleProyecto, Long id) {
@@ -96,5 +107,10 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     public List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id) {
         List<EntidadDetalleProyecto> entidades = this.repositorioDetalleProyectoJpa.findByIdActividadEstrategica(id);
         return this.mapeadorDetalleProyecto.listarDominio(entidades);
+    }
+
+    public List<DtoIdsProyecto> consultarPorIdActividadEstrategicaAEliminar(Long id) {
+        List<EntidadDetalleProyecto> entidades = this.repositorioDetalleProyectoJpa.findByIdActividadEstrategica(id);
+        return this.mapeadorDetalleProyecto.listarIds(entidades);
     }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface RepositorioActividadGestionJpa extends JpaRepository<EntidadActividadGestion,Long> {
     EntidadActividadGestion findByNombre(String noombre);
     List<EntidadActividadGestion> findByIdPat(Long idPat);
+    void deleteByIdPat(Long idPat);
 }

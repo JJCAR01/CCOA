@@ -90,7 +90,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     public void actualizarPorcentajeAvance(EntidadPat entidad) {
         List<EntidadActividadGestion> actividadGestiones = this.repositorioActividadGestionJpa.findByIdPat(entidad.getIdPat());
         List<EntidadInformacionActividadGestion> informacionActividadesGestiones = actividadGestiones.stream()
-                .map(actividadGestion -> this.repositorioInformacionActividadGestionJpa.findByIdInformacionActividad(actividadGestion.getIdActividadGestion()))
+                .map(actividadGestion -> this.repositorioInformacionActividadGestionJpa.findByIdInformacionActividadGestion(actividadGestion.getIdActividadGestion()))
                 .flatMap(List::stream).toList();
         List<EntidadInformacionActividadEstrategica> actividadEstrategicas = this.repositorioInformacionActividadEstrategicaJpa.findByIdPat(entidad.getIdPat());
 

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RepositorioDetalleProyectoJpa extends JpaRepository<EntidadDetalleProyecto, Long> {
     List<EntidadDetalleProyecto> findByIdActividadEstrategica(Long idActividadEstrategica);
+    void deleteByIdActividadEstrategica(Long idActividaEstrategica);
 }

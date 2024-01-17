@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.impl;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionActividadEstrategicaResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.InformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadGestionActividadEstrategica;
@@ -9,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionacti
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.mapeador.MapeadorInformacionActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestionactividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionActividadEstrategicaJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -62,6 +64,15 @@ public class    RepositorioActividadGestionActividadEstrategicaMySQL implements 
         return id;
     }
 
+    @Transactional
+    @Override
+    public Long eliminarPorActividadEstrategica(Long id) {
+        var entidades = consultarPorIdActividadEstrategica(id);
+        entidades.forEach(entidad -> repositorioInformacionActividadGestionActividadEstrategicaJpa.deleteById(entidad.getIdActividadGestionActividadEstrategica()));
+        repositorioActividadGestionActividadEstrategicaJpa.deleteByIdActividadEstrategica(id);
+        return id;
+    }
+
     @Override
     public Long modificar(ActividadGestionActividadEstrategica actividadGestionActividadEstrategica, InformacionActividadGestionActividadEstrategica informacionActividadGestionActividadEstrategica, Long id) {
         var entidad = this.repositorioActividadGestionActividadEstrategicaJpa.findById(id).orElse(null);
@@ -76,5 +87,11 @@ public class    RepositorioActividadGestionActividadEstrategicaMySQL implements 
     public List<DtoActividadGestionActividadEstrategicaResumen> consultarPorIdActividadEstrategica(Long idActividadEstrategica) {
         List<EntidadActividadGestionActividadEstrategica> entidades = this.repositorioActividadGestionActividadEstrategicaJpa.findByIdActividadEstrategica(idActividadEstrategica);
         return this.mapeadorActividadGestionActividadEstrategica.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoIdsActividadGestionActividadEstrategica> consultarPorIdActividadEstrategicaAEliminar(Long idActividadEstrategica) {
+        List<EntidadActividadGestionActividadEstrategica> entidades = this.repositorioActividadGestionActividadEstrategicaJpa.findByIdActividadEstrategica(idActividadEstrategica);
+        return this.mapeadorActividadGestionActividadEstrategica.listarPorIds(entidades);
     }
 }

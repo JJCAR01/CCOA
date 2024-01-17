@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.impl;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadGestion;
@@ -9,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.ada
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.mapeador.MapeadorInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,8 +48,8 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
         var informacionActividadEntidad = this.mapeadorInformacionActividadGestion.mapeadorEntidad(informacionActividadGestion);
         mapeadorInformacionActividadGestion.actualizarPorcentajeAvance(informacionActividadEntidad,informacionActividadGestion);
         var id = this.repositorioActividadGestionJpa.save(actividadEntidad).getIdActividadGestion();
-        informacionActividadEntidad.setIdInformacionActividad(id);
-        return this.repositorioInformacionActividadGestionJpa.save(informacionActividadEntidad).getIdInformacionActividad();
+        informacionActividadEntidad.setIdInformacionActividadGestion(id);
+        return this.repositorioInformacionActividadGestionJpa.save(informacionActividadEntidad).getIdInformacionActividadGestion();
     }
 
     @Override
@@ -60,6 +62,14 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
         this.repositorioActividadGestionJpa.deleteById(id);
         this.repositorioInformacionActividadGestionJpa.deleteById(id);
         return id;
+    }
+    @Transactional
+    @Override
+    public Long eliminarPorPat(Long id) {
+        var entidades = consultarPorIdPatAEliminar(id);
+        entidades.forEach(entidad -> repositorioInformacionActividadGestionJpa.deleteById(entidad.getIdInformacionActividadGestion()));
+        this.repositorioActividadGestionJpa.deleteByIdPat(id);
+        return null;
     }
 
     @Override
@@ -77,5 +87,11 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
     public List<DtoActividadGestionResumen> consultarPorIdPat(Long idPat) {
         List<EntidadActividadGestion> entidades = this.repositorioActividadGestionJpa.findByIdPat(idPat);
         return this.mapeadorActividadGestion.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoIdsActividadGestion> consultarPorIdPatAEliminar(Long idPat) {
+        List<EntidadActividadGestion> entidades = this.repositorioActividadGestionJpa.findByIdPat(idPat);
+        return this.mapeadorActividadGestion.listarPorIds(entidades);
     }
 }

@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.proyecto.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
@@ -71,6 +72,23 @@ public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadD
             dto.setDuracion(informacionEntidad.orElseThrow().getDuracion());
             dto.setPlaneacionSprint(informacionEntidad.orElseThrow().getPlaneacionSprint());
             dto.setTotalSprint(informacionEntidad.orElseThrow().getTotalSprint());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoIdsProyecto> listarIds(List<EntidadDetalleProyecto> entidades){
+        List<DtoIdsProyecto> listaDto = new ArrayList<>();
+        for (EntidadDetalleProyecto entidad : entidades) {
+            DtoIdsProyecto dto = new DtoIdsProyecto();
+            dto.setIdActividadEstrategica(entidad.getIdActividadEstrategica());
+            dto.setIdDetalleProyecto(entidad.getIdDetalleProyecto());
+
+            var proyectoEntidad = repositorioProyectoJpa.findById(entidad.getIdDetalleProyecto());
+            dto.setIdProyecto(proyectoEntidad.orElseThrow().getIdProyecto());
+
+            var informacionEntidad = repositorioInformacionProyectoJpa.findById(entidad.getIdDetalleProyecto());
+            dto.setIdInformacionProyecto(informacionEntidad.orElseThrow().getIdInformacionProyecto());
 
             listaDto.add(dto);
         }

@@ -22,4 +22,10 @@ public class ServicioEliminarActividadEstrategica{
 
         return this.repositorioActividadEstrategica.eliminar(id);
     }
+    public Long ejecutarEliminarPorPat(Long id){
+
+        if(this.repositorioActividadEstrategica.consultarPorIdPatAEliminar(id)== null) throw new ValorInvalidoExcepcion(NO_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+
+        return this.repositorioActividadEstrategica.eliminarPorPat(id);
+    }
 }

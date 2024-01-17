@@ -19,4 +19,8 @@ public class ServicioEliminarProyecto {
         if(this.repositorioProyecto.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyecto.eliminar(id);
     }
+    public Long ejecutarEliminarPorActividadEstrategica(Long id){
+        if(this.repositorioProyecto.consultarPorIdActividadEstrategicaAEliminar(id)== null) throw new ValorObligatorioExcepcion(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        return this.repositorioProyecto.eliminarPorActividadEstrategica(id);
+    }
 }

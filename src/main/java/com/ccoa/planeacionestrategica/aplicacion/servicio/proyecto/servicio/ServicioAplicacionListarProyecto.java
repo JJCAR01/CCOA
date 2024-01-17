@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio;
 
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
 import org.springframework.stereotype.Component;
@@ -18,4 +19,6 @@ public class ServicioAplicacionListarProyecto {
 
     public DtoProyectoResumen consultarById(Long id){return this.repositorioProyecto.consultarPorId(id);}
     public List<DtoProyectoResumen> consultarByIdActividadEstrategica(Long id){return this.repositorioProyecto.consultarPorIdActividadEstrategica(id);}
+
+    public List<DtoIdsProyecto> consultarByIdActividadEstrategicaAEliminar(Long id){return this.repositorioProyecto.consultarPorIdActividadEstrategicaAEliminar(id);}
 }

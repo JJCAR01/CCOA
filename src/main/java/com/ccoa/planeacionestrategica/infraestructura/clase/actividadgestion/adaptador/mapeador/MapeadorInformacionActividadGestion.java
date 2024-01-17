@@ -26,7 +26,7 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
 
     @Override
     public InformacionActividadGestion mapeadorDominio(EntidadInformacionActividadGestion entidad) {
-        return new InformacionActividadGestion(entidad.getIdInformacionActividad(), entidad.getFechaRegistro(), entidad.getDuracion(), entidad.getDiasRestantes(),entidad.getAvance());
+        return new InformacionActividadGestion(entidad.getIdInformacionActividadGestion(), entidad.getFechaRegistro(), entidad.getDuracion(), entidad.getDiasRestantes(),entidad.getAvance());
     }
 
     @Override

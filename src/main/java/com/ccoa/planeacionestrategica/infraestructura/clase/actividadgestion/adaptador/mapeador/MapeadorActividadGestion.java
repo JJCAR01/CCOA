@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadgestion.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
@@ -70,6 +71,22 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
         }
         return listaDto;
     }
+    public List<DtoIdsActividadGestion> listarPorIds(List<EntidadActividadGestion> entidades){
+        List<DtoIdsActividadGestion> listaDto = new ArrayList<>();
+
+        for (EntidadActividadGestion entidad : entidades) {
+            DtoIdsActividadGestion dto = new DtoIdsActividadGestion();
+            dto.setIdActividadGestion(entidad.getIdActividadGestion());
+            dto.setIdPat(entidad.getIdPat());
+
+            var infEntidad = repositorioInformacionActividadGestionJpa.findById(entidad.getIdActividadGestion());
+
+            dto.setIdInformacionActividadGestion(infEntidad.orElseThrow().getIdInformacionActividadGestion());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
 
     public void actualizarEntidad(EntidadActividadGestion entidad, ActividadGestion actividadGestion,
                                   EntidadInformacionActividadGestion entidadInformacionActividadGestion,
@@ -81,7 +98,7 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
         entidadInformacionActividadGestion.setDiasRestantes(informacionActividadGestion.getDiasRestantes());
     }
     public EntidadPat obtenerGestion(EntidadInformacionActividadGestion informacionActividadGestion){
-        var entidad = this.repositorioActividadGestionJpa.findById(informacionActividadGestion.getIdInformacionActividad());
+        var entidad = this.repositorioActividadGestionJpa.findById(informacionActividadGestion.getIdInformacionActividadGestion());
         var entidadPat = this.repositorioPatJpa.findById(entidad.orElseThrow().getIdPat());
         return obtenerActividadGestionRelacionado(entidadPat.orElseThrow().getIdPat());
     }

@@ -16,7 +16,7 @@ public class EntidadInformacionActividadGestion {
 
     @Id
     @Column(name = "id_informacion_actividad_gestion")
-    private Long idInformacionActividad;
+    private Long idInformacionActividadGestion;
 
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;

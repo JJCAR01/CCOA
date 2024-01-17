@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.impl;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadEstrategica;
@@ -9,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.mapeador.MapeadorInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -68,6 +70,15 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         return id;
     }
 
+    @Transactional
+    @Override
+    public Long eliminarPorPat(Long id) {
+        var entidades = consultarPorIdPatAEliminar(id);
+        entidades.forEach(entidad -> repositorioActividadEstrategicaJpa.deleteById(entidad.getIdActividadEstrategica()));
+        repositorioInformacionActividadEstrategicaJpa.deleteByIdPat(id);
+        return id;
+    }
+
     @Override
     public Long modificar(ActividadEstrategica actividadEstrategica,InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
         var entidad = this.repositorioActividadEstrategicaJpa.findById(id).orElse(null);
@@ -83,5 +94,11 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     public List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat) {
         List<EntidadInformacionActividadEstrategica> entidades = this.repositorioInformacionActividadEstrategicaJpa.findByIdPat(idPat);
         return this.mapeadorInformacionActividadEstrategica.listaDominioPorPat(entidades);
+    }
+
+    @Override
+    public List<DtoIdsActividadEstrategica> consultarPorIdPatAEliminar(Long idPat) {
+        List<EntidadInformacionActividadEstrategica> entidades = this.repositorioInformacionActividadEstrategicaJpa.findByIdPat(idPat);
+        return this.mapeadorInformacionActividadEstrategica.listarPorIds(entidades);
     }
 }

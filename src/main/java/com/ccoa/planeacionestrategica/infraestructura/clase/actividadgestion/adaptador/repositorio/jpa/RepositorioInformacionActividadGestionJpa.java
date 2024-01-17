@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface RepositorioInformacionActividadGestionJpa extends JpaRepository<EntidadInformacionActividadGestion,Long> {
 
-    List<EntidadInformacionActividadGestion> findByIdInformacionActividad(Long idInformacionActividad);
+    List<EntidadInformacionActividadGestion> findByIdInformacionActividadGestion(Long idInformacionActividadGestion);
 
 }

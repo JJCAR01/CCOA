@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EPeriodicidad;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,10 @@ public class DtoTarea {
     private String nombre;
     private EEstado estado;
     private String descripcion;
+    private String observacion;
+    private EPeriodicidad periodicidad;
     private ETipoASE tipoASE;
+    private Double porcentaje;
     private Long idASE;
     private Long idUsuario;
 }

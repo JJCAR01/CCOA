@@ -15,7 +15,7 @@ public class Tarea {
     private final Long idTarea;
     private final String nombre;
     private final EEstado estado;
-    private final String observacion;
+    private final String descripcion;
     private final ETipoASE tipoASE;
     private final Long idASE;
     private final Long idUsuario;
@@ -27,11 +27,11 @@ public class Tarea {
         return new Tarea(idTarea, nombre,estado, observacion, tipoASE, idASE, idUsuario);
     }
 
-    public Tarea(Long idTarea, String nombre, EEstado estado, String observacion, ETipoASE tipoASE, Long idASE, Long idUsuario) {
+    public Tarea(Long idTarea, String nombre, EEstado estado, String descripcion, ETipoASE tipoASE, Long idASE, Long idUsuario) {
         this.idTarea = idTarea;
         this.nombre = nombre;
         this.estado = estado;
-        this.observacion = observacion;
+        this.descripcion = descripcion;
         this.tipoASE = tipoASE;
         this.idASE = idASE;
         this.idUsuario = idUsuario;

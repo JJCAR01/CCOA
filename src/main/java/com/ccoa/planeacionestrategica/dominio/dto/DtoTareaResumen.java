@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EPeriodicidad;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,9 @@ public class DtoTareaResumen {
     private String nombre;
     private String estado;
     private String descripcion;
+    private EPeriodicidad periodicidad;
+    private String observacion;
+    private Double porcentaje;
     private String tipoAES;
     private Long idASE;
     private Long idUsuario;

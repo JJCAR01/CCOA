@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.tarea;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
@@ -16,8 +17,8 @@ public class ServicioGuardarTarea {
         this.repositorioTarea = repositorioTarea;
     }
 
-    public Long ejecutarGuardar(Tarea tarea){
+    public Long ejecutarGuardar(Tarea tarea, InformacionTarea informacionTarea){
         if(this.repositorioTarea.existe(tarea)) throw new ValorInvalidoExcepcion(YA_EXISTE_LA_TAREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioTarea.guardar(tarea);
+        return this.repositorioTarea.guardar(tarea,informacionTarea);
     }
 }

@@ -63,6 +63,10 @@ public class ControladorTarea {
         return ResponseEntity.ok(this.servicioAplicacionEliminarTarea.ejecutarEliminar(codigo));
     }
 
+    @PutMapping("/estado/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarEstado(@RequestBody DtoTarea tarea, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarTarea.modificarEstado(tarea,codigo));
+    }
     @PutMapping("/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoTarea tarea, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarTarea.ejecutarModificar(tarea,codigo));

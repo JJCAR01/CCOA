@@ -59,7 +59,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
         try {
             // Guardar la entidad de usuario y obtener el ID generado
-            var usuarioEntidad = this.mapeadorUsuario.mapeadorCrearSinPass(usuario);
+            var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
             usuarioEntidad = this.repositorioUsuarioJpa.save(usuarioEntidad);
             var idUsuarioGenerado = usuarioEntidad.getIdUsuario();
 

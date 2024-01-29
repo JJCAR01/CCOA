@@ -13,7 +13,7 @@ public class MapeadorAplicacionUsuario implements MapeadorAplicacion<DtoUsuario,
 
     @Override
     public Usuario mapeadorAplicacion(DtoUsuario dto) {
-        return new Usuario(dto.getIdUsuario(), dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),
+        return Usuario.of(dto.getIdUsuario(), dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),
                 dto.getIdCargo(), dto.getRoles());
     }
     public Usuario actualizarAplicacion(DtoUsuario dto) {

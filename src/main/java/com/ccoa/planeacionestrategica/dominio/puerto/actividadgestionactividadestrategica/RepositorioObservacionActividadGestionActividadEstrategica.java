@@ -1,0 +1,15 @@
+package com.ccoa.planeacionestrategica.dominio.puerto.actividadgestionactividadestrategica;
+
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestionactividadestrategica.DtoObservacionActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.observacion.ObservacionActividadGestionActividadEstrategica;
+
+import java.util.List;
+
+public interface RepositorioObservacionActividadGestionActividadEstrategica {
+
+    List<DtoObservacionActividadGestionActividadEstrategica> listar();
+    ObservacionActividadGestionActividadEstrategica consultarPorId(Long id);
+    Long guardar(ObservacionActividadGestionActividadEstrategica observacionActividadGestionActividadEstrategica);
+    boolean existe(ObservacionActividadGestionActividadEstrategica observacionActividadGestionActividadEstrategica);
+    List<DtoObservacionActividadGestionActividadEstrategica> consultarPorIdActividadGestionActividadEstrategica(Long idTarea);
+}

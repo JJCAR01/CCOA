@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.actividadestrategica;
 
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 

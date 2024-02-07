@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.pat;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
+import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +18,7 @@ public class ServicioGuardarPat {
     }
 
     public Long ejecutarGuardar(Pat pat, InformacionPat informacionPat)  {
-
         if(this.repositorioPat.existe(pat)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-
         return this.repositorioPat.guardar(pat,informacionPat);
     }
 }

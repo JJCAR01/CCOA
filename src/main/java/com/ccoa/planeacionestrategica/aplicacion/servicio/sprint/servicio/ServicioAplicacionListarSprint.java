@@ -3,7 +3,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioSprint;
+import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

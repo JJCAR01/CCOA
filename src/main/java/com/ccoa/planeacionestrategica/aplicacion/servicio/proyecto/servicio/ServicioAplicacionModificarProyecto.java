@@ -2,9 +2,9 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.adaptador.MapeadorAplicacionInformacionProyecto;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.adaptador.MapeadorAplicacionProyecto;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.adaptador.MapeadorAplicacionDetalleProyecto;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.mapeador.MapeadorAplicacionInformacionProyecto;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.mapeador.MapeadorAplicacionProyecto;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.mapeador.MapeadorAplicacionDetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.servicio.proyecto.ServicioModificarProyecto;
 import org.springframework.stereotype.Component;
 

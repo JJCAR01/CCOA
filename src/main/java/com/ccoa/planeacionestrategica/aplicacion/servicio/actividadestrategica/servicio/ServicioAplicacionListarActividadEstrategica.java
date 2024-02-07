@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,5 +19,5 @@ public class ServicioAplicacionListarActividadEstrategica {
 
     public DtoActividadEstrategicaResumen consultarById(Long id){return this.repositorioActividadEstrategica.consultarPorId(id);}
 
-    public List<DtoActividadEstrategicaResumen> consultarByIdpat(Long id){return this.repositorioActividadEstrategica.consultarPorIdPat(id);}
+    public List<DtoActividadEstrategicaResumen> consultarByIdPat(Long id){return this.repositorioActividadEstrategica.consultarPorIdPat(id);}
 }

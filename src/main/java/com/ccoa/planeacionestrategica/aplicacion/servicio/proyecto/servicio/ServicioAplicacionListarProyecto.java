@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
+import com.ccoa.planeacionestrategica.dominio.puerto.proyecto.RepositorioProyecto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

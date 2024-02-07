@@ -21,7 +21,7 @@ public class MapeadorAplicacionInformacionActividadEstrategica implements Mapead
     @Override
     public InformacionActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
         return InformacionActividadEstrategica.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
-                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),dto.getEstado(),
-                Mensaje.POR_DEFECTO_AVANCE, dto.getIdPat(), dto.getIdUsuario());
+                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),Mensaje.POR_DEFECTO_AVANCE,
+                Mensaje.POR_DEFECTO_AVANCE,Mensaje.POR_DEFECTO_AVANCE);
     }
 }

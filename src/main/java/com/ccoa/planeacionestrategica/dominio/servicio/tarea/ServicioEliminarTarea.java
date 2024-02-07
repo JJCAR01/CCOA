@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.tarea;
 
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioTarea;
+import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,9 @@
 package com.ccoa.planeacionestrategica.infraestructura.transversal.servicio;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EPeriodicidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentajeAvance;
+import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.tarea.adaptador.entidad.EntidadInformacionTarea;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,5 +17,22 @@ public class ServicioCalcularPorcentajeAvance implements ServicioObtenerPorcenta
         } else {
             return 0.0;
         }
+    }
+
+    @Override
+    public double obtenerPorcentajesDiferentesATareasUnicaVez(List<EntidadInformacionTarea> informacionTareas, long tareasTerminadas, long totalTareas) {
+        double porcentajeDiferenteAUnicaVez = 0;
+
+        for (EntidadInformacionTarea informacionTarea : informacionTareas) {
+            if(EPeriodicidad.UNICA_VEZ != informacionTarea.getPeriodicidad() && (informacionTarea.getPorcentaje() != Mensaje.PORCENTAJE)) {
+                porcentajeDiferenteAUnicaVez += informacionTarea.getPorcentaje();
+            }
+        }
+        return porcentajeDiferenteAUnicaVez;
+    }
+
+    @Override
+    public double obtenerNuevoAvance(long tareasTerminadas, double tareasDiferentesAUnicaVez, long totalTareas) {
+        return (((tareasTerminadas * 100) + tareasDiferentesAUnicaVez) / totalTareas);
     }
 }

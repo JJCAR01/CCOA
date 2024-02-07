@@ -18,7 +18,9 @@ public class DtoActividadGestionActividadEstrategicaResumen {
     private LocalDate fechaRegistro;
     private Integer duracion;
     private Integer diasRestantes;
-    private Double avance;
+    private double porcentajeReal;
+    private double porcentajeEsperado;
+    private double porcentajeCumplimiento;
     private Long idUsuario;
     private Long idActividadEstrategica;
 }

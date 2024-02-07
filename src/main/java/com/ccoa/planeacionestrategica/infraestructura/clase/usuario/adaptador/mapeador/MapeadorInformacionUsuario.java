@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.mapeador.MapeadorDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.clase.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proceso.adaptador.repositorio.jpa.RepositorioProcesoJpa;

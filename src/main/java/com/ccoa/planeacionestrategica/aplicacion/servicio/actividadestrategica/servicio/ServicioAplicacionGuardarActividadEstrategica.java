@@ -21,9 +21,8 @@ public class ServicioAplicacionGuardarActividadEstrategica {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoActividadEstrategica dto){
-        var epica = this.mapeadorAplicacionActividadEstrategica.mapeadorAplicacion(dto);
-        var informacionEpica = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorAplicacion(dto);
-
-        return new DtoRespuesta<>(this.servicioGuardarActividadEstrategica.ejecutarGuardar(epica,informacionEpica));
+        var actividad = this.mapeadorAplicacionActividadEstrategica.mapeadorAplicacion(dto);
+        var informacionActividad = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorAplicacion(dto);
+        return new DtoRespuesta<>(this.servicioGuardarActividadEstrategica.ejecutarGuardar(actividad,informacionActividad));
     }
 }

@@ -17,25 +17,28 @@ public class ActividadEstrategica {
     private final LocalDate fechaInicial;
     private final LocalDate fechaFinal;
     private final LocalDate fechaRegistro;
+    private final Long idPat;
+    private final Long idUsuario;
 
-    public static ActividadEstrategica of(Long idActividadEstrategica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro){
+    public static ActividadEstrategica of(Long idActividadEstrategica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal,
+                                          LocalDate fechaRegistro, Long idPat, Long idUsuario){
         ValidadorDominio.validarObligatorio(nombre,NOMBRE_DE_LA_ACTIVIDAD_ESTRATEGICA_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validarObligatorioTipoDato(fechaInicial,LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validarObligatorioTipoDato(fechaFinal,LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL);
         ValidadorDominio.validarObjeto(fechaRegistro,LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL);
-
-        return new ActividadEstrategica(idActividadEstrategica, nombre,fechaInicial,fechaFinal,fechaRegistro);
+        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_PAT);
+        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
+        return new ActividadEstrategica(idActividadEstrategica, nombre,fechaInicial,fechaFinal,fechaRegistro,idPat,idUsuario);
     }
 
-
-    public ActividadEstrategica(Long idActividadEstrategica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro) {
+    public ActividadEstrategica(Long idActividadEstrategica, String nombre, LocalDate fechaInicial, LocalDate fechaFinal, LocalDate fechaRegistro, Long idPat, Long idUsuario) {
         this.idActividadEstrategica = idActividadEstrategica;
         this.nombre = nombre;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.fechaRegistro = fechaRegistro;
-
-
+        this.idPat = idPat;
+        this.idUsuario = idUsuario;
     }
 }

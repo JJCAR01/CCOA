@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.pat;
 
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
+import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +17,7 @@ public class ServicioEliminarPat {
     }
 
     public Long ejecutarEliminar(Long id){
-
         if(this.repositorioPat.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(NO_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-
         return this.repositorioPat.eliminar(id);
     }
 }

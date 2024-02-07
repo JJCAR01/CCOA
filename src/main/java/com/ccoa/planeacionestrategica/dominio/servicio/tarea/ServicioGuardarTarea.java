@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioTarea;
+import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 

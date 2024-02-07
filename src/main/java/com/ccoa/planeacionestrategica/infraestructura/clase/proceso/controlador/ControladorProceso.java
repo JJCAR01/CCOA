@@ -6,7 +6,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.Servi
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.ServicioAplicacionGuardarProceso;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.ServicioAplicacionListarProceso;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.ServicioAplicacionModificarProceso;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
+import com.ccoa.planeacionestrategica.dominio.dto.DtoProcesoResumen;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +33,12 @@ public class ControladorProceso {
     }
 
     @GetMapping
-    public List<Proceso> listar(){
+    public List<DtoProcesoResumen> listar(){
         return this.servicioAplicacionListarProceso.ejecutar();
     }
 
     @GetMapping("/{codigo}")
-    public Proceso listar(@PathVariable Long codigo){
+    public DtoProcesoResumen listar(@PathVariable Long codigo){
         return servicioAplicacionListarProceso.consultarById(codigo);
     }
 

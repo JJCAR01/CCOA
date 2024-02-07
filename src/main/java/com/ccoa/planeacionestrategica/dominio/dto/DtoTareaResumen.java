@@ -16,7 +16,6 @@ public class DtoTareaResumen {
     private String estado;
     private String descripcion;
     private EPeriodicidad periodicidad;
-    private String observacion;
     private Double porcentaje;
     private String tipoAES;
     private Long idASE;

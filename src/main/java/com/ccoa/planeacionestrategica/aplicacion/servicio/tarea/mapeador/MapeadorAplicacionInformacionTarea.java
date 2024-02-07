@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionInformacionTarea implements MapeadorAplicacion<DtoTarea, InformacionTarea> {
     @Override
     public InformacionTarea mapeadorAplicacion(DtoTarea dto) {
-        return InformacionTarea.of(dto.getIdTarea(), dto.getObservacion(), dto.getPeriodicidad(), Mensaje.POR_DEFECTO_AVANCE);
+        return InformacionTarea.of(dto.getIdTarea(), dto.getPeriodicidad(), Mensaje.POR_DEFECTO_AVANCE);
     }
 
-    public InformacionTarea actualizarTarea(DtoTarea dto) {
-        return new InformacionTarea(dto.getIdTarea(), dto.getObservacion(), dto.getPeriodicidad(), dto.getPorcentaje());
-    }
     public InformacionTarea actualizarEstado(DtoTarea dto) {
-        return new InformacionTarea(dto.getIdTarea(), dto.getObservacion(), dto.getPeriodicidad(), dto.getPorcentaje());
+        return new InformacionTarea(dto.getIdTarea(), dto.getPeriodicidad(), dto.getPorcentaje());
+    }
+    public InformacionTarea actualizarPorcentaje(DtoTarea dto) {
+        return new InformacionTarea(dto.getIdTarea(), dto.getPeriodicidad(), dto.getPorcentaje());
     }
 }

@@ -31,7 +31,9 @@ public class Mensajes {
     public static final String LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL = "La fecha de registro debe ser la fecha actual";
     public static final String LA_DURACION_NO_PUEDE_SER_NEGATIVA = "La duracion no puede ser negativa";
     public static final String LOS_DIAS_RESTANTES_NO_PUEDEN_SER_NULOS = "Los días restantes no pueden ser nulos";
-    public static final String EL_PORCENTAJE_DE_AVANCE_NO_PUEDE_ESTAR_VACIO = "El porcentaje de avance no puede estar vacío";
+    public static final String EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO = "El porcentaje real no puede estar vacío";
+    public static final String EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO = "El porcentaje esperado no puede estar vacío";
+    public static final String EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO = "El porcentaje de cumplimiento no puede estar vacío";
     public static final String RUTA_ARCHIVO_DEL_DOCUMENTO_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo del documento no puede estar vacio";
     public static final String LA_URL_DEL_DOCUMENTO_DEBE_DE_SER_VALIDA = "La URL del documento debe de ser válida";
     public static final String LA_CONTRASENA_NO_CUENTA_CON_EL_PATRON_DE_SEGURIDAD_CORRRECTO = "La contraseña no cuenta con el patrón de seguridad correcto";
@@ -66,6 +68,8 @@ public class Mensajes {
     public static final String YA_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS = "Ya existe el usuario con los datos ingresados";
     public static final String YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS = "Ya existe el sprint con los datos ingresados";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT = "Ya existe un documento relacionado con el sprint";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION = "Ya existe un documento relacionado con la actividad de gestión";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DEL_AREA = "Ya existe un documento relacionado con la actividad del área";
     public static final String YA_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad estrategica con los datos ingresados";
     public static final String YA_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad gestion del area con los datos ingresados";
 }

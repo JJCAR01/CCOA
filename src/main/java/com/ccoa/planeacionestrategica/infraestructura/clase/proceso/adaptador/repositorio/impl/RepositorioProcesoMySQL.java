@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.clase.proceso.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.dominio.dto.DtoProcesoResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProceso;
 import com.ccoa.planeacionestrategica.infraestructura.clase.proceso.adaptador.mapeador.MapeadorProceso;
@@ -19,16 +20,16 @@ public class RepositorioProcesoMySQL implements RepositorioProceso {
     }
 
     @Override
-    public List<Proceso> listar() {
+    public List<DtoProcesoResumen> listar() {
         var entidad =this.repositorioProcesoJpa.findAll();
         return this.mapeadorProceso.listarDominio(entidad);
     }
 
     @Override
-    public Proceso consultarPorId(Long id) {
+    public DtoProcesoResumen consultarPorId(Long id) {
         var entidad = this.repositorioProcesoJpa.findById(id).orElse(null);
         assert entidad != null;
-        return this.mapeadorProceso.mapeadorDominio(entidad);
+        return this.mapeadorProceso.listarDtoResumen(entidad);
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionactividadestrategica.servicio;
-
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.documento.DocumentoActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.puerto.actividadgestionactividadestrategica.RepositorioActividadGestionActividadEstrategica;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-
 @Component
 public class ServicioAplicacionListarActividadGestionActividadEstrategica  {
 
@@ -18,5 +16,6 @@ public class ServicioAplicacionListarActividadGestionActividadEstrategica  {
 
     public List<DtoActividadGestionActividadEstrategicaResumen> ejecutar(){return this.repositorioActividadGestionActividadEstrategica.listar();}
     public ActividadGestionActividadEstrategica consultarById(Long id){return this.repositorioActividadGestionActividadEstrategica.consultarPorId(id);}
+    public DocumentoActividadGestionActividadEstrategica consultarByIdDocumento(Long id){return this.repositorioActividadGestionActividadEstrategica.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoActividadGestionActividadEstrategicaResumen> consultarByIdActividadEstrategica(Long id){return this.repositorioActividadGestionActividadEstrategica.consultarPorIdActividadEstrategica(id);}
 }

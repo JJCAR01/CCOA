@@ -1,16 +1,12 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class DtoActividadEstrategica {
     private Long idActividadEstrategica;
     private String nombre;
@@ -20,7 +16,9 @@ public class DtoActividadEstrategica {
     private Integer duracion;
     private Integer diasRestantes;
     private Boolean estado;
-    private Double avance;
+    private double porcentajeReal;
+    private double porcentajeEsperado;
+    private double porcentajeCumplimiento;
     private Long idUsuario;
     private Long idPat;
 }

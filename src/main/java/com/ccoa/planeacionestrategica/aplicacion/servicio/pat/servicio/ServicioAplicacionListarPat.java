@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioPat;
+import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

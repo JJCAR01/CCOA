@@ -16,4 +16,8 @@ public class MapeadorAplicacionTarea implements MapeadorAplicacion<DtoTarea, Tar
     public Tarea actualizarEstado(DtoTarea dto) {
         return new Tarea(dto.getIdTarea(), dto.getNombre(), dto.getEstado(), dto.getDescripcion(),dto.getTipoASE(), dto.getIdASE(), dto.getIdUsuario());
     }
+    public Tarea actualizarPorcentaje(DtoTarea dto) {
+        return new Tarea(dto.getIdTarea(), dto.getNombre(), dto.getEstado(), dto.getDescripcion(),dto.getTipoASE(), dto.getIdASE(), dto.getIdUsuario());
+    }
+
 }

@@ -12,6 +12,7 @@ import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.ma
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioRolJpa;
 import com.ccoa.planeacionestrategica.infraestructura.clase.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario) {
+    public Long guardar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario)  {
         try {
             // Guardar la entidad de usuario y obtener el ID generado
             var usuarioEntidad = this.mapeadorUsuario.mapeadorEntidad(usuario);
@@ -82,7 +83,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
             return idUsuarioGenerado; // Devolver el ID generado
         } catch (Exception e) {
             // Manejar cualquier excepción lanzada durante el proceso
-            throw new RuntimeException("Error al guardar el usuario", e);
+            throw new IllegalArgumentException(Mensaje.SE_HA_PRESENTADO_UN_ERROR_AL_GUARDAR_EL_USUARIO);
         }
     }
 

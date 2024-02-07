@@ -3,13 +3,18 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestion.mape
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapeadorAplicacionActividadGestion implements MapeadorAplicacion<DtoActividadGestion, ActividadGestion> {
+    private final ServicioObtenerHoraActual servicioObtenerHoraActual;
+    public MapeadorAplicacionActividadGestion(ServicioObtenerHoraActual servicioObtenerHoraActual) {
+        this.servicioObtenerHoraActual = servicioObtenerHoraActual;
+    }
     @Override
     public ActividadGestion mapeadorAplicacion(DtoActividadGestion dto) {
         return ActividadGestion.of(dto.getIdActividadGestion(),dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),
-                dto.getIdUsuario(), dto.getIdPat());
+                servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),dto.getIdUsuario(), dto.getIdPat());
     }
 }

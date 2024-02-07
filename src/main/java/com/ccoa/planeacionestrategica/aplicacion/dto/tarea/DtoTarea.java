@@ -17,7 +17,6 @@ public class DtoTarea {
     private String nombre;
     private EEstado estado;
     private String descripcion;
-    private String observacion;
     private EPeriodicidad periodicidad;
     private ETipoASE tipoASE;
     private Double porcentaje;

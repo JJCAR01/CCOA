@@ -28,6 +28,7 @@ public class RestExceptionHandler {
         STATES.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
         STATES.put(ValidadorFecha.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(AccessDeniedExcepcion.class.getSimpleName(),HttpStatus.INTERNAL_SERVER_ERROR);
+        STATES.put(BadRequestExcepcion.class.getSimpleName(),HttpStatus.INTERNAL_SERVER_ERROR);
         STATES.put(BadRequestExcepcion.class.getSimpleName(),HttpStatus.BAD_REQUEST);
     }
 

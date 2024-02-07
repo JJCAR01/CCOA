@@ -10,26 +10,24 @@ public class InformacionActividadEstrategica {
 
     private final Integer duracion;
     private final Integer diasRestantes;
-    private final Boolean estado;
-    private final Double avance;
-    private final Long idPat;
-    private final Long idUsuario;
+    private final double porcentajeReal;
+    private final double porcentajeEsperado;
+    private final double porcentajeCumplimiento;
 
-    public static InformacionActividadEstrategica of( Integer duracion, Integer diasRestantes, Boolean estado,
-                                                     Double avance, Long idPat,Long idUsuario){
-        ValidadorDominio.validadorNumeroDoubleYMayorACero(avance,EL_PORCENTAJE_DE_AVANCE_NO_PUEDE_ESTAR_VACIO);
-        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_PAT);
-        ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
-        return new InformacionActividadEstrategica(duracion, diasRestantes, estado, avance, idPat,idUsuario);
+
+    public static InformacionActividadEstrategica of(Integer duracion, Integer diasRestantes,double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO);
+
+        return new InformacionActividadEstrategica(duracion, diasRestantes, porcentajeReal,porcentajeEsperado,porcentajeCumplimiento);
     }
 
-    public InformacionActividadEstrategica( Integer duracion, Integer diasRestantes, Boolean estado, Double avance, Long idPat,Long idUsuario) {
+    public InformacionActividadEstrategica(Integer duracion, Integer diasRestantes,double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
         this.duracion = duracion;
         this.diasRestantes = diasRestantes;
-        this.estado = estado;
-        this.avance = avance;
-        this.idPat = idPat;
-        this.idUsuario=idUsuario;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
-
 }

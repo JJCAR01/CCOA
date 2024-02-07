@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.actividadgestionactivida
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.ActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionactividadestrategica.InformacionActividadGestionActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioActividadGestionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.puerto.actividadgestionactividadestrategica.RepositorioActividadGestionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 

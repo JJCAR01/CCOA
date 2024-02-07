@@ -17,7 +17,9 @@ public class DtoPatResumen {
     private String nombre;
     private Integer fechaAnual;
     private LocalDate fechaRegistro;
-    private Double porcentaje;
+    private Double porcentajeReal;
+    private Double porcentajeEsperado;
+    private Double porcentajeCumplimiento;
     private DtoProceso proceso;
     private DtoDireccion direccion;
     private Long idUsuario;

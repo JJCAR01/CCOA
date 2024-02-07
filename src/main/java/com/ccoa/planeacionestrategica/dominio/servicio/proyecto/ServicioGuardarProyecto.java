@@ -3,7 +3,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.proyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
-import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProyecto;
+import com.ccoa.planeacionestrategica.dominio.puerto.proyecto.RepositorioProyecto;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;
 

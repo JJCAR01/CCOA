@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.proyecto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.enums.EModalidad;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.enums.EPlaneacionSprint;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EModalidad;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPlaneacionSprint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,13 +19,15 @@ public class DtoProyecto {
     private Double presupuesto;
     private EModalidad modalidad;
     private Double valorEjecutado;
-    private Boolean estado;
-    private Long idActividadEstrategica;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
-    private Double avance;
+    private LocalDate fechaRegistro;
     private Integer duracion;
+    private double porcentajeReal;
+    private double porcentajeEsperado;
+    private double porcentajeCumplimiento;
     private Integer totalSprint;
     private EPlaneacionSprint planeacionSprint;
+    private Long idActividadEstrategica;
     private Long idUsuario;
 }

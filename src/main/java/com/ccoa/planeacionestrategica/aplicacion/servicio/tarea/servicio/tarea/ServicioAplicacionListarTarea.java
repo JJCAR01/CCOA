@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
 import org.springframework.stereotype.Component;
 

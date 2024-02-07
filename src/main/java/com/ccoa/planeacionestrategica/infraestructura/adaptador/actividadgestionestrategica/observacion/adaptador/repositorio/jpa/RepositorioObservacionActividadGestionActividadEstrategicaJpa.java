@@ -1,0 +1,12 @@
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.observacion.adaptador.repositorio.jpa;
+
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.observacion.adaptador.entidad.EntidadObservacionActividadGestionEstrategica;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface RepositorioObservacionActividadGestionActividadEstrategicaJpa extends JpaRepository<EntidadObservacionActividadGestionEstrategica, Long> {
+    List<EntidadObservacionActividadGestionEstrategica> findByIdActividadGestionEstrategica(long idActividadGestionEstrategica);
+}

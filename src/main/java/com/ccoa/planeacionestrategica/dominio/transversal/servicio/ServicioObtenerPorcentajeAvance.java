@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.servicio;
 
 
-import com.ccoa.planeacionestrategica.infraestructura.clase.tarea.tarea.adaptador.entidad.EntidadInformacionTarea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadInformacionTarea;
 
 import java.util.List;
 

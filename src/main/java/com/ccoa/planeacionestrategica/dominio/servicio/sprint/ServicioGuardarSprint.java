@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprint;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.DocumentoSprint;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
@@ -18,9 +19,9 @@ public class ServicioGuardarSprint {
         this.repositorioSprint = repositorioSprint;
     }
 
-    public Long ejecutarGuardar(Sprint sprint){
+    public Long ejecutarGuardar(Sprint sprint, InformacionSprint informacionSprint){
         if(this.repositorioSprint.existe(sprint)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioSprint.guardar(sprint);
+        return this.repositorioSprint.guardar(sprint, informacionSprint);
     }
 
     public Long ejecutarGuardarDocumento(DocumentoSprint documentoSprint,Long codigo){

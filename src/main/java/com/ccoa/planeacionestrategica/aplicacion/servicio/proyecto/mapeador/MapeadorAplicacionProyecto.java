@@ -10,6 +10,6 @@ public class MapeadorAplicacionProyecto implements MapeadorAplicacion<DtoProyect
     @Override
     public Proyecto mapeadorAplicacion(DtoProyecto dto) {
         return new Proyecto(dto.getIdProyecto(),dto.getNombre(), dto.getPresupuesto(),dto.getModalidad(),
-                dto.getValorEjecutado(), dto.getEstado());
+                dto.getValorEjecutado(), dto.getIdActividadEstrategica(), dto.getIdUsuario());
     }
 }

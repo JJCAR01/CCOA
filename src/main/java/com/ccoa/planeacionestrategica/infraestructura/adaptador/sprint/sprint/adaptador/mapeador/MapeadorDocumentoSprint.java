@@ -1,0 +1,23 @@
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador;
+
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadDocumentoSprint;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MapeadorDocumentoSprint implements MapeadorInfraestructura<EntidadDocumentoSprint, DocumentoSprint> {
+    @Override
+    public DocumentoSprint mapeadorDominio(EntidadDocumentoSprint entidad) {
+        return new DocumentoSprint(entidad.getIdDocumentoSprint(), entidad.getRutaArchivo());
+    }
+
+    @Override
+    public EntidadDocumentoSprint mapeadorEntidad(DocumentoSprint dominio) {
+        return new EntidadDocumentoSprint(dominio.getRutaArchivo());
+    }
+    public EntidadDocumentoSprint mapeadorEntidadDocumento(DocumentoSprint dominio,Long id) {
+        return new EntidadDocumentoSprint(id,dominio.getRutaArchivo());
+    }
+
+}

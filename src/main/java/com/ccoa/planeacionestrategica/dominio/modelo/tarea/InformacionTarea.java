@@ -1,30 +1,32 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.tarea;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EPeriodicidad;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO;
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
 
-@Getter
-@Setter
+@Data
 public class InformacionTarea {
 
-    private final Long idInformacionTarea;
     private final EPeriodicidad periodicidad;
-    private final Double porcentaje;
+    private final double porcentajeReal;
+    private final double porcentajeEsperado;
+    private final double porcentajeCumplimiento;
 
-    public static InformacionTarea of(Long idInformacionTarea, EPeriodicidad periodicidad, Double porcentaje){
+    public static InformacionTarea of(EPeriodicidad periodicidad, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
         ValidadorDominio.validarObligatorio(periodicidad, Mensajes.LA_PERIODICIDAD_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIA);
-        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentaje,EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
-        return new InformacionTarea(idInformacionTarea, periodicidad, porcentaje);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO);
+        return new InformacionTarea(periodicidad, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento);
     }
 
-    public InformacionTarea(Long idInformacionTarea, EPeriodicidad periodicidad, Double porcentaje) {
-        this.idInformacionTarea = idInformacionTarea;
+    public InformacionTarea(EPeriodicidad periodicidad, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
         this.periodicidad = periodicidad;
-        this.porcentaje = porcentaje;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
 }

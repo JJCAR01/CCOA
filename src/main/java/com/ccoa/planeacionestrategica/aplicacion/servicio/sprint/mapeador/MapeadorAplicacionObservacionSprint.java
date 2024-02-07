@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.ObservacionSprint;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

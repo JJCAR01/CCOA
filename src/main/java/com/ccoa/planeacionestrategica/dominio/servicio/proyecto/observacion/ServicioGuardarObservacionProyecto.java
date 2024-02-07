@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.proyecto.observacion;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.ObservacionProyecto;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.observacion.ObservacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.puerto.proyecto.RepositorioObservacionProyecto;
 import org.springframework.stereotype.Service;
 

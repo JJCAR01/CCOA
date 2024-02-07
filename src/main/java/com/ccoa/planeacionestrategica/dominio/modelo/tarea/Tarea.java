@@ -1,15 +1,13 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.tarea;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
 
-@Getter
-@Setter
+@Data
 public class Tarea {
 
     private final Long idTarea;

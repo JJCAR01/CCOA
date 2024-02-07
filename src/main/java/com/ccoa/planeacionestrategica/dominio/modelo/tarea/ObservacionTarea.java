@@ -1,14 +1,13 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.tarea;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 public class ObservacionTarea {
-
     private final Long idObservacionTarea;
     private final Long idTarea;
     private final LocalDate fecha;

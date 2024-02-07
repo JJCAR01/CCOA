@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.tarea;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.ObservacionSprint;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;
 
 import java.util.List;
 

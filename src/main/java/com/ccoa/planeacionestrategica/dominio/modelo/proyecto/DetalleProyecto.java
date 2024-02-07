@@ -4,29 +4,31 @@ import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDom
 import lombok.Getter;
 import lombok.Setter;
 
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_PUEDE_EXISTIR_SIN_ACTIVIDAD_ESTRATEGICA;
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_PUEDE_EXISTIR_SIN_USUARIO;
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
 
 
 @Getter
 @Setter
 public class DetalleProyecto {
 
-    private Long idDetalleProyecto;
-    private Double avance;
-    private Long idActividadEstrategica;
-    private Long idUsuario;
+    private final Integer duracion;
+    private final double porcentajeReal;
+    private final double porcentajeEsperado;
+    private final double porcentajeCumplimiento;
 
-    public static DetalleProyecto of(Long idDetalleProyecto,Double avance, Long idActividadEstrategica, Long idUsuario){
-        ValidadorDominio.validarObligatorio(idActividadEstrategica,NO_PUEDE_EXISTIR_SIN_ACTIVIDAD_ESTRATEGICA);
-        ValidadorDominio.validarObligatorio(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
-        return new DetalleProyecto(idDetalleProyecto, avance, idActividadEstrategica,idUsuario);
+    public static DetalleProyecto of(Integer duracion, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento){
+
+        ValidadorDominio.validadorNumeroEnteroYMayorACero(duracion,LA_DURACION_NO_PUEDE_SER_NEGATIVA);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal,EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeEsperado,EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeCumplimiento,EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO);
+        return new DetalleProyecto(duracion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento);
     }
 
-   public DetalleProyecto(Long idDetalleProyecto, Double avance, Long idActividadEstrategica, Long idUsuario) {
-        this.idDetalleProyecto = idDetalleProyecto;
-       this.avance = avance;
-       this.idActividadEstrategica = idActividadEstrategica;
-        this.idUsuario = idUsuario;
+    public DetalleProyecto(Integer duracion, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
+        this.duracion = duracion;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
 }

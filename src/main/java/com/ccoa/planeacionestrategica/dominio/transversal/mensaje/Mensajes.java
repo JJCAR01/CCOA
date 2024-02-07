@@ -30,6 +30,7 @@ public class Mensajes {
     public static final String LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL = "La fecha final debe ser mayor a la fecha inicial";
     public static final String LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL = "La fecha de registro debe ser la fecha actual";
     public static final String LA_DURACION_NO_PUEDE_SER_NEGATIVA = "La duracion no puede ser negativa";
+    public static final String LA_META_NO_PUEDE_SER_NEGATIVA = "La duracion no puede ser negativa";
     public static final String LOS_DIAS_RESTANTES_NO_PUEDEN_SER_NULOS = "Los días restantes no pueden ser nulos";
     public static final String EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO = "El porcentaje real no puede estar vacío";
     public static final String EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO = "El porcentaje esperado no puede estar vacío";
@@ -69,7 +70,9 @@ public class Mensajes {
     public static final String YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS = "Ya existe el sprint con los datos ingresados";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT = "Ya existe un documento relacionado con el sprint";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION = "Ya existe un documento relacionado con la actividad de gestión";
-    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DEL_AREA = "Ya existe un documento relacionado con la actividad del área";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_ESTRATEGICA = "Ya existe un documento relacionado con la actividad estrategica";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO = "Ya existe un documento relacionado con el proyecto";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA = "Ya existe un documento relacionado con la actividad de gestión de la actividad estratégica";
     public static final String YA_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad estrategica con los datos ingresados";
     public static final String YA_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad gestion del area con los datos ingresados";
 }

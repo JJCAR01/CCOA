@@ -13,7 +13,7 @@ public class ObservacionPat {
     private final String nombre;
 
     public static ObservacionPat of(Long idObservacionPat, Long idPat, LocalDate fecha, String nombre){
-        return new ObservacionPat(idObservacionPat, idPat, fecha, nombre);
+        return new ObservacionPat(idObservacionPat,idPat, fecha, nombre);
     }
 
     public ObservacionPat(Long idObservacionPat, Long idPat, LocalDate fecha, String nombre) {

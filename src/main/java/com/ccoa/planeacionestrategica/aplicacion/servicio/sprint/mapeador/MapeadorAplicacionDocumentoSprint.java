@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoRutaArchivo;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.DocumentoSprint;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

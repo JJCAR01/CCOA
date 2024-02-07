@@ -15,7 +15,8 @@ public class DtoSprintResumen {
     private String descripcion;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
-    private Double avance;
-    private Boolean estado;
+    private Double porcentajeReal;
+    private Double porcentajeEsperado;
+    private Double porcentajeCumplimiento;
     private Long idProyecto;
 }

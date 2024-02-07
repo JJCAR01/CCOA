@@ -3,7 +3,7 @@ package com.ccoa.planeacionestrategica.dominio.puerto.tarea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.ETipoASE;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 
 import java.util.List;
 

@@ -12,17 +12,8 @@ import java.util.List;
 
 @Configuration
 public class MapeadorAplicacionSprint implements MapeadorAplicacion<DtoSprint, Sprint> {
-    private final ServicioObtenerPorcentajeAvance servicioObtenerPorcentajeAvance;
-
-    public MapeadorAplicacionSprint(ServicioObtenerPorcentajeAvance servicioObtenerPorcentajeAvance) {
-        this.servicioObtenerPorcentajeAvance = servicioObtenerPorcentajeAvance;
-    }
-
     @Override
     public Sprint mapeadorAplicacion(DtoSprint dto) {
-        List<Tarea> tarea = new ArrayList<>();
-        return new Sprint(dto.getIdSprint(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),
-                servicioObtenerPorcentajeAvance.calcularPorcentaje(tarea),
-                dto.getEstado(), dto.getIdProyecto());
+        return new Sprint(dto.getIdSprint(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),dto.getIdProyecto());
     }
 }

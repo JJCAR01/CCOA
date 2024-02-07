@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.puerto.proyecto;
 
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoObservacionProyecto;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.ObservacionProyecto;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.observacion.ObservacionProyecto;
 
 import java.util.List;
 

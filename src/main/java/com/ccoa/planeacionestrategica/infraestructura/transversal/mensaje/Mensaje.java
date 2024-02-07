@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.enums.EEstado;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

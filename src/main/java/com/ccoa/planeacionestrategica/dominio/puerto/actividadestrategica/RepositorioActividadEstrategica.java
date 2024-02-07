@@ -4,6 +4,10 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 
 import java.util.List;
 
@@ -17,4 +21,7 @@ public interface RepositorioActividadEstrategica{
     Long modificar(ActividadEstrategica actividadEstrategica ,InformacionActividadEstrategica informacionActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);
     List<DtoIdsActividadEstrategica> consultarPorIdPatAEliminar(Long idPat);
+    Long guardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo);
+    boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica);
+    DocumentoActividadEstrategica consultarPorIdParaObtenerDocumento(Long id);
 }

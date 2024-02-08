@@ -16,22 +16,33 @@ public class EntidadInformacionPat {
     @Column(name = "id_informacion_pat")
     private Long idInformacionPat;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    /*CascadeType.PERSIST para que no elimine lo que tenga que ver con las clases hijas,
+    CascadeType.ALL, eliminaria */
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "id_proceso")
     private EntidadProceso proceso;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "id_direccion")
     private EntidadDireccion direccion;
 
     @Column(name = "porcentaje_real")
     private Double porcentajeReal;
 
-    @Column(name = "iporcentaje_esperado")
+    @Column(name = "porcentaje_esperado")
     private Double porcentajeEsperado;
 
     @Column(name = "porcentaje_cumplimiento")
     private Double porcentajeCumplimiento;
+
+    public EntidadInformacionPat(Long idInformacionPat, EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
+        this.idInformacionPat = idInformacionPat;
+        this.proceso = proceso;
+        this.direccion = direccion;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
+    }
 
     public EntidadInformacionPat(EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
         this.proceso = proceso;

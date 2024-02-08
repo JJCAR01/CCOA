@@ -72,6 +72,8 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(infEntidad.orElseThrow().getPorcentajeCumplimiento());
+            dto.setMeta(infEntidad.orElseThrow().getMeta());
+            dto.setResultado(infEntidad.orElseThrow().getResultado());
 
             listaDto.add(dto);
         }
@@ -99,8 +101,10 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidad.setNombre(actividadEstrategica.getNombre());
         entidad.setFechaInicial(actividadEstrategica.getFechaInicial());
         entidad.setFechaFinal(actividadEstrategica.getFechaFinal());
+        entidad.setIdUsuario(actividadEstrategica.getIdUsuario());
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
+        entidadInformacionActividadEstrategica.setMeta(informacionActividadEstrategica.getMeta());
     }
 
 

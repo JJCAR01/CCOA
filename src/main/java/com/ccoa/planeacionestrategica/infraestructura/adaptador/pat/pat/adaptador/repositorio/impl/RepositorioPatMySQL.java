@@ -33,10 +33,12 @@ public class RepositorioPatMySQL implements RepositorioPat {
     }
 
     @Override
-    public Pat consultarPorId(Long id) {
+    public DtoPatResumen consultarPorId(Long id) {
         var entidad = this.repositorioPatJpa.findById(id).orElse(null);
+        var informacionPat = this.repositorioInformacionPatJpa.findById(id).orElse(null);
         assert entidad != null;
-        return this.mapeadorPat.mapeadorDominio(entidad);
+        assert informacionPat != null;
+        return this.mapeadorPat.patDominio(entidad,informacionPat);
     }
 
     @Override

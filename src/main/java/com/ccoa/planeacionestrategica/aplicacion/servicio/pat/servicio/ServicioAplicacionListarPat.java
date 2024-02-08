@@ -18,5 +18,5 @@ public class ServicioAplicacionListarPat {
 
     public List<DtoPatResumen> ejecutar(){return this.repositorioPat.listar();}
 
-    public Pat consultarById(Long id){return this.repositorioPat.consultarPorId(id);}
+    public DtoPatResumen consultarById(Long id){return this.repositorioPat.consultarPorId(id);}
 }

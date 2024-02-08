@@ -10,8 +10,12 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.repositorio.jpa.RepositorioProcesoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
@@ -27,14 +31,16 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
     private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
     private final RepositorioProcesoJpa repositorioProcesoJpa;
+    private final RepositorioDireccionJpa repositorioDireccionJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
-    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioActividadGestionJpa repositorioActividadGestionJpa, RepositorioProcesoJpa repositorioProcesoJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
+    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioActividadGestionJpa repositorioActividadGestionJpa, RepositorioProcesoJpa repositorioProcesoJpa, RepositorioDireccionJpa repositorioDireccionJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
         this.repositorioProcesoJpa = repositorioProcesoJpa;
+        this.repositorioDireccionJpa = repositorioDireccionJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
     }
@@ -49,6 +55,18 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         var idUsuario = this.repositorioUsuarioJpa.findById(dominio.getIdUsuario()).orElseThrow().getIdUsuario();
 
         return new EntidadPat(dominio.getNombre(), dominio.getFechaAnual(),dominio.getFechaRegistro(),idUsuario);
+    }
+    public DtoPatResumen patDominio(EntidadPat entidad, EntidadInformacionPat entidadInformacionPat) {
+        DtoProceso dtoProceso = new DtoProceso();
+        dtoProceso.setNombre(entidadInformacionPat.getProceso().getNombre());
+
+        DtoDireccion dtoDireccion = new DtoDireccion();
+        dtoDireccion.setNombre(entidadInformacionPat.getDireccion().getNombre());
+
+        return new DtoPatResumen(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro()
+                ,entidadInformacionPat.getPorcentajeReal(), entidadInformacionPat.getPorcentajeEsperado(),
+                entidadInformacionPat.getPorcentajeCumplimiento(),dtoProceso ,
+                dtoDireccion,entidad.getIdUsuario());
     }
     public List<DtoPatResumen> listarDominio(List<EntidadPat> entidades){
         List<DtoPatResumen> listaDto = new ArrayList<>();
@@ -99,5 +117,6 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     public void actualizarEntidad(EntidadPat entidad, Pat pat) {
         entidad.setNombre(pat.getNombre());
         entidad.setFechaAnual(pat.getFechaAnual());
+        entidad.setIdUsuario(pat.getIdUsuario());
     }
 }

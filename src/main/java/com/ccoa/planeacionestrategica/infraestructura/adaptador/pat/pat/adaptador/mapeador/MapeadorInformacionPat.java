@@ -38,7 +38,7 @@ public class MapeadorInformacionPat implements MapeadorInfraestructura<EntidadIn
         var entidadDireccion = this.repositorioDireccionJpa.findByNombre(direccion.getNombre());
 
         // Crear y devolver la entidad EntidadInformacionPat
-        return new EntidadInformacionPat(entidadProceso,entidadDireccion, dominio.getPorcentajeReal(),
+                return new EntidadInformacionPat(dominio.getIdInformacionPat(),entidadProceso,entidadDireccion, dominio.getPorcentajeReal(),
                 dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento());
     }
 

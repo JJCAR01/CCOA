@@ -1,15 +1,11 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidad;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class DtoTareaResumen {
     private Long idTarea;
     private String nombre;

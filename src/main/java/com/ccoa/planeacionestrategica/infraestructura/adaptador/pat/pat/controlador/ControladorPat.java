@@ -40,7 +40,7 @@ public class ControladorPat {
     }
 
     @GetMapping("/{codigo}")
-    public Pat listar(@PathVariable Long codigo){
+    public DtoPatResumen listar(@PathVariable Long codigo){
         return servicioAplicacionListarPat.consultarById(codigo);
     }
 

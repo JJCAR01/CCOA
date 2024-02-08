@@ -23,7 +23,7 @@ public class EntidadInformacionActividadEstrategica{
     @Column(name = "porcentaje_real")
     private Double porcentajeReal;
 
-    @Column(name = "iporcentaje_esperado")
+    @Column(name = "porcentaje_esperado")
     private Double porcentajeEsperado;
 
     @Column(name = "porcentaje_cumplimiento")

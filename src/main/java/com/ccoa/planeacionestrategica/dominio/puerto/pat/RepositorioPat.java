@@ -10,7 +10,7 @@ public interface RepositorioPat {
 
 
     List<DtoPatResumen> listar();
-    Pat consultarPorId(Long id);
+    DtoPatResumen consultarPorId(Long id);
     Long guardar(Pat pat, InformacionPat informacionPat) ;
     boolean existe(Pat pat);
     Long eliminar(Long id);

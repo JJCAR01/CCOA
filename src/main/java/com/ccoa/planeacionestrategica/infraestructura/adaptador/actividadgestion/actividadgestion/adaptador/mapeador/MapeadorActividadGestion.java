@@ -96,6 +96,7 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
         entidad.setNombre(actividadGestion.getNombre());
         entidad.setFechaInicial(actividadGestion.getFechaInicial());
         entidad.setFechaFinal(actividadGestion.getFechaFinal());
+        entidad.setIdUsuario(actividadGestion.getIdUsuario());
         entidadInformacionActividadGestion.setDuracion(informacionActividadGestion.getDuracion());
         entidadInformacionActividadGestion.setDiasRestantes(informacionActividadGestion.getDiasRestantes());
     }

@@ -4,12 +4,14 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadDetalleProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
@@ -20,15 +22,19 @@ import java.util.List;
 @Configuration
 public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto, Proyecto> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioProyectoJpa repositorioProyectoJpa;
     private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
     private final RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
-    public MapeadorProyecto(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
+    public MapeadorProyecto(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioProyectoJpa repositorioProyectoJpa, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioInformacionProyectoJpa repositorioInformacionProyectoJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+        this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
         this.repositorioInformacionProyectoJpa = repositorioInformacionProyectoJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
 
     @Override
@@ -60,13 +66,14 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
 
             dto.setDuracion(detalleEntidad.orElseThrow().getDuracion());
             dto.setPorcentajeReal(detalleEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(detalleEntidad.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(detalleEntidad.orElseThrow().getPorcentajeCumplimiento());
 
             var informacionEntidad = repositorioInformacionProyectoJpa.findById(entidad.getIdProyecto());
             dto.setFechaInicial(informacionEntidad.orElseThrow().getFechaInicial());
             dto.setFechaFinal(informacionEntidad.orElseThrow().getFechaFinal());
             dto.setFechaRegistro(informacionEntidad.orElseThrow().getFechaRegistro());
+            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(informacionEntidad.orElseThrow().getFechaInicial(),
+                    detalleEntidad.orElseThrow().getDuracion()));
             dto.setPlaneacionSprint(informacionEntidad.orElseThrow().getPlaneacionSprint());
             dto.setTotalSprint(informacionEntidad.orElseThrow().getTotalSprint());
 
@@ -111,6 +118,10 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
                 entidadInformacionProyecto.getFechaInicial(),entidadInformacionProyecto.getFechaFinal(),entidadInformacionProyecto.getFechaRegistro()
                 ,entidadDetalleProyecto.getDuracion(),entidadDetalleProyecto.getPorcentajeReal(),entidadDetalleProyecto.getPorcentajeEsperado(),
                 entidadDetalleProyecto.getPorcentajeCumplimiento(),entidad.getIdActividadEstrategica(),entidad.getIdUsuario());
+    }
+
+    public EntidadProyecto obtenerActividadEstrategicaRelacionadoConElProyecto(Long id){
+        return this.repositorioProyectoJpa.findById(id).orElseThrow();
     }
 
 }

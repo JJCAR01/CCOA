@@ -60,7 +60,7 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         var informacionGestionEntidad = this.mapeadorInformacionActividadEstrategica.mapeadorEntidad(informacionActividadEstrategica);
 
         informacionGestionEntidad.setIdInformacionActividadEstrategica(idActividad);
-        mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(informacionGestionEntidad);
+        mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(informacionGestionEntidad,idActividad);
         this.repositorioInformacionActividadEstrategicaJpa.save(informacionGestionEntidad);
         return idActividad;
     }

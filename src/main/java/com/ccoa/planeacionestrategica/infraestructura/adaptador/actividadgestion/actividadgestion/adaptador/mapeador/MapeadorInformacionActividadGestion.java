@@ -1,27 +1,38 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentajeAvance;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorInformacionPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadInformacionTarea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class MapeadorInformacionActividadGestion implements MapeadorInfraestructura<EntidadInformacionActividadGestion, InformacionActividadGestion> {
     private final RepositorioTareaJpa repositorioTareaJpa;
     private final RepositorioInformacionTareaJpa repositorioInformacionTareaJpa;
-    private final ServicioObtenerPorcentajeAvance servicioObtenerPorcentajeAvance;
-    private final MapeadorPat mapeadorPat;
+    private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
+    private final MapeadorInformacionPat mapeadorInformacionPat;
     private final MapeadorActividadGestion mapeadorActividadGestion;
 
-    public MapeadorInformacionActividadGestion(RepositorioTareaJpa repositorioTareaJpa, RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, ServicioObtenerPorcentajeAvance servicioObtenerPorcentajeAvance, MapeadorPat mapeadorPat, MapeadorActividadGestion mapeadorActividadGestion) {
+    public MapeadorInformacionActividadGestion(RepositorioTareaJpa repositorioTareaJpa, RepositorioInformacionTareaJpa repositorioInformacionTareaJpa,
+                                               RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
+                                               ServicioObtenerPorcentaje servicioObtenerPorcentaje, MapeadorInformacionPat mapeadorInformacionPat, MapeadorActividadGestion mapeadorActividadGestion) {
         this.repositorioTareaJpa = repositorioTareaJpa;
         this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;
-        this.servicioObtenerPorcentajeAvance = servicioObtenerPorcentajeAvance;
-        this.mapeadorPat = mapeadorPat;
+        this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
+        this.mapeadorInformacionPat = mapeadorInformacionPat;
         this.mapeadorActividadGestion = mapeadorActividadGestion;
     }
 
@@ -36,24 +47,32 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
         return new EntidadInformacionActividadGestion(dominio.getDuracion(),dominio.getDiasRestantes(), dominio.getPorcentajeReal(),
                 dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento());
     }
-
-    public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad, InformacionActividadGestion actividadGestion) {
-        /*List<EntidadTarea> actividades = this.repositorioTareaJpa.findByIdASEAndTipoASE(actividadGestion.getIdInformacionActividad(), ETipoASE.ACTIVIDAD_GESTION);
-        List<EntidadInformacionTarea> informacionTareas = this.repositorioInformacionTareaJpa.
+    public EntidadInformacionActividadGestion obtenerTodaEntidadActvidadGestion(Long idSprint) {
+        var entidadInformacionSprint = repositorioInformacionActividadGestionJpa.findById(idSprint);
+        return new EntidadInformacionActividadGestion(entidadInformacionSprint.orElseThrow().getDuracion(),
+                entidadInformacionSprint.orElseThrow().getDiasRestantes(),entidadInformacionSprint.orElseThrow().getPorcentajeReal(),
+                entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
+                entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
+    }
+    public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad) {
+        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionActividadGestion(), ETipoASE.SPRINT);
+        List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
-                .filter(e -> actividades.stream()
+                .filter(e -> sprints.stream()
                         .anyMatch(actividad -> actividad.getIdTarea().equals(e.getIdInformacionTarea())))
                 .toList();
+        long totalTareas = sprints.size();
+        long tareasTerminadas = sprints.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
 
-        long totalActividades = actividades.size();
-        long tareasTerminadas = actividades.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
-
-        if (totalActividades > 0) {
-            double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentajeAvance.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareas, tareasTerminadas, totalActividades);
-            double nuevoAvance = servicioObtenerPorcentajeAvance.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalActividades);
-            entidad.setAvance(nuevoAvance);
-            mapeadorPat.actualizarPorcentajeAvance(mapeadorActividadGestion.obtenerGestion(entidad));
-        }*/
+        if (totalTareas > 0) {
+            double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
+            double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
+            entidad.setPorcentajeReal(nuevoAvance);
+            var idPat = mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(entidad.getIdInformacionActividadGestion()).getIdPat();
+            var entidadActividadGestion = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);
+            mapeadorInformacionPat.actualizarPorcentajeAvance(entidadActividadGestion,idPat);
+        }
     }
+
 }

@@ -2,9 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestio
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Entity
@@ -13,8 +11,8 @@ import lombok.Setter;
 public class EntidadInformacionActividadGestionEstrategica {
 
     @Id
-    @Column(name = "id_informacion_actividad_gestion_actividad_estrategica")
-    private Long idInformacionActividadEstrategica;
+    @Column(name = "id_informacion_actividad_gestion_estrategica")
+    private Long idInformacionActividadGestionEstrategica;
 
     private Integer duracion;
 

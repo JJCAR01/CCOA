@@ -71,7 +71,7 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
 
         var detalleProyectoEntidad = this.mapeadorDetalleProyecto.mapeadorEntidad(detalleProyecto);
         detalleProyectoEntidad.setIdDetalleProyecto(idProyecto);
-        mapeadorDetalleProyecto.actualizarPorcentajeAvance(detalleProyectoEntidad);
+        mapeadorDetalleProyecto.actualizarPorcentajeAvance(detalleProyectoEntidad,idProyecto);
         this.repositorioDetalleProyectoJpa.save(detalleProyectoEntidad);
 
         return idProyecto;

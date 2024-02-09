@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.puerto.proyecto;
 
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;

@@ -1,22 +1,19 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.ActividadGestionEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.entidad.EntidadActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.MapeadorActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador.MapeadorActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador.MapeadorInformacionActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionEstrategicaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.MapeadorInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadInformacionTarea;
@@ -33,26 +30,27 @@ import java.util.List;
 @Configuration
 public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tarea> {
     private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
-    private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa;
-    private final MapeadorSprint mapeadorSprint;
+    private final MapeadorInformacionSprint mapeadorInformacionSprint;
     private final MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion;
-    private final MapeadorActividadGestionEstrategica mapeadorActividadGestionEstrategica;
+    private final MapeadorInformacionActividadGestionEstrategica mapeadorInformacionActividadGestionEstrategica;
     private final RepositorioInformacionTareaJpa repositorioInformacionTareaJpa;
 
-    public MapeadorTarea(RepositorioActividadGestionJpa repositorioActividadGestionJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioSprintJpa repositorioSprintJpa, RepositorioUsuarioJpa repositorioUsuarioJpa,
-                         RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa, MapeadorSprint mapeadorSprint, MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion,
-                         MapeadorActividadGestionEstrategica mapeadorActividadGestionEstrategica, RepositorioInformacionTareaJpa repositorioInformacionTareaJpa) {
+    public MapeadorTarea(RepositorioActividadGestionJpa repositorioActividadGestionJpa,RepositorioSprintJpa repositorioSprintJpa,
+                         RepositorioUsuarioJpa repositorioUsuarioJpa,
+                         RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa,
+                         MapeadorInformacionSprint mapeadorInformacionSprint, MapeadorInformacionActividadGestion mapeadorInformacionActividadGestion,
+                         MapeadorInformacionActividadGestionEstrategica mapeadorInformacionActividadGestionEstrategica,
+                         RepositorioInformacionTareaJpa repositorioInformacionTareaJpa) {
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
-        this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioActividadGestionEstrategicaJpa = repositorioActividadGestionEstrategicaJpa;
-        this.mapeadorSprint = mapeadorSprint;
+        this.mapeadorInformacionSprint = mapeadorInformacionSprint;
         this.mapeadorInformacionActividadGestion = mapeadorInformacionActividadGestion;
-        this.mapeadorActividadGestionEstrategica = mapeadorActividadGestionEstrategica;
+        this.mapeadorInformacionActividadGestionEstrategica = mapeadorInformacionActividadGestionEstrategica;
         this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;
     }
 
@@ -78,6 +76,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
         }
     }
 
+
     public List<DtoTareaResumen> listarDominio(List<EntidadTarea> entidades){
         List<DtoTareaResumen> listaDto = new ArrayList<>();
         for (EntidadTarea entidad : entidades) {
@@ -101,59 +100,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
         }
         return listaDto;
     }
-    public void actualizarEstadoEntidad(EntidadTarea entidad, Tarea tarea, EntidadInformacionTarea entidadInformacionTarea) {
-        entidad.setEstado(tarea.getEstado());
-        if(tarea.getEstado() == EEstado.TERMINADO){
-            entidadInformacionTarea.setPorcentajeReal(Mensaje.PORCENTAJE);
-        } else {
-            entidadInformacionTarea.setPorcentajeReal(Mensaje.PORCENTAJE_CERO);
-        }
 
-        if (entidad.getTipoASE() == ETipoASE.SPRINT) {
-            EntidadSprint entidadSprint = obtenerSprintRelacionado(entidad.getIdASE());
-            if (entidadSprint != null) {
-                Sprint sprint = obtenerSprintDesdeEntidadSprint(entidadSprint);
-                mapeadorSprint.actualizarPorcentajeAvance(entidadSprint, sprint);
-            }
-        } else if (entidad.getTipoASE() == ETipoASE.ACTIVIDAD_GESTION) {
-            EntidadInformacionActividadGestion entidadInformacionActividadGestion = obtenerActividadGestionRelacionado(entidad.getIdASE());
-            if (entidadInformacionActividadGestion != null) {
-                InformacionActividadGestion actividadGestion = obtenerActividadGestionDesdeEntidadActividadGestion(entidadInformacionActividadGestion);
-                mapeadorInformacionActividadGestion.actualizarPorcentajeAvance(entidadInformacionActividadGestion, actividadGestion);
-            }
-        } else if (entidad.getTipoASE() == ETipoASE.ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA){
-            EntidadActividadGestionEstrategica entidadInformacionActividadGestion = obtenerActividadGestionActividadEstrategicaRelacionado(entidad.getIdASE());
-            if (entidadInformacionActividadGestion != null) {
-                ActividadGestionEstrategica actividadGestionActividadEstrategica = obtenerActividadGestionActividadEstrategicaDesdeEntidadActividadGestionActividadEstrategica(entidadInformacionActividadGestion);
-                mapeadorActividadGestionEstrategica.actualizarPorcentajeAvance(entidadInformacionActividadGestion, actividadGestionActividadEstrategica);
-            }
-        }
-    }
-    public void actualizarPorcentajeEntidad(EntidadTarea entidadTarea, EntidadInformacionTarea entidadInformacionTarea,
-                                            InformacionTarea informacionTarea) {
-        if(entidadInformacionTarea.getPeriodicidad() != EPeriodicidad.UNICA_VEZ){
-            this.modificarPorcentajeYEstadoSegunElValorDelPorcentje(entidadTarea,entidadInformacionTarea,informacionTarea);
-            if (entidadTarea.getTipoASE() == ETipoASE.SPRINT) {
-                EntidadSprint entidadSprint = obtenerSprintRelacionado(entidadTarea.getIdASE());
-                if (entidadSprint != null) {
-                    Sprint sprint = obtenerSprintDesdeEntidadSprint(entidadSprint);
-                    mapeadorSprint.actualizarPorcentajeAvance(entidadSprint, sprint);
-                }
-            } else if (entidadTarea.getTipoASE() == ETipoASE.ACTIVIDAD_GESTION) {
-                EntidadInformacionActividadGestion entidadInformacionActividadGestion = obtenerActividadGestionRelacionado(entidadTarea.getIdASE());
-                if (entidadInformacionActividadGestion != null) {
-                    InformacionActividadGestion actividadGestion = obtenerActividadGestionDesdeEntidadActividadGestion(entidadInformacionActividadGestion);
-                    mapeadorInformacionActividadGestion.actualizarPorcentajeAvance(entidadInformacionActividadGestion, actividadGestion);
-                }
-            } else if (entidadTarea.getTipoASE() == ETipoASE.ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA){
-                EntidadActividadGestionEstrategica entidadInformacionActividadGestion = obtenerActividadGestionActividadEstrategicaRelacionado(entidadTarea.getIdASE());
-                if (entidadInformacionActividadGestion != null) {
-                    ActividadGestionEstrategica actividadGestionEstrategica = obtenerActividadGestionActividadEstrategicaDesdeEntidadActividadGestionActividadEstrategica(entidadInformacionActividadGestion);
-                    mapeadorActividadGestionEstrategica.actualizarPorcentajeAvance(entidadInformacionActividadGestion, actividadGestionEstrategica);
-                }
-            }
-        }
-    }
     public void actualizarEntidad(EntidadTarea entidad, Tarea tarea, EntidadInformacionTarea entidadInformacionTarea,
                                   InformacionTarea informacionTarea){
         entidad.setNombre(tarea.getNombre());
@@ -161,6 +108,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
         entidad.setIdUsuario(tarea.getIdUsuario());
         entidadInformacionTarea.setPeriodicidad(informacionTarea.getPeriodicidad());
     }
+
     private void modificarPorcentajeYEstadoSegunElValorDelPorcentje(EntidadTarea entidadTarea, EntidadInformacionTarea entidadInformacionTarea,
                                                                     InformacionTarea informacionTarea) {
         if(informacionTarea.getPorcentajeReal() == Mensaje.PORCENTAJE){
@@ -171,31 +119,37 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
             entidadTarea.setEstado(EEstado.EN_PROCESO);
         }
     }
-    private EntidadInformacionActividadGestion obtenerActividadGestionRelacionado(Long id) {
-        return this.repositorioInformacionActividadGestionJpa.findById(id).orElseThrow();
+    public void actualizarEstadoEntidad(EntidadTarea entidad, Tarea tarea, EntidadInformacionTarea entidadInformacionTarea) {
+        entidad.setEstado(tarea.getEstado());
+        if(tarea.getEstado() == EEstado.TERMINADO){
+            entidadInformacionTarea.setPorcentajeReal(Mensaje.PORCENTAJE);
+        } else {
+            entidadInformacionTarea.setPorcentajeReal(Mensaje.PORCENTAJE_CERO);
+        }
+        this.irAEntidadesPadres(entidad.getTipoASE(),entidad);
     }
-    private InformacionActividadGestion obtenerActividadGestionDesdeEntidadActividadGestion(EntidadInformacionActividadGestion actividadGestion) {
-        /*return new InformacionActividadGestion(actividadGestion.getIdInformacionActividadGestion(), actividadGestion.getFechaRegistro(),actividadGestion.getDiasRestantes(),
-                actividadGestion.getDuracion(),actividadGestion.getAvance());*/
-        return null;
+    public void actualizarPorcentajeEntidad(EntidadTarea entidad, EntidadInformacionTarea entidadInformacionTarea,
+                                            InformacionTarea informacionTarea) {
+        if(entidadInformacionTarea.getPeriodicidad() != EPeriodicidad.UNICA_VEZ){
+            this.modificarPorcentajeYEstadoSegunElValorDelPorcentje(entidad,entidadInformacionTarea,informacionTarea);
+            this.irAEntidadesPadres(entidad.getTipoASE(),entidad);
+        }
     }
-    private EntidadSprint obtenerSprintRelacionado(Long id) {
-        return this.repositorioSprintJpa.findById(id).orElseThrow();
-    }
-    private Sprint obtenerSprintDesdeEntidadSprint(EntidadSprint entidadSprint) {
-        /*return new Sprint(entidadSprint.getIdSprint(), entidadSprint.getDescripcion(), entidadSprint.getFechaInicial(), entidadSprint.getFechaFinal(),
-                entidadSprint.getAvance(), entidadSprint.getEstado(), entidadSprint.getIdProyecto());*/
-        return null;
-    }
-    private EntidadActividadGestionEstrategica obtenerActividadGestionActividadEstrategicaRelacionado(Long id) {
-        return this.repositorioActividadGestionEstrategicaJpa.findById(id).orElseThrow();
-    }
-    private ActividadGestionEstrategica obtenerActividadGestionActividadEstrategicaDesdeEntidadActividadGestionActividadEstrategica
-            (EntidadActividadGestionEstrategica entidadActividadGestionEstrategica) {
-        /*return new ActividadGestionActividadEstrategica(entidadActividadGestionActividadEstrategica.getIdActividadGestionEstrategica(),
-                entidadActividadGestionActividadEstrategica.getNombre(), entidadActividadGestionActividadEstrategica.getFechaInicial(),
-                entidadActividadGestionActividadEstrategica.getFechaFinal(), entidadActividadGestionActividadEstrategica.getAvance(),
-                entidadActividadGestionActividadEstrategica.getIdUsuario(), entidadActividadGestionActividadEstrategica.getIdActividadEstrategica());+*/
-        return null;
+
+    public void irAEntidadesPadres(ETipoASE tipoSpritOActividadGestionOActividadGestionEstrategica,EntidadTarea entidad) {
+        switch (tipoSpritOActividadGestionOActividadGestionEstrategica) {
+            case SPRINT -> {
+                var sprint = mapeadorInformacionSprint.obtenerTodaEntidadSprint(entidad.getIdASE());
+                mapeadorInformacionSprint.actualizarPorcentajeAvance(sprint);
+            }
+            case ACTIVIDAD_GESTION -> {
+                var actividadGestion = mapeadorInformacionActividadGestion.obtenerTodaEntidadActvidadGestion(entidad.getIdASE());
+                mapeadorInformacionActividadGestion.actualizarPorcentajeAvance(actividadGestion);
+            }
+            case ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA -> {
+                var actividadGestionEstrategica = mapeadorInformacionActividadGestionEstrategica.obtenerTodaEntidadActvidadGestionEstrategica(entidad.getIdASE());
+                mapeadorInformacionActividadGestionEstrategica.actualizarPorcentajeAvance(actividadGestionEstrategica);
+            }
+        }
     }
 }

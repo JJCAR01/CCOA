@@ -1,15 +1,11 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class DtoActividadGestionResumen {
     private Long idActividadGestion;
     private String nombre;

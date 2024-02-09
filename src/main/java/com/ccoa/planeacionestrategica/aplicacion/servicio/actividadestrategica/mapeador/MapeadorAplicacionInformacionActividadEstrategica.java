@@ -6,22 +6,26 @@ import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.Inform
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDiasRestantes;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapeadorAplicacionInformacionActividadEstrategica implements MapeadorAplicacion<DtoActividadEstrategica, InformacionActividadEstrategica> {
     private final ServicioCalcularDiasRestantes servicioCalcularDiasRestantes;
     private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
+    private final ServicioCalcularPorcentaje servicioCalcularPorcentaje;
 
-    public MapeadorAplicacionInformacionActividadEstrategica(ServicioCalcularDiasRestantes servicioCalcularDiasRestantes, ServicioCalcularDuracionDias servicioCalcularDuracionDias) {
+    public MapeadorAplicacionInformacionActividadEstrategica(ServicioCalcularDiasRestantes servicioCalcularDiasRestantes, ServicioCalcularDuracionDias servicioCalcularDuracionDias, ServicioCalcularPorcentaje servicioCalcularPorcentaje) {
         this.servicioCalcularDiasRestantes = servicioCalcularDiasRestantes;
         this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
+        this.servicioCalcularPorcentaje = servicioCalcularPorcentaje;
     }
 
     @Override
     public InformacionActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
         return InformacionActividadEstrategica.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
                 servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),Mensaje.POR_DEFECTO_AVANCE,
-                Mensaje.POR_DEFECTO_AVANCE,Mensaje.POR_DEFECTO_AVANCE,dto.getMeta(), dto.getResultado());
+                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
+                Mensaje.POR_DEFECTO_AVANCE,dto.getMeta(), dto.getResultado());
     }
 }

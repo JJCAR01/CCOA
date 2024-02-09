@@ -5,9 +5,6 @@ import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 
 import java.util.List;
 

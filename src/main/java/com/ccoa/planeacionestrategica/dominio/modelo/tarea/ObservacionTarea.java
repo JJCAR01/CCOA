@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.tarea;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 

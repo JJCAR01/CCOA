@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioA
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionModificarPat;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

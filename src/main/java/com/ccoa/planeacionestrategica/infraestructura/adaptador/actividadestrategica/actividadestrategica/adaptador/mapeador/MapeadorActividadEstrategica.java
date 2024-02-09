@@ -5,6 +5,8 @@ import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
@@ -22,13 +24,17 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final ServicioObtenerDiasRestantes servicioObtenerDiasRestantes;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
-    public MapeadorActividadEstrategica(RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes) {
+    public MapeadorActividadEstrategica(RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+        this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.servicioObtenerDiasRestantes = servicioObtenerDiasRestantes;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
 
 
@@ -70,7 +76,7 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
             dto.setDuracion(infEntidad.orElseThrow().getDuracion());
             dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
+            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion()));
             dto.setPorcentajeCumplimiento(infEntidad.orElseThrow().getPorcentajeCumplimiento());
             dto.setMeta(infEntidad.orElseThrow().getMeta());
             dto.setResultado(infEntidad.orElseThrow().getResultado());
@@ -105,6 +111,10 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
         entidadInformacionActividadEstrategica.setMeta(informacionActividadEstrategica.getMeta());
+    }
+
+    public EntidadActividadEstrategica obtenerPatRelacionadoConActividadEstrategica(Long id){
+        return this.repositorioActividadEstrategicaJpa.findById(id).orElseThrow();
     }
 
 

@@ -8,6 +8,7 @@ import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorDocumentoSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioDocumentoSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
@@ -21,15 +22,17 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
     private final MapeadorSprint mapeadorSprint;
+    private final MapeadorInformacionSprint mapeadorInformacionSprint;
     private final RepositorioInformacionSprintJpa repositorioInformacionSprintJpa;
     private final MapeadorDocumentoSprint mapeadorDocumentoSprint;
     private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
 
     public RepositorioSprintMySQL(RepositorioSprintJpa repositorioSprintJpa, RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa,
-                                  MapeadorSprint mapeadorSprint, RepositorioInformacionSprintJpa repositorioInformacionSprintJpa, MapeadorDocumentoSprint mapeadorDocumentoSprint, MapeadorInformacionProyecto mapeadorInformacionProyecto) {
+                                  MapeadorSprint mapeadorSprint, MapeadorInformacionSprint mapeadorInformacionSprint, RepositorioInformacionSprintJpa repositorioInformacionSprintJpa, MapeadorDocumentoSprint mapeadorDocumentoSprint, MapeadorInformacionProyecto mapeadorInformacionProyecto) {
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.repositorioDocumentoSprintJpa = repositorioDocumentoSprintJpa;
         this.mapeadorSprint = mapeadorSprint;
+        this.mapeadorInformacionSprint = mapeadorInformacionSprint;
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
         this.mapeadorDocumentoSprint = mapeadorDocumentoSprint;
         this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
@@ -57,21 +60,18 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     @Override
     public Long guardar(Sprint sprint, InformacionSprint informacionSprint)   {
         var sprintEntidad = this.mapeadorSprint.mapeadorEntidad(sprint);
+        long totalSprintsProyecto = mapeadorInformacionProyecto.obtenerTotalSprints(sprint.getIdProyecto());
+        long totalSprintActuales = mapeadorSprint.obtenerTotalSprints(sprint.getIdProyecto());
 
+        if ( totalSprintActuales < totalSprintsProyecto ) {
+            var id = this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
+            var informacionSprintEntidad = this.mapeadorInformacionSprint.mapeadorEntidad(informacionSprint);
+            var informacionEntidad = this.repositorioInformacionSprintJpa.save(informacionSprintEntidad);
+            var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
 
-            long totalSprintsProyecto = mapeadorInformacionProyecto.obtenerTotalSprints(sprint.getIdProyecto());
-            long totalSprintActuales = mapeadorSprint.obtenerTotalSprints(sprint.getIdProyecto());
-
-            if ( totalSprintActuales < totalSprintsProyecto ) {
-                var id = this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
-                /*var informacionSprintEntidad = this.mapeadorSprint.mapeadorEntidad(sprint);
-                this.repositorioInformacionSprintJpa.save(informacionSprintEntidad);*/
-                var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
-
-                if (entidad != null) {
-                    this.mapeadorSprint.actualizarPorcentajeAvance(sprintEntidad, sprint);
-
-                    return this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
+            if (entidad != null) {
+                    mapeadorInformacionSprint.actualizarPorcentajeAvance(informacionEntidad);
+                    return id;
                 } else {
                     throw new IllegalArgumentException("No se pudo encontrar la entidad después de guardar.");
                 }

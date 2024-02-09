@@ -3,17 +3,12 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObjetoExcepcion;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentajeAvance;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadDetalleProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorDetalleProyecto;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,25 +24,17 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
 
     private final RepositorioProyectoJpa repositorioProyectoJpa;
     private final RepositorioInformacionSprintJpa repositorioInformacionSprintJpa;
-    private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
-    private final RepositorioTareaJpa repositorioTareaJpa;
-    private final RepositorioInformacionTareaJpa repositorioInformacionTareaJpa;
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
-    private final MapeadorDetalleProyecto mapeadorDetalleProyecto;
-    private final ServicioObtenerPorcentajeAvance servicioObtenerPorcentajeAvance;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
-    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioInformacionSprintJpa repositorioInformacionSprintJpa, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, RepositorioTareaJpa repositorioTareaJpa,
-                          RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, MapeadorDetalleProyecto mapeadorDetalleProyecto, ServicioObtenerPorcentajeAvance servicioObtenerPorcentajeAvance) {
+    public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioInformacionSprintJpa repositorioInformacionSprintJpa,
+                          RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
-        this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
-        this.repositorioTareaJpa = repositorioTareaJpa;
-        this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
-        this.mapeadorDetalleProyecto = mapeadorDetalleProyecto;
-        this.servicioObtenerPorcentajeAvance = servicioObtenerPorcentajeAvance;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
 
     @Override
@@ -95,31 +82,11 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
         entidad.setFechaInicial(sprint.getFechaInicial());
         entidad.setFechaFinal(sprint.getFechaFinal());
     }
-    public void actualizarPorcentajeAvance(EntidadSprint entidad, Sprint sprint) {
-        /*List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(sprint.getIdSprint(), ETipoASE.SPRINT);
-        List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
-                findAll()
-                .stream()
-                .filter(e -> sprints.stream()
-                        .anyMatch(actividad -> actividad.getIdTarea().equals(e.getIdInformacionTarea())))
-                .toList();
-
-
-        long totalTareas = sprints.size();
-        long tareasTerminadas = sprints.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
-
-        if (totalTareas > 0) {
-            double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentajeAvance.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
-            double nuevoAvance = servicioObtenerPorcentajeAvance.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
-            entidad.setAvance(nuevoAvance);
-            mapeadorDetalleProyecto.actualizarPorcentajeAvance(obtenerProyectoRelacionado(sprint.getIdProyecto()));
-        }*/
-    }
     public long obtenerTotalSprints(Long id){
         var entidad = this.repositorioSprintJpa.findByIdProyecto(id);
         return entidad.stream().map(EntidadSprint::getIdSprint).count();
     }
-    public EntidadDetalleProyecto obtenerProyectoRelacionado(Long id){
-        return this.repositorioDetalleProyectoJpa.findById(id).orElseThrow();
+    public EntidadSprint obtenerIdProyectoRelacionadoConElSprint(Long id){
+        return this.repositorioSprintJpa.findById(id).orElseThrow();
     }
 }

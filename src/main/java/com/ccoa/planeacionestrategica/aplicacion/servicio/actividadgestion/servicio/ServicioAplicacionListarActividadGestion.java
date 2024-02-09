@@ -16,7 +16,6 @@ public class ServicioAplicacionListarActividadGestion {
     public ServicioAplicacionListarActividadGestion(RepositorioActividadGestion repositorioActividadGestion) {
         this.repositorioActividadGestion = repositorioActividadGestion;
     }
-
     public List<DtoActividadGestionResumen> ejecutar(){return this.repositorioActividadGestion.listar();}
     public ActividadGestion consultarById(Long id){return this.repositorioActividadGestion.consultarPorId(id);}
     public DocumentoActividadGestion consultarByIdDocumento(Long id){return this.repositorioActividadGestion.consultarPorIdParaObtenerDocumento(id);}

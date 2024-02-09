@@ -3,20 +3,9 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadActividadGestion;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadInformacionActividadGestion;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.repositorio.jpa.RepositorioProcesoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
@@ -28,21 +17,9 @@ import java.util.List;
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
-    private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
-    private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
-    private final RepositorioProcesoJpa repositorioProcesoJpa;
-    private final RepositorioDireccionJpa repositorioDireccionJpa;
-    private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
-    private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
-    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa, RepositorioActividadGestionJpa repositorioActividadGestionJpa, RepositorioProcesoJpa repositorioProcesoJpa, RepositorioDireccionJpa repositorioDireccionJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa) {
+    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
-        this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
-        this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
-        this.repositorioProcesoJpa = repositorioProcesoJpa;
-        this.repositorioDireccionJpa = repositorioDireccionJpa;
-        this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
-        this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
     }
 
     @Override
@@ -98,21 +75,6 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     }
 
 
-    public void actualizarPorcentajeAvance(EntidadPat entidad) {
-        List<EntidadActividadGestion> actividadGestiones = this.repositorioActividadGestionJpa.findByIdPat(entidad.getIdPat());
-        List<EntidadInformacionActividadGestion> informacionActividadesGestiones = actividadGestiones.stream()
-                .map(actividadGestion -> this.repositorioInformacionActividadGestionJpa.findByIdInformacionActividadGestion(actividadGestion.getIdActividadGestion()))
-                .flatMap(List::stream).toList();
-        List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(entidad.getIdPat());
-
-        /*double porcentajeActividades = Mensaje.PORCENTAJE / (actividadGestiones.size() + actividadEstrategicas.size());
-
-        double sumaActGestion = informacionActividadesGestiones.stream().mapToDouble(eGestion -> eGestion.getAvance() * porcentajeActividades).sum();
-        double sumaActEstrategica = actividadEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajeReal() * porcentajeActividades).sum();
-
-        double avanceTotal = (sumaActGestion + sumaActEstrategica)/ Mensaje.PORCENTAJE;*/
-        //entidad.setPorcentaje(avanceTotal);
-    }
 
     public void actualizarEntidad(EntidadPat entidad, Pat pat) {
         entidad.setNombre(pat.getNombre());

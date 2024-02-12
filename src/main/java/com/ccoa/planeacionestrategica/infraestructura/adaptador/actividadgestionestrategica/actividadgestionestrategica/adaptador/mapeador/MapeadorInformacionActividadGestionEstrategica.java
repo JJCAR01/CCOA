@@ -57,7 +57,7 @@ public class MapeadorInformacionActividadGestionEstrategica implements MapeadorI
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
     public void actualizarPorcentajeAvance(EntidadInformacionActividadGestionEstrategica entidad) {
-        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionActividadGestionEstrategica(), ETipoASE.SPRINT);
+        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionActividadGestionEstrategica(), ETipoASE.ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA);
         List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()

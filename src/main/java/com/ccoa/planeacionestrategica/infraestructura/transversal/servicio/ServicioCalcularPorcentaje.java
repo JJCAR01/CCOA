@@ -7,7 +7,7 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaj
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 @Component
 public class ServicioCalcularPorcentaje implements ServicioObtenerPorcentaje {
@@ -41,8 +41,13 @@ public class ServicioCalcularPorcentaje implements ServicioObtenerPorcentaje {
     @Override
     public double obtenerPorcentajeEsperado(LocalDate fechaInicial,long totalDias) {
         LocalDate fechaActual = LocalDate.now();
-        long diasTranscurridos = fechaInicial.until(fechaActual).getDays(); // Calcula el valor de I4
+        long diasTranscurridos = ChronoUnit.DAYS.between(fechaInicial, fechaActual);
 
         return (diasTranscurridos * Mensaje.PORCENTAJE) / totalDias;
+    }
+
+    @Override
+    public double obtenerPorcentajeDeCumplimiento(double porcentajeReal, double porcentajeEsperado) {
+        return (porcentajeReal/porcentajeEsperado)* Mensaje.PORCENTAJE;
     }
 }

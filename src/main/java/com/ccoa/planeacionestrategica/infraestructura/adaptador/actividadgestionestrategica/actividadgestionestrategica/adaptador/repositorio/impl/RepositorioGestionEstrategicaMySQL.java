@@ -59,10 +59,10 @@ public class RepositorioGestionEstrategicaMySQL implements RepositorioActividadG
     @Override
     public Long guardar(ActividadGestionEstrategica actividadGestionEstrategica, InformacionActividadGestionEstrategica informacionActividadGestionEstrategica) {
         var actividadEntidad = this.mapeadorActividadGestionEstrategica.mapeadorEntidad(actividadGestionEstrategica);
-        var informacionActividadEntidad = this.mapeadorInformacionActividadGestionEstrategica.mapeadorEntidad(informacionActividadGestionEstrategica);
-        mapeadorInformacionActividadGestionEstrategica.actualizarPorcentajeAvance(informacionActividadEntidad);
         var id = this.repositorioActividadGestionEstrategicaJpa.save(actividadEntidad).getIdActividadEstrategica();
+        var informacionActividadEntidad = this.mapeadorInformacionActividadGestionEstrategica.mapeadorEntidad(informacionActividadGestionEstrategica);
         informacionActividadEntidad.setIdInformacionActividadGestionEstrategica(id);
+        mapeadorInformacionActividadGestionEstrategica.actualizarPorcentajeAvance(informacionActividadEntidad);
         return this.repositorioInformacionActividadGestionEstrategicaJpa.save(informacionActividadEntidad).getIdInformacionActividadGestionEstrategica() ;
     }
 

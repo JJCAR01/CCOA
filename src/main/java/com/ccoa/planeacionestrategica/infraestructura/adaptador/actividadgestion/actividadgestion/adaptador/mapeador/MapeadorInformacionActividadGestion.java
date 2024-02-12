@@ -47,15 +47,17 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
         return new EntidadInformacionActividadGestion(dominio.getDuracion(),dominio.getDiasRestantes(), dominio.getPorcentajeReal(),
                 dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento());
     }
-    public EntidadInformacionActividadGestion obtenerTodaEntidadActvidadGestion(Long idSprint) {
-        var entidadInformacionSprint = repositorioInformacionActividadGestionJpa.findById(idSprint);
-        return new EntidadInformacionActividadGestion(entidadInformacionSprint.orElseThrow().getDuracion(),
+    public EntidadInformacionActividadGestion obtenerTodaEntidadActvidadGestion(Long idActividadGestion) {
+        var entidadInformacionSprint = repositorioInformacionActividadGestionJpa.findById(idActividadGestion);
+        return new EntidadInformacionActividadGestion(
+                entidadInformacionSprint.orElseThrow().getIdInformacionActividadGestion(),
+                entidadInformacionSprint.orElseThrow().getDuracion(),
                 entidadInformacionSprint.orElseThrow().getDiasRestantes(),entidadInformacionSprint.orElseThrow().getPorcentajeReal(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
     public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad) {
-        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionActividadGestion(), ETipoASE.SPRINT);
+        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionActividadGestion(), ETipoASE.ACTIVIDAD_GESTION);
         List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
@@ -69,6 +71,7 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
+            repositorioInformacionActividadGestionJpa.save(entidad);
             var idPat = mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(entidad.getIdInformacionActividadGestion()).getIdPat();
             var entidadActividadGestion = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);
             mapeadorInformacionPat.actualizarPorcentajeAvance(entidadActividadGestion,idPat);

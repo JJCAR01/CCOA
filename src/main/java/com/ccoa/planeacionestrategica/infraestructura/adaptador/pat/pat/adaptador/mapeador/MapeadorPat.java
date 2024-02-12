@@ -3,11 +3,13 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -17,9 +19,13 @@ import java.util.List;
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
-    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa) {
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
+    private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
+    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioCalcularDuracionDias servicioCalcularDuracionDias) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
+        this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
 
         return new DtoPatResumen(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro()
                 ,entidadInformacionPat.getPorcentajeReal(), entidadInformacionPat.getPorcentajeEsperado(),
-                entidadInformacionPat.getPorcentajeCumplimiento(),dtoProceso ,
+                entidadInformacionPat.getPorcentajeCumplimiento(),entidadInformacionPat.getFechaInicial(),entidadInformacionPat.getFechaFinal(),dtoProceso ,
                 dtoDireccion,entidad.getIdUsuario());
     }
     public List<DtoPatResumen> listarDominio(List<EntidadPat> entidades){
@@ -57,9 +63,12 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
 
             var infEntidad = repositorioInformacionPatJpa.findById(entidad.getIdPat());
 
+            dto.setFechaInicial(infEntidad.orElseThrow().getFechaInicial());
+            dto.setFechaFinal(infEntidad.orElseThrow().getFechaFinal());
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
-            dto.setPorcentajeCumplimiento(infEntidad.orElseThrow().getPorcentajeCumplimiento());
+            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                    infEntidad.orElseThrow().getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())));
+            dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             DtoProceso dtoProceso = new DtoProceso();
             dtoProceso.setNombre(infEntidad.orElseThrow().getProceso().getNombre());

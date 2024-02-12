@@ -25,4 +25,8 @@ public class ServicioAplicacionModificarActividadEstrategica {
         var infActividadEstrategica = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorAplicacion(dto);
         return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.ejecutarModificar(actividadEstrategica,infActividadEstrategica,codigo));
     }
+    public DtoRespuesta<Long> ejecutarModificarResultado(DtoActividadEstrategica dto, Long codigo){
+        var infActividadEstrategica = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorModificarResultado(dto);
+        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.modificarResultado(infActividadEstrategica,codigo));
+    }
 }

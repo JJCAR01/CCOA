@@ -3,6 +3,7 @@ package com.ccoa.planeacionestrategica.aplicacion.dto.pat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,8 @@ public class DtoPat {
     private Double porcentajeReal;
     private Double porcentajeEsperado;
     private Double porcentajeCumplimiento;
+    private LocalDate fechaInicial;
+    private LocalDate fechaFinal;
     private DtoProceso proceso;
     private DtoDireccion direccion;
     private Long idUsuario;

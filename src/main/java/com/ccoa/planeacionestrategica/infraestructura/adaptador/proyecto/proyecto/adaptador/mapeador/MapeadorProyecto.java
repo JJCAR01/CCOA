@@ -66,7 +66,6 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
 
             dto.setDuracion(detalleEntidad.orElseThrow().getDuracion());
             dto.setPorcentajeReal(detalleEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeCumplimiento(detalleEntidad.orElseThrow().getPorcentajeCumplimiento());
 
             var informacionEntidad = repositorioInformacionProyectoJpa.findById(entidad.getIdProyecto());
             dto.setFechaInicial(informacionEntidad.orElseThrow().getFechaInicial());
@@ -74,6 +73,7 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
             dto.setFechaRegistro(informacionEntidad.orElseThrow().getFechaRegistro());
             dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(informacionEntidad.orElseThrow().getFechaInicial(),
                     detalleEntidad.orElseThrow().getDuracion()));
+            dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
             dto.setPlaneacionSprint(informacionEntidad.orElseThrow().getPlaneacionSprint());
             dto.setTotalSprint(informacionEntidad.orElseThrow().getTotalSprint());
 

@@ -5,35 +5,42 @@ import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
 
 @Data
 public class InformacionPat {
 
-    private Long idInformacionPat;
     private Proceso proceso;
     private Direccion direccion;
     private double porcentajeReal;
     private double porcentajeEsperado;
     private double porcentajeCumplimiento;
+    private LocalDate fechaInicial;
+    private LocalDate fechaFinal;
 
-    public static InformacionPat of(Long idInformacionPat, Proceso proceso, Direccion direccion, double porcentajeReal,
-                                    double porcentajeEsperado, double porcentajeCumplimiento){
+    public static InformacionPat of(Proceso proceso, Direccion direccion, double porcentajeReal, double porcentajeEsperado,
+                                    double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal){
         ValidadorDominio.validarObligatorio(proceso,EL_PROCESO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validarObligatorio(direccion,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeReal,EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeEsperado,EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeCumplimiento,EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO);
-        return new InformacionPat(idInformacionPat,proceso ,direccion,porcentajeReal,porcentajeEsperado,porcentajeCumplimiento);
+        ValidadorDominio.validarObligatorioTipoDato(fechaInicial,LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.validarObligatorioTipoDato(fechaFinal,LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL);
+        return new InformacionPat(proceso, direccion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, fechaInicial, fechaFinal);
     }
 
-    public InformacionPat(Long idInformacionPat, Proceso proceso, Direccion direccion, double porcentajeReal,
-                          double porcentajeEsperado, double porcentajeCumplimiento) {
-        this.idInformacionPat = idInformacionPat;
+    public InformacionPat(Proceso proceso, Direccion direccion, double porcentajeReal, double porcentajeEsperado,
+                          double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
         this.proceso = proceso;
         this.direccion = direccion;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
     }
 }

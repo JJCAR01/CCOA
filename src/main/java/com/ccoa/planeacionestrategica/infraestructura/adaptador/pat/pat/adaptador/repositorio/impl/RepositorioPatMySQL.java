@@ -48,13 +48,11 @@ public class RepositorioPatMySQL implements RepositorioPat {
         var patEntity = mapeadorPat.mapeadorEntidad(pat);
         var idPat = this.repositorioPatJpa.save(patEntity).getIdPat();
 
-        informacionPat.setIdInformacionPat(idPat);  // Asignar el mismo ID a EntidadInformacionPat
         var informacionPatEntity = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
+        informacionPatEntity.setIdInformacionPat(idPat);
         this.repositorioInformacionPatJpa.save(informacionPatEntity);
         return idPat;
     }
-
-
     @Override
     public boolean existe(Pat pat) {
         return this.repositorioPatJpa.findByNombre(pat.getNombre()) != null;

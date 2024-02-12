@@ -3,15 +3,11 @@ package com.ccoa.planeacionestrategica.aplicacion.dto.tarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class DtoTarea {
     private Long idTarea;
     private String nombre;

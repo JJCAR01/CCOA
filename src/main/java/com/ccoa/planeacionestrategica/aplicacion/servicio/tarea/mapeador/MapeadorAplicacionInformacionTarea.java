@@ -23,7 +23,7 @@ public class MapeadorAplicacionInformacionTarea implements MapeadorAplicacion<Dt
                 Mensaje.POR_DEFECTO_AVANCE);
     }
     public InformacionTarea actualizarPorcentaje(DtoTarea dto) {
-        return new InformacionTarea(dto.getPeriodicidad(), Mensaje.POR_DEFECTO_AVANCE,Mensaje.POR_DEFECTO_AVANCE,
+        return new InformacionTarea(dto.getPeriodicidad(), dto.getPorcentajeReal(), Mensaje.POR_DEFECTO_AVANCE,
                 Mensaje.POR_DEFECTO_AVANCE);
     }
 }

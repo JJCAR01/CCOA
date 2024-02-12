@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -35,20 +37,20 @@ public class EntidadInformacionPat {
     @Column(name = "porcentaje_cumplimiento")
     private Double porcentajeCumplimiento;
 
-    public EntidadInformacionPat(Long idInformacionPat, EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
-        this.idInformacionPat = idInformacionPat;
-        this.proceso = proceso;
-        this.direccion = direccion;
-        this.porcentajeReal = porcentajeReal;
-        this.porcentajeEsperado = porcentajeEsperado;
-        this.porcentajeCumplimiento = porcentajeCumplimiento;
-    }
+    @Column(name = "fecha_inicial")
+    private LocalDate fechaInicial;
 
-    public EntidadInformacionPat(EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
+    @Column(name = "fecha_final")
+    private LocalDate fechaFinal;
+
+    public EntidadInformacionPat(EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal,
+                                 Double porcentajeEsperado, Double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
         this.proceso = proceso;
         this.direccion = direccion;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
     }
 }

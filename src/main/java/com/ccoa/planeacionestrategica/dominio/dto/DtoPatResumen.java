@@ -16,6 +16,8 @@ public class DtoPatResumen {
     private Double porcentajeReal;
     private Double porcentajeEsperado;
     private Double porcentajeCumplimiento;
+    private LocalDate fechaInicial;
+    private LocalDate fechaFinal;
     private DtoProceso proceso;
     private DtoDireccion direccion;
     private Long idUsuario;

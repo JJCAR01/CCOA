@@ -66,6 +66,7 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
         if ( totalSprintActuales < totalSprintsProyecto ) {
             var id = this.repositorioSprintJpa.save(sprintEntidad).getIdSprint();
             var informacionSprintEntidad = this.mapeadorInformacionSprint.mapeadorEntidad(informacionSprint);
+            informacionSprintEntidad.setIdInformacionSprint(id);
             var informacionEntidad = this.repositorioInformacionSprintJpa.save(informacionSprintEntidad);
             var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
 

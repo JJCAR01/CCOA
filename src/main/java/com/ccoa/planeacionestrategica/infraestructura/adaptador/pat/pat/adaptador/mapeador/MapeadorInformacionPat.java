@@ -50,8 +50,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     public InformacionPat mapeadorDominio(EntidadInformacionPat entidad) {
         Proceso proceso = Proceso.of(entidad.getProceso().getNombre());
         Direccion direccion = Direccion.of(entidad.getDireccion().getNombre());
-        return InformacionPat.of(entidad.getIdInformacionPat(), proceso,direccion,entidad.getPorcentajeReal(),
-                entidad.getPorcentajeEsperado(), entidad.getPorcentajeCumplimiento());
+        return InformacionPat.of(proceso,direccion,entidad.getPorcentajeReal(),
+                entidad.getPorcentajeEsperado(), entidad.getPorcentajeCumplimiento(),entidad.getFechaInicial(),entidad.getFechaFinal());
     }
 
     @Override
@@ -64,8 +64,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         var entidadDireccion = this.repositorioDireccionJpa.findByNombre(direccion.getNombre());
 
         // Crear y devolver la entidad EntidadInformacionPat
-                return new EntidadInformacionPat(dominio.getIdInformacionPat(),entidadProceso,entidadDireccion, dominio.getPorcentajeReal(),
-                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento());
+                return new EntidadInformacionPat(entidadProceso,entidadDireccion, dominio.getPorcentajeReal(),
+                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento(),dominio.getFechaInicial(),dominio.getFechaFinal());
     }
 
     public void actualizarEntidad(EntidadInformacionPat entidad, InformacionPat informacionPat) {
@@ -96,6 +96,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
 
         double avanceTotal = (sumaActGestion + sumaActEstrategica)/ Mensaje.PORCENTAJE;
         entidad.setPorcentajeReal(avanceTotal);
+        entidad.setIdInformacionPat(idPat);
+        repositorioInformacionPatJpa.save(entidad);
     }
 
     public EntidadInformacionPat obtenerTodaEntidadPat(Long idPat) {
@@ -103,6 +105,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         return new EntidadInformacionPat(entidad.orElseThrow().getProceso(),entidad.orElseThrow().getDireccion()
                 ,entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
-                entidad.orElseThrow().getPorcentajeCumplimiento());
+                entidad.orElseThrow().getPorcentajeCumplimiento(),
+                entidad.orElseThrow().getFechaInicial(),
+                entidad.orElseThrow().getFechaFinal());
     }
 }

@@ -16,6 +16,7 @@ public interface RepositorioActividadEstrategica{
     Long eliminar(Long id);
     Long eliminarPorPat(Long id);
     Long modificar(ActividadEstrategica actividadEstrategica ,InformacionActividadEstrategica informacionActividadEstrategica, Long id);
+    Long modificarResultado(InformacionActividadEstrategica informacionActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);
     List<DtoIdsActividadEstrategica> consultarPorIdPatAEliminar(Long idPat);
     Long guardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo);

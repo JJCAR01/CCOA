@@ -14,8 +14,8 @@ public class MapeadorAplicacionInformacionPat implements MapeadorAplicacion<DtoP
     public InformacionPat mapeadorAplicacion(DtoPat dto) {
         Direccion direccion = Direccion.of(dto.getDireccion().getNombre());
         Proceso proceso = Proceso.of(dto.getProceso().getNombre());
-        return InformacionPat.of(dto.getIdPat(), proceso,direccion, Mensaje.POR_DEFECTO_AVANCE,
+        return InformacionPat.of(proceso,direccion, Mensaje.POR_DEFECTO_AVANCE,
                 Mensaje.POR_DEFECTO_AVANCE
-                ,Mensaje.POR_DEFECTO_AVANCE);
+                ,Mensaje.POR_DEFECTO_AVANCE,dto.getFechaInicial(),dto.getFechaFinal());
     }
 }

@@ -50,13 +50,6 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
         return new EntidadActividadGestion(dominio.getNombre(),dominio.getFechaInicial(),dominio.getFechaFinal(),
                 dominio.getFechaRegistro(),usuario,pat);
     }
-    public DtoActividadGestionResumen obtenerTodaLaEntidadActividadGestion(EntidadActividadGestion entidad) {
-        var entidadInformacionSprint = repositorioInformacionActividadGestionJpa.findById(entidad.getIdActividadGestion());
-        return new DtoActividadGestionResumen(entidad.getIdActividadGestion(), entidad.getNombre(),entidad.getFechaInicial(),entidad.getFechaFinal(),
-                entidad.getFechaRegistro(),entidadInformacionSprint.orElseThrow().getDuracion(),entidadInformacionSprint.orElseThrow().getDiasRestantes(),
-                entidadInformacionSprint.orElseThrow().getPorcentajeReal(),entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
-                entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento(), entidad.getIdUsuario(), entidad.getIdPat());
-    }
     public List<DtoActividadGestionResumen> listarDominio(List<EntidadActividadGestion> entidades){
         List<DtoActividadGestionResumen> listaDto = new ArrayList<>();
 
@@ -76,7 +69,7 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
             dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion()));
-            dto.setPorcentajeCumplimiento(infEntidad.orElseThrow().getPorcentajeCumplimiento());
+            dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);
         }

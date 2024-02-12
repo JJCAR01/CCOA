@@ -10,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.ad
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -27,14 +28,16 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
+    private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
 
     public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioInformacionSprintJpa repositorioInformacionSprintJpa,
-                          RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
+                          RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioCalcularDuracionDias servicioCalcularDuracionDias) {
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
+        this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
     }
 
     @Override
@@ -69,8 +72,9 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             var informacionSprint = repositorioInformacionSprintJpa.findById(entidad.getIdSprint());
 
             dto.setPorcentajeReal(informacionSprint.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(informacionSprint.orElseThrow().getPorcentajeEsperado());
-            dto.setPorcentajeCumplimiento(informacionSprint.orElseThrow().getPorcentajeCumplimiento());
+            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                    entidad.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())));
+            dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);
         }

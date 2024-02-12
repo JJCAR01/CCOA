@@ -115,9 +115,10 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
             entidadTarea.setEstado(EEstado.TERMINADO);
             entidadInformacionTarea.setPorcentajeReal(informacionTarea.getPorcentajeReal());
         }else {
-            entidadInformacionTarea.setPorcentajeReal(informacionTarea.getPorcentajeReal());
             entidadTarea.setEstado(EEstado.EN_PROCESO);
+            entidadInformacionTarea.setPorcentajeReal(informacionTarea.getPorcentajeReal());
         }
+        repositorioInformacionTareaJpa.save(entidadInformacionTarea);
     }
     public void actualizarEstadoEntidad(EntidadTarea entidad, Tarea tarea, EntidadInformacionTarea entidadInformacionTarea) {
         entidad.setEstado(tarea.getEstado());

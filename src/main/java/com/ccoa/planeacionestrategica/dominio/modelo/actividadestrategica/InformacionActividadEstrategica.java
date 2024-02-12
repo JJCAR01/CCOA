@@ -26,6 +26,11 @@ public class InformacionActividadEstrategica {
         return new InformacionActividadEstrategica(duracion, diasRestantes, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, meta, resultado);
     }
 
+    public static InformacionActividadEstrategica modificarResultado(Integer duracion, Integer diasRestantes, double porcentajeReal,
+                                                     double porcentajeEsperado, double porcentajeCumplimiento, Integer meta, String resultado) {
+        return new InformacionActividadEstrategica(duracion, diasRestantes, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, meta, resultado);
+    }
+
     public InformacionActividadEstrategica(Integer duracion, Integer diasRestantes, double porcentajeReal,
                                            double porcentajeEsperado, double porcentajeCumplimiento, Integer meta, String resultado) {
         this.duracion = duracion;

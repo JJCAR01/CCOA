@@ -28,4 +28,8 @@ public class MapeadorAplicacionInformacionActividadEstrategica implements Mapead
                 servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
                 Mensaje.POR_DEFECTO_AVANCE,dto.getMeta(), dto.getResultado());
     }
+    public InformacionActividadEstrategica mapeadorModificarResultado(DtoActividadEstrategica dto) {
+        return InformacionActividadEstrategica.modificarResultado(dto.getDuracion(), dto.getDiasRestantes(), dto.getPorcentajeReal(),
+                dto.getPorcentajeEsperado(), dto.getPorcentajeCumplimiento(), dto.getMeta(), dto.getResultado());
+    }
 }

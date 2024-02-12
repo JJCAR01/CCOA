@@ -98,6 +98,14 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     }
 
     @Override
+    public Long modificarResultado(InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
+        var entidadInformacion = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
+        assert  entidadInformacion != null;
+        this.mapeadorActividadEstrategica.actualizarResultado(entidadInformacion,informacionActividadEstrategica);
+        return this.repositorioInformacionActividadEstrategicaJpa.save(entidadInformacion).getIdInformacionActividadEstrategica();
+    }
+
+    @Override
     public List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat) {
         List<EntidadActividadEstrategica> entidades = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
         return this.mapeadorActividadEstrategica.listarDominio(entidades);

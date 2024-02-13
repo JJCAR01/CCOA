@@ -56,4 +56,8 @@ public class ControladorActividadEstrategica {
     public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificar(epica,codigo));
     }
+    @PutMapping("/resultado/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarResultado(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificarResultado(epica,codigo));
+    }
 }

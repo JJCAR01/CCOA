@@ -27,4 +27,11 @@ public class EntidadInformacionSprint {
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
+
+    public EntidadInformacionSprint(Long idInformacionSprint, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
+        this.idInformacionSprint = idInformacionSprint;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
+    }
 }

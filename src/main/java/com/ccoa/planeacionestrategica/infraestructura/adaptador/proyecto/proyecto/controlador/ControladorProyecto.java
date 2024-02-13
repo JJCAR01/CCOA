@@ -1,5 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoDocumentoActividadEstrategica;
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoDocumentoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionEliminarProyecto;
@@ -7,6 +9,8 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.Serv
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionListarProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.ServicioAplicacionModificarProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.documento.DocumentoProyecto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +35,14 @@ public class ControladorProyecto {
     @PostMapping
     public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoProyecto proyecto){
         return ResponseEntity.ok(this.servicioAplicacionGuardarProyecto.ejecutar(proyecto));
+    }
+    @PutMapping("/archivo/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoDocumentoProyecto rutaArchivo, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionGuardarProyecto.guardarRutaArchivo(rutaArchivo,codigo));
+    }
+    @GetMapping("/archivo/{codigo}")
+    public ResponseEntity<DocumentoProyecto> obtenerDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(servicioAplicacionListarProyecto.consultarByIdDocumento(codigo));
     }
 
     @GetMapping

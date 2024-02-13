@@ -51,7 +51,8 @@ public class MapeadorInformacionActividadGestionEstrategica implements MapeadorI
 
     public EntidadInformacionActividadGestionEstrategica obtenerTodaEntidadActvidadGestionEstrategica(Long idSprint) {
         var entidadInformacionSprint = repositorioInformacionActividadGestionEstrategicaJpa.findById(idSprint);
-        return new EntidadInformacionActividadGestionEstrategica(entidadInformacionSprint.orElseThrow().getDuracion(),
+        return new EntidadInformacionActividadGestionEstrategica(idSprint
+                ,entidadInformacionSprint.orElseThrow().getDuracion(),
                 entidadInformacionSprint.orElseThrow().getDiasRestantes(),entidadInformacionSprint.orElseThrow().getPorcentajeReal(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
@@ -72,6 +73,7 @@ public class MapeadorInformacionActividadGestionEstrategica implements MapeadorI
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
+            repositorioInformacionActividadGestionEstrategicaJpa.save(entidad);
             var idActividadEstrategica = mapeadorActividadGestionEstrategica.obtenerIdProyectoRelacionadoConElSprint(entidad.getIdInformacionActividadGestionEstrategica()).getIdActividadEstrategica();
             var entidadActividad = mapeadorInformacionActividadEstrategica.obtenerTodaEntidadActividadEstrategica(idActividadEstrategica);
             mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(entidadActividad,idActividadEstrategica);

@@ -36,4 +36,14 @@ public class EntidadInformacionActividadGestionEstrategica {
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
+
+    public EntidadInformacionActividadGestionEstrategica(Long idInformacionActividadGestionEstrategica, Integer duracion, Integer diasRestantes,
+                                                         Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
+        this.idInformacionActividadGestionEstrategica = idInformacionActividadGestionEstrategica;
+        this.duracion = duracion;
+        this.diasRestantes = diasRestantes;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
+    }
 }

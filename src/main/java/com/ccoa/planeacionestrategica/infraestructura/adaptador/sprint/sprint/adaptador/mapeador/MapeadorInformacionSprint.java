@@ -46,7 +46,8 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
     }
     public EntidadInformacionSprint obtenerTodaEntidadSprint(Long idSprint) {
         var entidadInformacionSprint = repositorioInformacionSprintJpa.findById(idSprint);
-        return new EntidadInformacionSprint(entidadInformacionSprint.orElseThrow().getPorcentajeReal(),
+        return new EntidadInformacionSprint(idSprint,
+                entidadInformacionSprint.orElseThrow().getPorcentajeReal(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
@@ -66,6 +67,7 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
+            repositorioInformacionSprintJpa.save(entidad);
             var idProyecto = mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(entidad.getIdInformacionSprint()).getIdProyecto();
             var proyecto = mapeadorDetalleProyecto.obtenerTodaEntidadProyecto(idProyecto);
             mapeadorDetalleProyecto.actualizarPorcentajeAvance(proyecto,idProyecto);

@@ -72,8 +72,9 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             var informacionSprint = repositorioInformacionSprintJpa.findById(entidad.getIdSprint());
 
             dto.setPorcentajeReal(informacionSprint.orElseThrow().getPorcentajeReal());
+            var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
             dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    entidad.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())));
+                    entidad.getFechaInicial(),duracion));
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);

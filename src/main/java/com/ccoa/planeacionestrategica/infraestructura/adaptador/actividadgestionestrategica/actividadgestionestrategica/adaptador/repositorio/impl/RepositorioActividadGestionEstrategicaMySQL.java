@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class RepositorioGestionEstrategicaMySQL implements RepositorioActividadGestionEstrategica {
+public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioActividadGestionEstrategica {
 
     private final RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa;
     private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
@@ -26,8 +26,8 @@ public class RepositorioGestionEstrategicaMySQL implements RepositorioActividadG
     private final MapeadorInformacionActividadGestionEstrategica mapeadorInformacionActividadGestionEstrategica;
     private final MapeadorDocumentoActividadGestionEstrategica mapeadorDocumentoActividadGestionEstrategica;
     private final RepositorioDocumentoActividadGestionEstrategicaJpa repositorioDocumentoActividadGestionEstrategicaJpa;
-    public RepositorioGestionEstrategicaMySQL(RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa,
-                                              RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa, MapeadorActividadGestionEstrategica mapeadorActividadGestionEstrategica, MapeadorInformacionActividadGestionEstrategica mapeadorInformacionActividadGestionEstrategica, MapeadorDocumentoActividadGestionEstrategica mapeadorDocumentoActividadGestionEstrategica, RepositorioDocumentoActividadGestionEstrategicaJpa repositorioDocumentoActividadGestionEstrategicaJpa) {
+    public RepositorioActividadGestionEstrategicaMySQL(RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa,
+                                                       RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa, MapeadorActividadGestionEstrategica mapeadorActividadGestionEstrategica, MapeadorInformacionActividadGestionEstrategica mapeadorInformacionActividadGestionEstrategica, MapeadorDocumentoActividadGestionEstrategica mapeadorDocumentoActividadGestionEstrategica, RepositorioDocumentoActividadGestionEstrategicaJpa repositorioDocumentoActividadGestionEstrategicaJpa) {
         this.repositorioActividadGestionEstrategicaJpa = repositorioActividadGestionEstrategicaJpa;
         this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.mapeadorActividadGestionEstrategica = mapeadorActividadGestionEstrategica;
@@ -59,10 +59,10 @@ public class RepositorioGestionEstrategicaMySQL implements RepositorioActividadG
     @Override
     public Long guardar(ActividadGestionEstrategica actividadGestionEstrategica, InformacionActividadGestionEstrategica informacionActividadGestionEstrategica) {
         var actividadEntidad = this.mapeadorActividadGestionEstrategica.mapeadorEntidad(actividadGestionEstrategica);
-        var id = this.repositorioActividadGestionEstrategicaJpa.save(actividadEntidad).getIdActividadEstrategica();
         var informacionActividadEntidad = this.mapeadorInformacionActividadGestionEstrategica.mapeadorEntidad(informacionActividadGestionEstrategica);
-        informacionActividadEntidad.setIdInformacionActividadGestionEstrategica(id);
         mapeadorInformacionActividadGestionEstrategica.actualizarPorcentajeAvance(informacionActividadEntidad);
+        var id = this.repositorioActividadGestionEstrategicaJpa.save(actividadEntidad).getIdActividadEstrategica();
+        informacionActividadEntidad.setIdInformacionActividadGestionEstrategica(id);
         return this.repositorioInformacionActividadGestionEstrategicaJpa.save(informacionActividadEntidad).getIdInformacionActividadGestionEstrategica() ;
     }
 

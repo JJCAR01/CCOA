@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.ServicioAplicacionEliminarDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.ServicioAplicacionGuardarDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio.ServicioAplicacionListarDireccion;

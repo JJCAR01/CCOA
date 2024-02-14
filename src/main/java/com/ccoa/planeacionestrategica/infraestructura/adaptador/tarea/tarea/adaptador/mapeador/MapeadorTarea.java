@@ -109,7 +109,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
         entidadInformacionTarea.setPeriodicidad(informacionTarea.getPeriodicidad());
     }
 
-    private void modificarPorcentajeYEstadoSegunElValorDelPorcentje(EntidadTarea entidadTarea, EntidadInformacionTarea entidadInformacionTarea,
+    private void modificarPorcentajeYEstadoSegunElValorDelPorcentaje(EntidadTarea entidadTarea, EntidadInformacionTarea entidadInformacionTarea,
                                                                     InformacionTarea informacionTarea) {
         if(informacionTarea.getPorcentajeReal() == Mensaje.PORCENTAJE){
             entidadTarea.setEstado(EEstado.TERMINADO);
@@ -132,7 +132,7 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
     public void actualizarPorcentajeEntidad(EntidadTarea entidad, EntidadInformacionTarea entidadInformacionTarea,
                                             InformacionTarea informacionTarea) {
         if(entidadInformacionTarea.getPeriodicidad() != EPeriodicidad.UNICA_VEZ){
-            this.modificarPorcentajeYEstadoSegunElValorDelPorcentje(entidad,entidadInformacionTarea,informacionTarea);
+            this.modificarPorcentajeYEstadoSegunElValorDelPorcentaje(entidad,entidadInformacionTarea,informacionTarea);
             this.irAEntidadesPadres(entidad.getTipoASE(),entidad);
         }
     }

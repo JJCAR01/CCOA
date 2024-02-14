@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.servicio.direccion.ServicioEliminarDireccion;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;

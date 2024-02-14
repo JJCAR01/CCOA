@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadestrategica.ServicioEliminarActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadgestionestrategica.ServicioEliminarActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.servicio.proyecto.ServicioEliminarProyecto;

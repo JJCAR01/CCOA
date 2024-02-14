@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.observac
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;
-import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioObservacionSprint;
+import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioObservacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.observacion.adaptador.entidad.EntidadObservacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.observacion.adaptador.mapeador.MapeadorObservacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.observacion.adaptador.repositorio.jpa.RepositorioObservacionSprintJpa;

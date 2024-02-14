@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.observacion.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.observacion.ServicioAplicacionGuardarObservacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.observacion.ServicioAplicacionListarObservacionSprint;

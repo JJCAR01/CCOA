@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.direccion.mapeador.MapeadorAplicacionDireccion;
 import com.ccoa.planeacionestrategica.dominio.servicio.direccion.ServicioModificarDireccion;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.obser
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;
-import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioObservacionSprint;
+import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioObservacionSprint;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

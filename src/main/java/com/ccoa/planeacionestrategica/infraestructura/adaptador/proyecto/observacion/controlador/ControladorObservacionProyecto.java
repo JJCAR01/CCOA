@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.observacion.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoObservacionProyecto;
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.observacion.ServicioAplicacionGuardarObservacionProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.observacion.ServicioAplicacionListarObservacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.observacion.ObservacionProyecto;

@@ -1,8 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoDocumentoActividadEstrategica;
-import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoDocumentoActividadGestion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.ServicioAplicacionEliminarActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.ServicioAplicacionGuardarActividadEstrategica;
@@ -10,7 +9,6 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.s
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.ServicioAplicacionModificarActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

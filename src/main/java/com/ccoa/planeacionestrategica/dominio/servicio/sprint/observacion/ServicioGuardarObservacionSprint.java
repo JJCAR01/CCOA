@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprint.observacion;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;
-import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioObservacionSprint;
+import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioObservacionSprint;
 import org.springframework.stereotype.Service;
 
 @Service

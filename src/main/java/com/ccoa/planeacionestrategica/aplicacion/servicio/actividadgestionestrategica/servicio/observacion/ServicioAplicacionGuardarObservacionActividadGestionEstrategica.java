@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionestrategica.servicio.observacion;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestionestrategica.DtoObservacionActividadGestionEstrategica;
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionestrategica.mapeador.observacion.MapeadorAplicacionObservacionActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadgestionestrategica.observacion.ServicioGuardarObservacionActividadGestionEstrategica;
 import org.springframework.stereotype.Component;

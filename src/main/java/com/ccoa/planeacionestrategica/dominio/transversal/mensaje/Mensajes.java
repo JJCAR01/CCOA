@@ -47,6 +47,7 @@ public class Mensajes {
     public static final String NO_PUEDE_EXISTIR_SIN_PROYECTO = "No puede existir sin proyecto";
     public static final String NO_PUEDE_EXISTIR_SIN_ACTIVIDAD_ESTRATEGICA = "No puede existir sin actividad estrategica";
     public static final String NO_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS = "No existe el sprint con los datos ingresados";
+    public static final String NO_EXISTE_EL_SPRINT_DEL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "No existe el sprint del proyecto del área con los datos ingresados";
     public static final String NO_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "No existe la Actividad estrategica con los datos ingresados";
     public static final String NO_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "No existe la Actividad gestion del area con los datos ingresados";
     public static final String NO_EXISTE_LA_TAREA_CON_LOS_DATOS_INGRESADOS = "No existe la tarea con los datos ingresados";
@@ -56,6 +57,7 @@ public class Mensajes {
     public static final String NO_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS = "No existe el proceso con los datos ingresados";
     public static final String NO_EXISTE_LA_DIRECCION_CON_LOS_DATOS_INGRESADOS = "No existe la direccion con los datos ingresados";
     public static final String NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS = "No existe el proyecto con los datos ingresados";
+    public static final String NO_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "No existe el proyecto del área los datos ingresados";
     public static final String NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS = "No existe el usuario con los datos ingresados";
     public static final String NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "No existe la actividad de gestion de la actividad estrategica con los datos ingresados";
     public static final String YA_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad de gestion de la actividad estrategica con los datos ingresados";
@@ -66,12 +68,16 @@ public class Mensajes {
     public static final String YA_EXISTE_LA_DIRECCION_CON_LOS_DATOS_INGRESADOS = "Ya existe la direccion con los datos ingresados";
     public static final String YA_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS = "Ya existe el proceso con los datos ingresados";
     public static final String YA_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS = "Ya existe el proyecto con los datos ingresados";
+    public static final String YA_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe el proyecto del area con los datos ingresados";
     public static final String YA_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS = "Ya existe el usuario con los datos ingresados";
     public static final String YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS = "Ya existe el sprint con los datos ingresados";
+    public static final String YA_EXISTE_EL_SPRINT_DEL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe el sprint del proyecto del área con los datos ingresados";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT = "Ya existe un documento relacionado con el sprint";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT_DEL_PROYECTO_DEL_AREA = "Ya existe un documento relacionado con el sprint del proyecto del área";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION = "Ya existe un documento relacionado con la actividad de gestión";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_ESTRATEGICA = "Ya existe un documento relacionado con la actividad estrategica";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO = "Ya existe un documento relacionado con el proyecto";
+    public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO_DEL_AREA = "Ya existe un documento relacionado con el proyecto del área";
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA = "Ya existe un documento relacionado con la actividad de gestión de la actividad estratégica";
     public static final String YA_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad estrategica con los datos ingresados";
     public static final String YA_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad gestion del area con los datos ingresados";

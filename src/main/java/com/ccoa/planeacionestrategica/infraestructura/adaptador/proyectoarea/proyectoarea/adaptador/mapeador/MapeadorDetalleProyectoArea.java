@@ -1,0 +1,86 @@
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador;
+
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorInformacionActividadEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadDetalleProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadDetalleProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadInformacionSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadInformacionSprintProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadSprintProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioInformacionSprintProyectoAreaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioSprintProyectoAreaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+
+@Configuration
+public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<EntidadDetalleProyectoArea, DetalleProyectoArea> {
+    private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
+    private final RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa;
+    private final MapeadorProyecto mapeadorProyecto;
+    private final RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa;
+    private final MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica;
+    private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
+
+    public MapeadorDetalleProyectoArea(
+            RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa,
+            RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa,
+            MapeadorProyecto mapeadorProyecto, RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa) {
+        this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
+        this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
+        this.mapeadorProyecto = mapeadorProyecto;
+        this.repositorioSprintProyectoAreaJpa = repositorioSprintProyectoAreaJpa;
+        this.mapeadorInformacionActividadEstrategica = mapeadorInformacionActividadEstrategica;
+        this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
+    }
+    @Override
+    public DetalleProyectoArea mapeadorDominio(EntidadDetalleProyectoArea entidad) {
+        return new DetalleProyectoArea(entidad.getDuracion(), entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(),
+                entidad.getPorcentajeCumplimiento());
+    }
+    @Override
+    public EntidadDetalleProyectoArea mapeadorEntidad(DetalleProyectoArea dominio) {
+        return new EntidadDetalleProyectoArea(dominio.getDuracion(), dominio.getPorcentajeReal(), dominio.getPorcentajeEsperado(),
+                dominio.getPorcentajeCumplimiento());
+    }
+
+    public void actualizarPorcentajeAvance(EntidadDetalleProyecto entidad, Long idProyectoArea) {
+        List<EntidadSprintProyectoArea> sprintProyectoAreas = this.repositorioSprintProyectoAreaJpa.findByIdProyectoArea(idProyectoArea);
+        List<EntidadInformacionSprintProyectoArea> informacionSprintProyectoArea = this.repositorioInformacionSprintProyectoAreaJpa.
+                findAll()
+                .stream()
+                .filter(e -> sprintProyectoAreas.stream()
+                        .anyMatch(sprintProyectoArea -> sprintProyectoArea.getIdSprintProyectoArea().equals(e.getIdInformacionSprintProyectoArea())))
+                .toList();
+
+        long totalSprintProyectoAreas = sprintProyectoAreas.size();
+        double sumaSprintProyectoArea = informacionSprintProyectoArea.stream().mapToDouble(EntidadInformacionSprintProyectoArea::getPorcentajeReal).sum();
+
+        if (totalSprintProyectoAreas > 0) {
+            int nuevoAvance = (int) (sumaSprintProyectoArea / totalSprintProyectoAreas);
+            entidad.setPorcentajeReal((double) nuevoAvance);
+            entidad.setIdDetalleProyecto(idProyectoArea);
+            repositorioDetalleProyectoJpa.save(entidad);
+            var idActividadEstrategica = mapeadorProyecto.obtenerActividadEstrategicaRelacionadoConElProyecto(entidad.getIdDetalleProyecto()).getIdActividadEstrategica();
+            var entidadActividad = mapeadorInformacionActividadEstrategica.obtenerTodaEntidadActividadEstrategica(idActividadEstrategica);
+            mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(entidadActividad,idActividadEstrategica);
+        }
+    }
+    public EntidadDetalleProyecto obtenerTodaEntidadProyecto(Long idProyecto) {
+        var entidad = repositorioInformacionActividadGestionEstrategicaJpa.findById(idProyecto);
+        return new EntidadDetalleProyecto(entidad.orElseThrow().getDiasRestantes()
+                ,entidad.orElseThrow().getPorcentajeReal(),
+                entidad.orElseThrow().getPorcentajeEsperado(),
+                entidad.orElseThrow().getPorcentajeCumplimiento());
+    }
+
+
+}

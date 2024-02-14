@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
-import com.ccoa.planeacionestrategica.aplicacion.dto.respuesta.DtoRespuesta;
+import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.ServicioAplicacionEliminarProceso;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.ServicioAplicacionGuardarProceso;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proceso.servicio.ServicioAplicacionListarProceso;

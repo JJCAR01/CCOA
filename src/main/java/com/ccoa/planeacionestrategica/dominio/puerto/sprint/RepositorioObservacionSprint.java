@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.dominio.puerto.tarea;
+package com.ccoa.planeacionestrategica.dominio.puerto.sprint;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;

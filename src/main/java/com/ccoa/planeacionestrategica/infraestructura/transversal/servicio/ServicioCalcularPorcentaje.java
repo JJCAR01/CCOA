@@ -41,13 +41,17 @@ public class ServicioCalcularPorcentaje implements ServicioObtenerPorcentaje {
     @Override
     public double obtenerPorcentajeEsperado(LocalDate fechaInicial,long totalDias) {
         LocalDate fechaActual = LocalDate.now();
-        long diasTranscurridos = ChronoUnit.DAYS.between(fechaInicial, fechaActual);
-
-        return (diasTranscurridos * Mensaje.PORCENTAJE) / totalDias;
+        if(fechaInicial.isBefore(fechaActual)) {
+            long diasTranscurridos = ChronoUnit.DAYS.between(fechaInicial, fechaActual);
+            return (diasTranscurridos * Mensaje.PORCENTAJE) / totalDias;
+        } else {
+            return Mensaje.PORCENTAJE_CERO;
+        }
     }
 
     @Override
     public double obtenerPorcentajeDeCumplimiento(double porcentajeReal, double porcentajeEsperado) {
-        return (porcentajeReal/porcentajeEsperado)* Mensaje.PORCENTAJE;
+        return !(porcentajeReal == Mensaje.PORCENTAJE_CERO || porcentajeEsperado == Mensaje.PORCENTAJE_CERO) ?
+                (porcentajeReal/porcentajeEsperado)* Mensaje.PORCENTAJE : Mensaje.PORCENTAJE_CERO;
     }
 }

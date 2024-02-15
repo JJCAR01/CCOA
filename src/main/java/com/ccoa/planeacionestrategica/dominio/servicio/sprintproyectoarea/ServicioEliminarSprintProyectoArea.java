@@ -1,11 +1,9 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprintproyectoarea;
 
-import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprintproyectoarea.RepositorioSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import org.springframework.stereotype.Service;
 
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_SPRINT_DEL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS;
 import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 

@@ -2,8 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documen
 
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.LA_URL_DEL_DOCUMENTO_DEBE_DE_SER_VALIDA;
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.RUTA_ARCHIVO_DEL_DOCUMENTO_NO_PUEDE_ESTAR_VACIO;

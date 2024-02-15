@@ -34,4 +34,12 @@ public class EntidadDetalleProyectoArea {
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
+
+    public EntidadDetalleProyectoArea(Long idDetalleProyectoArea, Integer duracion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
+        this.idDetalleProyectoArea = idDetalleProyectoArea;
+        this.duracion = duracion;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
+    }
 }

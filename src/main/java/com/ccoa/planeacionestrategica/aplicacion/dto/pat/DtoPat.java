@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.aplicacion.dto.pat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import lombok.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

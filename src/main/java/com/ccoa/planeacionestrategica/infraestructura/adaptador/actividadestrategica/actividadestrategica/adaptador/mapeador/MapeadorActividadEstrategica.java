@@ -4,8 +4,6 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
-import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
@@ -13,8 +11,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrate
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadInformacionTarea;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.stereotype.Component;

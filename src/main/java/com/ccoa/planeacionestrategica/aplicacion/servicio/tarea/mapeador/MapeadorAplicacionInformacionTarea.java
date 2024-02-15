@@ -4,8 +4,6 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

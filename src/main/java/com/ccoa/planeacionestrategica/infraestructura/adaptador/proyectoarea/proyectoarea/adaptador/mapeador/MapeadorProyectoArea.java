@@ -103,12 +103,12 @@ public class MapeadorProyectoArea implements MapeadorInfraestructura<EntidadProy
         return listaDto;
     }
 
-    public void actualizarEntidad(EntidadProyectoArea entidad, ProyectoArea ProyectoArea,
+    public void actualizarEntidad(EntidadProyectoArea entidad, ProyectoArea proyectoArea,
                                   EntidadInformacionProyectoArea entidadInformacionProyectoArea,
                                   InformacionProyectoArea informacionProyectoArea) {
-        entidad.setNombre(ProyectoArea.getNombre());
-        entidad.setPresupuesto(ProyectoArea.getPresupuesto());
-        entidad.setModalidad(ProyectoArea.getModalidad());
+        entidad.setNombre(proyectoArea.getNombre());
+        entidad.setPresupuesto(proyectoArea.getPresupuesto());
+        entidad.setModalidad(proyectoArea.getModalidad());
         entidadInformacionProyectoArea.setPlaneacionSprint(informacionProyectoArea.getPlaneacionSprint());
         entidadInformacionProyectoArea.setFechaInicial(informacionProyectoArea.getFechaInicial());
         entidadInformacionProyectoArea.setFechaFinal(informacionProyectoArea.getFechaFinal());
@@ -122,7 +122,7 @@ public class MapeadorProyectoArea implements MapeadorInfraestructura<EntidadProy
                 entidadDetalleProyectoArea.getPorcentajeCumplimiento(),entidad.getIdPat(),entidad.getIdUsuario());
     }
 
-    public EntidadProyectoArea obtenerActividadEstrategicaRelacionadoConElProyectoArea(Long id){
+    public EntidadProyectoArea obtenerProyectoAreaRelacionadoConElProyecto(Long id){
         return this.repositorioProyectoAreaJpa.findById(id).orElseThrow();
     }
 

@@ -1,12 +1,8 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.servicio;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintProyectoAreaResumen;
-import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprintproyectoarea.RepositorioSprintProyectoArea;
 import org.springframework.stereotype.Component;
 

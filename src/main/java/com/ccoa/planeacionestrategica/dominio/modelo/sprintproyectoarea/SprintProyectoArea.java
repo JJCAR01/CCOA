@@ -2,8 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 

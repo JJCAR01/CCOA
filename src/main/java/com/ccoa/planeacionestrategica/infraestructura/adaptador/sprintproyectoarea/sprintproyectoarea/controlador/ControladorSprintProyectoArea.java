@@ -32,8 +32,8 @@ public class ControladorSprintProyectoArea {
     }
 
     @PostMapping
-    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoSprintProyectoArea SprintProyectoArea){
-        return ResponseEntity.ok(this.servicioAplicacionGuardarSprintProyectoArea.ejecutar(SprintProyectoArea));
+    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoSprintProyectoArea sprintProyectoArea){
+        return ResponseEntity.ok(this.servicioAplicacionGuardarSprintProyectoArea.ejecutar(sprintProyectoArea));
     }
     @PutMapping("/archivo/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoDocumentoSprintProyectoArea rutaArchivo, @PathVariable Long codigo){

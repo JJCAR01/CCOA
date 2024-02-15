@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
 import org.springframework.stereotype.Component;
 

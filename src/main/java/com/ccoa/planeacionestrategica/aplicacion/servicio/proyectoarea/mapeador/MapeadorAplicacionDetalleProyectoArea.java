@@ -1,9 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.proyectoarea.mapeador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;

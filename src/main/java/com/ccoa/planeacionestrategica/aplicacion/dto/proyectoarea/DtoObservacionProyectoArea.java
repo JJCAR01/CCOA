@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 public class DtoObservacionProyectoArea {
     private Long idObservacionProyectoArea;
-    private Long idProyectoaArea;
+    private Long idProyectoArea;
     private LocalDate fecha;
     private String nombre;
 }

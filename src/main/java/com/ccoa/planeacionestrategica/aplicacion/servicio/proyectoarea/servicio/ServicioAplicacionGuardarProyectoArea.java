@@ -28,11 +28,11 @@ public class ServicioAplicacionGuardarProyectoArea {
     }
 
     public DtoRespuesta<Long> ejecutar(DtoProyectoArea dto){
-        var ProyectoArea = this.mapeadorAplicacionProyectoArea.mapeadorAplicacion(dto);
+        var proyectoArea = this.mapeadorAplicacionProyectoArea.mapeadorAplicacion(dto);
         var informacionProyectoArea = this.mapeadorAplicacionInformacionProyectoArea.mapeadorAplicacion(dto);
         var detalleProyectoArea = this.mapeadorAplicacionDetalleProyectoArea.mapeadorAplicacion(dto);
 
-        return new DtoRespuesta<>(this.servicioGuardarProyectoArea.ejecutarGuardar(ProyectoArea,informacionProyectoArea,detalleProyectoArea));
+        return new DtoRespuesta<>(this.servicioGuardarProyectoArea.ejecutarGuardar(proyectoArea,informacionProyectoArea,detalleProyectoArea));
     }
     public DtoRespuesta<Long> guardarRutaArchivo(DtoDocumentoProyectoArea dto, Long codigo){
         var documento = this.mapeadorAplicacionDocumentoProyectoArea.mapeadorAplicacionCrear(dto,codigo);

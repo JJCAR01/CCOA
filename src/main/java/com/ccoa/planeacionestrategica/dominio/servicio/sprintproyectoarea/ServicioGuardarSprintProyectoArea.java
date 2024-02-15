@@ -1,12 +1,8 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprintproyectoarea;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.InformacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprintproyectoarea.RepositorioSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import org.springframework.stereotype.Service;

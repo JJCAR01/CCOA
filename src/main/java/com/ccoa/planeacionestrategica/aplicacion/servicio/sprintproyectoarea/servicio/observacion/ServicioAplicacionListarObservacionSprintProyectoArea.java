@@ -1,10 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.servicio.observacion;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoObservacionSprintProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.observacion.ObservacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.observacion.ObservacionSprintProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioObservacionSprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprintproyectoarea.RepositorioObservacionSprintProyectoArea;
 import org.springframework.stereotype.Component;
 

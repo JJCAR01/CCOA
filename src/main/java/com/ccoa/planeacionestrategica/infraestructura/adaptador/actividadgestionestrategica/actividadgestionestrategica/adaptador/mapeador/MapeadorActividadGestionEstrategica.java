@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestionestrategica.DtoActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.ActividadGestionEstrategica;
@@ -24,18 +23,15 @@ public class MapeadorActividadGestionEstrategica implements MapeadorInfraestruct
     private final RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa;
     private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
-    private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final ServicioObtenerDiasRestantes servicioObtenerDiasRestantes;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
     public MapeadorActividadGestionEstrategica(RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa, RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
-                                               RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
                                                RepositorioUsuarioJpa repositorioUsuarioJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioActividadGestionEstrategicaJpa = repositorioActividadGestionEstrategicaJpa;
         this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
-        this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.servicioObtenerDiasRestantes = servicioObtenerDiasRestantes;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;

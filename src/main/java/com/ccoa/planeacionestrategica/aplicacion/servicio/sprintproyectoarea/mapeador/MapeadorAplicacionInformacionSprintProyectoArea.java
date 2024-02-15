@@ -1,9 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.InformacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;

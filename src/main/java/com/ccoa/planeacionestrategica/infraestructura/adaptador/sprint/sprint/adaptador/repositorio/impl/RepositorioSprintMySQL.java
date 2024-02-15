@@ -71,7 +71,7 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
             var entidad = this.repositorioSprintJpa.findById(id).orElse(null);
 
             if (entidad != null) {
-                    mapeadorInformacionSprint.actualizarPorcentajeAvance(informacionEntidad);
+                    mapeadorInformacionSprint.actualizarPorcentajeAvance(informacionEntidad,id);
                     return id;
                 } else {
                     throw new IllegalArgumentException("No se pudo encontrar la entidad después de guardar.");

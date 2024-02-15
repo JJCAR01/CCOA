@@ -27,7 +27,7 @@ public class MapeadorObservacionProyectoArea implements MapeadorInfraestructura<
 
             DtoObservacionProyectoArea dto = new DtoObservacionProyectoArea();
             dto.setIdObservacionProyectoArea(entidad.getIdObservacionProyectoArea());
-            dto.setIdProyectoaArea(entidad.getIdProyectoArea());
+            dto.setIdProyectoArea(entidad.getIdProyectoArea());
             dto.setFecha(entidad.getFecha());
             dto.setNombre(entidad.getNombre());
 

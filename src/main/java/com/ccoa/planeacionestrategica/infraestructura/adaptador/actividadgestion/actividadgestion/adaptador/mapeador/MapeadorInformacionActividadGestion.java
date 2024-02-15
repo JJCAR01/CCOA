@@ -56,8 +56,8 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
                 entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
-    public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad) {
-        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionActividadGestion(), ETipoASE.ACTIVIDAD_GESTION);
+    public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad,Long idInformacionActividadGestion) {
+        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(idInformacionActividadGestion, ETipoASE.ACTIVIDAD_GESTION);
         List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
@@ -71,8 +71,9 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
+            entidad.setIdInformacionActividadGestion(idInformacionActividadGestion);
             repositorioInformacionActividadGestionJpa.save(entidad);
-            var idPat = mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(entidad.getIdInformacionActividadGestion()).getIdPat();
+            var idPat = mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(idInformacionActividadGestion).getIdPat();
             var entidadActividadGestion = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);
             mapeadorInformacionPat.actualizarPorcentajeAvance(entidadActividadGestion,idPat);
         }

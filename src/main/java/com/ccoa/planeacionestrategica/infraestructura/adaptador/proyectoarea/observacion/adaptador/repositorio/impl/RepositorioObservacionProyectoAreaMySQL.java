@@ -1,14 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.observacion.adaptador.repositorio.impl;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoObservacionProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoObservacionProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.observacion.ObservacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.observacion.ObservacionProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.puerto.proyecto.RepositorioObservacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea.RepositorioObservacionProyectoArea;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.observacion.adaptador.entidad.EntidadObservacionProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.observacion.adaptador.mapeador.MapeadorObservacionProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.observacion.adaptador.repositorio.jpa.RepositorioObservacionProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.observacion.adaptador.entidad.EntidadObservacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.observacion.adaptador.mapeador.MapeadorObservacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.observacion.adaptador.repositorio.jpa.RepositorioObservacionProyectoAreaJpa;

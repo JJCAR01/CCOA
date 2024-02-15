@@ -72,7 +72,7 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
             var entidad = this.repositorioSprintProyectoAreaJpa.findById(id).orElse(null);
 
             if (entidad != null) {
-                mapeadorInformacionSprintProyectoArea.actualizarPorcentajeAvance(informacionEntidad);
+                mapeadorInformacionSprintProyectoArea.actualizarPorcentajeAvance(informacionEntidad,id);
                 return id;
             } else {
                 throw new IllegalArgumentException("No se pudo encontrar la entidad después de guardar.");

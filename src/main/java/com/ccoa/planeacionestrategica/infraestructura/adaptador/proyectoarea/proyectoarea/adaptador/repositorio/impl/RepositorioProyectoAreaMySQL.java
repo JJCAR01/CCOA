@@ -71,7 +71,7 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
 
         var detalleProyectoAreaEntidad = this.mapeadorDetalleProyectoArea.mapeadorEntidad(detalleProyectoArea);
         detalleProyectoAreaEntidad.setIdDetalleProyectoArea(idProyectoArea);
-        //mapeadorDetalleProyectoArea.actualizarPorcentajeAvance(detalleProyectoAreaEntidad,idProyectoArea);
+        mapeadorDetalleProyectoArea.actualizarPorcentajeAvance(detalleProyectoAreaEntidad,idProyectoArea);
         this.repositorioDetalleProyectoAreaJpa.save(detalleProyectoAreaEntidad);
 
         return idProyectoArea;

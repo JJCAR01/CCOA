@@ -15,6 +15,10 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptado
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.repositorio.jpa.RepositorioProcesoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadDetalleProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioDetalleProyectoAreaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
@@ -29,19 +33,23 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
+    private final RepositorioProyectoAreaJpa repositorioProyectoAreaJpa;
+    private final RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa;
     private final RepositorioProcesoJpa repositorioProcesoJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
 
     public MapeadorInformacionPat(RepositorioDireccionJpa repositorioDireccionJpa, RepositorioActividadGestionJpa repositorioActividadGestionJpa,
                                   RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
                                   RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
-                                  RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioProcesoJpa repositorioProcesoJpa,
+                                  RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioProyectoAreaJpa repositorioProyectoAreaJpa, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa, RepositorioProcesoJpa repositorioProcesoJpa,
                                   RepositorioInformacionPatJpa repositorioInformacionPatJpa) {
         this.repositorioDireccionJpa = repositorioDireccionJpa;
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
+        this.repositorioProyectoAreaJpa = repositorioProyectoAreaJpa;
+        this.repositorioDetalleProyectoAreaJpa = repositorioDetalleProyectoAreaJpa;
         this.repositorioProcesoJpa = repositorioProcesoJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
     }
@@ -88,13 +96,19 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         List<EntidadInformacionActividadEstrategica> informacionActividadesEstrategicas = actividadEstrategicas.stream()
                 .map(actividadEstrategica -> this.repositorioInformacionActividadEstrategicaJpa.findByIdInformacionActividadEstrategica(actividadEstrategica.getIdActividadEstrategica()))
                 .flatMap(List::stream).toList();
+        List<EntidadProyectoArea> proyectosArea = this.repositorioProyectoAreaJpa.findByIdPat(idPat);
+        List<EntidadDetalleProyectoArea> detalleProyectosArea = proyectosArea.stream()
+                .map(proyecto -> this.repositorioDetalleProyectoAreaJpa.findByIdDetalleProyectoArea(proyecto.getIdProyectoArea()))
+                .flatMap(List::stream).toList();
 
-        double porcentajeActividades = Mensaje.PORCENTAJE / (actividadGestiones.size() + actividadEstrategicas.size());
+        double porcentaje = Mensaje.PORCENTAJE / (actividadGestiones.size() + actividadEstrategicas.size() + proyectosArea.size());
 
-        double sumaActGestion = informacionActividadesGestiones.stream().mapToDouble(eGestion -> eGestion.getPorcentajeReal() * porcentajeActividades).sum();
-        double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajeReal() * porcentajeActividades).sum();
+        double sumaActGestion = informacionActividadesGestiones.stream().mapToDouble(eGestion -> eGestion.getPorcentajeReal() * porcentaje).sum();
+        double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajeReal() * porcentaje).sum();
+        double sumaProyectos = detalleProyectosArea.stream().mapToDouble(proyecto -> proyecto.getPorcentajeReal() * porcentaje).sum();
 
-        double avanceTotal = (sumaActGestion + sumaActEstrategica)/ Mensaje.PORCENTAJE;
+
+        double avanceTotal = (sumaActGestion + sumaActEstrategica + sumaProyectos)/ Mensaje.PORCENTAJE;
         entidad.setPorcentajeReal(avanceTotal);
         entidad.setIdInformacionPat(idPat);
         repositorioInformacionPatJpa.save(entidad);

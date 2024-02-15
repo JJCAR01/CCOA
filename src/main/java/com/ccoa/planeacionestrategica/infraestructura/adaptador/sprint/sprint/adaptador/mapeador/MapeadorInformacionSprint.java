@@ -51,8 +51,8 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
                 entidadInformacionSprint.orElseThrow().getPorcentajeEsperado(),
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
-    public void actualizarPorcentajeAvance(EntidadInformacionSprint entidad) {
-        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(entidad.getIdInformacionSprint(), ETipoASE.SPRINT);
+    public void actualizarPorcentajeAvance(EntidadInformacionSprint entidad, Long idInformacionSprint) {
+        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(idInformacionSprint, ETipoASE.SPRINT);
         List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
@@ -67,8 +67,9 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
+            entidad.setIdInformacionSprint(idInformacionSprint);
             repositorioInformacionSprintJpa.save(entidad);
-            var idProyecto = mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(entidad.getIdInformacionSprint()).getIdProyecto();
+            var idProyecto = mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(idInformacionSprint).getIdProyecto();
             var proyecto = mapeadorDetalleProyecto.obtenerTodaEntidadProyecto(idProyecto);
             mapeadorDetalleProyecto.actualizarPorcentajeAvance(proyecto,idProyecto);
         }

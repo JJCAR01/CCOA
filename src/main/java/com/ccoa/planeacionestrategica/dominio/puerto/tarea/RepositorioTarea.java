@@ -18,5 +18,6 @@ public interface RepositorioTarea {
     Long modificarPorcentaje(Tarea tarea,InformacionTarea informacionTarea, Long id);
     List<DtoTareaResumen> consultarPorIdActividadGestion(Long idActividadGestion, ETipoASE tipoASE);
     List<DtoTareaResumen> consultarPorIdSprint(Long idSprint, ETipoASE tipoASE);
+    List<DtoTareaResumen> consultarPorIdSprintProyectoArea(Long idSprintProyectoAre, ETipoASE tipoASE);
     List<DtoTareaResumen> consultarPorIdActividadGestionActvidadEstrategica(Long idActividadGestionActividadEstrategica, ETipoASE tipoASE);
 }

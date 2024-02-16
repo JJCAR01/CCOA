@@ -47,8 +47,6 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
         var tareaEntidad = this.mapeadorTarea.mapeadorEntidad(tarea);
         var entidadInformacionTarea = this.mapeadorInformacionTarea.mapeadorEntidad(informacionTarea);
         var id = this.repositorioTareaJpa.save(tareaEntidad).getIdTarea();
-        var entidad = this.repositorioTareaJpa.findById(id).orElse(null);
-        assert entidad != null;
         this.mapeadorTarea.actualizarEstadoEntidad(tareaEntidad,tarea,entidadInformacionTarea);
         entidadInformacionTarea.setIdInformacionTarea(id);
         this.repositorioInformacionTareaJpa.save(entidadInformacionTarea);
@@ -106,6 +104,12 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     @Override
     public List<DtoTareaResumen> consultarPorIdSprint(Long idSprint, ETipoASE tipoASE) {
         List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprint,tipoASE);
+        return this.mapeadorTarea.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoTareaResumen> consultarPorIdSprintProyectoArea(Long idSprintProyectoAre, ETipoASE tipoASE) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprintProyectoAre,tipoASE);
         return this.mapeadorTarea.listarDominio(entidades);
     }
 

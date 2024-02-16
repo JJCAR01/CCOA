@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio;
 
+import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.mapeador.MapeadorAplicacionDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.mapeador.MapeadorAplicacionActividadEstrategica;
@@ -12,21 +13,24 @@ public class ServicioAplicacionModificarActividadEstrategica {
     private final ServicioModificarActividadEstrategica servicioModificarActividadEstrategica;
     private final MapeadorAplicacionActividadEstrategica mapeadorAplicacionActividadEstrategica;
     private final MapeadorAplicacionInformacionActividadEstrategica mapeadorAplicacionInformacionActividadEstrategica;
+    private final MapeadorAplicacionDetalleActividadEstrategica mapeadorAplicacionDetalleActividadEstrategica;
 
     public ServicioAplicacionModificarActividadEstrategica(ServicioModificarActividadEstrategica servicioModificarActividadEstrategica,
-                                                           MapeadorAplicacionActividadEstrategica mapeadorAplicacionActividadEstrategica, MapeadorAplicacionInformacionActividadEstrategica mapeadorAplicacionInformacionActividadEstrategica) {
+                                                           MapeadorAplicacionActividadEstrategica mapeadorAplicacionActividadEstrategica, MapeadorAplicacionInformacionActividadEstrategica mapeadorAplicacionInformacionActividadEstrategica, MapeadorAplicacionDetalleActividadEstrategica mapeadorAplicacionDetalleActividadEstrategica) {
         this.servicioModificarActividadEstrategica = servicioModificarActividadEstrategica;
         this.mapeadorAplicacionActividadEstrategica = mapeadorAplicacionActividadEstrategica;
         this.mapeadorAplicacionInformacionActividadEstrategica = mapeadorAplicacionInformacionActividadEstrategica;
+        this.mapeadorAplicacionDetalleActividadEstrategica = mapeadorAplicacionDetalleActividadEstrategica;
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoActividadEstrategica dto, Long codigo){
         var actividadEstrategica = this.mapeadorAplicacionActividadEstrategica.mapeadorAplicacion(dto);
         var infActividadEstrategica = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorAplicacion(dto);
-        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.ejecutarModificar(actividadEstrategica,infActividadEstrategica,codigo));
+        var detalleActividadEstrategica = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorAplicacion(dto);
+        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.ejecutarModificar(actividadEstrategica,infActividadEstrategica,detalleActividadEstrategica,codigo));
     }
     public DtoRespuesta<Long> ejecutarModificarResultado(DtoActividadEstrategica dto, Long codigo){
-        var infActividadEstrategica = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorModificarResultado(dto);
-        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.modificarResultado(infActividadEstrategica,codigo));
+        var detalleActividadEstrategica = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorModificarResultado(dto);
+        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.modificarResultado(detalleActividadEstrategica,codigo));
     }
 }

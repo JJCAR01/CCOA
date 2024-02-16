@@ -46,14 +46,13 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
     @Override
     public InformacionActividadEstrategica mapeadorDominio(EntidadInformacionActividadEstrategica entidad) {
         return new InformacionActividadEstrategica(entidad.getDuracion(), entidad.getDiasRestantes(),
-                entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(),entidad.getPorcentajeCumplimiento(),entidad.getMeta(),
-                entidad.getResultado());
+                entidad.getPorcentajeReal(), entidad.getPorcentajeEsperado(),entidad.getPorcentajeCumplimiento());
     }
 
     @Override
     public EntidadInformacionActividadEstrategica mapeadorEntidad(InformacionActividadEstrategica dominio) {
         return new EntidadInformacionActividadEstrategica(dominio.getDuracion(),dominio.getDiasRestantes(), dominio.getPorcentajeReal(),
-                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento(),dominio.getMeta(), dominio.getResultado());
+                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento());
     }
 
 
@@ -95,8 +94,6 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
                 entidad.orElseThrow().getDiasRestantes(),
                 entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
-                entidad.orElseThrow().getPorcentajeCumplimiento(),
-                entidad.orElseThrow().getMeta(),
-                entidad.orElseThrow().getResultado());
+                entidad.orElseThrow().getPorcentajeCumplimiento());
     }
 }

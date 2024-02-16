@@ -20,7 +20,9 @@ public class DtoActividadEstrategica {
     private double porcentajeEsperado;
     private double porcentajeCumplimiento;
     private Integer meta;
-    private String resultado;
+    private Integer resultadoMeta;
+    private Integer promedioMeta;
+    private String entregable;
     private Long idUsuario;
     private Long idPat;
 }

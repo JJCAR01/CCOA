@@ -27,17 +27,13 @@ public class EntidadInformacionActividadEstrategica{
     @Column(name = "porcentaje_cumplimiento")
     private Double porcentajeCumplimiento;
 
-    private Integer meta;
-    private String resultado;
 
     public EntidadInformacionActividadEstrategica(Integer duracion, Integer diasRestantes,
-                                                  Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento, Integer meta, String resultado) {
+                                                  Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
         this.duracion = duracion;
         this.diasRestantes = diasRestantes;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
-        this.meta = meta;
-        this.resultado = resultado;
     }
 }

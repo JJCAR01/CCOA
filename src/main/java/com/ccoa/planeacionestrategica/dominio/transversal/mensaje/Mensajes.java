@@ -31,6 +31,7 @@ public class Mensajes {
     public static final String LA_FECHA_REGISTRO_DEBE_SER_LA_FECHA_ACTUAL = "La fecha de registro debe ser la fecha actual";
     public static final String LA_DURACION_NO_PUEDE_SER_NEGATIVA = "La duracion no puede ser negativa";
     public static final String LA_META_NO_PUEDE_SER_NEGATIVA = "La duracion no puede ser negativa";
+    public static final String EL_RESULTADO_DE_LA_META_NO_PUEDE_SER_NEGATIVA = "El resultado de la meta no puede ser negativa";
     public static final String LOS_DIAS_RESTANTES_NO_PUEDEN_SER_NULOS = "Los días restantes no pueden ser nulos";
     public static final String EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO = "El porcentaje real no puede estar vacío";
     public static final String EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO = "El porcentaje esperado no puede estar vacío";

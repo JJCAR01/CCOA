@@ -3,14 +3,17 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrat
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.DetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorDocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDetalleActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDocumentoActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import jakarta.transaction.Transactional;
@@ -23,16 +26,20 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final RepositorioDocumentoActividadEstrategicaJpa repositorioDocumentoActividadEstrategicaJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
+    private final RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa;
     private final MapeadorActividadEstrategica mapeadorActividadEstrategica;
+    private final MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica;
     private final MapeadorDocumentoActividadEstrategica mapeadorDocumentoActividadEstrategica;
     private final MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica;
 
     public RepositorioActividadEstrategicaMySQL(RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioDocumentoActividadEstrategicaJpa repositorioDocumentoActividadEstrategicaJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
-                                                MapeadorActividadEstrategica mapeadorActividadEstrategica, MapeadorDocumentoActividadEstrategica mapeadorDocumentoActividadEstrategica, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica) {
+                                                RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa, MapeadorActividadEstrategica mapeadorActividadEstrategica, MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica, MapeadorDocumentoActividadEstrategica mapeadorDocumentoActividadEstrategica, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica) {
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.repositorioDocumentoActividadEstrategicaJpa = repositorioDocumentoActividadEstrategicaJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
+        this.repositorioDetalleActividadEstrategicaJpa = repositorioDetalleActividadEstrategicaJpa;
         this.mapeadorActividadEstrategica = mapeadorActividadEstrategica;
+        this.mapeadorDetalleActividadEstrategica = mapeadorDetalleActividadEstrategica;
         this.mapeadorDocumentoActividadEstrategica = mapeadorDocumentoActividadEstrategica;
         this.mapeadorInformacionActividadEstrategica = mapeadorInformacionActividadEstrategica;
     }
@@ -48,21 +55,24 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     public DtoActividadEstrategicaResumen consultarPorId(Long id) {
         var entidad = this.repositorioActividadEstrategicaJpa.findById(id).orElse(null);
         var entidadInf = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
+        var entidadDetalle = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
         assert entidad != null;
         assert entidadInf != null;
-        return this.mapeadorActividadEstrategica.listarDominioPorId(entidad,entidadInf);
+        assert entidadDetalle != null;
+        return this.mapeadorActividadEstrategica.listarDominioPorId(entidad,entidadInf,entidadDetalle);
     }
 
     @Override
-    public Long guardar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica) {
+    public Long guardar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica, DetalleActividadEstrategica detalleActividadEstrategica) {
         var entidad = this.mapeadorActividadEstrategica.mapeadorEntidad(actividadEstrategica);
         var idActividad = this.repositorioActividadEstrategicaJpa.save(entidad).getIdActividadEstrategica();
         var informacionGestionEntidad = this.mapeadorInformacionActividadEstrategica.mapeadorEntidad(informacionActividadEstrategica);
-
+        var detalleGestionEntidad = this.mapeadorDetalleActividadEstrategica.mapeadorEntidad(detalleActividadEstrategica);
+        detalleGestionEntidad.setIdDetalleActividadEstrategica(idActividad);
         informacionGestionEntidad.setIdInformacionActividadEstrategica(idActividad);
         mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(informacionGestionEntidad,idActividad);
         this.repositorioInformacionActividadEstrategicaJpa.save(informacionGestionEntidad);
-        return idActividad;
+        return repositorioDetalleActividadEstrategicaJpa.save(detalleGestionEntidad).getIdDetalleActividadEstrategica();
     }
 
     @Override
@@ -87,7 +97,7 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     }
 
     @Override
-    public Long modificar(ActividadEstrategica actividadEstrategica,InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
+    public Long modificar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica, DetalleActividadEstrategica detalleActividadEstrategica, Long id) {
         var entidad = this.repositorioActividadEstrategicaJpa.findById(id).orElse(null);
         var entidadInf = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert entidad != null;
@@ -98,11 +108,11 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     }
 
     @Override
-    public Long modificarResultado(InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
-        var entidadInformacion = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
+    public Long modificarEntregable(DetalleActividadEstrategica detalleActividadEstrategica, Long id) {
+        var entidadInformacion = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
         assert  entidadInformacion != null;
-        this.mapeadorActividadEstrategica.actualizarResultado(entidadInformacion,informacionActividadEstrategica);
-        return this.repositorioInformacionActividadEstrategicaJpa.save(entidadInformacion).getIdInformacionActividadEstrategica();
+        this.mapeadorDetalleActividadEstrategica.actualizarResultado(entidadInformacion, detalleActividadEstrategica);
+        return this.repositorioDetalleActividadEstrategicaJpa.save(entidadInformacion).getIdDetalleActividadEstrategica();
     }
 
     @Override

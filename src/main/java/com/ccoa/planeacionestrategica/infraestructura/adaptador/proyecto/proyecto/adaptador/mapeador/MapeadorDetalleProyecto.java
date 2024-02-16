@@ -62,14 +62,14 @@ public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadD
             entidad.setPorcentajeReal((double) nuevoAvance);
             entidad.setIdDetalleProyecto(idProyecto);
             repositorioDetalleProyectoJpa.save(entidad);
-            var idActividadEstrategica = mapeadorProyecto.obtenerActividadEstrategicaRelacionadoConElProyecto(entidad.getIdDetalleProyecto()).getIdActividadEstrategica();
+            var idActividadEstrategica = mapeadorProyecto.obtenerActividadEstrategicaRelacionadoConElProyecto(idProyecto).getIdActividadEstrategica();
             var entidadActividad = mapeadorInformacionActividadEstrategica.obtenerTodaEntidadActividadEstrategica(idActividadEstrategica);
             mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(entidadActividad,idActividadEstrategica);
         }
     }
     public EntidadDetalleProyecto obtenerTodaEntidadProyecto(Long idProyecto) {
-        var entidad = repositorioInformacionActividadGestionEstrategicaJpa.findById(idProyecto);
-        return new EntidadDetalleProyecto(entidad.orElseThrow().getDiasRestantes()
+        var entidad = repositorioDetalleProyectoJpa.findById(idProyecto);
+        return new EntidadDetalleProyecto(idProyecto, entidad.orElseThrow().getDuracion()
                 ,entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
                 entidad.orElseThrow().getPorcentajeCumplimiento());

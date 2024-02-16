@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoDocumentoActividadEstrategica;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.mapeador.MapeadorAplicacionDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.mapeador.MapeadorAplicacionActividadEstrategica;
@@ -14,20 +15,23 @@ public class ServicioAplicacionGuardarActividadEstrategica {
     private final ServicioGuardarActividadEstrategica servicioGuardarActividadEstrategica;
     private final MapeadorAplicacionActividadEstrategica mapeadorAplicacionActividadEstrategica;
     private final MapeadorAplicacionInformacionActividadEstrategica mapeadorAplicacionInformacionActividadEstrategica;
+    private final MapeadorAplicacionDetalleActividadEstrategica mapeadorAplicacionDetalleActividadEstrategica;
     private final MapeadorAplicacionDocumentoActividadEstrategica mapeadorAplicacionDocumentoActividadEstrategica;
 
     public ServicioAplicacionGuardarActividadEstrategica(ServicioGuardarActividadEstrategica servicioGuardarActividadEstrategica, MapeadorAplicacionActividadEstrategica mapeadorAplicacionActividadEstrategica,
-                                                         MapeadorAplicacionInformacionActividadEstrategica mapeadorAplicacionInformacionActividadEstrategica, MapeadorAplicacionDocumentoActividadEstrategica mapeadorAplicacionDocumentoActividadEstrategica) {
+                                                         MapeadorAplicacionInformacionActividadEstrategica mapeadorAplicacionInformacionActividadEstrategica, MapeadorAplicacionDetalleActividadEstrategica mapeadorAplicacionDetalleActividadEstrategica, MapeadorAplicacionDocumentoActividadEstrategica mapeadorAplicacionDocumentoActividadEstrategica) {
         this.servicioGuardarActividadEstrategica = servicioGuardarActividadEstrategica;
         this.mapeadorAplicacionActividadEstrategica = mapeadorAplicacionActividadEstrategica;
         this.mapeadorAplicacionInformacionActividadEstrategica = mapeadorAplicacionInformacionActividadEstrategica;
+        this.mapeadorAplicacionDetalleActividadEstrategica = mapeadorAplicacionDetalleActividadEstrategica;
         this.mapeadorAplicacionDocumentoActividadEstrategica = mapeadorAplicacionDocumentoActividadEstrategica;
     }
 
     public DtoRespuesta<Long> ejecutar(DtoActividadEstrategica dto){
         var actividad = this.mapeadorAplicacionActividadEstrategica.mapeadorAplicacion(dto);
         var informacionActividad = this.mapeadorAplicacionInformacionActividadEstrategica.mapeadorAplicacion(dto);
-        return new DtoRespuesta<>(this.servicioGuardarActividadEstrategica.ejecutarGuardar(actividad,informacionActividad));
+        var detalleActividad = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorAplicacion(dto);
+        return new DtoRespuesta<>(this.servicioGuardarActividadEstrategica.ejecutarGuardar(actividad,informacionActividad,detalleActividad));
     }
     public DtoRespuesta<Long> guardarRutaArchivo(DtoDocumentoActividadEstrategica dto, Long codigo){
         var documento = this.mapeadorAplicacionDocumentoActividadEstrategica.mapeadorAplicacionCrear(dto,codigo);

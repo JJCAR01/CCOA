@@ -70,8 +70,8 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
         }
     }
     public EntidadDetalleProyectoArea obtenerTodaEntidadProyecto(Long idProyectoArea) {
-        var entidad = repositorioInformacionActividadGestionEstrategicaJpa.findById(idProyectoArea);
-        return new EntidadDetalleProyectoArea(idProyectoArea,entidad.orElseThrow().getDiasRestantes()
+        var entidad = repositorioDetalleProyectoAreaJpa.findById(idProyectoArea);
+        return new EntidadDetalleProyectoArea(idProyectoArea,entidad.orElseThrow().getDuracion()
                 ,entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
                 entidad.orElseThrow().getPorcentajeCumplimiento());

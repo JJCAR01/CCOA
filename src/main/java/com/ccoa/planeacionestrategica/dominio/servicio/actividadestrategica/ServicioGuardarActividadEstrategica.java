@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.actividadestrategica;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.DetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
@@ -19,11 +20,10 @@ public class ServicioGuardarActividadEstrategica {
         this.repositorioActividadEstrategica = repositorioActividadEstrategica;
     }
 
-    public Long ejecutarGuardar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica){
-
+    public Long ejecutarGuardar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica,
+                                DetalleActividadEstrategica detalleActividadEstrategica){
         if(this.repositorioActividadEstrategica.existe(actividadEstrategica)) throw new ValorInvalidoExcepcion(YA_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-
-        return this.repositorioActividadEstrategica.guardar(actividadEstrategica,informacionActividadEstrategica);
+        return this.repositorioActividadEstrategica.guardar(actividadEstrategica,informacionActividadEstrategica, detalleActividadEstrategica);
     }
     public Long ejecutarGuardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo){
         if(this.repositorioActividadEstrategica.existeDocumento(documentoActividadEstrategica)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_ESTRATEGICA,MENSAJE_DEFECTO);

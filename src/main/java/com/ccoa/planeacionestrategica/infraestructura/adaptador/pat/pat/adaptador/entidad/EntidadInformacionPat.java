@@ -53,4 +53,15 @@ public class EntidadInformacionPat {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
     }
+
+    public EntidadInformacionPat(Long idInformacionPat, EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
+        this.idInformacionPat = idInformacionPat;
+        this.proceso = proceso;
+        this.direccion = direccion;
+        this.porcentajeReal = porcentajeReal;
+        this.porcentajeEsperado = porcentajeEsperado;
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+    }
 }

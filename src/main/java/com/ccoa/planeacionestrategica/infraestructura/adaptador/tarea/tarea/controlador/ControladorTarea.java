@@ -53,6 +53,10 @@ public class ControladorTarea {
     public ResponseEntity<List<DtoTareaResumen>> listarPorSprint(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdSprint(codigo,ETipoASE.SPRINT));
     }
+    @GetMapping("/sprintproyectoarea/{codigo}")
+    public ResponseEntity<List<DtoTareaResumen>> listarPorSprintProyectoArea(@PathVariable Long codigo){
+        return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdSprintProyectoArea(codigo,ETipoASE.SPRINT_PROYECTO_AREA));
+    }
     @GetMapping("/actividad/{codigo}")
     public ResponseEntity<List<DtoTareaResumen>> listarPorActividadGestionActividadEstrategica(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarTarea.consultarPorIdActividadGestionActvidadEstrategica(codigo,ETipoASE.ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA));

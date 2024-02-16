@@ -3,10 +3,13 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrat
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.DetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDetalleActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
@@ -22,14 +25,16 @@ import java.util.List;
 public class MapeadorActividadEstrategica implements MapeadorInfraestructura<EntidadActividadEstrategica, ActividadEstrategica> {
 
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
+    private final RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa;
     private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final ServicioObtenerDiasRestantes servicioObtenerDiasRestantes;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
-    public MapeadorActividadEstrategica(RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
+    public MapeadorActividadEstrategica(RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa, RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
+        this.repositorioDetalleActividadEstrategicaJpa = repositorioDetalleActividadEstrategicaJpa;
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
@@ -51,12 +56,14 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
                 ,pat,usuario);
     }
     public DtoActividadEstrategicaResumen listarDominioPorId(EntidadActividadEstrategica entidad,
-                                                             EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica) {
+                                                             EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica,
+                                                             EntidadDetalleActividadEstrategica entidadDetalleActividadEstrategica) {
         return new DtoActividadEstrategicaResumen( entidad.getIdActividadEstrategica(), entidad.getNombre(), entidad.getFechaInicial(),entidad.getFechaFinal(),
                 entidad.getFechaRegistro(),entidadInformacionActividadEstrategica.getDuracion(), entidadInformacionActividadEstrategica.getDiasRestantes(),
                 entidadInformacionActividadEstrategica.getPorcentajeReal(),entidadInformacionActividadEstrategica.getPorcentajeEsperado(),
-                entidadInformacionActividadEstrategica.getPorcentajeCumplimiento(),entidadInformacionActividadEstrategica.getMeta(),
-                entidadInformacionActividadEstrategica.getResultado(),entidad.getIdUsuario(),entidad.getIdPat());
+                entidadInformacionActividadEstrategica.getPorcentajeCumplimiento(), entidadDetalleActividadEstrategica.getMeta(),
+                entidadDetalleActividadEstrategica.getResultadoMeta(), entidadDetalleActividadEstrategica.getPromedioMeta(),
+                entidadDetalleActividadEstrategica.getEntregable(),entidad.getIdUsuario(),entidad.getIdPat());
     }
 
     public List<DtoActividadEstrategicaResumen> listarDominio(List<EntidadActividadEstrategica> entidades){
@@ -78,8 +85,13 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion()));
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
-            dto.setMeta(infEntidad.orElseThrow().getMeta());
-            dto.setResultado(infEntidad.orElseThrow().getResultado());
+
+            var detalleEntidad = repositorioDetalleActividadEstrategicaJpa.findById(entidad.getIdActividadEstrategica());
+
+            dto.setMeta(detalleEntidad.orElseThrow().getMeta());
+            dto.setResultadoMeta(detalleEntidad.orElseThrow().getResultadoMeta());
+            dto.setPromedioMeta(detalleEntidad.orElseThrow().getPromedioMeta());
+            dto.setEntregable(detalleEntidad.orElseThrow().getEntregable());
 
             listaDto.add(dto);
         }
@@ -101,11 +113,6 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         return listaDto;
     }
 
-    public void actualizarResultado(EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica,
-                                            InformacionActividadEstrategica informacionActividadEstrategica) {
-        entidadInformacionActividadEstrategica.setResultado(informacionActividadEstrategica.getResultado());
-    }
-
     public void actualizarEntidad(EntidadActividadEstrategica entidad, ActividadEstrategica actividadEstrategica,
                                   EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica,
                                   InformacionActividadEstrategica informacionActividadEstrategica) {
@@ -115,7 +122,6 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidad.setIdUsuario(actividadEstrategica.getIdUsuario());
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
-        entidadInformacionActividadEstrategica.setMeta(informacionActividadEstrategica.getMeta());
     }
 
     public EntidadActividadEstrategica obtenerPatRelacionadoConActividadEstrategica(Long id){

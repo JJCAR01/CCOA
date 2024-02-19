@@ -20,7 +20,7 @@ public class ServicioAplicacionModificarPat {
     }
     public DtoRespuesta<Long> ejecutarModificar(DtoPat dto, Long codigo){
         var pat = this.mapeadorAplicacionPat.mapeadorAplicacion(dto);
-        var informacionPat = this.mapeadorAplicacionInformacionPat.mapeadorAplicacion(dto);
+        var informacionPat = this.mapeadorAplicacionInformacionPat.mapeadorActualizar(dto);
         return new DtoRespuesta<>(this.servicioModificarPat.ejecutarModificar(pat,informacionPat,codigo));
     }
 }

@@ -17,7 +17,6 @@ import java.util.List;
 
 @Configuration
 public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<EntidadDetalleProyectoArea, DetalleProyectoArea> {
-    private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
     private final RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa;
     private final MapeadorProyectoArea mapeadorProyectoArea;
     private final RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa;
@@ -25,11 +24,9 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
     private final RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa;
 
     public MapeadorDetalleProyectoArea(
-            RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa,
             RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa,
-            MapeadorProyectoArea mapeadorProyectoArea, RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica,
+            MapeadorProyectoArea mapeadorProyectoArea, RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa,
             MapeadorInformacionPat mapeadorInformacionPat, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa) {
-        this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
         this.mapeadorProyectoArea = mapeadorProyectoArea;
         this.repositorioSprintProyectoAreaJpa = repositorioSprintProyectoAreaJpa;

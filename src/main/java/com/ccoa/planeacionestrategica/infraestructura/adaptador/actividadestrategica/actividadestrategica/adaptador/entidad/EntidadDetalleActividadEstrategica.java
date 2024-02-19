@@ -16,24 +16,24 @@ public class EntidadDetalleActividadEstrategica {
     @Column(name = "id_detalle_actividad_estrategica")
     private Long idDetalleActividadEstrategica;
 
-    private Integer meta;
+    private Double meta;
 
     @Column(name = "resultado_meta")
-    private Integer resultadoMeta;
+    private Double resultadoMeta;
 
     @Column(name = "promedio_meta")
-    private Integer promedioMeta;
+    private Double promedioMeta;
 
     private String entregable;
 
-    public EntidadDetalleActividadEstrategica(Integer meta, Integer resultadoMeta, Integer promedioMeta, String entregable) {
+    public EntidadDetalleActividadEstrategica(Double meta, Double resultadoMeta, Double promedioMeta, String entregable) {
         this.meta = meta;
         this.resultadoMeta = resultadoMeta;
         this.promedioMeta = promedioMeta;
         this.entregable = entregable;
     }
 
-    public EntidadDetalleActividadEstrategica(Long idDetalleActividadEstrategica, Integer meta, Integer resultadoMeta, Integer promedioMeta, String entregable) {
+    public EntidadDetalleActividadEstrategica(Long idDetalleActividadEstrategica, Double meta, Double resultadoMeta, Double promedioMeta, String entregable) {
         this.idDetalleActividadEstrategica = idDetalleActividadEstrategica;
         this.meta = meta;
         this.resultadoMeta = resultadoMeta;

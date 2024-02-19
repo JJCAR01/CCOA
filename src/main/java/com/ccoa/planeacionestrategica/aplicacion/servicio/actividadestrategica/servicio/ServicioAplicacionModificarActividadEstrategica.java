@@ -29,8 +29,12 @@ public class ServicioAplicacionModificarActividadEstrategica {
         var detalleActividadEstrategica = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorAplicacion(dto);
         return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.ejecutarModificar(actividadEstrategica,infActividadEstrategica,detalleActividadEstrategica,codigo));
     }
-    public DtoRespuesta<Long> ejecutarModificarResultado(DtoActividadEstrategica dto, Long codigo){
-        var detalleActividadEstrategica = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorModificarResultado(dto);
-        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.modificarResultado(detalleActividadEstrategica,codigo));
+    public DtoRespuesta<Long> ejecutarModificarEntregable(DtoActividadEstrategica dto, Long codigo){
+        var detalleActividadEstrategica = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorModificarEntregable(dto);
+        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.modificarEntregable(detalleActividadEstrategica,codigo));
+    }
+    public DtoRespuesta<Long> ejecutarModificarResultadoMeta(DtoActividadEstrategica dto, Long codigo){
+        var detalleActividadEstrategica = this.mapeadorAplicacionDetalleActividadEstrategica.mapeadorModificarResultadoMeta(dto);
+        return new DtoRespuesta<>(this.servicioModificarActividadEstrategica.modificarResultadoMeta(detalleActividadEstrategica,codigo));
     }
 }

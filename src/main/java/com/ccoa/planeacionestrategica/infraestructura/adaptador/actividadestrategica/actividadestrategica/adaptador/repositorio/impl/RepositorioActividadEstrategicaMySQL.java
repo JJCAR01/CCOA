@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.Detall
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadDocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorDocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorInformacionActividadEstrategica;
@@ -99,10 +100,12 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     @Override
     public Long modificar(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica, DetalleActividadEstrategica detalleActividadEstrategica, Long id) {
         var entidad = this.repositorioActividadEstrategicaJpa.findById(id).orElse(null);
-        var entidadInf = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert entidad != null;
+        var entidadInf = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert entidadInf != null;
-        this.mapeadorActividadEstrategica.actualizarEntidad(entidad, actividadEstrategica,entidadInf,informacionActividadEstrategica);
+        var entidadDetalle = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
+        assert entidadDetalle != null;
+        this.mapeadorActividadEstrategica.actualizarEntidad(entidad, actividadEstrategica,entidadInf,informacionActividadEstrategica,entidadDetalle,detalleActividadEstrategica);
         this.repositorioInformacionActividadEstrategicaJpa.save(entidadInf);
         return this.repositorioActividadEstrategicaJpa.save(entidad).getIdActividadEstrategica();
     }
@@ -111,7 +114,15 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     public Long modificarEntregable(DetalleActividadEstrategica detalleActividadEstrategica, Long id) {
         var entidadInformacion = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
         assert  entidadInformacion != null;
-        this.mapeadorDetalleActividadEstrategica.actualizarResultado(entidadInformacion, detalleActividadEstrategica);
+        this.mapeadorDetalleActividadEstrategica.actualizarEntregbale(entidadInformacion, detalleActividadEstrategica);
+        return this.repositorioDetalleActividadEstrategicaJpa.save(entidadInformacion).getIdDetalleActividadEstrategica();
+    }
+
+    @Override
+    public Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica, Long id) {
+        var entidadInformacion = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
+        assert  entidadInformacion != null;
+        this.mapeadorDetalleActividadEstrategica.actualizarResultadoMeta(entidadInformacion, detalleActividadEstrategica);
         return this.repositorioDetalleActividadEstrategicaJpa.save(entidadInformacion).getIdDetalleActividadEstrategica();
     }
 
@@ -135,13 +146,13 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
 
     @Override
     public boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica) {
-        return this.repositorioDocumentoActividadEstrategicaJpa.findById(documentoActividadEstrategica.getIdRutaDocumentoActividadEstrategica()).isPresent();
+        return this.repositorioDocumentoActividadEstrategicaJpa.findById(documentoActividadEstrategica.getIdActividadEstrategica()).isPresent();
     }
 
     @Override
-    public DocumentoActividadEstrategica consultarPorIdParaObtenerDocumento(Long id) {
-        var entidad = this.repositorioDocumentoActividadEstrategicaJpa.findById(id).orElse(null);
+    public List<DocumentoActividadEstrategica> consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoActividadEstrategicaJpa.findByIdActividadEstrategica(id);
         assert entidad != null;
-        return this.mapeadorDocumentoActividadEstrategica.mapeadorDominio(entidad);
+        return this.mapeadorDocumentoActividadEstrategica.mapeadorListaDocumentos(entidad);
     }
 }

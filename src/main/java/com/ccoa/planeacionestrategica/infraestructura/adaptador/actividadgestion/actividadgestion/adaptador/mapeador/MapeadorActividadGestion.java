@@ -106,25 +106,5 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
         return this.repositorioActividadGestionJpa.findById(id).orElse(null);
     }
 
-    public void actualizarPorcentajeAvance(EntidadActividadGestion entidad, DtoActividadGestionResumen actividadGestion) {
-        /*List<EntidadTarea> actividades = this.repositorioTareaJpa.findByIdASEAndTipoASE(actividadGestion.getIdInformacionActividad(), ETipoASE.ACTIVIDAD_GESTION);
-        List<EntidadInformacionTarea> informacionTareas = this.repositorioInformacionTareaJpa.
-                findAll()
-                .stream()
-                .filter(e -> actividades.stream()
-                        .anyMatch(actividad -> actividad.getIdTarea().equals(e.getIdInformacionTarea())))
-                .toList();
-
-        long totalActividades = actividades.size();
-        long tareasTerminadas = actividades.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
-
-        if (totalActividades > 0) {
-            double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentajeAvance.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareas, tareasTerminadas, totalActividades);
-            double nuevoAvance = servicioObtenerPorcentajeAvance.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalActividades);
-            entidad.setAvance(nuevoAvance);
-            mapeadorPat.actualizarPorcentajeAvance(mapeadorActividadGestion.obtenerGestion(entidad));
-        }*/
-    }
-
 
 }

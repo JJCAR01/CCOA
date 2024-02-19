@@ -22,6 +22,11 @@ public class ServicioCalcularPorcentaje implements ServicioObtenerPorcentaje {
     }
 
     @Override
+    public double calcularPorcentajeMeta(Double meta, Double resultadoMeta) {
+        return resultadoMeta >= 0 ? (resultadoMeta/meta) * Mensaje.PORCENTAJE : Mensaje.PORCENTAJE_CERO;
+    }
+
+    @Override
     public double obtenerPorcentajesDiferentesATareasUnicaVez(List<EntidadInformacionTarea> informacionTareas, long tareasTerminadas, long totalTareas) {
         double porcentajeDiferenteAUnicaVez = 0;
 

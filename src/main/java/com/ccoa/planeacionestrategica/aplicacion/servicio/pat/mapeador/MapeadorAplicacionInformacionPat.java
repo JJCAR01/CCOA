@@ -18,4 +18,10 @@ public class MapeadorAplicacionInformacionPat implements MapeadorAplicacion<DtoP
                 Mensaje.POR_DEFECTO_AVANCE
                 ,Mensaje.POR_DEFECTO_AVANCE,dto.getFechaInicial(),dto.getFechaFinal());
     }
+    public InformacionPat mapeadorActualizar(DtoPat dto) {
+        Direccion direccion = Direccion.of(dto.getDireccion().getNombre());
+        Proceso proceso = Proceso.of(dto.getProceso().getNombre());
+        return new InformacionPat (proceso,direccion, dto.getPorcentajeReal(),
+                dto.getPorcentajeEsperado(), dto.getPorcentajeCumplimiento(),dto.getFechaInicial(),dto.getFechaFinal());
+    }
 }

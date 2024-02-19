@@ -109,6 +109,7 @@ public class MapeadorProyectoArea implements MapeadorInfraestructura<EntidadProy
         entidad.setNombre(proyectoArea.getNombre());
         entidad.setPresupuesto(proyectoArea.getPresupuesto());
         entidad.setModalidad(proyectoArea.getModalidad());
+        entidadInformacionProyectoArea.setTotalSprint(informacionProyectoArea.getTotalSprint());
         entidadInformacionProyectoArea.setPlaneacionSprint(informacionProyectoArea.getPlaneacionSprint());
         entidadInformacionProyectoArea.setFechaInicial(informacionProyectoArea.getFechaInicial());
         entidadInformacionProyectoArea.setFechaFinal(informacionProyectoArea.getFechaFinal());

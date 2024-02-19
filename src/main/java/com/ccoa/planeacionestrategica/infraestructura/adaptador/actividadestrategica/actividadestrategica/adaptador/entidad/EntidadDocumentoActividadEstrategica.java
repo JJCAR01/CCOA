@@ -1,9 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +11,12 @@ import lombok.NoArgsConstructor;
 public class EntidadDocumentoActividadEstrategica {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_documento_actividad_estrategica")
     private Long idDocumentoActividadEstrategica;
+
+    @Column(name = "id_actividad_estrategica")
+    private Long idActividadEstrategica;
 
     @Column(name = "ruta_documento")
     private String rutaDocumento;
@@ -24,8 +25,8 @@ public class EntidadDocumentoActividadEstrategica {
         this.rutaDocumento = rutaDocumento;
     }
 
-    public EntidadDocumentoActividadEstrategica(Long idDocumentoActividadEstrategica, String rutaDocumento) {
-        this.idDocumentoActividadEstrategica = idDocumentoActividadEstrategica;
+    public EntidadDocumentoActividadEstrategica(Long idActividadEstrategica, String rutaDocumento) {
+        this.idActividadEstrategica = idActividadEstrategica;
         this.rutaDocumento = rutaDocumento;
     }
 }

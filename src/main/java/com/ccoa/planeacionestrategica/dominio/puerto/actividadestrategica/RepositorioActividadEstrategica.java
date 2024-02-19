@@ -20,9 +20,10 @@ public interface RepositorioActividadEstrategica{
     Long modificar(ActividadEstrategica actividadEstrategica ,InformacionActividadEstrategica informacionActividadEstrategica,
                    DetalleActividadEstrategica detalleActividadEstrategica, Long id);
     Long modificarEntregable(DetalleActividadEstrategica detalleActividadEstrategica, Long id);
+    Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);
     List<DtoIdsActividadEstrategica> consultarPorIdPatAEliminar(Long idPat);
     Long guardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo);
     boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica);
-    DocumentoActividadEstrategica consultarPorIdParaObtenerDocumento(Long id);
+    List<DocumentoActividadEstrategica> consultarPorIdParaObtenerDocumento(Long id);
 }

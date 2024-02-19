@@ -27,7 +27,8 @@ public class MapeadorInformacionSprintProyectoArea implements MapeadorInfraestru
     private final MapeadorSprintProyectoArea mapeadorSprintProyectoArea;
 
     public MapeadorInformacionSprintProyectoArea(RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa, RepositorioTareaJpa repositorioTareaJpa,
-                                                 RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, MapeadorDetalleProyecto mapeadorDetalleProyecto, MapeadorDetalleProyectoArea mapeadorDetalleProyectoArea, MapeadorSprintProyectoArea mapeadorSprintProyectoArea) {
+                                                 RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje,
+                                                 MapeadorDetalleProyectoArea mapeadorDetalleProyectoArea, MapeadorSprintProyectoArea mapeadorSprintProyectoArea) {
         this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
         this.repositorioTareaJpa = repositorioTareaJpa;
         this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;

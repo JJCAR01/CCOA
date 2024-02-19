@@ -116,7 +116,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
 
     public EntidadInformacionPat obtenerTodaEntidadPat(Long idPat) {
         var entidad = repositorioInformacionPatJpa.findById(idPat);
-        return new EntidadInformacionPat(idPat,entidad.orElseThrow().getProceso(),entidad.orElseThrow().getDireccion()
+        return new EntidadInformacionPat(idPat
                 ,entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
                 entidad.orElseThrow().getPorcentajeCumplimiento(),

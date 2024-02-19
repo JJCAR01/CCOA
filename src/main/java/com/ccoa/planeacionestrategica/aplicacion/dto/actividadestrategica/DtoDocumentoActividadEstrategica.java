@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class DtoDocumentoActividadEstrategica {
+    private Long idActividadEstrategica;
     private String rutaDocumento;
 }

@@ -16,7 +16,6 @@ import java.util.List;
 
 @Configuration
 public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadDetalleProyecto, DetalleProyecto> {
-    private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
     private final RepositorioInformacionSprintJpa repositorioInformacionSprintJpa;
     private final MapeadorProyecto mapeadorProyecto;
     private final RepositorioSprintJpa repositorioSprintJpa;
@@ -24,10 +23,8 @@ public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadD
     private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
 
     public MapeadorDetalleProyecto(
-            RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa,
             RepositorioInformacionSprintJpa repositorioInformacionSprintJpa,
             MapeadorProyecto mapeadorProyecto, RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa) {
-        this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
         this.mapeadorProyecto = mapeadorProyecto;
         this.repositorioSprintJpa = repositorioSprintJpa;

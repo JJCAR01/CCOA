@@ -8,7 +8,6 @@ import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObten
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.entidad.EntidadActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.entidad.EntidadInformacionActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionEstrategicaJpa;
@@ -97,6 +96,7 @@ public class MapeadorActividadGestionEstrategica implements MapeadorInfraestruct
         entidad.setNombre(actividadGestion.getNombre());
         entidad.setFechaInicial(actividadGestion.getFechaInicial());
         entidad.setFechaFinal(actividadGestion.getFechaFinal());
+        entidad.setIdUsuario(actividadGestion.getIdUsuario());
         entidadInformacionActividadGestion.setDuracion(informacionActividadGestion.getDuracion());
         entidadInformacionActividadGestion.setDiasRestantes(informacionActividadGestion.getDiasRestantes());
     }

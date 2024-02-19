@@ -9,6 +9,7 @@ import java.util.List;
 public interface ServicioObtenerPorcentaje {
 
     double calcularPorcentaje(List<?> objecto);
+    double calcularPorcentajeMeta(Double meta,Double resultadoMeta);
     double obtenerPorcentajesDiferentesATareasUnicaVez(List<EntidadInformacionTarea> informacionTareas, long tareasTerminadas, long totalTareas);
     double obtenerNuevoAvance(long tareasTerminadas,double tareasDiferentesAUnicaVez, long totalTareas);
     double obtenerPorcentajeEsperado(LocalDate fechaInicial, long totalDias);

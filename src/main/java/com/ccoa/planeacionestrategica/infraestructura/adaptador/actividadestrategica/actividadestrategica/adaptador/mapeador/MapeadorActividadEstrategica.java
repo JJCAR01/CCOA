@@ -115,13 +115,19 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
 
     public void actualizarEntidad(EntidadActividadEstrategica entidad, ActividadEstrategica actividadEstrategica,
                                   EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica,
-                                  InformacionActividadEstrategica informacionActividadEstrategica) {
+                                  InformacionActividadEstrategica informacionActividadEstrategica,
+                                  EntidadDetalleActividadEstrategica entidadDetalleActividadEstrategica,
+                                  DetalleActividadEstrategica detalleActividadEstrategica) {
         entidad.setNombre(actividadEstrategica.getNombre());
         entidad.setFechaInicial(actividadEstrategica.getFechaInicial());
         entidad.setFechaFinal(actividadEstrategica.getFechaFinal());
         entidad.setIdUsuario(actividadEstrategica.getIdUsuario());
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
+        entidadDetalleActividadEstrategica.setMeta(detalleActividadEstrategica.getMeta());
+        entidadDetalleActividadEstrategica.setPromedioMeta(
+                servicioObtenerPorcentaje.calcularPorcentajeMeta(entidadDetalleActividadEstrategica.getMeta(), entidadDetalleActividadEstrategica.getResultadoMeta())
+        );
     }
 
     public EntidadActividadEstrategica obtenerPatRelacionadoConActividadEstrategica(Long id){

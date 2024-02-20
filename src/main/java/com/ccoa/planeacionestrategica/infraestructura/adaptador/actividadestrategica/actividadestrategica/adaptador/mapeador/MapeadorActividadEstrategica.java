@@ -61,8 +61,9 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         return new DtoActividadEstrategicaResumen( entidad.getIdActividadEstrategica(), entidad.getNombre(), entidad.getFechaInicial(),entidad.getFechaFinal(),
                 entidad.getFechaRegistro(),entidadInformacionActividadEstrategica.getDuracion(), entidadInformacionActividadEstrategica.getDiasRestantes(),
                 entidadInformacionActividadEstrategica.getPorcentajeReal(),entidadInformacionActividadEstrategica.getPorcentajeEsperado(),
-                entidadInformacionActividadEstrategica.getPorcentajeCumplimiento(), entidadDetalleActividadEstrategica.getMeta(),
-                entidadDetalleActividadEstrategica.getResultadoMeta(), entidadDetalleActividadEstrategica.getPromedioMeta(),
+                entidadInformacionActividadEstrategica.getPorcentajeCumplimiento(), entidadInformacionActividadEstrategica.getPorcentajePat(),
+                entidadDetalleActividadEstrategica.getUnidad(),entidadDetalleActividadEstrategica.getMeta(),entidadDetalleActividadEstrategica.getPeriodicidadMeta(),
+                entidadDetalleActividadEstrategica.getResultadoMeta(), entidadDetalleActividadEstrategica.getPorcentajeMeta(),
                 entidadDetalleActividadEstrategica.getEntregable(),entidad.getIdUsuario(),entidad.getIdPat());
     }
 
@@ -88,10 +89,13 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
 
             var detalleEntidad = repositorioDetalleActividadEstrategicaJpa.findById(entidad.getIdActividadEstrategica());
 
+            dto.setUnidad(detalleEntidad.orElseThrow().getUnidad());
             dto.setMeta(detalleEntidad.orElseThrow().getMeta());
+            dto.setPeriodicidadMeta(detalleEntidad.orElseThrow().getPeriodicidadMeta());
             dto.setResultadoMeta(detalleEntidad.orElseThrow().getResultadoMeta());
-            dto.setPromedioMeta(detalleEntidad.orElseThrow().getPromedioMeta());
+            dto.setPromedioMeta(detalleEntidad.orElseThrow().getPorcentajeMeta());
             dto.setEntregable(detalleEntidad.orElseThrow().getEntregable());
+            dto.setPorcentajePat(servicioObtenerPorcentaje.obtenerPorcentajePat(dto.getPorcentajeCumplimiento(),dto.getPromedioMeta()));
 
             listaDto.add(dto);
         }
@@ -113,7 +117,7 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         return listaDto;
     }
 
-    public void actualizarEntidad(EntidadActividadEstrategica entidad, ActividadEstrategica actividadEstrategica,
+    public void  actualizarEntidad(EntidadActividadEstrategica entidad, ActividadEstrategica actividadEstrategica,
                                   EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica,
                                   InformacionActividadEstrategica informacionActividadEstrategica,
                                   EntidadDetalleActividadEstrategica entidadDetalleActividadEstrategica,
@@ -125,9 +129,11 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
         entidadDetalleActividadEstrategica.setMeta(detalleActividadEstrategica.getMeta());
-        entidadDetalleActividadEstrategica.setPromedioMeta(
-                servicioObtenerPorcentaje.calcularPorcentajeMeta(entidadDetalleActividadEstrategica.getMeta(), entidadDetalleActividadEstrategica.getResultadoMeta())
-        );
+        entidadDetalleActividadEstrategica.setPorcentajeMeta(
+                servicioObtenerPorcentaje.calcularPorcentajeMeta(entidadDetalleActividadEstrategica.getMeta(), entidadDetalleActividadEstrategica.getResultadoMeta()));
+        entidadInformacionActividadEstrategica.setPorcentajeReal(
+                servicioObtenerPorcentaje.obtenerPorcentajePat(entidadInformacionActividadEstrategica.getPorcentajeCumplimiento(),
+                        entidadDetalleActividadEstrategica.getPorcentajeMeta()));
     }
 
     public EntidadActividadEstrategica obtenerPatRelacionadoConActividadEstrategica(Long id){

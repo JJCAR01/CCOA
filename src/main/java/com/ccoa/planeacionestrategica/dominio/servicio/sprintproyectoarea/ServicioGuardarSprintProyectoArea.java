@@ -24,7 +24,6 @@ public class ServicioGuardarSprintProyectoArea {
     }
 
     public Long ejecutarGuardarDocumento(DocumentoSprintProyectoArea documentoSprintProyectoArea, Long codigo){
-        if(this.repositorioSprintProyectoArea.existeDocumento(documentoSprintProyectoArea)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_SPRINT_DEL_PROYECTO_DEL_AREA,MENSAJE_DEFECTO);
         return this.repositorioSprintProyectoArea.guardarDocumento(documentoSprintProyectoArea,codigo);
     }
 

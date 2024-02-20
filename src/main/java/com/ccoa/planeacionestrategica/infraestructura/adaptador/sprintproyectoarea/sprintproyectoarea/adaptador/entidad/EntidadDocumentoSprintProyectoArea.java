@@ -1,11 +1,10 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -13,18 +12,21 @@ import lombok.NoArgsConstructor;
 @Table(name = "documentos_sprint_proyecto_area")
 public class EntidadDocumentoSprintProyectoArea {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_documneto_sprint_proyecto_area")
     private Long idDocumentoSprintProyectoArea;
 
-    @Column(name = "ruta_archivo")
-    private String rutaArchivo;
+    @Column(name = "id_sprint_proyecto_area")
+    private Long idSprintProyectoArea;
 
-    public EntidadDocumentoSprintProyectoArea(String rutaArchivo) {
-        this.rutaArchivo = rutaArchivo;
-    }
+    @Column(name = "ruta_documento")
+    private String rutaDocumento;
 
-    public EntidadDocumentoSprintProyectoArea(Long idDocumentoSprintProyectoArea, String rutaArchivo) {
-        this.idDocumentoSprintProyectoArea = idDocumentoSprintProyectoArea;
-        this.rutaArchivo = rutaArchivo;
+    private LocalDate fecha;
+
+    public EntidadDocumentoSprintProyectoArea(Long idSprintProyectoArea, String rutaDocumento, LocalDate fecha) {
+        this.idSprintProyectoArea = idSprintProyectoArea;
+        this.rutaDocumento = rutaDocumento;
+        this.fecha = fecha;
     }
 }

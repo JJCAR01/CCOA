@@ -24,7 +24,6 @@ public class ServicioGuardarProyectoArea {
         return this.repositorioProyectoArea.guardar(proyectoArea,informacionProyectoArea,detalleProyectoArea);
     }
     public Long ejecutarGuardarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo){
-        if(this.repositorioProyectoArea.existeDocumento(documentoProyectoArea)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO_DEL_AREA,MENSAJE_DEFECTO);
         return this.repositorioProyectoArea.guardarDocumento(documentoProyectoArea,codigo);
     }
 }

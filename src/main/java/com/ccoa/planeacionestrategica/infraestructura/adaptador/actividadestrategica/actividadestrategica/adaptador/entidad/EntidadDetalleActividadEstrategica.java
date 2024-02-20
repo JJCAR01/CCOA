@@ -1,9 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidadMeta;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EUnidad;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,28 +15,28 @@ public class EntidadDetalleActividadEstrategica {
     @Column(name = "id_detalle_actividad_estrategica")
     private Long idDetalleActividadEstrategica;
 
+    @Enumerated(EnumType.STRING)
+    private EUnidad unidad;
+
     private Double meta;
+    @Enumerated(EnumType.STRING)
+    private EPeriodicidadMeta periodicidadMeta;
 
     @Column(name = "resultado_meta")
     private Double resultadoMeta;
 
-    @Column(name = "promedio_meta")
-    private Double promedioMeta;
+    @Column(name = "porcentaje_meta")
+    private Double porcentajeMeta;
 
     private String entregable;
 
-    public EntidadDetalleActividadEstrategica(Double meta, Double resultadoMeta, Double promedioMeta, String entregable) {
-        this.meta = meta;
-        this.resultadoMeta = resultadoMeta;
-        this.promedioMeta = promedioMeta;
-        this.entregable = entregable;
-    }
 
-    public EntidadDetalleActividadEstrategica(Long idDetalleActividadEstrategica, Double meta, Double resultadoMeta, Double promedioMeta, String entregable) {
-        this.idDetalleActividadEstrategica = idDetalleActividadEstrategica;
+    public EntidadDetalleActividadEstrategica(EUnidad unidad, Double meta, EPeriodicidadMeta periodicidadMeta, Double resultadoMeta, Double porcentajeMeta, String entregable) {
+        this.unidad = unidad;
         this.meta = meta;
+        this.periodicidadMeta = periodicidadMeta;
         this.resultadoMeta = resultadoMeta;
-        this.promedioMeta = promedioMeta;
+        this.porcentajeMeta = porcentajeMeta;
         this.entregable = entregable;
     }
 }

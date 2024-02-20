@@ -21,5 +21,5 @@ public interface RepositorioProyecto {
     List<DtoIdsProyecto> consultarPorIdActividadEstrategicaAEliminar(Long id);
     Long guardarDocumento(DocumentoProyecto documentoProyecto, Long codigo);
     boolean existeDocumento(DocumentoProyecto documentoProyecto);
-    DocumentoProyecto consultarPorIdParaObtenerDocumento(Long id);
+    List<DocumentoProyecto> consultarPorIdParaObtenerDocumento(Long id);
 }

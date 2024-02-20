@@ -13,6 +13,6 @@ public class MapeadorAplicacionDocumentoActividadGestionEstrategica implements M
     }
 
     public DocumentoActividadGestionEstrategica mapeadorAplicacionCrear(DtoDocumentoActividadGestionEstrategica dto, Long codigo) {
-        return new DocumentoActividadGestionEstrategica(codigo,dto.getRutaDocumento());
+        return new DocumentoActividadGestionEstrategica(codigo,dto.getRutaDocumento(),dto.getFecha());
     }
 }

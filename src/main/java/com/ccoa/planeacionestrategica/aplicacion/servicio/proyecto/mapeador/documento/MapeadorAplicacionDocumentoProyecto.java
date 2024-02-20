@@ -10,6 +10,6 @@ public class MapeadorAplicacionDocumentoProyecto implements MapeadorAplicacion<D
     @Override
     public DocumentoProyecto mapeadorAplicacion(DtoDocumentoProyecto dto) {return null; }
     public DocumentoProyecto mapeadorAplicacionCrear(DtoDocumentoProyecto dto, Long codigo) {
-        return new DocumentoProyecto(codigo,dto.getRutaDocumento());
+        return new DocumentoProyecto(codigo,dto.getRutaDocumento(),dto.getFecha());
     }
 }

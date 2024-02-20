@@ -4,6 +4,9 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoar
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RepositorioDocumentoSprintProyectoAreaJpa extends JpaRepository<EntidadDocumentoSprintProyectoArea,Long> {
+    List<EntidadDocumentoSprintProyectoArea> findByIdSprintProyectoArea(Long idSprintProyectoArea);
 }

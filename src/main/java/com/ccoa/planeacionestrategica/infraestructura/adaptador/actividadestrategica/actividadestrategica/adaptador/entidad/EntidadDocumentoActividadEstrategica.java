@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,12 +23,11 @@ public class EntidadDocumentoActividadEstrategica {
     @Column(name = "ruta_documento")
     private String rutaDocumento;
 
-    public EntidadDocumentoActividadEstrategica(String rutaDocumento) {
-        this.rutaDocumento = rutaDocumento;
-    }
+    private LocalDate fecha;
 
-    public EntidadDocumentoActividadEstrategica(Long idActividadEstrategica, String rutaDocumento) {
+    public EntidadDocumentoActividadEstrategica(Long idActividadEstrategica, String rutaDocumento, LocalDate fecha) {
         this.idActividadEstrategica = idActividadEstrategica;
         this.rutaDocumento = rutaDocumento;
+        this.fecha = fecha;
     }
 }

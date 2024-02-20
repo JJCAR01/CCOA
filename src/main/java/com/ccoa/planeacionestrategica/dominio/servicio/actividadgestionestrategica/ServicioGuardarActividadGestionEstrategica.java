@@ -23,7 +23,6 @@ public class ServicioGuardarActividadGestionEstrategica {
         return this.repositorioActividadGestionEstrategica.guardar(actividadGestionEstrategica,informacionActividadGestionEstrategica);
     }
     public Long ejecutarGuardarDocumento(DocumentoActividadGestionEstrategica documentoActividadGestionEstrategica, Long codigo){
-        if(this.repositorioActividadGestionEstrategica.existeDocumento(documentoActividadGestionEstrategica)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA,MENSAJE_DEFECTO);
         return this.repositorioActividadGestionEstrategica.guardarDocumento(documentoActividadGestionEstrategica,codigo);
     }
 }

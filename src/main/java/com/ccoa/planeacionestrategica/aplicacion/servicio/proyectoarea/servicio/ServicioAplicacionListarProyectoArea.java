@@ -20,6 +20,6 @@ public class ServicioAplicacionListarProyectoArea {
 
     public DtoProyectoAreaResumen consultarById(Long id){return this.repositorioProyectoArea.consultarPorId(id);}
     public List<DtoProyectoAreaResumen> consultarByIdPat(Long id){return this.repositorioProyectoArea.consultarPorIdPat(id);}
-    public DocumentoProyectoArea consultarByIdDocumento(Long id){return this.repositorioProyectoArea.consultarPorIdParaObtenerDocumento(id);}
+    public List<DocumentoProyectoArea> consultarByIdDocumento(Long id){return this.repositorioProyectoArea.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoIdsProyectoArea> consultarByIdPatAEliminar(Long id){return this.repositorioProyectoArea.consultarPorIdPatAEliminar(id);}
 }

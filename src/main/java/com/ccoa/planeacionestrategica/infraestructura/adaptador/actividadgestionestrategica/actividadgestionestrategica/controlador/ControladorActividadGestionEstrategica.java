@@ -40,7 +40,7 @@ public class ControladorActividadGestionEstrategica {
         return ResponseEntity.ok(this.servicioAplicacionGuardarActividadGestionEstrategica.guardarRutaArchivo(rutaArchivo,codigo));
     }
     @GetMapping("/archivo/{codigo}")
-    public ResponseEntity<DocumentoActividadGestionEstrategica> obtenerDocumento(@PathVariable Long codigo){
+    public ResponseEntity<List<DocumentoActividadGestionEstrategica>> obtenerDocumento(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarActividadGestionEstrategica.consultarByIdDocumento(codigo));
     }
     @GetMapping

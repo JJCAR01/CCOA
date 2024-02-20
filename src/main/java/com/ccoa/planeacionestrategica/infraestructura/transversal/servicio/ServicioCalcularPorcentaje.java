@@ -59,4 +59,9 @@ public class ServicioCalcularPorcentaje implements ServicioObtenerPorcentaje {
         return !(porcentajeReal == Mensaje.PORCENTAJE_CERO || porcentajeEsperado == Mensaje.PORCENTAJE_CERO) ?
                 (porcentajeReal/porcentajeEsperado)* Mensaje.PORCENTAJE : Mensaje.PORCENTAJE_CERO;
     }
+
+    @Override
+    public double obtenerPorcentajePat(double porcentajeCumplimiento, double promedioMeta) {
+        return (porcentajeCumplimiento * Mensaje.PORCENTAJE_PONDERADO_ACTIVIDADES) + (promedioMeta * Mensaje.PORCENTAJE_PONDERADO_META);
+    }
 }

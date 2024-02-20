@@ -1,9 +1,9 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoRutaArchivo;
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.MapeadorAplicacionDocumentoSprint;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.documento.MapeadorAplicacionDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.MapeadorAplicacionInformacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.MapeadorAplicacionSprint;
 import com.ccoa.planeacionestrategica.dominio.servicio.sprint.ServicioGuardarSprint;
@@ -29,7 +29,7 @@ public class ServicioAplicacionGuardarSprint {
         var informacionSprint = this.mapeadorAplicacionInformacionSprint.mapeadorAplicacion(dto);
         return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardar(sprint,informacionSprint));
     }
-    public DtoRespuesta<Long> guardarRutaArchivo(DtoRutaArchivo dto, Long codigo){
+    public DtoRespuesta<Long> guardarRutaArchivo(DtoDocumentoSprint dto, Long codigo){
         var docSprint = this.mapeadorAplicacionDocumentoSprint.mapeadorAplicacionCrear(dto,codigo);
 
         return new DtoRespuesta<>(this.servicioGuardarSprint.ejecutarGuardarDocumento(docSprint,codigo));

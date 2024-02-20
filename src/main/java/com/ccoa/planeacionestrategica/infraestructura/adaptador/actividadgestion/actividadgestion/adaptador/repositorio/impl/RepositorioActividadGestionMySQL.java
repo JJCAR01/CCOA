@@ -7,7 +7,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadgestion.RepositorioActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.MapeadorActividadGestion;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.MapeadorDocumentoActividadGestion;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.documento.MapeadorDocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.MapeadorInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioDocumentoActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadActividadGestion;
@@ -43,10 +43,10 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
     }
 
     @Override
-    public DocumentoActividadGestion consultarPorIdParaObtenerDocumento(Long id) {
-        var entidad = this.repositorioDocumentoActividadGestionJpa.findById(id).orElse(null);
+    public List<DocumentoActividadGestion> consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoActividadGestionJpa.findByIdActividadGestion(id);
         assert entidad != null;
-        return this.mapeadorDocumentoActividadGestion.mapeadorDominio(entidad);
+        return this.mapeadorDocumentoActividadGestion.mapeadorListaDocumentos(entidad);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
 
     @Override
     public boolean existeDocumento(DocumentoActividadGestion documentoActividadGestion) {
-        return this.repositorioDocumentoActividadGestionJpa.findById(documentoActividadGestion.getIdRutaDocumentoActividadGestion()).isPresent();
+        return this.repositorioDocumentoActividadGestionJpa.findById(documentoActividadGestion.getIdActividadGestion()).isPresent();
     }
 
     @Override

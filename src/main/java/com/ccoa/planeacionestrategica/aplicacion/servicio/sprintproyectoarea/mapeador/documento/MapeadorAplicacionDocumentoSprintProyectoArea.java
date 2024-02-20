@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador;
+package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador.documento;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
@@ -14,6 +14,6 @@ public class MapeadorAplicacionDocumentoSprintProyectoArea implements MapeadorAp
     }
 
     public DocumentoSprintProyectoArea mapeadorAplicacionCrear(DtoDocumentoSprintProyectoArea dto, Long codigo) {
-        return new DocumentoSprintProyectoArea(codigo,dto.getRutaArchivo());
+        return new DocumentoSprintProyectoArea(codigo,dto.getRutaDocumento(),dto.getFecha());
     }
 }

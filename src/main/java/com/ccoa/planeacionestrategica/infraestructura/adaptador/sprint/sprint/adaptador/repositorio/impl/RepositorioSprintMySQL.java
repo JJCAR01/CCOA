@@ -51,10 +51,10 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     }
 
     @Override
-    public DocumentoSprint consultarPorIdParaObtenerDocumento(Long id) {
-        var entidad = this.repositorioDocumentoSprintJpa.findById(id).orElse(null);
+    public List<DocumentoSprint> consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoSprintJpa.findByIdSprint(id);
         assert entidad != null;
-        return this.mapeadorDocumentoSprint.mapeadorDominio(entidad);
+        return this.mapeadorDocumentoSprint.mapeadorListaDocumentos(entidad);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
 
     @Override
     public boolean existeDocumento(DocumentoSprint sprint) {
-        return this.repositorioDocumentoSprintJpa.findById(sprint.getIdRutaArchivo()).isPresent();
+        return this.repositorioDocumentoSprintJpa.findById(sprint.getIdSprint()).isPresent();
     }
 
     @Override

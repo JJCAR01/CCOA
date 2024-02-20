@@ -43,10 +43,10 @@ public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioA
     }
 
     @Override
-    public DocumentoActividadGestionEstrategica consultarPorIdParaObtenerDocumento(Long id) {
-        var entidad = this.repositorioDocumentoActividadGestionEstrategicaJpa.findById(id).orElse(null);
+    public List<DocumentoActividadGestionEstrategica> consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoActividadGestionEstrategicaJpa.findByIdActividadGestionEstrategica(id);
         assert entidad != null;
-        return this.mapeadorDocumentoActividadGestionEstrategica.mapeadorDominio(entidad);
+        return this.mapeadorDocumentoActividadGestionEstrategica.mapeadorListaDocumentos(entidad);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioA
 
     @Override
     public boolean existeDocumento(DocumentoActividadGestionEstrategica documentoActividadGestionEstrategica) {
-        return this.repositorioDocumentoActividadGestionEstrategicaJpa.findById(documentoActividadGestionEstrategica.getIdRutaDocumentoActividadGestionEstrategica()).isPresent();
+        return this.repositorioDocumentoActividadGestionEstrategicaJpa.findById(documentoActividadGestionEstrategica.getIdActividadGestionEstrategica()).isPresent();
     }
 
     @Override

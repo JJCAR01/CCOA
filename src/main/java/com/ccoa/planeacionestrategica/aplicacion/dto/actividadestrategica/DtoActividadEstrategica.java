@@ -1,5 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica;
 
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPeriodicidadMeta;
+import com.ccoa.planeacionestrategica.dominio.transversal.enums.EUnidad;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -15,13 +17,15 @@ public class DtoActividadEstrategica {
     private LocalDate fechaRegistro;
     private Integer duracion;
     private Integer diasRestantes;
-    private Boolean estado;
     private double porcentajeReal;
     private double porcentajeEsperado;
     private double porcentajeCumplimiento;
+    private double porcentajePat;
+    private EUnidad unidad;
     private Double meta;
+    private EPeriodicidadMeta periodicidadMeta;
     private Double resultadoMeta;
-    private Double promedioMeta;
+    private Double porcentajeMeta;
     private String entregable;
     private Long idUsuario;
     private Long idPat;

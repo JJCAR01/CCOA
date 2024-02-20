@@ -11,6 +11,6 @@ public class MapeadorAplicacionDocumentoActividadGestion implements MapeadorApli
         return null;
     }
     public DocumentoActividadGestion mapeadorAplicacionCrear(DtoDocumentoActividadGestion dto, Long codigo) {
-        return new DocumentoActividadGestion(codigo,dto.getRutaDocumento());
+        return new DocumentoActividadGestion(codigo,dto.getRutaDocumento(),dto.getFecha());
     }
 }

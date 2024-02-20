@@ -18,6 +18,6 @@ public class ServicioAplicacionListarActividadGestion {
     }
     public List<DtoActividadGestionResumen> ejecutar(){return this.repositorioActividadGestion.listar();}
     public ActividadGestion consultarById(Long id){return this.repositorioActividadGestion.consultarPorId(id);}
-    public DocumentoActividadGestion consultarByIdDocumento(Long id){return this.repositorioActividadGestion.consultarPorIdParaObtenerDocumento(id);}
+    public List<DocumentoActividadGestion> consultarByIdDocumento(Long id){return this.repositorioActividadGestion.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoActividadGestionResumen> consultarByIdPat(Long id){return this.repositorioActividadGestion.consultarPorIdPat(id);}
 }

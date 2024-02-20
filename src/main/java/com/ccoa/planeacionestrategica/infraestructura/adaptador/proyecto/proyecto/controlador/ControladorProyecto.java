@@ -39,7 +39,7 @@ public class ControladorProyecto {
         return ResponseEntity.ok(this.servicioAplicacionGuardarProyecto.guardarRutaArchivo(rutaArchivo,codigo));
     }
     @GetMapping("/archivo/{codigo}")
-    public ResponseEntity<DocumentoProyecto> obtenerDocumento(@PathVariable Long codigo){
+    public ResponseEntity<List<DocumentoProyecto>> obtenerDocumento(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarProyecto.consultarByIdDocumento(codigo));
     }
 

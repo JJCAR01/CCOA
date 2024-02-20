@@ -107,7 +107,6 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajeReal() * porcentaje).sum();
         double sumaProyectos = detalleProyectosArea.stream().mapToDouble(proyecto -> proyecto.getPorcentajeReal() * porcentaje).sum();
 
-
         double avanceTotal = (sumaActGestion + sumaActEstrategica + sumaProyectos)/ Mensaje.PORCENTAJE;
         entidad.setPorcentajeReal(avanceTotal);
         entidad.setIdInformacionPat(idPat);
@@ -116,7 +115,12 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
 
     public EntidadInformacionPat obtenerTodaEntidadPat(Long idPat) {
         var entidad = repositorioInformacionPatJpa.findById(idPat);
-        return new EntidadInformacionPat(idPat
+
+        var entidadProceso = this.repositorioProcesoJpa.findByNombre(entidad.orElseThrow().getProceso().getNombre());
+        var entidadDireccion = this.repositorioDireccionJpa.findByNombre(entidad.orElseThrow().getDireccion().getNombre());
+
+        // Crear y devolver la entidad EntidadInformacionPat
+        return new EntidadInformacionPat(idPat,entidadProceso,entidadDireccion
                 ,entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
                 entidad.orElseThrow().getPorcentajeCumplimiento(),

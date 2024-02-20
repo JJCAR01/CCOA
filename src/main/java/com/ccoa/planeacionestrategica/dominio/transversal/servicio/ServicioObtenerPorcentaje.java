@@ -14,4 +14,5 @@ public interface ServicioObtenerPorcentaje {
     double obtenerNuevoAvance(long tareasTerminadas,double tareasDiferentesAUnicaVez, long totalTareas);
     double obtenerPorcentajeEsperado(LocalDate fechaInicial, long totalDias);
     double obtenerPorcentajeDeCumplimiento(double porcentajeReal, double porcentajeEsperado);
+    double obtenerPorcentajePat(double porcentajeCumplimiento, double promedioMeta);
 }

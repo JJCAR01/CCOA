@@ -10,7 +10,7 @@ import java.util.List;
 public interface RepositorioSprintProyectoArea {
     List<DtoSprintProyectoAreaResumen> listar();
     SprintProyectoArea consultarPorId(Long id);
-    DocumentoSprintProyectoArea consultarPorIdParaObtenerDocumento(Long id);
+    List<DocumentoSprintProyectoArea>  consultarPorIdParaObtenerDocumento(Long id);
     Long guardar(SprintProyectoArea sprintProyectoArea, InformacionSprintProyectoArea informacionSprintProyectoArea);
     Long guardarDocumento(DocumentoSprintProyectoArea documentoSprintProyectoArea,Long codigo);
     boolean existe(SprintProyectoArea sprintProyectoArea);

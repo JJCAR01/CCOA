@@ -3,24 +3,30 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "documentos_sprint")
 public class EntidadDocumentoSprint {
     @Id
-    @Column(name = "id_documneto_sprint")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_documento_sprint")
     private Long idDocumentoSprint;
 
-    @Column(name = "ruta_archivo")
-    private String rutaArchivo;
+    @Column(name = "id_sprint")
+    private Long idSprint;
 
-    public EntidadDocumentoSprint(String rutaArchivo) {
-        this.rutaArchivo = rutaArchivo;
-    }
+    @Column(name = "ruta_documento")
+    private String rutaDocumento;
 
-    public EntidadDocumentoSprint(Long idDocumentoSprint, String rutaArchivo) {
-        this.idDocumentoSprint = idDocumentoSprint;
-        this.rutaArchivo = rutaArchivo;
+    private LocalDate fecha;
+
+    public EntidadDocumentoSprint(Long idSprint, String rutaDocumento, LocalDate fecha) {
+        this.idSprint = idSprint;
+        this.rutaDocumento = rutaDocumento;
+        this.fecha = fecha;
     }
 }

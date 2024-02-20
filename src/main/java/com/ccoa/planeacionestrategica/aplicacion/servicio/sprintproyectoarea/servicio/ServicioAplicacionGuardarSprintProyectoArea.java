@@ -3,7 +3,7 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.se
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoSprintProyectoArea;
-import com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador.MapeadorAplicacionDocumentoSprintProyectoArea;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador.documento.MapeadorAplicacionDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador.MapeadorAplicacionInformacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador.MapeadorAplicacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.servicio.sprintproyectoarea.ServicioGuardarSprintProyectoArea;

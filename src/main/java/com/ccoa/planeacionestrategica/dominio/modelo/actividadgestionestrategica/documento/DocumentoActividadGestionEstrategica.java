@@ -2,21 +2,27 @@ package com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategic
 
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.LA_URL_DEL_DOCUMENTO_DEBE_DE_SER_VALIDA;
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.RUTA_ARCHIVO_DEL_DOCUMENTO_NO_PUEDE_ESTAR_VACIO;
+@NoArgsConstructor
 @Data
 public class DocumentoActividadGestionEstrategica {
-    private final Long idRutaDocumentoActividadGestionEstrategica;
-    private final String rutaDocumento;
-    public static DocumentoActividadGestionEstrategica of(Long idRutaDocumentoActividadGestionEstrategica, String rutaDocumento){
+    private Long idActividadGestionEstrategica;
+    private String rutaDocumento;
+    private LocalDate fecha;
+    public static DocumentoActividadGestionEstrategica of(Long idActividadGestionEstrategica, String rutaDocumento, LocalDate fecha){
         ValidadorDominio.validarObligatorio(rutaDocumento,RUTA_ARCHIVO_DEL_DOCUMENTO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validarPatronURLEsValido(rutaDocumento,LA_URL_DEL_DOCUMENTO_DEBE_DE_SER_VALIDA);
-        return new DocumentoActividadGestionEstrategica(idRutaDocumentoActividadGestionEstrategica,rutaDocumento);
+        return new DocumentoActividadGestionEstrategica(idActividadGestionEstrategica, rutaDocumento, fecha);
     }
 
-    public DocumentoActividadGestionEstrategica(Long idRutaDocumentoActividadGestionEstrategica, String rutaDocumento) {
-        this.idRutaDocumentoActividadGestionEstrategica = idRutaDocumentoActividadGestionEstrategica;
+    public DocumentoActividadGestionEstrategica(Long idActividadGestionEstrategica, String rutaDocumento, LocalDate fecha) {
+        this.idActividadGestionEstrategica = idActividadGestionEstrategica;
         this.rutaDocumento = rutaDocumento;
+        this.fecha = fecha;
     }
 }

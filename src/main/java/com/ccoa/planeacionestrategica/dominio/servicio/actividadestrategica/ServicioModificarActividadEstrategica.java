@@ -28,8 +28,8 @@ public class ServicioModificarActividadEstrategica {
         if(this.repositorioActividadEstrategica.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioActividadEstrategica.modificarEntregable(detalleActividadEstrategica,codigo);
     }
-    public Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica, Long codigo){
+    public Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica,InformacionActividadEstrategica informacionActividadEstrategica, Long codigo){
         if(this.repositorioActividadEstrategica.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioActividadEstrategica.modificarResultadoMeta(detalleActividadEstrategica,codigo);
+        return this.repositorioActividadEstrategica.modificarResultadoMeta(detalleActividadEstrategica,informacionActividadEstrategica,codigo);
     }
 }

@@ -18,6 +18,6 @@ public class ServicioAplicacionListarSprint {
     public List<DtoSprintResumen> ejecutar(){return this.repositorioSprint.listar();}
 
     public Sprint consultarById(Long id){return this.repositorioSprint.consultarPorId(id);}
-    public DocumentoSprint consultarByIdDocumento(Long id){return this.repositorioSprint.consultarPorIdParaObtenerDocumento(id);}
+    public List<DocumentoSprint> consultarByIdDocumento(Long id){return this.repositorioSprint.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoSprintResumen> consultarByIdProyecto(Long id){return this.repositorioSprint.consultarPorIdProyecto(id);}
 }

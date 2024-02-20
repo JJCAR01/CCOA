@@ -5,19 +5,34 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoar
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 public class MapeadorDocumentoSprintProyectoArea implements MapeadorInfraestructura<EntidadDocumentoSprintProyectoArea, DocumentoSprintProyectoArea> {
     @Override
     public DocumentoSprintProyectoArea mapeadorDominio(EntidadDocumentoSprintProyectoArea entidad) {
-        return new DocumentoSprintProyectoArea(entidad.getIdDocumentoSprintProyectoArea(), entidad.getRutaArchivo());
+        return new DocumentoSprintProyectoArea(entidad.getIdSprintProyectoArea(), entidad.getRutaDocumento(),entidad.getFecha());
     }
 
     @Override
     public EntidadDocumentoSprintProyectoArea mapeadorEntidad(DocumentoSprintProyectoArea dominio) {
-        return new EntidadDocumentoSprintProyectoArea(dominio.getRutaArchivo());
+        return new EntidadDocumentoSprintProyectoArea(dominio.getIdSprintProyectoArea(), dominio.getRutaDocumento(), dominio.getFecha());
     }
     public EntidadDocumentoSprintProyectoArea mapeadorEntidadDocumento(DocumentoSprintProyectoArea dominio,Long id) {
-        return new EntidadDocumentoSprintProyectoArea(id,dominio.getRutaArchivo());
+        return new EntidadDocumentoSprintProyectoArea(id,dominio.getRutaDocumento(),dominio.getFecha());
+    }
+    public List<DocumentoSprintProyectoArea> mapeadorListaDocumentos(List<EntidadDocumentoSprintProyectoArea> entidades) {
+        List<DocumentoSprintProyectoArea> listaDto = new ArrayList<>();
+        for (EntidadDocumentoSprintProyectoArea entidadActual : entidades) {
+            DocumentoSprintProyectoArea dto = new DocumentoSprintProyectoArea();
+            dto.setIdSprintProyectoArea(entidadActual.getIdSprintProyectoArea());
+            dto.setRutaDocumento(entidadActual.getRutaDocumento());
+            dto.setFecha(entidadActual.getFecha());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
     }
 
 }

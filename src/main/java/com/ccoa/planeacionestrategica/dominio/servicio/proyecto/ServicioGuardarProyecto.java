@@ -24,7 +24,6 @@ public class ServicioGuardarProyecto {
         return this.repositorioProyecto.guardar(proyecto,informacionProyecto,detalleProyecto);
     }
     public Long ejecutarGuardarDocumento(DocumentoProyecto documentoProyecto, Long codigo){
-        if(this.repositorioProyecto.existeDocumento(documentoProyecto)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO,MENSAJE_DEFECTO);
         return this.repositorioProyecto.guardarDocumento(documentoProyecto,codigo);
     }
 }

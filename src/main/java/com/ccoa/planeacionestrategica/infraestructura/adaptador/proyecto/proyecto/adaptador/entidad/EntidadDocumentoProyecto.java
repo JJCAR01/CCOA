@@ -1,11 +1,10 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -14,18 +13,21 @@ import lombok.NoArgsConstructor;
 public class EntidadDocumentoProyecto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_documento_proyecto")
     private Long idDocumentoProyecto;
+
+    @Column(name = "id_proyecto")
+    private Long idProyecto;
 
     @Column(name = "ruta_documento")
     private String rutaDocumento;
 
-    public EntidadDocumentoProyecto(String rutaDocumento) {
-        this.rutaDocumento = rutaDocumento;
-    }
+    private LocalDate fecha;
 
-    public EntidadDocumentoProyecto(Long idDocumentoProyecto, String rutaDocumento) {
-        this.idDocumentoProyecto = idDocumentoProyecto;
+    public EntidadDocumentoProyecto(Long idProyecto, String rutaDocumento, LocalDate fecha) {
+        this.idProyecto = idProyecto;
         this.rutaDocumento = rutaDocumento;
+        this.fecha = fecha;
     }
 }

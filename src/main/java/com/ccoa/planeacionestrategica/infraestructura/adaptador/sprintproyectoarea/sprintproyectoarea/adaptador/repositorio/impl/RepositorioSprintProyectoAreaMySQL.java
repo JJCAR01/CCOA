@@ -52,10 +52,10 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
     }
 
     @Override
-    public DocumentoSprintProyectoArea consultarPorIdParaObtenerDocumento(Long id) {
-        var entidad = this.repositorioDocumentoSprintProyectoAreaJpa.findById(id).orElse(null);
+    public List<DocumentoSprintProyectoArea>  consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoSprintProyectoAreaJpa.findByIdSprintProyectoArea(id);
         assert entidad != null;
-        return this.mapeadorDocumentoSprintProyectoArea.mapeadorDominio(entidad);
+        return this.mapeadorDocumentoSprintProyectoArea.mapeadorListaDocumentos(entidad);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
 
     @Override
     public boolean existeDocumento(DocumentoSprintProyectoArea sprintProyectoArea) {
-        return this.repositorioDocumentoSprintProyectoAreaJpa.findById(sprintProyectoArea.getIdRutaDocumentoSprintProyectoArea()).isPresent();
+        return this.repositorioDocumentoSprintProyectoAreaJpa.findById(sprintProyectoArea.getIdSprintProyectoArea()).isPresent();
     }
 
     @Override

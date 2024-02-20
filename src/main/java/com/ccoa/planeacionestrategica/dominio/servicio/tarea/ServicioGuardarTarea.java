@@ -18,7 +18,6 @@ public class ServicioGuardarTarea {
     }
 
     public Long ejecutarGuardar(Tarea tarea, InformacionTarea informacionTarea){
-        if(this.repositorioTarea.existe(tarea)) throw new ValorInvalidoExcepcion(YA_EXISTE_LA_TAREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioTarea.guardar(tarea,informacionTarea);
     }
 }

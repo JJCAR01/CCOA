@@ -13,6 +13,6 @@ public class MapeadorAplicacionDocumentoProyectoArea implements MapeadorAplicaci
         return null;
     }
     public DocumentoProyectoArea mapeadorAplicacionCrear(DtoDocumentoProyectoArea dto, Long codigo) {
-        return new DocumentoProyectoArea(codigo, dto.getRutaDocumento());
+        return new DocumentoProyectoArea(codigo, dto.getRutaDocumento(),dto.getFecha());
     }
 }

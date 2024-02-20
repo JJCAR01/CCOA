@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
-import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoRutaArchivo;
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionEliminarSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionGuardarSprint;
@@ -36,11 +36,11 @@ public class ControladorSprint {
         return ResponseEntity.ok(this.servicioAplicacionGuardarSprint.ejecutar(sprint));
     }
     @PutMapping("/archivo/{codigo}")
-    public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoRutaArchivo rutaArchivo, @PathVariable Long codigo){
+    public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoDocumentoSprint rutaArchivo, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionGuardarSprint.guardarRutaArchivo(rutaArchivo,codigo));
     }
     @GetMapping("/archivo/{codigo}")
-    public ResponseEntity<DocumentoSprint> obtenerDocumento(@PathVariable Long codigo){
+    public ResponseEntity<List<DocumentoSprint>> obtenerDocumento(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarSprint.consultarByIdDocumento(codigo));
     }
     @GetMapping

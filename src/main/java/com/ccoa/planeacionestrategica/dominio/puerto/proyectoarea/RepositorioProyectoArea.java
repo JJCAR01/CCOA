@@ -21,5 +21,5 @@ public interface RepositorioProyectoArea {
     List<DtoIdsProyectoArea> consultarPorIdPatAEliminar(Long id);
     Long guardarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo);
     boolean existeDocumento(DocumentoProyectoArea documentoProyectoArea);
-    DocumentoProyectoArea consultarPorIdParaObtenerDocumento(Long id);
+    List<DocumentoProyectoArea> consultarPorIdParaObtenerDocumento(Long id);
 }

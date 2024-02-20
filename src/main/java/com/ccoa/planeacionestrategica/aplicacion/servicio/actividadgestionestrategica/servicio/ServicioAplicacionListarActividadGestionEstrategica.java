@@ -16,6 +16,6 @@ public class ServicioAplicacionListarActividadGestionEstrategica  {
 
     public List<DtoActividadGestionEstrategicaResumen> ejecutar(){return this.repositorioActividadGestionEstrategica.listar();}
     public ActividadGestionEstrategica consultarById(Long id){return this.repositorioActividadGestionEstrategica.consultarPorId(id);}
-    public DocumentoActividadGestionEstrategica consultarByIdDocumento(Long id){return this.repositorioActividadGestionEstrategica.consultarPorIdParaObtenerDocumento(id);}
+    public List<DocumentoActividadGestionEstrategica> consultarByIdDocumento(Long id){return this.repositorioActividadGestionEstrategica.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoActividadGestionEstrategicaResumen> consultarByIdEstrategica(Long id){return this.repositorioActividadGestionEstrategica.consultarPorIdActividadEstrategica(id);}
 }

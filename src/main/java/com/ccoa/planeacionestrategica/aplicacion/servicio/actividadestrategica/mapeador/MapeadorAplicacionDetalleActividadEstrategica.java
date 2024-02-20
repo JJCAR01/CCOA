@@ -4,21 +4,28 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoAct
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.DetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapeadorAplicacionDetalleActividadEstrategica implements MapeadorAplicacion<DtoActividadEstrategica, DetalleActividadEstrategica> {
+    private final ServicioCalcularPorcentaje servicioCalcularPorcentaje;
 
+    public MapeadorAplicacionDetalleActividadEstrategica(ServicioCalcularPorcentaje servicioCalcularPorcentaje) {
+        this.servicioCalcularPorcentaje = servicioCalcularPorcentaje;
+    }
 
     @Override
     public DetalleActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
-        return DetalleActividadEstrategica.of(dto.getMeta(),dto.getResultadoMeta(),
+        return DetalleActividadEstrategica.of(dto.getUnidad(),dto.getMeta(),dto.getPeriodicidadMeta(),dto.getResultadoMeta(),
                 Mensaje.PORCENTAJE, dto.getEntregable());
     }
     public DetalleActividadEstrategica mapeadorModificarEntregable(DtoActividadEstrategica dto) {
-        return DetalleActividadEstrategica.modificarEntregable(dto.getMeta(), dto.getResultadoMeta(),dto.getPromedioMeta(),dto.getEntregable());
+        return DetalleActividadEstrategica.modificarEntregable(dto.getUnidad(),dto.getMeta(),dto.getPeriodicidadMeta(), dto.getResultadoMeta(),dto.getPorcentajeMeta(),dto.getEntregable());
     }
     public DetalleActividadEstrategica mapeadorModificarResultadoMeta(DtoActividadEstrategica dto) {
-        return DetalleActividadEstrategica.modificarResultadometa(dto.getMeta(), dto.getResultadoMeta(),dto.getPromedioMeta(),dto.getEntregable());
+        return DetalleActividadEstrategica.modificarResultadoMeta(dto.getUnidad(),dto.getMeta(), dto.getPeriodicidadMeta(),
+                dto.getResultadoMeta(),
+                servicioCalcularPorcentaje.calcularPorcentajeMeta(dto.getMeta(), dto.getResultadoMeta()),dto.getEntregable());
     }
 }

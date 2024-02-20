@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador;
+package com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.mapeador.observacion;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoObservacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;

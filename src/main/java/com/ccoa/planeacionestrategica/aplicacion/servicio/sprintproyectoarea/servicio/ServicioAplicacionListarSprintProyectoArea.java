@@ -18,6 +18,6 @@ public class ServicioAplicacionListarSprintProyectoArea {
 
     public List<DtoSprintProyectoAreaResumen> ejecutar(){return this.repositorioSprintProyectoArea.listar();}
     public SprintProyectoArea consultarById(Long id){return this.repositorioSprintProyectoArea.consultarPorId(id);}
-    public DocumentoSprintProyectoArea consultarByIdDocumento(Long id){return this.repositorioSprintProyectoArea.consultarPorIdParaObtenerDocumento(id);}
+    public List<DocumentoSprintProyectoArea> consultarByIdDocumento(Long id){return this.repositorioSprintProyectoArea.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoSprintProyectoAreaResumen> consultarByIdProyectoArea(Long id){return this.repositorioSprintProyectoArea.consultarPorIdProyectoArea(id);}
 }

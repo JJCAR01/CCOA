@@ -21,7 +21,6 @@ public class ServicioGuardarActividadGestion {
         return this.repositorioActividadGestion.guardar(actividadGestion,informacionActividadGestion);
     }
     public Long ejecutarGuardarDocumento(DocumentoActividadGestion documentoActividadGestion, Long codigo){
-        if(this.repositorioActividadGestion.existeDocumento(documentoActividadGestion)) throw new ValorInvalidoExcepcion(YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION,MENSAJE_DEFECTO);
         return this.repositorioActividadGestion.guardarDocumento(documentoActividadGestion,codigo);
     }
 

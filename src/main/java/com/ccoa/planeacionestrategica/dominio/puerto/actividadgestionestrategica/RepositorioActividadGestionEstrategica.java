@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RepositorioActividadGestionEstrategica {
     List<DtoActividadGestionEstrategicaResumen> listar();
-    DocumentoActividadGestionEstrategica consultarPorIdParaObtenerDocumento(Long id);
+    List<DocumentoActividadGestionEstrategica> consultarPorIdParaObtenerDocumento(Long id);
     ActividadGestionEstrategica consultarPorId(Long id);
     Long guardar(ActividadGestionEstrategica actividadGestionEstrategica, InformacionActividadGestionEstrategica informacionActividadGestionActividadEstrategica);
     Long guardarDocumento(DocumentoActividadGestionEstrategica documentoActividadGestionActividadEstrategica, Long codigo);

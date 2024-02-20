@@ -129,13 +129,13 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
 
     @Override
     public boolean existeDocumento(DocumentoProyectoArea documentoProyectoArea) {
-        return this.repositorioDocumentoProyectoAreaJpa.findById(documentoProyectoArea.getIdRutaDocumentoProyectoArea()).isPresent();
+        return this.repositorioDocumentoProyectoAreaJpa.findById(documentoProyectoArea.getIdProyectoArea()).isPresent();
     }
 
     @Override
-    public DocumentoProyectoArea consultarPorIdParaObtenerDocumento(Long id) {
-        var entidad = this.repositorioDocumentoProyectoAreaJpa.findById(id).orElse(null);
+    public List<DocumentoProyectoArea> consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoProyectoAreaJpa.findByIdProyectoArea(id);
         assert entidad != null;
-        return this.mapeadorDocumentoProyectoArea.mapeadorDominio(entidad);
+        return this.mapeadorDocumentoProyectoArea.mapeadorListaDocumentos(entidad);
     }
 }

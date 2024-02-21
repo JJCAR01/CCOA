@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadDetalleProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioDetalleProyectoAreaJpa;
@@ -9,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoar
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioInformacionSprintProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioSprintProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -19,17 +21,21 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
     private final MapeadorProyectoArea mapeadorProyectoArea;
     private final RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa;
     private final MapeadorInformacionPat mapeadorInformacionPat;
+    private final MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea;
     private final RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
     public MapeadorDetalleProyectoArea(
             RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa,
             MapeadorProyectoArea mapeadorProyectoArea, RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa,
-            MapeadorInformacionPat mapeadorInformacionPat, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa) {
+            MapeadorInformacionPat mapeadorInformacionPat, MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
         this.mapeadorProyectoArea = mapeadorProyectoArea;
         this.repositorioSprintProyectoAreaJpa = repositorioSprintProyectoAreaJpa;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
+        this.mapeadorInformacionProyectoArea = mapeadorInformacionProyectoArea;
         this.repositorioDetalleProyectoAreaJpa = repositorioDetalleProyectoAreaJpa;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
     @Override
     public DetalleProyectoArea mapeadorDominio(EntidadDetalleProyectoArea entidad) {
@@ -58,6 +64,10 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
             int nuevoAvance = (int) (sumaSprintProyectoArea / totalSprintProyectoAreas);
             entidad.setPorcentajeReal((double) nuevoAvance);
             entidad.setIdDetalleProyectoArea(idProyectoArea);
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                    mapeadorInformacionProyectoArea.obtenerProyectoAreaRelacionadoConElProyecto(idProyectoArea).getFechaInicial(), entidad.getDuracion());
+            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioDetalleProyectoAreaJpa.save(entidad);
             var idPat = mapeadorProyectoArea.obtenerProyectoAreaRelacionadoConElProyecto(idProyectoArea).getIdPat();
             var entidadActividad = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);

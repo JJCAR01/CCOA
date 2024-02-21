@@ -12,6 +12,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adap
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -72,6 +73,10 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionActividadGestion(idInformacionActividadGestion);
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                    mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(idInformacionActividadGestion).getFechaInicial(), entidad.getDuracion());
+            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioInformacionActividadGestionJpa.save(entidad);
             var idPat = mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(idInformacionActividadGestion).getIdPat();
             var entidadActividadGestion = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);

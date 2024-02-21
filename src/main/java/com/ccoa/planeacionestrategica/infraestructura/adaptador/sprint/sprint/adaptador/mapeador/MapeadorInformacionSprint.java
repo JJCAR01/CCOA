@@ -3,6 +3,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorDetalleProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadInformacionSprint;
@@ -12,6 +13,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adap
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -22,15 +24,17 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
     private final RepositorioTareaJpa repositorioTareaJpa;
     private final RepositorioInformacionTareaJpa repositorioInformacionTareaJpa;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
+    private final ServicioObtenerDuracion servicioObtenerDuracion;
     private final MapeadorDetalleProyecto mapeadorDetalleProyecto;
     private final MapeadorSprint mapeadorSprint;
 
     public MapeadorInformacionSprint(RepositorioInformacionSprintJpa repositorioInformacionSprintJpa, RepositorioTareaJpa repositorioTareaJpa,
-                                     RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, MapeadorDetalleProyecto mapeadorDetalleProyecto, MapeadorSprint mapeadorSprint) {
+                                     RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioObtenerDuracion servicioObtenerDuracion, MapeadorDetalleProyecto mapeadorDetalleProyecto, MapeadorSprint mapeadorSprint) {
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
         this.repositorioTareaJpa = repositorioTareaJpa;
         this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
+        this.servicioObtenerDuracion = servicioObtenerDuracion;
         this.mapeadorDetalleProyecto = mapeadorDetalleProyecto;
         this.mapeadorSprint = mapeadorSprint;
     }
@@ -68,6 +72,14 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionSprint(idInformacionSprint);
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                    mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(idInformacionSprint).getFechaInicial(),
+                    servicioObtenerDuracion.calcular(
+                            mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(idInformacionSprint).getFechaInicial(),
+                            mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(idInformacionSprint).getFechaFinal()
+                    ));
+            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioInformacionSprintJpa.save(entidad);
             var idProyecto = mapeadorSprint.obtenerIdProyectoRelacionadoConElSprint(idInformacionSprint).getIdProyecto();
             var proyecto = mapeadorDetalleProyecto.obtenerTodaEntidadProyecto(idProyecto);

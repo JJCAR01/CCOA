@@ -3,6 +3,8 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptad
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
@@ -29,6 +31,8 @@ import java.util.List;
 public class    MapeadorInformacionPat implements MapeadorInfraestructura<EntidadInformacionPat, InformacionPat> {
 
     private final RepositorioDireccionJpa repositorioDireccionJpa;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
+    private final ServicioObtenerDuracion servicioObtenerDuracion;
     private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
     private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
@@ -38,12 +42,14 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     private final RepositorioProcesoJpa repositorioProcesoJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
 
-    public MapeadorInformacionPat(RepositorioDireccionJpa repositorioDireccionJpa, RepositorioActividadGestionJpa repositorioActividadGestionJpa,
+    public MapeadorInformacionPat(RepositorioDireccionJpa repositorioDireccionJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioObtenerDuracion servicioObtenerDuracion, RepositorioActividadGestionJpa repositorioActividadGestionJpa,
                                   RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
                                   RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
                                   RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioProyectoAreaJpa repositorioProyectoAreaJpa, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa, RepositorioProcesoJpa repositorioProcesoJpa,
                                   RepositorioInformacionPatJpa repositorioInformacionPatJpa) {
         this.repositorioDireccionJpa = repositorioDireccionJpa;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
+        this.servicioObtenerDuracion = servicioObtenerDuracion;
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
@@ -110,6 +116,11 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         double avanceTotal = (sumaActGestion + sumaActEstrategica + sumaProyectos)/ Mensaje.PORCENTAJE;
         entidad.setPorcentajeReal(avanceTotal);
         entidad.setIdInformacionPat(idPat);
+        var duracion = servicioObtenerDuracion.calcular(entidad.getFechaInicial(),entidad.getFechaFinal());
+        var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                obtenerPatRelacionadoConPat(idPat).getFechaInicial(), duracion);
+        entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+        entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
         repositorioInformacionPatJpa.save(entidad);
     }
 
@@ -126,5 +137,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
                 entidad.orElseThrow().getPorcentajeCumplimiento(),
                 entidad.orElseThrow().getFechaInicial(),
                 entidad.orElseThrow().getFechaFinal());
+    }
+    public EntidadInformacionPat obtenerPatRelacionadoConPat(Long id){
+        return this.repositorioInformacionPatJpa.findById(id).orElseThrow();
     }
 }

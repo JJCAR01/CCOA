@@ -16,6 +16,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrate
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -84,7 +85,8 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
             dto.setDuracion(infEntidad.orElseThrow().getDuracion());
             dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion()));
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion());
+            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             var detalleEntidad = repositorioDetalleActividadEstrategicaJpa.findById(entidad.getIdActividadEstrategica());
@@ -95,7 +97,8 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
             dto.setResultadoMeta(detalleEntidad.orElseThrow().getResultadoMeta());
             dto.setPromedioMeta(detalleEntidad.orElseThrow().getPorcentajeMeta());
             dto.setEntregable(detalleEntidad.orElseThrow().getEntregable());
-            dto.setPorcentajePat(servicioObtenerPorcentaje.obtenerPorcentajePat(dto.getPorcentajeCumplimiento(),dto.getPromedioMeta()));
+            dto.setPorcentajePat(servicioObtenerPorcentaje.obtenerPorcentajePat(
+                    infEntidad.orElseThrow().getPorcentajeCumplimiento(),detalleEntidad.orElseThrow().getPorcentajeMeta()));
 
             listaDto.add(dto);
         }
@@ -129,6 +132,8 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidadInformacionActividadEstrategica.setDuracion(informacionActividadEstrategica.getDuracion());
         entidadInformacionActividadEstrategica.setDiasRestantes(informacionActividadEstrategica.getDiasRestantes());
         entidadDetalleActividadEstrategica.setMeta(detalleActividadEstrategica.getMeta());
+        entidadDetalleActividadEstrategica.setUnidad(detalleActividadEstrategica.getUnidad());
+        entidadDetalleActividadEstrategica.setPeriodicidadMeta(detalleActividadEstrategica.getPeriodicidadMeta());
         entidadDetalleActividadEstrategica.setPorcentajeMeta(
                 servicioObtenerPorcentaje.calcularPorcentajeMeta(entidadDetalleActividadEstrategica.getMeta(), entidadDetalleActividadEstrategica.getResultadoMeta()));
         entidadInformacionActividadEstrategica.setPorcentajeReal(

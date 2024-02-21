@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.pr
 
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadInformacionProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioInformacionProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
@@ -33,5 +34,9 @@ public class MapeadorInformacionProyectoArea implements MapeadorInfraestructura<
         return this.repositorioInformacionProyectoAreaJpa.findById(id)
                 .map(EntidadInformacionProyectoArea::getTotalSprint)
                 .orElseThrow(() -> new NoSuchElementException("No se encontró información para el ProyectoArea con ID: " + id));
+    }
+
+    public EntidadInformacionProyectoArea obtenerProyectoAreaRelacionadoConElProyecto(Long id){
+        return this.repositorioInformacionProyectoAreaJpa.findById(id).orElseThrow();
     }
 }

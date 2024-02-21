@@ -25,14 +25,18 @@
         @Column(name = "fecha_registro")
         private LocalDate fechaRegistro;
 
+        @Column(name = "porcentaje_pat")
+        private Double porcentajePat;
+
         @JoinColumn(name = "id_usuario")
         private Long idUsuario;
 
 
-        public EntidadPat(String nombre, Integer fechaAnual, LocalDate fechaRegistro,Long idUsuario) {
+        public EntidadPat(String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentajePat, Long idUsuario) {
             this.nombre = nombre;
             this.fechaAnual = fechaAnual;
             this.fechaRegistro = fechaRegistro;
+            this.porcentajePat = porcentajePat;
             this.idUsuario = idUsuario;
         }
     }

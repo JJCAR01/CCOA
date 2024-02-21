@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.InformacionActividadEstrategica;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.entidad.EntidadActividadGestionEstrategica;
@@ -13,6 +14,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyect
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,22 +27,26 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
     private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
     private final RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa;
     private final MapeadorInformacionPat mapeadorInformacionPat;
+    private final MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica;
     private final MapeadorActividadEstrategica mapeadorActividadEstrategica;
+    private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
     public MapeadorInformacionActividadEstrategica(
-                                                   RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
-                                                   RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa,
-                                                   RepositorioProyectoJpa repositorioProyectoJpa,
-                                                   RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa,
-                                                   RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa,
-                                                   MapeadorInformacionPat mapeadorInformacionPat, MapeadorActividadEstrategica mapeadorActividadEstrategica) {
+            RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
+            RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa,
+            RepositorioProyectoJpa repositorioProyectoJpa,
+            RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa,
+            RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa,
+            MapeadorInformacionPat mapeadorInformacionPat, MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica, MapeadorActividadEstrategica mapeadorActividadEstrategica, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
 
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
+        this.mapeadorDetalleActividadEstrategica = mapeadorDetalleActividadEstrategica;
         this.mapeadorActividadEstrategica = mapeadorActividadEstrategica;
         this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
         this.repositorioActividadGestionEstrategicaJpa = repositorioActividadGestionEstrategicaJpa;
+        this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
 
     @Override
@@ -81,6 +87,14 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
         int nuevoAvance = (int) ((sumaProyectos + sumaActividadesGestion)/ (totalProyectos + totalActividadesGestion));
         entidad.setPorcentajeReal((double) nuevoAvance);
         entidad.setIdInformacionActividadEstrategica(idActividadEstrategica);
+        var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                mapeadorActividadEstrategica.obtenerPatRelacionadoConActividadEstrategica(idActividadEstrategica).getFechaInicial(), entidad.getDuracion());
+        entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+        entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
+        entidad.setPorcentajePat(
+                servicioObtenerPorcentaje.obtenerPorcentajePat(
+                        entidad.getPorcentajeCumplimiento(),
+                        mapeadorDetalleActividadEstrategica.obtenerDetalleActividadEstrategicaRelacionadoConActividadEstrategica(idActividadEstrategica).getPorcentajeMeta() ));
         repositorioInformacionActividadEstrategicaJpa.save(entidad);
         var idPat = mapeadorActividadEstrategica.obtenerPatRelacionadoConActividadEstrategica(entidad.getIdInformacionActividadEstrategica()).getIdPat();
         var entidadPat = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);

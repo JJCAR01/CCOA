@@ -13,6 +13,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -68,7 +69,8 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
             dto.setDuracion(infEntidad.orElseThrow().getDuracion());
             dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion()));
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion());
+            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);

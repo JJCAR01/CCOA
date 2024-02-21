@@ -123,7 +123,7 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         assert  entidadDetalle != null;
         var entidadInformacion = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert  entidadInformacion != null;
-        this.mapeadorDetalleActividadEstrategica.actualizarResultadoMeta(entidadDetalle, detalleActividadEstrategica,entidadInformacion,informacionActividadEstrategica);
+        this.mapeadorDetalleActividadEstrategica.actualizarResultadoMeta(entidadDetalle, detalleActividadEstrategica,entidadInformacion);
         repositorioInformacionActividadEstrategicaJpa.save(entidadInformacion);
         return this.repositorioDetalleActividadEstrategicaJpa.save(entidadDetalle).getIdDetalleActividadEstrategica();
     }

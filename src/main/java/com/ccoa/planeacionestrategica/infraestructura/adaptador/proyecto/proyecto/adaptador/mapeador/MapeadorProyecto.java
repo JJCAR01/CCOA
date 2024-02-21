@@ -14,6 +14,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyect
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -71,8 +72,9 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
             dto.setFechaInicial(informacionEntidad.orElseThrow().getFechaInicial());
             dto.setFechaFinal(informacionEntidad.orElseThrow().getFechaFinal());
             dto.setFechaRegistro(informacionEntidad.orElseThrow().getFechaRegistro());
-            dto.setPorcentajeEsperado(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(informacionEntidad.orElseThrow().getFechaInicial(),
-                    detalleEntidad.orElseThrow().getDuracion()));
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(informacionEntidad.orElseThrow().getFechaInicial(),
+                    detalleEntidad.orElseThrow().getDuracion());
+            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
             dto.setPlaneacionSprint(informacionEntidad.orElseThrow().getPlaneacionSprint());
             dto.setTotalSprint(informacionEntidad.orElseThrow().getTotalSprint());

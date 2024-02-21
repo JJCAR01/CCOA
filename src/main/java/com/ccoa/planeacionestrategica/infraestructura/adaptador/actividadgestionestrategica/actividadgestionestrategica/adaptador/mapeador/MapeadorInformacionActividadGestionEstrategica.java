@@ -12,6 +12,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adap
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
+import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -74,6 +75,11 @@ public class MapeadorInformacionActividadGestionEstrategica implements MapeadorI
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionActividadGestionEstrategica(idInformacionActividadGestionEstrategica);
+            entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
+            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
+                    mapeadorActividadGestionEstrategica.obtenerIdProyectoRelacionadoConElSprint(idInformacionActividadGestionEstrategica).getFechaInicial(), entidad.getDuracion());
+            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioInformacionActividadGestionEstrategicaJpa.save(entidad);
             var idActividadEstrategica = mapeadorActividadGestionEstrategica.obtenerIdProyectoRelacionadoConElSprint(idInformacionActividadGestionEstrategica).getIdActividadEstrategica();
             var entidadActividad = mapeadorInformacionActividadEstrategica.obtenerTodaEntidadActividadEstrategica(idActividadEstrategica);

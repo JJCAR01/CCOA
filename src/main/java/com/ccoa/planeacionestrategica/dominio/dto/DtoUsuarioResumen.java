@@ -2,7 +2,9 @@ package com.ccoa.planeacionestrategica.dominio.dto;
 
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
+import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoPatUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,6 @@ public class DtoUsuarioResumen {
     private String apellidos;
     private String correo;
     private List<DtoDireccion> direcciones;
-    private List<DtoProceso> procesos;
+    private List<DtoPatUsuario> pats;
     private Long idCargo;
 }

@@ -67,13 +67,13 @@ public class ControladorUsuario {
         return this.servicioAplicacionModificarUsuario.ejecutarEliminarDirecciones(usuario,codigo);
     }
 
-    @PutMapping("/procesos/{codigo}")
-    public DtoRespuesta<Long> modificarProcesos(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
-        return this.servicioAplicacionModificarUsuario.ejecutarModificarProcesos(usuario,codigo);
+    @PutMapping("/pats/{codigo}")
+    public DtoRespuesta<Long> modificarPats(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarModificarPats(usuario,codigo);
     }
-    @PutMapping("/procesos/del/{codigo}")
-    public DtoRespuesta<Long> eliminarProcesos(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
-        return this.servicioAplicacionModificarUsuario.ejecutarEliminarProcesos(usuario,codigo);
+    @PutMapping("/pats/del/{codigo}")
+    public DtoRespuesta<Long> eliminarPats(@RequestBody DtoUsuario usuario, @PathVariable Long codigo){
+        return this.servicioAplicacionModificarUsuario.ejecutarEliminarPats(usuario,codigo);
     }
 
 

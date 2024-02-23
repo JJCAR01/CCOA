@@ -38,13 +38,13 @@ public class ServicioAplicacionModificarUsuario {
         var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarDireccion(dto);
         return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarEliminarDirecciones(informacionUsuario,codigo));
     }
-    public DtoRespuesta<Long> ejecutarModificarProcesos(DtoUsuario dto, Long codigo){
-        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarProceso(dto);
-        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificarProcesos(informacionUsuario,codigo));
+    public DtoRespuesta<Long> ejecutarModificarPats(DtoUsuario dto, Long codigo){
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarPat(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificarPats(informacionUsuario,codigo));
     }
-    public DtoRespuesta<Long> ejecutarEliminarProcesos(DtoUsuario dto, Long codigo){
-        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarProceso(dto);
-        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarEliminarProcesos(informacionUsuario,codigo));
+    public DtoRespuesta<Long> ejecutarEliminarPats(DtoUsuario dto, Long codigo){
+        var informacionUsuario = mapeadorAplicacionInformacionUsuario.actualizarPat(dto);
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarEliminarPats(informacionUsuario,codigo));
     }
 
 }

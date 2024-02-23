@@ -20,8 +20,9 @@ public interface RepositorioUsuario {
     Long modificarAgregarPass(Usuario usuario,InformacionUsuario informacionUsuario,Long id);
     Long modificarDireciones(InformacionUsuario informacionUsuario,Long id);
     Long modificarDirecionesParaEliminar(InformacionUsuario informacionUsuario,Long id);
-    Long modificarProcesos(InformacionUsuario informacionUsuario,Long id);
-    Long modificarProcesosParaEliminar(InformacionUsuario informacionUsuario,Long id);
-    List<String> obtenerDireccionDelUsuario(String correo);
-    List<String> obtenerProcesoDelUsuario(String correo);
+    Long modificarPats(InformacionUsuario informacionUsuario,Long id);
+    Long modificarPatParaEliminar(InformacionUsuario informacionUsuario,Long id);
+    Long obtenerIdUsuarioDelUsuario(String correo);
+    List<String> obtenerDireccionesDelUsuario(String correo);
+    List<String> obtenerPatsDelUsuario(String correo);
 }

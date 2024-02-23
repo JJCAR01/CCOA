@@ -21,10 +21,6 @@ public class EntidadInformacionPat {
     /*CascadeType.PERSIST para que no elimine lo que tenga que ver con las clases hijas,
     CascadeType.ALL, eliminaria */
     @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "id_proceso")
-    private EntidadProceso proceso;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "id_direccion")
     private EntidadDireccion direccion;
 
@@ -43,9 +39,9 @@ public class EntidadInformacionPat {
     @Column(name = "fecha_final")
     private LocalDate fechaFinal;
 
-    public EntidadInformacionPat(EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal,
+    public EntidadInformacionPat(Long idInformacionPat, EntidadDireccion direccion, Double porcentajeReal,
                                  Double porcentajeEsperado, Double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
-        this.proceso = proceso;
+        this.idInformacionPat = idInformacionPat;
         this.direccion = direccion;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;
@@ -54,20 +50,8 @@ public class EntidadInformacionPat {
         this.fechaFinal = fechaFinal;
     }
 
-    public EntidadInformacionPat(Long idInformacionPat, EntidadProceso proceso, EntidadDireccion direccion, Double porcentajeReal,
-                                 Double porcentajeEsperado, Double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
-        this.idInformacionPat = idInformacionPat;
-        this.proceso = proceso;
+    public EntidadInformacionPat(EntidadDireccion direccion, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
         this.direccion = direccion;
-        this.porcentajeReal = porcentajeReal;
-        this.porcentajeEsperado = porcentajeEsperado;
-        this.porcentajeCumplimiento = porcentajeCumplimiento;
-        this.fechaInicial = fechaInicial;
-        this.fechaFinal = fechaFinal;
-    }
-
-    public EntidadInformacionPat(Long idInformacionPat, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
-        this.idInformacionPat = idInformacionPat;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;

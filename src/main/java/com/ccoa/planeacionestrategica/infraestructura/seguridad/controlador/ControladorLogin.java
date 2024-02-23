@@ -38,8 +38,8 @@ public class ControladorLogin {
                     dtoLogin.getPassword());
             Authentication authentication = this.authenticationManager.authenticate(login);
 
-            String jwt = this.jwtUtil.create(dtoLogin.getCorreo(),getTipo((List<GrantedAuthority>) authentication.getAuthorities()),
-                    obtenerDireccionDelUsuario(dtoLogin.getCorreo()),obtenerProcesoDelUsuario(dtoLogin.getCorreo()));
+            String jwt = this.jwtUtil.create(dtoLogin.getCorreo(),obtenerIdUsuario(dtoLogin.getCorreo()),getTipo((List<GrantedAuthority>) authentication.getAuthorities()),
+                    obtenerDireccionesDelUsuario(dtoLogin.getCorreo()),obtenerPatsDelUsuario(dtoLogin.getCorreo()));
 
             return ResponseEntity.ok(new AuthResponse(jwt));
         } catch (BadCredentialsException ex) {
@@ -51,14 +51,24 @@ public class ControladorLogin {
 
     private String getTipo(List<GrantedAuthority> authorities){
         return authorities.stream().filter(aut -> aut.getAuthority().startsWith("ROLE_")).findFirst().
-                map(aut -> aut.getAuthority().equals("ROLE_ADMIN")?"ADMIN":"OPERADOR").orElse("O");
+                map(aut -> {
+                    return switch (aut.getAuthority()) {
+                        case "ROLE_ADMIN" -> "ADMIN";
+                        case "ROLE_DIRECTOR" -> "DIRECTOR";
+                        case "ROLE_OPERADOR" -> "OPERADOR";
+                        default -> "O"; // Por defecto
+                    };
+        })
+                .orElse("O");
     }
-
-    private List<String> obtenerDireccionDelUsuario(String correo) {
-        return servicioAplicacionListarUsuario.consultarByCorreoParaDireccion(correo);
+    private Long obtenerIdUsuario(String correo) {
+        return servicioAplicacionListarUsuario.consultarByCorreoParaIdUsuario(correo);
     }
-    private List<String> obtenerProcesoDelUsuario(String correo) {
-        return servicioAplicacionListarUsuario.consultarByCorreoParaProceso(correo);
+    private List<String> obtenerDireccionesDelUsuario(String correo) {
+        return servicioAplicacionListarUsuario.consultarByCorreoParaDirecciones(correo);
+    }
+    private List<String> obtenerPatsDelUsuario(String correo) {
+        return servicioAplicacionListarUsuario.consultarByCorreoParaPats(correo);
     }
 
 

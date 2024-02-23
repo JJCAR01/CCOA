@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad;
 
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,9 +23,9 @@ public class EntidadInformacionUsuario {
     private List<EntidadDireccion> direccion = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<EntidadProceso> procesos = new ArrayList<>();
-    public EntidadInformacionUsuario(List<EntidadDireccion> direccion, List<EntidadProceso> procesos) {
+    private List<EntidadPat> pats = new ArrayList<>();
+    public EntidadInformacionUsuario(List<EntidadDireccion> direccion, List<EntidadPat> pats) {
         this.direccion = direccion;
-        this.procesos = procesos;
+        this.pats = pats;
     }
 }

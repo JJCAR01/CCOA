@@ -8,6 +8,8 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptado
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,11 +21,15 @@ public class RepositorioPatMySQL implements RepositorioPat {
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
     private final MapeadorPat mapeadorPat;
     private final MapeadorInformacionPat mapeadorInformacionPat;
-    public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat) {
+    private final MapeadorInformacionUsuario mapeadorInformacionUsuario;
+    private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
+    public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat, MapeadorInformacionUsuario mapeadorInformacionUsuario, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
         this.mapeadorPat = mapeadorPat;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
+        this.mapeadorInformacionUsuario = mapeadorInformacionUsuario;
+        this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
     }
 
     @Override
@@ -43,14 +49,15 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long guardar(Pat pat, InformacionPat informacionPat) {
-        // Guardar InformacionPat
-        // Guardar Pat
         var patEntity = mapeadorPat.mapeadorEntidad(pat);
         var idPat = this.repositorioPatJpa.save(patEntity).getIdPat();
 
         var informacionPatEntity = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
         informacionPatEntity.setIdInformacionPat(idPat);
         this.repositorioInformacionPatJpa.save(informacionPatEntity);
+        var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
+        mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
+        repositorioInformacionUsuarioJpa.save(entidadUsuario);
         return idPat;
     }
     @Override

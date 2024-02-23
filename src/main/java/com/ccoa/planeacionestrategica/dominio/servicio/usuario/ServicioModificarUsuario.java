@@ -41,16 +41,16 @@ public class ServicioModificarUsuario {
 
         return this.repositorioUsuario.modificarDirecionesParaEliminar(informacionUsuario , codigo);
     }
-    public Long ejecutarModificarProcesos(InformacionUsuario informacionUsuario,Long codigo){
+    public Long ejecutarModificarPats(InformacionUsuario informacionUsuario,Long codigo){
 
         if(this.repositorioUsuario.consultarPorIdParaModificar(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
-        return this.repositorioUsuario.modificarProcesos(informacionUsuario , codigo);
+        return this.repositorioUsuario.modificarPats(informacionUsuario , codigo);
     }
-    public Long ejecutarEliminarProcesos(InformacionUsuario informacionUsuario,Long codigo){
+    public Long ejecutarEliminarPats(InformacionUsuario informacionUsuario,Long codigo){
 
         if(this.repositorioUsuario.consultarPorIdParaModificar(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
-        return this.repositorioUsuario.modificarProcesosParaEliminar(informacionUsuario , codigo);
+        return this.repositorioUsuario.modificarPatParaEliminar(informacionUsuario , codigo);
     }
 }

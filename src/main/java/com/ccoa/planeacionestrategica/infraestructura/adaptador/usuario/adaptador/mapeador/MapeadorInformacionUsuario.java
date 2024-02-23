@@ -1,8 +1,12 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.PatUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
@@ -20,39 +24,39 @@ import java.util.List;
 public class MapeadorInformacionUsuario implements MapeadorInfraestructura<EntidadInformacionUsuario, InformacionUsuario> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioDireccionJpa repositorioDireccionJpa;
-    private final RepositorioProcesoJpa repositorioProcesoJpa;
+    private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
 
     public MapeadorInformacionUsuario(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioDireccionJpa repositorioDireccionJpa,
-                                      RepositorioProcesoJpa repositorioProcesoJpa, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
+                                      RepositorioPatJpa repositorioPatJpa, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioDireccionJpa = repositorioDireccionJpa;
-        this.repositorioProcesoJpa = repositorioProcesoJpa;
+        this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
     }
 
     @Override
     public InformacionUsuario mapeadorDominio(EntidadInformacionUsuario entidad) {
         List<Direccion> direcciones = entidad.getDireccion().stream().map(e -> new Direccion(e.getNombre())).toList();
-        List<Proceso> procesos = entidad.getProcesos().stream().map(e -> new Proceso(e.getNombre())).toList();
-        return new InformacionUsuario(entidad.getIdInformacionUsuario(), direcciones,procesos);
+        List<PatUsuario> pats = entidad.getPats().stream().map(e -> new PatUsuario(e.getNombre())).toList();
+        return new InformacionUsuario(entidad.getIdInformacionUsuario(), direcciones,pats);
     }
 
     @Override
     public EntidadInformacionUsuario mapeadorEntidad(InformacionUsuario dominio) {
-        List<Proceso> procesos = dominio.getProcesos();
+        List<PatUsuario> pats = dominio.getPats();
         // Supongo que getProcesos() devuelve una lista de objetos Proceso
         // Puedes ajustar esto según la estructura real de tu dominio
 
         // Crear una lista para almacenar las entidades de procesos asociadas al usuario
-        List<EntidadProceso> entidadesProceso = new ArrayList<>();
+        List<EntidadPat> entidadesPats = new ArrayList<>();
 
         // Buscar y agregar cada entidad de proceso asociada al usuario
-        for (Proceso proceso : procesos) {
+        for (PatUsuario pat : pats) {
             // Buscar la entidad EntidadProceso por nombre (suponiendo que existe un repositorio para Proceso)
-            EntidadProceso entidadProceso = this.repositorioProcesoJpa.findByNombre(proceso.getNombre());
-            if (entidadProceso != null) {
-                entidadesProceso.add(entidadProceso);
+            EntidadPat entidadPat = this.repositorioPatJpa.findByNombre(pat.getNombre());
+            if (entidadPat != null) {
+                entidadesPats.add(entidadPat);
             }
         }
 
@@ -70,7 +74,15 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
         }
 
         // Crear y retornar una nueva instancia de EntidadInformacionUsuario con las entidades de procesos y dirección encontradas
-        return new EntidadInformacionUsuario(entidadesDireccion, entidadesProceso);
+        return new EntidadInformacionUsuario(entidadesDireccion, entidadesPats);
+    }
+
+    public EntidadInformacionUsuario obtenerUsuario(Long idUsuario) {
+        return this.repositorioInformacionUsuarioJpa.findById(idUsuario).orElseThrow();
+    }
+    public Long obtenerIdUsuario(String correo) {
+        var usuario = this.repositorioUsuarioJpa.findByCorreo(correo);
+        return usuario.getIdUsuario();
     }
 
     public List<String> obtenerDirecciones(String correo) {
@@ -92,9 +104,9 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
         }
         return direcciones;
     }
-    public List<String> obtenerProcesos(String correo) {
+    public List<String> obtenerPats(String correo) {
         var usuario = this.repositorioUsuarioJpa.findByCorreo(correo);
-        List<String> procesos = new ArrayList<>();
+        List<String> pats = new ArrayList<>();
 
         var todasLasInformaciones = this.repositorioInformacionUsuarioJpa.findAll();
 
@@ -103,13 +115,13 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
             // Comparar el idUsuario
             if (usuario != null && usuario.getIdUsuario().equals(informacionUsuario.getIdInformacionUsuario())) {
                 // Obtener los procesos asociados al InformacionUsuario
-                List<String> procesoStrings = informacionUsuario.getProcesos().stream()
-                        .map(EntidadProceso::getNombre)
+                List<String> procesoStrings = informacionUsuario.getPats().stream()
+                        .map(EntidadPat::getNombre)
                         .toList();
-                procesos.addAll(procesoStrings);
+                pats.addAll(procesoStrings);
             }
         }
-        return procesos;
+        return pats;
     }
 
 
@@ -159,51 +171,80 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
         entidadInformacionUsuario.setDireccion(direccionesActuales);
     }
 
-    public void actualizarProcesos(EntidadInformacionUsuario entidadInformacionUsuario,
+    public void actualizarPats(EntidadInformacionUsuario entidadInformacionUsuario,
                                    InformacionUsuario informacionUsuario){
 
-        List<EntidadProceso> procesosActuales = entidadInformacionUsuario.getProcesos();
-        List<Proceso> procesosNuevos = informacionUsuario.getProcesos();
+        List<EntidadPat> patsActuales = entidadInformacionUsuario.getPats();
+        List<PatUsuario> patsNuevos = informacionUsuario.getPats();
 
         // Obtener la lista preexistente de direcciones por nombres
-        List<EntidadProceso> procesos = this.repositorioProcesoJpa.findAll();
+        List<EntidadPat> pats = this.repositorioPatJpa.findAll();
 
-        for (Proceso nuevoProceso : procesosNuevos) {
+        for (PatUsuario nuevoPat : patsNuevos) {
             // Verificar si la nueva dirección no está en la lista actual
-            boolean procesoNoExistente = !procesosActuales.stream()
-                    .anyMatch(entidad -> entidad.getNombre().equals(nuevoProceso.getNombre()));
+            boolean patNoExistente = !patsActuales.stream()
+                    .anyMatch(entidad -> entidad.getNombre().equals(nuevoPat.getNombre()));
 
             // Verificar si la nueva dirección existe en la lista preexistente
-            boolean procesoExistente = procesos.stream()
-                    .anyMatch(entidad -> entidad.getNombre().equals(nuevoProceso.getNombre()));
+            boolean patExistente = pats.stream()
+                    .anyMatch(entidad -> entidad.getNombre().equals(nuevoPat.getNombre()));
 
             // Verificar si la nueva dirección ya está en la relación informacion_usuario_direccion
-            boolean procesoEnRelacion = entidadInformacionUsuario.getProcesos().stream()
-                    .anyMatch(entidad -> entidad.getNombre().equals(nuevoProceso.getNombre()));
+            boolean patEnRelacion = entidadInformacionUsuario.getPats().stream()
+                    .anyMatch(entidad -> entidad.getNombre().equals(nuevoPat.getNombre()));
 
-            if (procesoNoExistente && procesoExistente && !procesoEnRelacion) {
+            if (patNoExistente && patExistente && !patEnRelacion) {
                 // Agregar la referencia de la nueva dirección a la lista actual
-                procesosActuales.add(procesos.stream()
-                        .filter(entidad -> entidad.getNombre().equals(nuevoProceso.getNombre()))
+                patsActuales.add(pats.stream()
+                        .filter(entidad -> entidad.getNombre().equals(nuevoPat.getNombre()))
                         .findFirst()
                         .orElse(null));
             }
         }
-        entidadInformacionUsuario.setProcesos(procesosActuales);
+        entidadInformacionUsuario.setPats(patsActuales);
     }
-    public void eliminarProcesos(EntidadInformacionUsuario entidadInformacionUsuario,
+    public void actualizarPatsPorPat(EntidadInformacionUsuario entidadInformacionUsuario,
+                               Pat pat){
+
+        List<EntidadPat> patsActuales = entidadInformacionUsuario.getPats();
+
+        // Obtener la lista preexistente de direcciones por nombres
+        List<EntidadPat> pats = this.repositorioPatJpa.findAll();
+
+            // Verificar si la nueva dirección no está en la lista actual
+            boolean patNoExistente = !patsActuales.stream()
+                    .anyMatch(entidad -> entidad.getNombre().equals(pat.getNombre()));
+
+            // Verificar si la nueva dirección existe en la lista preexistente
+            boolean patExistente = pats.stream()
+                    .anyMatch(entidad -> entidad.getNombre().equals(pat.getNombre()));
+
+            // Verificar si la nueva dirección ya está en la relación informacion_usuario_direccion
+            boolean patEnRelacion = entidadInformacionUsuario.getPats().stream()
+                    .anyMatch(entidad -> entidad.getNombre().equals(pat.getNombre()));
+
+            if (patNoExistente && patExistente && !patEnRelacion) {
+                // Agregar la referencia de la nueva dirección a la lista actual
+                patsActuales.add(pats.stream()
+                        .filter(entidad -> entidad.getNombre().equals(pat.getNombre()))
+                        .findFirst()
+                        .orElse(null));
+            }
+        entidadInformacionUsuario.setPats(patsActuales);
+    }
+    public void eliminarPats(EntidadInformacionUsuario entidadInformacionUsuario,
                                  InformacionUsuario informacionUsuario) {
 
-        List<EntidadProceso> procesosActuales = entidadInformacionUsuario.getProcesos();
+        List<EntidadPat> patsActuales = entidadInformacionUsuario.getPats();
 
-        List<Proceso> procesosAEliminar = informacionUsuario.getProcesos();
+        List<PatUsuario> patsAEliminar = informacionUsuario.getPats();
 
-        procesosActuales.removeIf(entidad ->
-                procesosAEliminar.stream().anyMatch(proceso ->
+        patsActuales.removeIf(entidad ->
+                patsAEliminar.stream().anyMatch(proceso ->
                         proceso.getNombre().equals(entidad.getNombre())
                 )
         );
 
-        entidadInformacionUsuario.setProcesos(procesosActuales);
+        entidadInformacionUsuario.setPats(patsActuales);
     }
 }

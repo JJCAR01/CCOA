@@ -18,7 +18,7 @@ public class ServicioAplicacionListarUsuario {
     public List<DtoUsuarioResumen> ejecutar(){return this.repositorioUsuario.listar();}
 
     public DtoUsuarioResumen consultarById(Long id){return this.repositorioUsuario.consultarPorId(id);}
-
-    public List<String> consultarByCorreoParaDireccion(String correo){return this.repositorioUsuario.obtenerDireccionDelUsuario(correo);}
-    public List<String> consultarByCorreoParaProceso(String correo){return this.repositorioUsuario.obtenerProcesoDelUsuario(correo);}
+    public Long consultarByCorreoParaIdUsuario(String correo){return this.repositorioUsuario.obtenerIdUsuarioDelUsuario(correo);}
+    public List<String> consultarByCorreoParaDirecciones(String correo){return this.repositorioUsuario.obtenerDireccionesDelUsuario(correo);}
+    public List<String> consultarByCorreoParaPats(String correo){return this.repositorioUsuario.obtenerPatsDelUsuario(correo);}
 }

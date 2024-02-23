@@ -18,8 +18,10 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaj
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
@@ -53,16 +55,13 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
                 dominio.getPorcentajePat(), idUsuario);
     }
     public DtoPatResumen patDominio(EntidadPat entidad, EntidadInformacionPat entidadInformacionPat) {
-        DtoProceso dtoProceso = new DtoProceso();
-        dtoProceso.setNombre(entidadInformacionPat.getProceso().getNombre());
-
         DtoDireccion dtoDireccion = new DtoDireccion();
         dtoDireccion.setNombre(entidadInformacionPat.getDireccion().getNombre());
 
         return new DtoPatResumen(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro(),
                 entidad.getPorcentajePat(),entidadInformacionPat.getPorcentajeReal(), entidadInformacionPat.getPorcentajeEsperado(),
                 entidadInformacionPat.getPorcentajeCumplimiento(),entidadInformacionPat.getFechaInicial(),
-                entidadInformacionPat.getFechaFinal(),dtoProceso,dtoDireccion,entidad.getIdUsuario());
+                entidadInformacionPat.getFechaFinal(),dtoDireccion,entidad.getIdUsuario());
     }
     public List<DtoPatResumen> listarDominio(List<EntidadPat> entidades){
         List<DtoPatResumen> listaDto = new ArrayList<>();
@@ -84,10 +83,6 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
             dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
-            DtoProceso dtoProceso = new DtoProceso();
-            dtoProceso.setNombre(infEntidad.orElseThrow().getProceso().getNombre());
-            dto.setProceso(dtoProceso);
-
             DtoDireccion dtoDireccion = new DtoDireccion();
             dtoDireccion.setNombre(infEntidad.orElseThrow().getDireccion().getNombre());
             dto.setDireccion(dtoDireccion);
@@ -108,11 +103,20 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     }
     public double actualizarPorcentajePat(Long idPat, EntidadPat entidad) {
         List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
-        List<EntidadInformacionActividadEstrategica> informacionActividadesEstrategicas = actividadEstrategicas.stream()
-                .map(actividadEstrategica -> this.repositorioInformacionActividadEstrategicaJpa.findByIdInformacionActividadEstrategica(actividadEstrategica.getIdActividadEstrategica()))
-                .flatMap(List::stream).toList();
 
-        double porcentaje = Mensaje.PORCENTAJE /  actividadEstrategicas.size();
+        // Filtrar las actividades estratégicas por la fecha inicial
+        List<EntidadActividadEstrategica> actividadesFiltradas = actividadEstrategicas.stream()
+                .filter(actividad -> actividad.getFechaInicial().isBefore(LocalDate.now()))
+                .toList();
+
+        // Obtener la información de las actividades filtradas
+        List<EntidadInformacionActividadEstrategica> informacionActividadesEstrategicas = actividadesFiltradas.stream()
+                .map(actividadEstrategica -> this.repositorioInformacionActividadEstrategicaJpa.findByIdInformacionActividadEstrategica(actividadEstrategica.getIdActividadEstrategica()))
+                .flatMap(List::stream)
+                .toList();
+
+        // Calcular el porcentaje
+        double porcentaje = Mensaje.PORCENTAJE / informacionActividadesEstrategicas.size();
 
         double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajePat() * porcentaje).sum();
 
@@ -121,6 +125,9 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         entidad.setIdPat(idPat);
         repositorioPatJpa.save(entidad);
         return avanceTotal;
+    }
+    public EntidadPat obtenerPatRelacionadoConPat(Long id){
+        return this.repositorioPatJpa.findById(id).orElseThrow();
     }
 
 

@@ -1,12 +1,15 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
+import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoPatUsuario;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.cargo.adaptador.repositorio.jpa.RepositorioCargoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
@@ -76,11 +79,11 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
                         .toList();
                 dto.setDirecciones(dtoDirecciones);
 
-                List<DtoProceso> dtoProcesos = infEntidad.getProcesos()
+                List<DtoPatUsuario> dtoPats = infEntidad.getPats()
                         .stream()
-                        .map(this::mapearProceso)
+                        .map(this::mapearPat)
                         .toList();
-                dto.setProcesos(dtoProcesos);
+                dto.setPats(dtoPats);
 
                 listaDto.add(dto);
             }
@@ -96,12 +99,12 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
                 .toList();
 
         // Mapear la lista de DtoProceso
-        List<DtoProceso> dtoProcesos = informacionUsuario.getProcesos()
+        List<DtoPatUsuario> dtoPats = informacionUsuario.getPats()
                 .stream()
-                .map(this::mapearProceso)
+                .map(this::mapearPat)
                 .toList();
         return new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),entidad.getCorreo(),
-                dtoDirecciones, dtoProcesos, entidad.getIdCargo());
+                dtoDirecciones, dtoPats, entidad.getIdCargo());
     }
 
     public DtoDireccion mapearDireccion(EntidadDireccion entidadDireccion) {
@@ -111,10 +114,10 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
         return dtoDireccion;
     }
 
-    public DtoProceso mapearProceso(EntidadProceso entidadProceso) {
-        DtoProceso dtoProceso = new DtoProceso();
-        dtoProceso.setNombre(entidadProceso.getNombre());
+    public DtoPatUsuario mapearPat(EntidadPat entidadPat) {
+        DtoPatUsuario dtoPat = new DtoPatUsuario();
+        dtoPat.setNombre(entidadPat.getNombre());
         // Mapear otros atributos según sea necesario
-        return dtoProceso;
+        return dtoPat;
     }
 }

@@ -50,8 +50,9 @@ public class ControladorGoogle {
             if (usuario == null) throw new NoDatoExcepcion(MENSAJE_DEFECTO, Mensaje.USUARIO_NO_ESTA_REGISTRADO);
 
             // Generar un JWT sin autenticar con Spring Security
-            String jwt = jwtUtil.create(decodedToken.getEmail(), getTipo(usuario.getRoles()),obtenerDireccionDelUsuario(decodedToken.getEmail()),
-                    obtenerProcesoDelUsuario(decodedToken.getEmail()));
+            String jwt = jwtUtil.create(decodedToken.getEmail(), obtenerIdUsuario(decodedToken.getEmail()),
+                    getTipo(usuario.getRoles()),obtenerDireccionesDelUsuario(decodedToken.getEmail()),
+                    obtenerPatsDelUsuario(decodedToken.getEmail()));
 
             // Devolver la respuesta con el JWT
             return ResponseEntity.ok(new AuthResponse(jwt));
@@ -62,12 +63,24 @@ public class ControladorGoogle {
     }
 
     private String getTipo(List<EntidadUsuarioRol> roles) {
-         return roles.stream().anyMatch(aut -> aut.getRol().equals("OPERADOR"))? "OPERADOR" : "ADMIN";
+        return roles.stream().filter(aut -> aut.getRol().startsWith("ROLE_")).findFirst().
+                map(aut -> {
+                    return switch (aut.getRol()) {
+                        case "ROLE_ADMIN" -> "ADMIN";
+                        case "ROLE_DIRECTOR" -> "DIRECTOR";
+                        case "ROLE_OPERADOR" -> "OPERADOR";
+                        default -> "O"; // Por defecto
+                    };
+                })
+                .orElse("O");
     }
-    private List<String> obtenerDireccionDelUsuario(String correo) {
-        return servicioAplicacionListarUsuario.consultarByCorreoParaDireccion(correo);
+    private Long obtenerIdUsuario(String correo) {
+        return servicioAplicacionListarUsuario.consultarByCorreoParaIdUsuario(correo);
     }
-    private List<String> obtenerProcesoDelUsuario(String correo) {
-        return servicioAplicacionListarUsuario.consultarByCorreoParaProceso(correo);
+    private List<String> obtenerDireccionesDelUsuario(String correo) {
+        return servicioAplicacionListarUsuario.consultarByCorreoParaDirecciones(correo);
+    }
+    private List<String> obtenerPatsDelUsuario(String correo) {
+        return servicioAplicacionListarUsuario.consultarByCorreoParaPats(correo);
     }
 }

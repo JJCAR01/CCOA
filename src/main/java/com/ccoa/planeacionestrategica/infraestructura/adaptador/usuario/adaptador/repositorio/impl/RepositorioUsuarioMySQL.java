@@ -149,28 +149,33 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public Long modificarProcesos(InformacionUsuario informacionUsuario, Long id) {
+    public Long modificarPats(InformacionUsuario informacionUsuario, Long id) {
         var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
         assert entidad != null;
-        this.mapeadorInformacionUsuario.actualizarProcesos(entidad,informacionUsuario);
+        this.mapeadorInformacionUsuario.actualizarPats(entidad,informacionUsuario);
         return this.repositorioInformacionUsuarioJpa.save(entidad).getIdInformacionUsuario();
     }
 
     @Override
-    public Long modificarProcesosParaEliminar(InformacionUsuario informacionUsuario, Long id) {
+    public Long modificarPatParaEliminar(InformacionUsuario informacionUsuario, Long id) {
         var entidad = this.repositorioInformacionUsuarioJpa.findById(id).orElse(null);
         assert entidad != null;
-        this.mapeadorInformacionUsuario.eliminarProcesos(entidad,informacionUsuario);
+        this.mapeadorInformacionUsuario.eliminarPats(entidad,informacionUsuario);
         return this.repositorioInformacionUsuarioJpa.save(entidad).getIdInformacionUsuario();
     }
 
     @Override
-    public List<String> obtenerDireccionDelUsuario(String correo) {
+    public Long obtenerIdUsuarioDelUsuario(String correo) {
+        return this.mapeadorInformacionUsuario.obtenerIdUsuario(correo);
+    }
+
+    @Override
+    public List<String> obtenerDireccionesDelUsuario(String correo) {
         return this.mapeadorInformacionUsuario.obtenerDirecciones(correo);
     }
 
     @Override
-    public List<String> obtenerProcesoDelUsuario(String correo) {
-        return this.mapeadorInformacionUsuario.obtenerProcesos(correo);
+    public List<String> obtenerPatsDelUsuario(String correo) {
+        return this.mapeadorInformacionUsuario.obtenerPats(correo);
     }
 }

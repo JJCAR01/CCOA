@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.seguridad.servicio;
 
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuarioRol;
@@ -42,25 +43,25 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
         if (entidadUsuario == null) throw new AutorizacionExcepcion(Mensaje.USUARIO_O_CLAVE_INCORRECTOS);
 
         List<EntidadDireccion> direcciones = new ArrayList<>();
-        List<EntidadProceso> procesos = new ArrayList<>();
+        List<EntidadPat> pats = new ArrayList<>();
 
         var todasLasInformaciones = this.repositorioInformacionUsuarioJpa.findAll();
 
         for (var informacionUsuario : todasLasInformaciones) {
             if (entidadUsuario.getIdUsuario().equals(informacionUsuario.getIdInformacionUsuario())) {
                 direcciones.addAll(informacionUsuario.getDireccion());
-                procesos.addAll(informacionUsuario.getProcesos());
+                pats.addAll(informacionUsuario.getPats());
             }
         }
         String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
         return User.builder()
                 .username(entidadUsuario.getCorreo())
                 .password(entidadUsuario.getPassword())
-                .authorities(this.grantedAuthorities(roles,direcciones,procesos))
+                .authorities(this.grantedAuthorities(roles,direcciones,pats))
                 .build();
     }
 
-    private List<GrantedAuthority> grantedAuthorities(String[] roles, List<EntidadDireccion> direcciones, List<EntidadProceso> procesos) {
+    private List<GrantedAuthority> grantedAuthorities(String[] roles, List<EntidadDireccion> direcciones, List<EntidadPat> pats) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
 
         for (String role: roles) {
@@ -69,7 +70,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
             for (String authority: this.getDirecciones(direcciones)) {
                 authorities.add(new SimpleGrantedAuthority(authority));
             }
-            for (String authority: this.getProcesos(procesos)) {
+            for (String authority: this.getPats(pats)) {
                 authorities.add(new SimpleGrantedAuthority(authority));
             }
         }
@@ -88,16 +89,16 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
     }
 
 
-    private String[] getProcesos(List<EntidadProceso> procesos) {
-        if (procesos == null || procesos.isEmpty()) {
+    private String[] getPats(List<EntidadPat> pats) {
+        if (pats == null || pats.isEmpty()) {
             return new String[]{};
         }
 
-        List<String> nombresProcesos = procesos.stream()
-                .map(EntidadProceso::getNombre)
+        List<String> nombrePats = pats.stream()
+                .map(EntidadPat::getNombre)
                 .toList();
 
-        return nombresProcesos.toArray(new String[0]);
+        return nombrePats.toArray(new String[0]);
     }
 
 

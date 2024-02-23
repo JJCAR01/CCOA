@@ -12,7 +12,6 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensaje
 @Data
 public class InformacionPat {
 
-    private Proceso proceso;
     private Direccion direccion;
     private double porcentajeReal;
     private double porcentajeEsperado;
@@ -20,9 +19,8 @@ public class InformacionPat {
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
 
-    public static InformacionPat of(Proceso proceso, Direccion direccion, double porcentajeReal, double porcentajeEsperado,
+    public static InformacionPat of(Direccion direccion, double porcentajeReal, double porcentajeEsperado,
                                     double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal){
-        ValidadorDominio.validarObligatorio(proceso,EL_PROCESO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validarObligatorio(direccion,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeReal,EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeEsperado,EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
@@ -30,12 +28,11 @@ public class InformacionPat {
         ValidadorDominio.validarObligatorioTipoDato(fechaInicial,LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validarObligatorioTipoDato(fechaFinal,LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL);
-        return new InformacionPat(proceso, direccion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, fechaInicial, fechaFinal);
+        return new InformacionPat(direccion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, fechaInicial, fechaFinal);
     }
 
-    public InformacionPat(Proceso proceso, Direccion direccion, double porcentajeReal, double porcentajeEsperado,
+    public InformacionPat( Direccion direccion, double porcentajeReal, double porcentajeEsperado,
                           double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
-        this.proceso = proceso;
         this.direccion = direccion;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;

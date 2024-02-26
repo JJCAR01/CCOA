@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptad
 
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import jakarta.persistence.*;
 import lombok.*;
 

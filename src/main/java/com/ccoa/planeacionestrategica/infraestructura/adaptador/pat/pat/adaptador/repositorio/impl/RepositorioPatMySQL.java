@@ -10,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptado
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -71,6 +72,8 @@ public class RepositorioPatMySQL implements RepositorioPat {
         this.repositorioPatJpa.deleteById(id);
         return id;
     }
+
+
 
     @Override
     public Long modificar(Pat pat, InformacionPat informacionPat, Long id) {

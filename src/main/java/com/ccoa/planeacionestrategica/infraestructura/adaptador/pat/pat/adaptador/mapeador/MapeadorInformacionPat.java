@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptad
 
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
@@ -17,7 +16,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptado
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.repositorio.jpa.RepositorioProcesoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadDetalleProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioDetalleProyectoAreaJpa;

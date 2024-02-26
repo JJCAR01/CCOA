@@ -51,13 +51,12 @@ public class ControladorLogin {
 
     private String getTipo(List<GrantedAuthority> authorities){
         return authorities.stream().filter(aut -> aut.getAuthority().startsWith("ROLE_")).findFirst().
-                map(aut -> {
-                    return switch (aut.getAuthority()) {
+                map(aut ->
+                     switch (aut.getAuthority()) {
                         case "ROLE_ADMIN" -> "ADMIN";
                         case "ROLE_DIRECTOR" -> "DIRECTOR";
                         case "ROLE_OPERADOR" -> "OPERADOR";
-                        default -> "O"; // Por defecto
-                    };
+                        default -> "O";
         })
                 .orElse("O");
     }

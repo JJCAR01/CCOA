@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
-import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoPatUsuario;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
@@ -10,7 +8,6 @@ import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.cargo.adaptador.repositorio.jpa.RepositorioCargoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;

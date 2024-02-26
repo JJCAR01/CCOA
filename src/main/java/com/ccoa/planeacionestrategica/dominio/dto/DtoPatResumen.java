@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.dto;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import lombok.*;
 
 import java.time.LocalDate;

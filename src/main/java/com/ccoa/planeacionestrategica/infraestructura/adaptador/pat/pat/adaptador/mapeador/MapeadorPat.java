@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador;
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
@@ -21,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {

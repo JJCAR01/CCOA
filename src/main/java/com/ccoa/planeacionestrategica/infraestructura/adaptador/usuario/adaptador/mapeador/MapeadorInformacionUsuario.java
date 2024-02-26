@@ -2,16 +2,13 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptad
 
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.PatUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.entidad.EntidadDireccion;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adaptador.repositorio.jpa.RepositorioDireccionJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.repositorio.jpa.RepositorioProcesoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;

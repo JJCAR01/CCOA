@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.pat;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
 

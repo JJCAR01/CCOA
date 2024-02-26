@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.adaptador;
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.PatUsuario;
 import org.springframework.context.annotation.Configuration;

@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyec
 
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadInformacionProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;

@@ -53,7 +53,7 @@ public class ControladorProyecto {
         return ResponseEntity.ok(this.servicioAplicacionListarProyecto.consultarById(codigo));
     }
     @GetMapping("/actividad/{codigo}")
-    public ResponseEntity<List<DtoProyectoResumen>> listarPorPat(@PathVariable Long codigo){
+    public ResponseEntity<List<DtoProyectoResumen>> listarPorActividadEstrategica(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionListarProyecto.consultarByIdActividadEstrategica(codigo));
     }
 

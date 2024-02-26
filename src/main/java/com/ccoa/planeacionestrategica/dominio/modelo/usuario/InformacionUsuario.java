@@ -1,16 +1,11 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.usuario;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
+
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.EL_PROCESO_NO_PUEDE_ESTAR_VACIO;
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.LA_DIRECCION_NO_PUEDE_ESTAR_VACIA;
 
 @Data

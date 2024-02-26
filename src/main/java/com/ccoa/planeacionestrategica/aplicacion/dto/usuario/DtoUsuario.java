@@ -1,8 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.usuario;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
-import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
-import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

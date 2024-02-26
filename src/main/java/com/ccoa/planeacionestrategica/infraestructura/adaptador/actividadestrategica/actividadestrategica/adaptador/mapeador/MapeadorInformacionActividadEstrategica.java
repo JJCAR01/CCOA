@@ -91,10 +91,6 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
                 mapeadorActividadEstrategica.obtenerPatRelacionadoConActividadEstrategica(idActividadEstrategica).getFechaInicial(), entidad.getDuracion());
         entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
         entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
-        entidad.setPorcentajePat(
-                servicioObtenerPorcentaje.obtenerPorcentajePat(
-                        entidad.getPorcentajeCumplimiento(),
-                        mapeadorDetalleActividadEstrategica.obtenerDetalleActividadEstrategicaRelacionadoConActividadEstrategica(idActividadEstrategica).getPorcentajeMeta() ));
         repositorioInformacionActividadEstrategicaJpa.save(entidad);
         var idPat = mapeadorActividadEstrategica.obtenerPatRelacionadoConActividadEstrategica(entidad.getIdInformacionActividadEstrategica()).getIdPat();
         var entidadPat = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);

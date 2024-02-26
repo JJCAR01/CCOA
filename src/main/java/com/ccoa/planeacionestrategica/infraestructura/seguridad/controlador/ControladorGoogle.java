@@ -64,13 +64,12 @@ public class ControladorGoogle {
 
     private String getTipo(List<EntidadUsuarioRol> roles) {
         return roles.stream().filter(aut -> aut.getRol().startsWith("ROLE_")).findFirst().
-                map(aut -> {
-                    return switch (aut.getRol()) {
-                        case "ROLE_ADMIN" -> "ADMIN";
-                        case "ROLE_DIRECTOR" -> "DIRECTOR";
-                        case "ROLE_OPERADOR" -> "OPERADOR";
-                        default -> "O"; // Por defecto
-                    };
+                map(aut ->
+                        switch (aut.getRol()) {
+                            case "ROLE_ADMIN" -> "ADMIN";
+                            case "ROLE_DIRECTOR" -> "DIRECTOR";
+                            case "ROLE_OPERADOR" -> "OPERADOR";
+                            default -> "O";
                 })
                 .orElse("O");
     }

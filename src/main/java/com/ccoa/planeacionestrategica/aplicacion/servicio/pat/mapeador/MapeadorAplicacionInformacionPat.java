@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoPat;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.direccion.Direccion;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 

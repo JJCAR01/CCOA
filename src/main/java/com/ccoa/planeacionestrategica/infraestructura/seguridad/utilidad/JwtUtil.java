@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,21 @@ public class JwtUtil {
     public String create(String username,Long user ,String type, List<String> direcciones, List<String> procesos) {
         String direccionesString = String.join(",", direcciones);
         String procesosString = String.join(",", procesos);
+        // Obtén la fecha actual
+        Calendar calendar = Calendar.getInstance();
+
+        // Reinicia la hora, minuto, segundo y milisegundo a 0 para representar la medianoche
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        // Agrega un día a la fecha actual para obtener la medianoche del día siguiente
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+        // Configura la expiración del token JWT para la medianoche del día actual
+        Date expiracion = calendar.getTime();
+
         return JWT.create()
                 .withSubject(username)
                 .withClaim("idUser", user)
@@ -28,7 +44,7 @@ public class JwtUtil {
                 .withClaim("pats", procesosString)
                 .withIssuer("CCOA")
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1)))
+                .withExpiresAt(expiracion)
                 .sign(ALGORITHM);
     }
 

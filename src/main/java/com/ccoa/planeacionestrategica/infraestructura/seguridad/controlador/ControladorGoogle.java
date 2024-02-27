@@ -63,16 +63,19 @@ public class ControladorGoogle {
     }
 
     private String getTipo(List<EntidadUsuarioRol> roles) {
-        return roles.stream().filter(aut -> aut.getRol().startsWith("ROLE_")).findFirst().
-                map(aut ->
-                        switch (aut.getRol()) {
-                            case "ROLE_ADMIN" -> "ADMIN";
-                            case "ROLE_DIRECTOR" -> "DIRECTOR";
-                            case "ROLE_OPERADOR" -> "OPERADOR";
-                            default -> "O";
-                })
-                .orElse("O");
+        if (roles.stream().anyMatch(aut -> aut.getRol().equals("OPERADOR"))) {
+            return "OPERADOR";
+        } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("DIRECTOR"))) {
+            return "DIRECTOR";
+        } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("ADMIN"))) {
+            return "ADMIN";
+        } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("CONSULTOR"))) {
+            return "CONSULTOR";
+        }else {
+            return null;
+        }
     }
+
     private Long obtenerIdUsuario(String correo) {
         return servicioAplicacionListarUsuario.consultarByCorreoParaIdUsuario(correo);
     }

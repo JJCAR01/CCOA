@@ -56,6 +56,7 @@ public class ControladorLogin {
                         case "ROLE_ADMIN" -> "ADMIN";
                         case "ROLE_DIRECTOR" -> "DIRECTOR";
                         case "ROLE_OPERADOR" -> "OPERADOR";
+                        case "ROLE_CONSULTOR" -> "CONSULTOR";
                         default -> "O";
         })
                 .orElse("O");

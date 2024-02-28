@@ -1,7 +1,9 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
 import org.springframework.stereotype.Component;
@@ -26,4 +28,5 @@ public class ServicioAplicacionListarTarea {
     public List<DtoTareaResumen> consultarPorIdSprintProyectoArea(Long id, ETipoASE tipoASE){return this.repositorioTarea.consultarPorIdSprintProyectoArea(id,tipoASE);}
     public List<DtoTareaResumen> consultarPorIdActividadGestionActvidadEstrategica(Long id, ETipoASE tipoASE){
         return this.repositorioTarea.consultarPorIdActividadGestionActvidadEstrategica(id,tipoASE );}
+    public List<DocumentoTarea> consultarByIdDocumento(Long id){return this.repositorioTarea.consultarPorIdParaObtenerDocumento(id);}
 }

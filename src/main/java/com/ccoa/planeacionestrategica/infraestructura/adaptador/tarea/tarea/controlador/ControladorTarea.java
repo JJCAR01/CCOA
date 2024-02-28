@@ -1,5 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
+import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoDocumentoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.ServicioAplicacionEliminarTarea;
@@ -7,7 +9,9 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.S
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.ServicioAplicacionListarTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.ServicioAplicacionModificarTarea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -79,5 +83,13 @@ public class ControladorTarea {
     @PutMapping("/porcentaje/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificarPorcentaje(@RequestBody DtoTarea tarea, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarTarea.modificarPorcentaje(tarea,codigo));
+    }
+    @PutMapping("/archivo/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoDocumentoTarea rutaArchivo, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionGuardarTarea.guardarRutaArchivo(rutaArchivo,codigo));
+    }
+    @GetMapping("/archivo/{codigo}")
+    public ResponseEntity<List<DocumentoTarea>> obtenerDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(servicioAplicacionListarTarea.consultarByIdDocumento(codigo));
     }
 }

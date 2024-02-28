@@ -1,8 +1,12 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.InformacionSprintProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 
 import java.util.List;
@@ -20,4 +24,7 @@ public interface RepositorioTarea {
     List<DtoTareaResumen> consultarPorIdSprint(Long idSprint, ETipoASE tipoASE);
     List<DtoTareaResumen> consultarPorIdSprintProyectoArea(Long idSprintProyectoAre, ETipoASE tipoASE);
     List<DtoTareaResumen> consultarPorIdActividadGestionActvidadEstrategica(Long idActividadGestionActividadEstrategica, ETipoASE tipoASE);
+    List<DocumentoTarea>  consultarPorIdParaObtenerDocumento(Long id);
+    Long guardarDocumento(DocumentoTarea documentoTarea, Long codigo);
+    boolean existeDocumento(DocumentoTarea documentoTarea);
 }

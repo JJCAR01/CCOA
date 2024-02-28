@@ -3,10 +3,13 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.ada
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
+import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.MapeadorDocumentoTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.MapeadorInformacionTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.MapeadorTarea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioDocumentoTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
@@ -21,12 +24,16 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     private final RepositorioInformacionTareaJpa repositorioInformacionTareaJpa;
     private final MapeadorTarea mapeadorTarea;
     private final MapeadorInformacionTarea mapeadorInformacionTarea;
+    private final MapeadorDocumentoTarea mapeadorDocumentoTarea;
+    private final RepositorioDocumentoTareaJpa repositorioDocumentoTareaJpa;
 
-    public RepositorioTareaMySQL(RepositorioTareaJpa repositorioTareaJpa, RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, MapeadorTarea mapeadorTarea, MapeadorInformacionTarea mapeadorInformacionTarea) {
+    public RepositorioTareaMySQL(RepositorioTareaJpa repositorioTareaJpa, RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, MapeadorTarea mapeadorTarea, MapeadorInformacionTarea mapeadorInformacionTarea, MapeadorDocumentoTarea mapeadorDocumentoTarea, RepositorioDocumentoTareaJpa repositorioDocumentoTareaJpa) {
         this.repositorioTareaJpa = repositorioTareaJpa;
         this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;
         this.mapeadorTarea = mapeadorTarea;
         this.mapeadorInformacionTarea = mapeadorInformacionTarea;
+        this.mapeadorDocumentoTarea = mapeadorDocumentoTarea;
+        this.repositorioDocumentoTareaJpa = repositorioDocumentoTareaJpa;
     }
 
     @Override
@@ -117,5 +124,23 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     public List<DtoTareaResumen> consultarPorIdActividadGestionActvidadEstrategica(Long idActividadGestionActividadEstrategica, ETipoASE tipoASE) {
         List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idActividadGestionActividadEstrategica,tipoASE);
         return this.mapeadorTarea.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DocumentoTarea> consultarPorIdParaObtenerDocumento(Long id) {
+        var entidad = this.repositorioDocumentoTareaJpa.findByIdTarea(id);
+        assert entidad != null;
+        return this.mapeadorDocumentoTarea.mapeadorListaDocumentos(entidad);
+    }
+
+    @Override
+    public Long guardarDocumento(DocumentoTarea documentoTarea, Long codigo) {
+        var docTarea = this.mapeadorDocumentoTarea.mapeadorEntidadDocumento(documentoTarea,codigo);
+        return this.repositorioDocumentoTareaJpa.save(docTarea).getIdDocumentoTarea();
+    }
+
+    @Override
+    public boolean existeDocumento(DocumentoTarea documentoTarea) {
+        return this.repositorioDocumentoTareaJpa.findById(documentoTarea.getIdTarea()).isPresent();
     }
 }

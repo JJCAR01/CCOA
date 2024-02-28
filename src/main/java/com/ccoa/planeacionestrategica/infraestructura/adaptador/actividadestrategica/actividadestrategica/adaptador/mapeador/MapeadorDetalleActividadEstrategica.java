@@ -25,7 +25,8 @@ public class MapeadorDetalleActividadEstrategica implements MapeadorInfraestruct
 
     @Override
     public EntidadDetalleActividadEstrategica mapeadorEntidad(DetalleActividadEstrategica dominio) {
-        return new EntidadDetalleActividadEstrategica(dominio.getUnidad(), dominio.getMeta(),dominio.getPeriodicidadMeta(), dominio.getResultadoMeta(), dominio.getPorcentajeMeta(),
+        return new EntidadDetalleActividadEstrategica(dominio.getUnidad(), dominio.getMeta(),dominio.getPeriodicidadMeta(),
+                dominio.getResultadoMeta(), dominio.getPorcentajeMeta(),
                 dominio.getEntregable());
     }
     public void actualizarEntregbale(EntidadDetalleActividadEstrategica entidadDetalleActividadEstrategica,

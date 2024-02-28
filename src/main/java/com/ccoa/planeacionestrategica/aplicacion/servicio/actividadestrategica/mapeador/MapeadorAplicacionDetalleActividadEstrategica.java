@@ -18,7 +18,7 @@ public class MapeadorAplicacionDetalleActividadEstrategica implements MapeadorAp
     @Override
     public DetalleActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
         return DetalleActividadEstrategica.of(dto.getUnidad(),dto.getMeta(),dto.getPeriodicidadMeta(),dto.getResultadoMeta(),
-                Mensaje.PORCENTAJE, dto.getEntregable());
+                Mensaje.PORCENTAJE_CERO, dto.getEntregable());
     }
     public DetalleActividadEstrategica mapeadorModificarEntregable(DtoActividadEstrategica dto) {
         return DetalleActividadEstrategica.modificarEntregable(dto.getUnidad(),dto.getMeta(),dto.getPeriodicidadMeta(), dto.getResultadoMeta(),dto.getPorcentajeMeta(),dto.getEntregable());

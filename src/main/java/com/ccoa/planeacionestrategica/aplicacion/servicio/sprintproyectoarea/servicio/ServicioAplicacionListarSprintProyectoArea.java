@@ -15,7 +15,6 @@ public class ServicioAplicacionListarSprintProyectoArea {
     public ServicioAplicacionListarSprintProyectoArea(RepositorioSprintProyectoArea repositorioSprintProyectoArea) {
         this.repositorioSprintProyectoArea = repositorioSprintProyectoArea;
     }
-
     public List<DtoSprintProyectoAreaResumen> ejecutar(){return this.repositorioSprintProyectoArea.listar();}
     public SprintProyectoArea consultarById(Long id){return this.repositorioSprintProyectoArea.consultarPorId(id);}
     public List<DocumentoSprintProyectoArea> consultarByIdDocumento(Long id){return this.repositorioSprintProyectoArea.consultarPorIdParaObtenerDocumento(id);}

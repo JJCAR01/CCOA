@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoDocumentoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
@@ -9,7 +8,6 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.S
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.ServicioAplicacionListarTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.ServicioAplicacionModificarTarea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;

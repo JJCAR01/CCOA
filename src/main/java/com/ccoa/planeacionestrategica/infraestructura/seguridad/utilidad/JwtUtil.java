@@ -9,14 +9,13 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.CLAVE;
+import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.ORGANIZACION;
 
 @Component
 public class JwtUtil {
 
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(CLAVE);
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(ORGANIZACION);
 
     public String create(String username,Long user ,String type, List<String> direcciones, List<String> procesos) {
         String direccionesString = String.join(",", direcciones);

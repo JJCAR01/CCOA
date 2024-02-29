@@ -27,7 +27,6 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
     private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
     private final RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa;
     private final MapeadorInformacionPat mapeadorInformacionPat;
-    private final MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica;
     private final MapeadorActividadEstrategica mapeadorActividadEstrategica;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
     public MapeadorInformacionActividadEstrategica(
@@ -36,13 +35,12 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
             RepositorioProyectoJpa repositorioProyectoJpa,
             RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa,
             RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa,
-            MapeadorInformacionPat mapeadorInformacionPat, MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica, MapeadorActividadEstrategica mapeadorActividadEstrategica, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
+            MapeadorInformacionPat mapeadorInformacionPat, MapeadorActividadEstrategica mapeadorActividadEstrategica, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
 
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
-        this.mapeadorDetalleActividadEstrategica = mapeadorDetalleActividadEstrategica;
         this.mapeadorActividadEstrategica = mapeadorActividadEstrategica;
         this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;
         this.repositorioActividadGestionEstrategicaJpa = repositorioActividadGestionEstrategicaJpa;

@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;

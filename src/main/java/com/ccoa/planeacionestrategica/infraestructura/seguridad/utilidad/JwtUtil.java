@@ -5,12 +5,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.ConstantesSeguridad.ORGANIZACION;
+import static com.ccoa.planeacionestrategica.infraestructura.seguridad.utilidad.Constantes.ORGANIZACION;
 
 @Component
 public class JwtUtil {
@@ -62,19 +61,5 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public List<String> getDirecciones(String jwt) {
-        String direccionesString = JWT.require(ALGORITHM).build().verify(jwt)
-                .getClaim("direcciones").asString();
 
-        // Convierte la cadena de direcciones nuevamente a una lista si es necesario
-        return Arrays.asList(direccionesString.split(","));
-    }
-
-    public List<String> getPats(String jwt) {
-        String patsString = JWT.require(ALGORITHM).build().verify(jwt)
-                .getClaim("pats").asString();
-
-        // Convierte la cadena de procesos nuevamente a una lista si es necesario
-        return Arrays.asList(patsString.split(","));
-    }
 }

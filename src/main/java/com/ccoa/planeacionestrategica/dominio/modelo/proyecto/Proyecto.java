@@ -26,6 +26,11 @@ public class Proyecto {
         ValidadorDominio.validarObligatorio(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
         return new Proyecto(idProyecto, nombre, presupuesto, modalidad, valorEjecutado, idActividadEstrategica, idUsuario);
     }
+    public static Proyecto ofValorEjecutado(Long idProyecto, String nombre, Double presupuesto, EModalidad modalidad,
+                              Double valorEjecutado, Long idActividadEstrategica, Long idUsuario){
+        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(valorEjecutado,EL_VALOR_EJECUTADO_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO);
+        return new Proyecto(idProyecto, nombre, presupuesto, modalidad, valorEjecutado, idActividadEstrategica, idUsuario);
+    }
 
     public Proyecto(Long idProyecto, String nombre, Double presupuesto, EModalidad modalidad, Double valorEjecutado, Long idActividadEstrategica, Long idUsuario) {
         this.idProyecto = idProyecto;

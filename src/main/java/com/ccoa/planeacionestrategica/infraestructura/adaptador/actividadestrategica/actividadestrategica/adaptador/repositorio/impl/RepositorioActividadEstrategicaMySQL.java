@@ -110,14 +110,6 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     }
 
     @Override
-    public Long modificarEntregable(DetalleActividadEstrategica detalleActividadEstrategica, Long id) {
-        var entidadInformacion = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
-        assert  entidadInformacion != null;
-        this.mapeadorDetalleActividadEstrategica.actualizarEntregbale(entidadInformacion, detalleActividadEstrategica);
-        return this.repositorioDetalleActividadEstrategicaJpa.save(entidadInformacion).getIdDetalleActividadEstrategica();
-    }
-
-    @Override
     public Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
         var entidadDetalle = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
         assert  entidadDetalle != null;

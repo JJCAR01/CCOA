@@ -42,8 +42,6 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         this.servicioObtenerDiasRestantes = servicioObtenerDiasRestantes;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
-
-
     @Override
     public ActividadEstrategica mapeadorDominio(EntidadActividadEstrategica entidad) {
         return new ActividadEstrategica(entidad.getIdActividadEstrategica(), entidad.getNombre(), entidad.getFechaInicial(),entidad.getFechaFinal(),
@@ -134,6 +132,7 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         entidadDetalleActividadEstrategica.setMeta(detalleActividadEstrategica.getMeta());
         entidadDetalleActividadEstrategica.setUnidad(detalleActividadEstrategica.getUnidad());
         entidadDetalleActividadEstrategica.setPeriodicidadMeta(detalleActividadEstrategica.getPeriodicidadMeta());
+        entidadDetalleActividadEstrategica.setEntregable(detalleActividadEstrategica.getEntregable());
         entidadDetalleActividadEstrategica.setPorcentajeMeta(
                 servicioObtenerPorcentaje.calcularPorcentajeMeta(entidadDetalleActividadEstrategica.getMeta(), entidadDetalleActividadEstrategica.getResultadoMeta()));
         entidadInformacionActividadEstrategica.setPorcentajeReal(

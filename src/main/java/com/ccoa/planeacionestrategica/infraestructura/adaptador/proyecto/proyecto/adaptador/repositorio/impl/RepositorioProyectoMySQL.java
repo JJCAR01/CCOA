@@ -111,6 +111,14 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     }
 
     @Override
+    public Long modificarValorEjecutado(Proyecto proyecto, Long id) {
+        var entidad = this.repositorioProyectoJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorProyecto.actualizarValorEjecutado(entidad, proyecto);
+        return this.repositorioProyectoJpa.save(entidad).getIdProyecto();
+    }
+
+    @Override
     public List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id) {
         List<EntidadProyecto> entidades = this.repositorioProyectoJpa.findByIdActividadEstrategica(id);
         return this.mapeadorProyecto.listarDominio(entidades);

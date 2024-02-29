@@ -17,6 +17,7 @@ public interface RepositorioProyecto {
     Long eliminar(Long id);
     Long eliminarPorActividadEstrategica(Long id);
     Long modificar(Proyecto proyecto,InformacionProyecto informacionProyecto,DetalleProyecto detalleProyecto, Long id);
+    Long modificarValorEjecutado(Proyecto proyecto, Long id);
     List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id);
     List<DtoIdsProyecto> consultarPorIdActividadEstrategicaAEliminar(Long id);
     Long guardarDocumento(DocumentoProyecto documentoProyecto, Long codigo);

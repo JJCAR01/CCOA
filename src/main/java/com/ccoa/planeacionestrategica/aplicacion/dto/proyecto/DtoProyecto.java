@@ -2,17 +2,13 @@ package com.ccoa.planeacionestrategica.aplicacion.dto.proyecto;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EModalidad;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EPlaneacionSprint;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class DtoProyecto {
     private Long idProyecto;
     private String nombre;

@@ -114,6 +114,9 @@ public class MapeadorProyecto implements MapeadorInfraestructura<EntidadProyecto
         entidadInformacionProyecto.setFechaInicial(informacionProyecto.getFechaInicial());
         entidadInformacionProyecto.setFechaFinal(informacionProyecto.getFechaFinal());
     }
+    public void actualizarValorEjecutado(EntidadProyecto entidad, Proyecto proyecto) {
+        entidad.setValorEjecutado(proyecto.getValorEjecutado());
+    }
     public DtoProyectoResumen mapeadorDominioProyecto(EntidadProyecto entidad, EntidadDetalleProyecto entidadDetalleProyecto,
                                                       EntidadInformacionProyecto entidadInformacionProyecto) {
         return new DtoProyectoResumen(entidad.getIdProyecto(), entidad.getNombre(), entidad.getPresupuesto(),entidad.getModalidad(),

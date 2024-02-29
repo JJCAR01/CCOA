@@ -65,10 +65,6 @@ public class ControladorActividadEstrategica {
     public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificar(epica,codigo));
     }
-    @PutMapping("/entregable/{codigo}")
-    public ResponseEntity<DtoRespuesta<Long>> modificarEntregable(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
-        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificarEntregable(epica,codigo));
-    }
     @PutMapping("/meta/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificarResultadoMeta(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificarResultadoMeta(epica,codigo));

@@ -15,9 +15,7 @@ public class ServicioAplicacionListarActividadEstrategica {
     public ServicioAplicacionListarActividadEstrategica(RepositorioActividadEstrategica repositorioActividadEstrategica) {
         this.repositorioActividadEstrategica = repositorioActividadEstrategica;
     }
-
     public List<DtoActividadEstrategicaResumen> ejecutar(){return this.repositorioActividadEstrategica.listar();}
-
     public DtoActividadEstrategicaResumen consultarById(Long id){return this.repositorioActividadEstrategica.consultarPorId(id);}
     public List<DocumentoActividadEstrategica> consultarByIdDocumento(Long id){return this.repositorioActividadEstrategica.consultarPorIdParaObtenerDocumento(id);}
     public List<DtoActividadEstrategicaResumen> consultarByIdPat(Long id){return this.repositorioActividadEstrategica.consultarPorIdPat(id);}

@@ -19,16 +19,12 @@ public class DetalleActividadEstrategica {
     public static DetalleActividadEstrategica of(EUnidad unidad, Double meta, EPeriodicidadMeta periodicidadMeta,
                                                  Double resultadoMeta, Double porcentajeMeta, String entregable ){
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(meta,LA_META_NO_PUEDE_SER_NEGATIVA);
-        //
-        return new DetalleActividadEstrategica(unidad, meta, periodicidadMeta, resultadoMeta, porcentajeMeta, entregable);
-    }
-    public static DetalleActividadEstrategica modificarEntregable(EUnidad unidad, Double meta, EPeriodicidadMeta periodicidadMeta,
-                                                                  Double resultadoMeta, Double porcentajeMeta, String entregable) {
+        ValidadorDominio.validarObligatorio(entregable,EL_ENTREGABLE_NO_PUEDE_ESTAR_VACIO);
         return new DetalleActividadEstrategica(unidad, meta, periodicidadMeta, resultadoMeta, porcentajeMeta, entregable);
     }
     public static DetalleActividadEstrategica modificarResultadoMeta(EUnidad unidad, Double meta, EPeriodicidadMeta periodicidadMeta,
                                                                      Double resultadoMeta, Double porcentajeMeta, String entregable) {
-        //ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(resultadoMeta,EL_RESULTADO_DE_LA_META_NO_PUEDE_SER_NEGATIVA);
+        ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(resultadoMeta,EL_RESULTADO_DE_LA_META_NO_PUEDE_SER_NEGATIVA);
         return new DetalleActividadEstrategica(unidad, meta, periodicidadMeta, resultadoMeta, porcentajeMeta, entregable);
     }
     public DetalleActividadEstrategica(EUnidad unidad, Double meta, EPeriodicidadMeta periodicidadMeta, Double resultadoMeta, Double porcentajeMeta, String entregable) {

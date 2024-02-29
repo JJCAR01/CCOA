@@ -28,4 +28,8 @@ public class ServicioAplicacionModificarProyecto {
         var deatalleProyecto = this.mapeadorAplicacionDetalleProyecto.mapeadorAplicacion(dto);
         return new DtoRespuesta<>(this.servicioModificarProyecto.ejecutarModificar(proyecto,informacionProyecto,deatalleProyecto,codigo));
     }
+    public DtoRespuesta<Long> ejecutarModificarValorEjecutado(DtoProyecto dto, Long codigo){
+        var proyecto = this.mapeadorAplicacionProyecto.mapeadorAplicacionValorEjecutado(dto);
+        return new DtoRespuesta<>(this.servicioModificarProyecto.ejecutarModificarValorEjecutado(proyecto,codigo));
+    }
 }

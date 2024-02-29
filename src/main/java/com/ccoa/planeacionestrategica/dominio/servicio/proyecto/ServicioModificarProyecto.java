@@ -22,4 +22,8 @@ public class ServicioModificarProyecto {
         if(this.repositorioProyecto.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyecto.modificar(proyecto, informacionProyecto,detalleProyecto , codigo);
     }
+    public Long ejecutarModificarValorEjecutado(Proyecto proyecto, Long codigo){
+        if(this.repositorioProyecto.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        return this.repositorioProyecto.modificarValorEjecutado(proyecto, codigo);
+    }
 }

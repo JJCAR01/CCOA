@@ -12,4 +12,9 @@ public class MapeadorAplicacionProyecto implements MapeadorAplicacion<DtoProyect
         return new Proyecto(dto.getIdProyecto(),dto.getNombre(), dto.getPresupuesto(),dto.getModalidad(),
                 dto.getValorEjecutado(), dto.getIdActividadEstrategica(), dto.getIdUsuario());
     }
+    public Proyecto mapeadorAplicacionValorEjecutado(DtoProyecto dto) {
+        return Proyecto.ofValorEjecutado(dto.getIdProyecto(),dto.getNombre(), dto.getPresupuesto(),dto.getModalidad(),
+                dto.getValorEjecutado(), dto.getIdActividadEstrategica(), dto.getIdUsuario());
+    }
+
 }

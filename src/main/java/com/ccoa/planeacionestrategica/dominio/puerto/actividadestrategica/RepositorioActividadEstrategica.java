@@ -19,7 +19,6 @@ public interface RepositorioActividadEstrategica{
     Long eliminarPorPat(Long id);
     Long modificar(ActividadEstrategica actividadEstrategica ,InformacionActividadEstrategica informacionActividadEstrategica,
                    DetalleActividadEstrategica detalleActividadEstrategica, Long id);
-    Long modificarEntregable(DetalleActividadEstrategica detalleActividadEstrategica, Long id);
     Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica,
             InformacionActividadEstrategica informacionActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);

@@ -29,10 +29,6 @@ public class MapeadorDetalleActividadEstrategica implements MapeadorInfraestruct
                 dominio.getResultadoMeta(), dominio.getPorcentajeMeta(),
                 dominio.getEntregable());
     }
-    public void actualizarEntregbale(EntidadDetalleActividadEstrategica entidadDetalleActividadEstrategica,
-                                    DetalleActividadEstrategica detalleActividadEstrategica) {
-        entidadDetalleActividadEstrategica.setEntregable(detalleActividadEstrategica.getEntregable());
-    }
     public void actualizarResultadoMeta(EntidadDetalleActividadEstrategica entidadDetalleActividadEstrategica,
                                         DetalleActividadEstrategica detalleActividadEstrategica,
                                         EntidadInformacionActividadEstrategica entidadInformacionActividadEstrategica) {

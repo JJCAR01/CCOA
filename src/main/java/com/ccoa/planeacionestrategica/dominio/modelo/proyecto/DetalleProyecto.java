@@ -24,7 +24,6 @@ public class DetalleProyecto {
         ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeCumplimiento,EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO);
         return new DetalleProyecto(duracion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento);
     }
-
     public DetalleProyecto(Integer duracion, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
         this.duracion = duracion;
         this.porcentajeReal = porcentajeReal;

@@ -20,9 +20,6 @@ public class MapeadorAplicacionDetalleActividadEstrategica implements MapeadorAp
         return DetalleActividadEstrategica.of(dto.getUnidad(),dto.getMeta(),dto.getPeriodicidadMeta(),dto.getResultadoMeta(),
                 Mensaje.PORCENTAJE_CERO, dto.getEntregable());
     }
-    public DetalleActividadEstrategica mapeadorModificarEntregable(DtoActividadEstrategica dto) {
-        return DetalleActividadEstrategica.modificarEntregable(dto.getUnidad(),dto.getMeta(),dto.getPeriodicidadMeta(), dto.getResultadoMeta(),dto.getPorcentajeMeta(),dto.getEntregable());
-    }
     public DetalleActividadEstrategica mapeadorModificarResultadoMeta(DtoActividadEstrategica dto) {
         return DetalleActividadEstrategica.modificarResultadoMeta(dto.getUnidad(),dto.getMeta(), dto.getPeriodicidadMeta(),
                 dto.getResultadoMeta(),

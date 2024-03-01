@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoDocumentoProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
@@ -60,6 +61,10 @@ public class ControladorProyectoArea {
     @DeleteMapping("/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionEliminarProyectoArea.ejecutarEliminar(codigo));
+    }
+    @PutMapping("/valor-ejecutado/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarValorEjecutado(@RequestBody DtoProyectoArea epica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarProyectoArea.ejecutarModificarValorEjecutado(epica,codigo));
     }
 
     @PutMapping("/{codigo}")

@@ -61,7 +61,7 @@ public class ControladorProyecto {
     public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionEliminarProyecto.ejecutarEliminar(codigo));
     }
-    @PutMapping("/valorejecutado/{codigo}")
+    @PutMapping("/valor-ejecutado/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificarValorEjecutado(@RequestBody DtoProyecto epica, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarProyecto.ejecutarModificarValorEjecutado(epica,codigo));
     }

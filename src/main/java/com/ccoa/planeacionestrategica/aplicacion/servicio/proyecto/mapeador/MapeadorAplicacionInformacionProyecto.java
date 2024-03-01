@@ -25,7 +25,9 @@ public class MapeadorAplicacionInformacionProyecto implements MapeadorAplicacion
     @Override
     public InformacionProyecto mapeadorAplicacion(DtoProyecto dto) {
         Integer duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
-        return InformacionProyecto.of(dto.getFechaInicial(),dto.getFechaFinal(),servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
-                dto.getPlaneacionSprint(),servicioCalcularTotalSprint.calcular(duracion, dto.getPlaneacionSprint()));
+        return InformacionProyecto.of(dto.getFechaInicial(),dto.getFechaFinal(),
+                servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
+                dto.getPlaneacionSprint(),
+                servicioCalcularTotalSprint.calcular(duracion, dto.getPlaneacionSprint()));
     }
 }

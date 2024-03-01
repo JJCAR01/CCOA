@@ -25,7 +25,8 @@ public class MapeadorAplicacionInformacionActividadEstrategica implements Mapead
     public InformacionActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
         return InformacionActividadEstrategica.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
                 servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),Mensaje.POR_DEFECTO_AVANCE,
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
+                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),
+                        servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
                 Mensaje.POR_DEFECTO_AVANCE,dto.getPorcentajePat());
     }
     public InformacionActividadEstrategica mapeadorAplicacionActualizarPorcentaje(DtoActividadEstrategica dto) {

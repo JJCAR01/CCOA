@@ -19,8 +19,10 @@ public class MapeadorAplicacionDetalleProyecto implements MapeadorAplicacion<Dto
     }
     @Override
     public DetalleProyecto mapeadorAplicacion(DtoProyecto dto) {
-        return DetalleProyecto.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()) , Mensaje.POR_DEFECTO_AVANCE,
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
+        return DetalleProyecto.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()) ,
+                Mensaje.POR_DEFECTO_AVANCE,
+                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),
+                        servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
                 Mensaje.POR_DEFECTO_AVANCE);
     }
 }

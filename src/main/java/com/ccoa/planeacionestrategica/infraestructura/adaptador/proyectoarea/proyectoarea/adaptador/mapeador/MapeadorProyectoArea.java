@@ -2,10 +2,12 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.pr
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.ProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadDetalleProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadInformacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadProyectoArea;
@@ -111,10 +113,14 @@ public class MapeadorProyectoArea implements MapeadorInfraestructura<EntidadProy
         entidad.setNombre(proyectoArea.getNombre());
         entidad.setPresupuesto(proyectoArea.getPresupuesto());
         entidad.setModalidad(proyectoArea.getModalidad());
+        entidad.setIdUsuario(proyectoArea.getIdUsuario());
         entidadInformacionProyectoArea.setTotalSprint(informacionProyectoArea.getTotalSprint());
         entidadInformacionProyectoArea.setPlaneacionSprint(informacionProyectoArea.getPlaneacionSprint());
         entidadInformacionProyectoArea.setFechaInicial(informacionProyectoArea.getFechaInicial());
         entidadInformacionProyectoArea.setFechaFinal(informacionProyectoArea.getFechaFinal());
+    }
+    public void actualizarValorEjecutado(EntidadProyectoArea entidad, ProyectoArea proyectoArea) {
+        entidad.setValorEjecutado(proyectoArea.getValorEjecutado());
     }
     public DtoProyectoAreaResumen mapeadorDominioProyectoArea(EntidadProyectoArea entidad, EntidadDetalleProyectoArea entidadDetalleProyectoArea,
                                                               EntidadInformacionProyectoArea entidadInformacionProyectoArea) {

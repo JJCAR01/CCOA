@@ -8,11 +8,13 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptado
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class RepositorioPatMySQL implements RepositorioPat {
@@ -67,9 +69,21 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     @Override
     public Long eliminar(Long id) {
+        eliminarReferenciasDePat(id);
         this.repositorioInformacionPatJpa.deleteById(id);
         this.repositorioPatJpa.deleteById(id);
         return id;
+    }
+
+    public void eliminarReferenciasDePat(Long idPat) {
+        // Obtén todas las instancias de EntidadInformacionUsuario que contengan la EntidadPat
+        List<EntidadInformacionUsuario> usuariosConPat = repositorioInformacionUsuarioJpa.findByPats_IdPat(idPat);
+
+        // Itera sobre cada EntidadInformacionUsuario y elimina la EntidadPat de la lista pats
+        for (EntidadInformacionUsuario usuario : usuariosConPat) {
+            usuario.getPats().removeIf(pat -> Objects.equals(pat.getIdPat(), idPat));
+            repositorioInformacionUsuarioJpa.save(usuario); // Guarda los cambios
+        }
     }
 
 

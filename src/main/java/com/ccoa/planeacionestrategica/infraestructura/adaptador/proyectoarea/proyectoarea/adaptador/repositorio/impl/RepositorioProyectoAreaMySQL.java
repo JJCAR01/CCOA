@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.pr
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.ProyectoArea;
@@ -107,6 +108,13 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
         assert entidadInf != null;
         this.mapeadorProyectoArea.actualizarEntidad(entidad, proyectoArea,entidadInf,informacionProyectoArea);
         this.repositorioInformacionProyectoAreaJpa.save(entidadInf);
+        return this.repositorioProyectoAreaJpa.save(entidad).getIdProyectoArea();
+    }
+    @Override
+    public Long modificarValorEjecutado(ProyectoArea proyectoArea, Long id) {
+        var entidad = this.repositorioProyectoAreaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorProyectoArea.actualizarValorEjecutado(entidad, proyectoArea);
         return this.repositorioProyectoAreaJpa.save(entidad).getIdProyectoArea();
     }
 

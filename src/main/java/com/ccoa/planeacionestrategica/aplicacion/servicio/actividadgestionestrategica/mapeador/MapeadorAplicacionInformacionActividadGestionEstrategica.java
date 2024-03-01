@@ -26,8 +26,10 @@ public class MapeadorAplicacionInformacionActividadGestionEstrategica implements
     @Override
     public InformacionActividadGestionEstrategica mapeadorAplicacion(DtoActividadGestionEstrategica dto) {
         return InformacionActividadGestionEstrategica.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
-                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()), Mensaje.POR_DEFECTO_AVANCE,
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()))
+                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),
+                Mensaje.POR_DEFECTO_AVANCE,
+                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),
+                        servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()))
                 ,Mensaje.POR_DEFECTO_AVANCE);
     }
 }

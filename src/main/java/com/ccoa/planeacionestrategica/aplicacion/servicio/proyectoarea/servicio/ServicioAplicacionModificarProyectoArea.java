@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.proyectoarea.servicio;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyectoarea.mapeador.MapeadorAplicacionDetalleProyectoArea;
@@ -28,5 +29,9 @@ public class ServicioAplicacionModificarProyectoArea {
         var informacionProyecto = this.mapeadorAplicacionInformacionProyectoArea.mapeadorAplicacion(dto);
         var detalleProyecto = this.mapeadorAplicacionDetalleProyectoArea.mapeadorAplicacion(dto);
         return new DtoRespuesta<>(this.servicioModificarProyectoArea.ejecutarModificar(proyecto,informacionProyecto,detalleProyecto,codigo));
+    }
+    public DtoRespuesta<Long> ejecutarModificarValorEjecutado(DtoProyectoArea dto, Long codigo){
+        var proyecto = this.mapeadorAplicacionProyectoArea.mapeadorAplicacionValorEjecutado(dto);
+        return new DtoRespuesta<>(this.servicioModificarProyectoArea.ejecutarModificarValorEjecutado(proyecto,codigo));
     }
 }

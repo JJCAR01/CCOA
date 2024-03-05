@@ -75,19 +75,6 @@ public class RepositorioPatMySQL implements RepositorioPat {
         return id;
     }
 
-    public void eliminarReferenciasDePat(Long idPat) {
-        // Obtén todas las instancias de EntidadInformacionUsuario que contengan la EntidadPat
-        List<EntidadInformacionUsuario> usuariosConPat = repositorioInformacionUsuarioJpa.findByPats_IdPat(idPat);
-
-        // Itera sobre cada EntidadInformacionUsuario y elimina la EntidadPat de la lista pats
-        for (EntidadInformacionUsuario usuario : usuariosConPat) {
-            usuario.getPats().removeIf(pat -> Objects.equals(pat.getIdPat(), idPat));
-            repositorioInformacionUsuarioJpa.save(usuario); // Guarda los cambios
-        }
-    }
-
-
-
     @Override
     public Long modificar(Pat pat, InformacionPat informacionPat, Long id) {
         var entidadPat = this.repositorioPatJpa.findById(id).orElse(null);
@@ -97,7 +84,20 @@ public class RepositorioPatMySQL implements RepositorioPat {
         this.mapeadorPat.actualizarEntidad(entidadPat, pat);
         this.mapeadorInformacionPat.actualizarEntidad(entidadInformacionpat, informacionPat);
         this.repositorioInformacionPatJpa.save(entidadInformacionpat);
-        return this.repositorioPatJpa.save(entidadPat).getIdPat();
+        var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
+        repositorioInformacionUsuarioJpa.save(entidadUsuario);
+        this.repositorioPatJpa.save(entidadPat);
+        return id;
+    }
+    public void eliminarReferenciasDePat(Long idPat) {
+        // Obtén todas las instancias de EntidadInformacionUsuario que contengan la EntidadPat
+        List<EntidadInformacionUsuario> usuariosConPat = repositorioInformacionUsuarioJpa.findByPats_IdPat(idPat);
+
+        // Itera sobre cada EntidadInformacionUsuario y elimina la EntidadPat de la lista pats
+        for (EntidadInformacionUsuario usuario : usuariosConPat) {
+            usuario.getPats().removeIf(pat -> Objects.equals(pat.getIdPat(), idPat));
+            repositorioInformacionUsuarioJpa.save(usuario); // Guarda los cambios
+        }
     }
 
 }

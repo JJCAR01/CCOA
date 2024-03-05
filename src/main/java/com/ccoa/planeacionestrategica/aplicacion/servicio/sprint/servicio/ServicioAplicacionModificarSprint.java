@@ -8,7 +8,7 @@ import com.ccoa.planeacionestrategica.dominio.servicio.sprint.ServicioModificarS
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServicioAplicacionModificarSprint {
+public class  ServicioAplicacionModificarSprint {
     private final ServicioModificarSprint servicioModificarSprint;
     private final MapeadorAplicacionSprint mapeadorAplicacionSprint;
     private final MapeadorAplicacionInformacionSprint mapeadorAplicacionInformacionSprint;

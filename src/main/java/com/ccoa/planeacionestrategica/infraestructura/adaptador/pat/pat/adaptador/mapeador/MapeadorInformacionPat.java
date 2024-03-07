@@ -86,6 +86,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         // Buscar la entidad EntidadDireccion por nombre
         var entidadDireccion = this.repositorioDireccionJpa.findByNombre(direccion.getNombre());
         entidad.setDireccion(entidadDireccion);
+        entidad.setFechaInicial(informacionPat.getFechaInicial());
+        entidad.setFechaFinal(informacionPat.getFechaFinal());
     }
 
     public void actualizarPorcentajeAvance(EntidadInformacionPat entidad, Long idPat) {

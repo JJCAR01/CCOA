@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.dominio.dto;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoPatUsuario;
-import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

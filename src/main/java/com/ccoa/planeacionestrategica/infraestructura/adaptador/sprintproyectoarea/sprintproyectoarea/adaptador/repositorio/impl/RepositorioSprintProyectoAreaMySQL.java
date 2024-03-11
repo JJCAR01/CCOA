@@ -112,7 +112,7 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
         var informacionEntidad = this.repositorioInformacionSprintProyectoAreaJpa.findById(id).orElse(null);
         assert informacionEntidad != null;
         assert entidad != null;
-        this.mapeadorSprintProyectoArea.actualizarEntidad(entidad, sprintProyectoArea);
+        this.mapeadorSprintProyectoArea.actualizarEntidad(entidad, sprintProyectoArea,informacionEntidad);
         this.repositorioInformacionSprintProyectoAreaJpa.save(informacionEntidad);
         return this.repositorioSprintProyectoAreaJpa.save(entidad).getIdSprintProyectoArea();
     }

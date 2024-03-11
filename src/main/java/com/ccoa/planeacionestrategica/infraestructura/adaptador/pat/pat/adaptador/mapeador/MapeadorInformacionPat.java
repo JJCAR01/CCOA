@@ -24,6 +24,7 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.Mapea
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
@@ -88,6 +89,9 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         entidad.setDireccion(entidadDireccion);
         entidad.setFechaInicial(informacionPat.getFechaInicial());
         entidad.setFechaFinal(informacionPat.getFechaFinal());
+        var duracion = obtenerDuracion(entidad.getFechaInicial(),entidad.getFechaFinal());
+        entidad.setPorcentajeEsperado(obtenerPorcentajeEsperado(entidad.getFechaInicial(),duracion));
+
     }
 
     public void actualizarPorcentajeAvance(EntidadInformacionPat entidad, Long idPat) {
@@ -113,13 +117,10 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         double avanceTotal = (sumaActGestion + sumaActEstrategica + sumaProyectos)/ Mensaje.PORCENTAJE;
         entidad.setPorcentajeReal(avanceTotal);
         entidad.setIdInformacionPat(idPat);
-        var duracion = servicioObtenerDuracion.calcular(entidad.getFechaInicial(),entidad.getFechaFinal());
+        var duracion = obtenerDuracion(entidad.getFechaInicial(),entidad.getFechaFinal());
         var entidadPat = mapeadorPat.obtenerPatRelacionadoConPat(idPat);
         var porcentajePat =  mapeadorPat.actualizarPorcentajePat(idPat,mapeadorPat.obtenerPatRelacionadoConPat(idPat));
-
-        var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                obtenerPatRelacionadoConPat(idPat).getFechaInicial(), duracion);
-        entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+        entidad.setPorcentajeEsperado(obtenerPorcentajeEsperado(entidad.getFechaInicial(),duracion));
         entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
         entidadPat.setPorcentajePat(porcentajePat);
         entidadPat.setIdPat(idPat);
@@ -142,5 +143,12 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     }
     public EntidadInformacionPat obtenerPatRelacionadoConPat(Long id){
         return this.repositorioInformacionPatJpa.findById(id).orElseThrow();
+    }
+
+    public long obtenerDuracion(LocalDate fechaInicial, LocalDate fechaFinal){
+        return servicioObtenerDuracion.calcular(fechaInicial,fechaFinal);
+    }
+    public double obtenerPorcentajeEsperado(LocalDate fechaInicial, long duracion){
+        return Math.min(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion), Mensaje.PORCENTAJE);
     }
 }

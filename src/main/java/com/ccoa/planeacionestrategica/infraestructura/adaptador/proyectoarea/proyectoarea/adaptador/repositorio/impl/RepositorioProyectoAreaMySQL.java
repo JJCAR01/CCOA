@@ -2,7 +2,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.pr
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.ProyectoArea;
@@ -104,9 +103,11 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
     public Long modificar(ProyectoArea proyectoArea, InformacionProyectoArea informacionProyectoArea, DetalleProyectoArea detalleProyectoArea, Long id) {
         var entidad = this.repositorioProyectoAreaJpa.findById(id).orElse(null);
         var entidadInf = this.repositorioInformacionProyectoAreaJpa.findById(id).orElse(null);
+        var entidadDetalle= this.repositorioDetalleProyectoAreaJpa.findById(id).orElse(null);
         assert entidad != null;
         assert entidadInf != null;
-        this.mapeadorProyectoArea.actualizarEntidad(entidad, proyectoArea,entidadInf,informacionProyectoArea);
+        assert entidadDetalle != null;
+        this.mapeadorProyectoArea.actualizarEntidad(entidad, proyectoArea,entidadInf,informacionProyectoArea,entidadDetalle);
         this.repositorioInformacionProyectoAreaJpa.save(entidadInf);
         return this.repositorioProyectoAreaJpa.save(entidad).getIdProyectoArea();
     }

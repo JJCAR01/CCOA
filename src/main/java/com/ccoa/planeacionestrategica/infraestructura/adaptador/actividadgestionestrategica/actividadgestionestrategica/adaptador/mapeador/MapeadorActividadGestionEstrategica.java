@@ -4,7 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionEstrategica
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.ActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.InformacionActividadGestionEstrategica;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDiasRestantes;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
@@ -16,6 +16,7 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.Mapea
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Configuration
@@ -24,16 +25,16 @@ public class MapeadorActividadGestionEstrategica implements MapeadorInfraestruct
     private final RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
-    private final ServicioObtenerDiasRestantes servicioObtenerDiasRestantes;
+    private final ServicioObtenerDuracion servicioObtenerDuracion;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
     public MapeadorActividadGestionEstrategica(RepositorioActividadGestionEstrategicaJpa repositorioActividadGestionEstrategicaJpa, RepositorioInformacionActividadGestionEstrategicaJpa repositorioInformacionActividadGestionEstrategicaJpa, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
-                                               RepositorioUsuarioJpa repositorioUsuarioJpa, ServicioObtenerDiasRestantes servicioObtenerDiasRestantes, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
+                                               RepositorioUsuarioJpa repositorioUsuarioJpa, ServicioObtenerDuracion servicioObtenerDuracion, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioActividadGestionEstrategicaJpa = repositorioActividadGestionEstrategicaJpa;
         this.repositorioInformacionActividadGestionEstrategicaJpa = repositorioInformacionActividadGestionEstrategicaJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
-        this.servicioObtenerDiasRestantes = servicioObtenerDiasRestantes;
+        this.servicioObtenerDuracion = servicioObtenerDuracion;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }
 
@@ -66,10 +67,9 @@ public class MapeadorActividadGestionEstrategica implements MapeadorInfraestruct
             var infEntidad = repositorioInformacionActividadGestionEstrategicaJpa.findById(entidad.getIdActividadGestionEstrategica());
 
             dto.setDuracion(infEntidad.orElseThrow().getDuracion());
-            dto.setDiasRestantes(servicioObtenerDiasRestantes.calcular(entidad.getFechaFinal()));
+            dto.setDiasRestantes(infEntidad.orElseThrow().getDiasRestantes());
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(entidad.getFechaInicial(),infEntidad.orElseThrow().getDuracion());
-            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);
@@ -99,10 +99,19 @@ public class MapeadorActividadGestionEstrategica implements MapeadorInfraestruct
         entidad.setFechaInicial(actividadGestion.getFechaInicial());
         entidad.setFechaFinal(actividadGestion.getFechaFinal());
         entidad.setIdUsuario(actividadGestion.getIdUsuario());
-        entidadInformacionActividadGestion.setDuracion(informacionActividadGestion.getDuracion());
+        var duracion = obtenerDuracion(entidad.getFechaInicial(),entidad.getFechaFinal());
+        entidadInformacionActividadGestion.setDuracion(duracion);
+        entidadInformacionActividadGestion.setPorcentajeEsperado(obtenerPorcentajeEsperado(entidad.getFechaInicial(),duracion));
         entidadInformacionActividadGestion.setDiasRestantes(informacionActividadGestion.getDiasRestantes());
     }
     public EntidadActividadGestionEstrategica obtenerIdProyectoRelacionadoConElSprint(Long id){
         return this.repositorioActividadGestionEstrategicaJpa.findById(id).orElseThrow();
+    }
+
+    public Integer obtenerDuracion(LocalDate fechaInicial, LocalDate fechaFinal){
+        return servicioObtenerDuracion.calcular(fechaInicial,fechaFinal);
+    }
+    public double obtenerPorcentajeEsperado(LocalDate fechaInicial, long duracion){
+        return Math.min(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion), Mensaje.PORCENTAJE);
     }
 }

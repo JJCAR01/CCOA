@@ -3,17 +3,19 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObjetoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +31,17 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
-    private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
+    private final ServicioObtenerDuracion servicioObtenerDuracion;
 
     public MapeadorSprint(RepositorioProyectoJpa repositorioProyectoJpa, RepositorioInformacionSprintJpa repositorioInformacionSprintJpa,
-                          RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioCalcularDuracionDias servicioCalcularDuracionDias) {
+                          RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionProyecto mapeadorInformacionProyecto,
+                          ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioObtenerDuracion servicioObtenerDuracion) {
         this.repositorioProyectoJpa = repositorioProyectoJpa;
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
-        this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
+        this.servicioObtenerDuracion = servicioObtenerDuracion;
     }
 
     @Override
@@ -73,10 +76,7 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             var informacionSprint = repositorioInformacionSprintJpa.findById(entidad.getIdSprint());
 
             dto.setPorcentajeReal(informacionSprint.orElseThrow().getPorcentajeReal());
-            var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    entidad.getFechaInicial(),duracion);
-            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            dto.setPorcentajeEsperado(informacionSprint.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);
@@ -84,10 +84,12 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
         return listaDto;
     }
 
-    public void actualizarEntidad(EntidadSprint entidad, Sprint sprint) {
+    public void actualizarEntidad(EntidadSprint entidad, Sprint sprint, EntidadInformacionSprint entidadInformacionSprint) {
         entidad.setDescripcion(sprint.getDescripcion());
         entidad.setFechaInicial(sprint.getFechaInicial());
         entidad.setFechaFinal(sprint.getFechaFinal());
+        var duracion = obtenerDuracion(entidad.getFechaInicial(),entidad.getFechaFinal());
+        entidadInformacionSprint.setPorcentajeEsperado(obtenerPorcentajeEsperado(entidad.getFechaInicial(),duracion));
     }
     public long obtenerTotalSprints(Long id){
         var entidad = this.repositorioSprintJpa.findByIdProyecto(id);
@@ -95,5 +97,11 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     }
     public EntidadSprint obtenerIdProyectoRelacionadoConElSprint(Long id){
         return this.repositorioSprintJpa.findById(id).orElseThrow();
+    }
+    public Integer obtenerDuracion(LocalDate fechaInicial, LocalDate fechaFinal){
+        return servicioObtenerDuracion.calcular(fechaInicial,fechaFinal);
+    }
+    public double obtenerPorcentajeEsperado(LocalDate fechaInicial, long duracion){
+        return Math.min(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion), Mensaje.PORCENTAJE);
     }
 }

@@ -103,9 +103,11 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     public Long modificar(Proyecto proyecto, InformacionProyecto informacionProyecto, DetalleProyecto detalleProyecto, Long id) {
         var entidad = this.repositorioProyectoJpa.findById(id).orElse(null);
         var entidadInf = this.repositorioInformacionProyectoJpa.findById(id).orElse(null);
+        var entidadDetalle = this.repositorioDetalleProyectoJpa.findById(id).orElse(null);
         assert entidad != null;
         assert entidadInf != null;
-        this.mapeadorProyecto.actualizarEntidad(entidad, proyecto,entidadInf,informacionProyecto);
+        assert entidadDetalle != null;
+        this.mapeadorProyecto.actualizarEntidad(entidad, proyecto,entidadInf,informacionProyecto,entidadDetalle);
         this.repositorioInformacionProyectoJpa.save(entidadInf);
         return this.repositorioProyectoJpa.save(entidad).getIdProyecto();
     }

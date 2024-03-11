@@ -3,17 +3,19 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoa
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObjetoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorInformacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioProyectoAreaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadInformacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadSprintProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioInformacionSprintProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioSprintProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +31,18 @@ public class MapeadorSprintProyectoArea implements MapeadorInfraestructura<Entid
     private final RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa;
     private final MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
-    private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
+    private final ServicioObtenerDuracion servicioObtenerDuracion;
 
     public MapeadorSprintProyectoArea(RepositorioProyectoAreaJpa repositorioProyectoAreaJpa, RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa,
-                                      RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa, MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioCalcularDuracionDias servicioCalcularDuracionDias) {
+                                      RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa,
+                                      MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea,
+                                      ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioObtenerDuracion servicioObtenerDuracion) {
         this.repositorioProyectoAreaJpa = repositorioProyectoAreaJpa;
         this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
         this.repositorioSprintProyectoAreaJpa = repositorioSprintProyectoAreaJpa;
         this.mapeadorInformacionProyectoArea = mapeadorInformacionProyectoArea;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
-        this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
+        this.servicioObtenerDuracion = servicioObtenerDuracion;
     }
 
     @Override
@@ -73,10 +77,7 @@ public class MapeadorSprintProyectoArea implements MapeadorInfraestructura<Entid
             var informacionSprintProyectoArea = repositorioInformacionSprintProyectoAreaJpa.findById(entidad.getIdSprintProyectoArea());
 
             dto.setPorcentajeReal(informacionSprintProyectoArea.orElseThrow().getPorcentajeReal());
-            var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    entidad.getFechaInicial(),duracion);
-            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            dto.setPorcentajeEsperado(informacionSprintProyectoArea.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             listaDto.add(dto);
@@ -84,10 +85,13 @@ public class MapeadorSprintProyectoArea implements MapeadorInfraestructura<Entid
         return listaDto;
     }
 
-    public void actualizarEntidad(EntidadSprintProyectoArea entidad, SprintProyectoArea sprintProyectoArea) {
+    public void actualizarEntidad(EntidadSprintProyectoArea entidad, SprintProyectoArea sprintProyectoArea,
+                                  EntidadInformacionSprintProyectoArea entidadInformacionSprintProyectoArea) {
         entidad.setDescripcion(sprintProyectoArea.getDescripcion());
         entidad.setFechaInicial(sprintProyectoArea.getFechaInicial());
         entidad.setFechaFinal(sprintProyectoArea.getFechaFinal());
+        var duracion = obtenerDuracion(entidad.getFechaInicial(),entidad.getFechaFinal());
+        entidadInformacionSprintProyectoArea.setPorcentajeEsperado(obtenerPorcentajeEsperado(entidad.getFechaInicial(),duracion));
     }
     public long obtenerTotalSprintProyectoAreas(Long id){
         var entidad = this.repositorioSprintProyectoAreaJpa.findByIdProyectoArea(id);
@@ -95,5 +99,11 @@ public class MapeadorSprintProyectoArea implements MapeadorInfraestructura<Entid
     }
     public EntidadSprintProyectoArea obtenerIdProyectoRelacionadoConElSprintProyectoArea(Long id){
         return this.repositorioSprintProyectoAreaJpa.findById(id).orElseThrow();
+    }
+    public Integer obtenerDuracion(LocalDate fechaInicial, LocalDate fechaFinal){
+        return servicioObtenerDuracion.calcular(fechaInicial,fechaFinal);
+    }
+    public double obtenerPorcentajeEsperado(LocalDate fechaInicial, long duracion){
+        return Math.min(servicioObtenerPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion), Mensaje.PORCENTAJE);
     }
 }

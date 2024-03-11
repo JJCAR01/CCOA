@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador;
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
@@ -21,22 +20,22 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
-    private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioPatJpa repositorioPatJpa;
-    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioCalcularDuracionDias servicioCalcularDuracionDias, RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa) {
+    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa,
+                       ServicioObtenerPorcentaje servicioObtenerPorcentaje,
+                       RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
+                       RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
-        this.servicioCalcularDuracionDias = servicioCalcularDuracionDias;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioPatJpa = repositorioPatJpa;
@@ -78,9 +77,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
             dto.setFechaInicial(infEntidad.orElseThrow().getFechaInicial());
             dto.setFechaFinal(infEntidad.orElseThrow().getFechaFinal());
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    infEntidad.orElseThrow().getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()));
-            dto.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
 
             DtoDireccion dtoDireccion = new DtoDireccion();

@@ -111,7 +111,7 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
         var informacionEntidad = this.repositorioInformacionSprintJpa.findById(id).orElse(null);
         assert informacionEntidad != null;
         assert entidad != null;
-        this.mapeadorSprint.actualizarEntidad(entidad, sprint);
+        this.mapeadorSprint.actualizarEntidad(entidad, sprint, informacionEntidad);
         this.repositorioInformacionSprintJpa.save(informacionEntidad);
         return this.repositorioSprintJpa.save(entidad).getIdSprint();
     }

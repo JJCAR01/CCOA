@@ -1,19 +1,15 @@
 package com.ccoa.planeacionestrategica.aplicacion.dto.tarea;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class DtoObservacionTarea {
     private Long idObservacionTarea;
     private Long idTarea;
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 }

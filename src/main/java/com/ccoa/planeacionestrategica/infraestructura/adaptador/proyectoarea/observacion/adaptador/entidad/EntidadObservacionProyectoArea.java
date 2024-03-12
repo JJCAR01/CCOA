@@ -21,12 +21,12 @@ public class EntidadObservacionProyectoArea {
     private Long idProyectoArea;
 
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 
-    public EntidadObservacionProyectoArea(Long idProyectoArea, LocalDate fecha, String nombre) {
+    public EntidadObservacionProyectoArea(Long idProyectoArea, LocalDate fecha, String descripcion) {
         this.idProyectoArea = idProyectoArea;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
 }

@@ -13,5 +13,5 @@ public class DtoObservacionActividadGestionEstrategica {
     private Long idObservacionActividadGestionEstrategica;
     private Long idActividadGestionEstrategica;
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 }

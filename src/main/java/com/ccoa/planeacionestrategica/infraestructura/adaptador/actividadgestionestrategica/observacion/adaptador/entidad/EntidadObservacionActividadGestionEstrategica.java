@@ -21,12 +21,12 @@ public class EntidadObservacionActividadGestionEstrategica {
     private Long idActividadGestionEstrategica;
 
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 
-    public EntidadObservacionActividadGestionEstrategica(Long idActividadGestionEstrategica, LocalDate fecha, String nombre) {
+    public EntidadObservacionActividadGestionEstrategica(Long idActividadGestionEstrategica, LocalDate fecha, String descripcion) {
         this.idActividadGestionEstrategica = idActividadGestionEstrategica;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
 }

@@ -9,16 +9,16 @@ public class ObservacionSprintProyectoArea {
     private final Long idObservacionSprintProyectoArea;
     private final Long idSprintProyectoArea;
     private final LocalDate fecha;
-    private final String nombre;
+    private final String descripcion;
 
-    public static ObservacionSprintProyectoArea of(Long idObservacionSprintProyectoArea, Long idSprint, LocalDate fecha, String nombre){
-        return new ObservacionSprintProyectoArea(idObservacionSprintProyectoArea, idSprint, fecha, nombre);
+    public static ObservacionSprintProyectoArea of(Long idObservacionSprintProyectoArea, Long idSprint, LocalDate fecha, String descripcion){
+        return new ObservacionSprintProyectoArea(idObservacionSprintProyectoArea, idSprint, fecha, descripcion);
     }
 
-    public ObservacionSprintProyectoArea(Long idObservacionSprintProyectoArea, Long idSprintProyectoArea, LocalDate fecha, String nombre) {
+    public ObservacionSprintProyectoArea(Long idObservacionSprintProyectoArea, Long idSprintProyectoArea, LocalDate fecha, String descripcion) {
         this.idObservacionSprintProyectoArea = idObservacionSprintProyectoArea;
         this.idSprintProyectoArea = idSprintProyectoArea;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

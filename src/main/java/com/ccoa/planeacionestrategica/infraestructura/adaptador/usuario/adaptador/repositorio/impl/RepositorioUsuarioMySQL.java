@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuarioRol;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.UsuarioRolId;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
@@ -67,14 +68,11 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
             // Utilizar el mismo ID generado para la entidad de información de usuario
             var infUsuarioEntidad = this.mapeadorInformacionUsuario.mapeadorEntidad(informacionUsuario);
             infUsuarioEntidad.setIdInformacionUsuario(idUsuarioGenerado);
-
-
-
             // Crear y guardar la entidad de UsuarioRol
             EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
             entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());
             entidadUsuarioRol.setUsuario(usuarioEntidad);  // Asignar el usuario antes de guardarlo
-            entidadUsuarioRol.setRol(rol.getNombreRol());
+            entidadUsuarioRol.setRol(rol.getRol());
             this.repositorioRolJpa.save(entidadUsuarioRol);
 
             // Guardar la entidad de información de usuario
@@ -96,7 +94,6 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     public Long eliminar(Long id) {
         // Elimina la entidad de roles del usuario
         this.repositorioRolJpa.eliminarRolesPorUsuarioId(id);
-
         // Ahora puedes eliminar el usuario
         this.repositorioUsuarioJpa.deleteById(id);
         return id;
@@ -109,7 +106,6 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         if(entidadUsuario == null) {
             return null;
         }
-
         List<Rol> roles = entidadUsuario.getRoles().stream().map(rol -> Rol.of(rol.getIdUsuario(), rol.getRol())).toList();
 
         return Usuario.of(entidadUsuario.getIdUsuario(), entidadUsuario.getNombre(), entidadUsuario.getApellido(), entidadUsuario.getCorreo(), entidadUsuario.getPassword(),
@@ -117,12 +113,34 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
     }
 
     @Override
-    public Long modificar(Usuario usuario, InformacionUsuario informacionUsuario, Long id) {
-        var entidad = this.repositorioUsuarioJpa.findById(id).orElse(null);
-        assert entidad != null;
-        this.mapeadorUsuario.actualizarEntidad(entidad, usuario);
-        return this.repositorioUsuarioJpa.save(entidad).getIdUsuario();
+    public Long modificar(Usuario usuario, Rol rol, InformacionUsuario informacionUsuario, Long id) {
+        // Obtener la entidad Usuario
+        var entidadUsuario = this.repositorioUsuarioJpa.findById(id).orElse(null);
+        assert entidadUsuario != null;
+
+        // Buscar la entidad EntidadUsuarioRol correspondiente al usuario
+        EntidadUsuarioRol entidadUsuarioRol = this.repositorioRolJpa.findByIdUsuario(id);
+
+        // Verificar si la entidad EntidadUsuarioRol existe
+        if (entidadUsuarioRol != null) {
+            // Si existe, eliminar la entidad existente
+            this.repositorioRolJpa.delete(entidadUsuarioRol);
+        }
+
+        // Crear una nueva instancia de EntidadUsuarioRol
+        EntidadUsuarioRol nuevoUsuarioRol = new EntidadUsuarioRol();
+        nuevoUsuarioRol.setIdUsuario(id);
+        nuevoUsuarioRol.setUsuario(entidadUsuario);
+        nuevoUsuarioRol.setRol(rol.getRol());
+
+        // Guardar la nueva instancia de EntidadUsuarioRol
+        this.repositorioRolJpa.save(nuevoUsuarioRol);
+
+        // Retornar el ID del usuario
+        return entidadUsuario.getIdUsuario();
     }
+
+
 
     @Override
     public Long modificarAgregarPass(Usuario usuario, InformacionUsuario informacionUsuario, Long id) {

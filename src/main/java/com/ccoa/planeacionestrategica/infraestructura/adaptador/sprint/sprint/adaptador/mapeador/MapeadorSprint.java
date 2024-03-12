@@ -53,7 +53,7 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
     public EntidadSprint mapeadorEntidad(Sprint dominio) {
         var proyecto = this.repositorioProyectoJpa.findById(dominio.getIdProyecto()).orElseThrow().getIdProyecto();
 
-        long totalSprintEnProyecto = mapeadorInformacionProyecto.obtenerTotalSprint(dominio.getIdProyecto());
+        long totalSprintEnProyecto = mapeadorInformacionProyecto.obtenerTotalSprints(dominio.getIdProyecto());
         long totalSprintCreados = obtenerTotalSprints(dominio.getIdProyecto());
 
         if(totalSprintCreados <= totalSprintEnProyecto ){

@@ -21,11 +21,11 @@ public class EntidadObservacionSprint {
     private Long idSprint;
 
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 
-    public EntidadObservacionSprint(Long idSprint, LocalDate fecha, String nombre) {
+    public EntidadObservacionSprint(Long idSprint, LocalDate fecha, String descripcion) {
         this.idSprint = idSprint;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

@@ -15,11 +15,11 @@ public class MapeadorObservacionActividadEstrategica implements MapeadorInfraest
     @Override
     public ObservacionActividadEstrategica mapeadorDominio(EntidadObservacionActividadEstrategica entidad) {
         return new ObservacionActividadEstrategica(entidad.getIdObservacionActividadEstrategica(), entidad.getIdActividadEstrategica(), entidad.getFecha(),
-                entidad.getNombre());
+                entidad.getDescripcion());
     }
     @Override
     public EntidadObservacionActividadEstrategica mapeadorEntidad(ObservacionActividadEstrategica dominio) {
-        return new EntidadObservacionActividadEstrategica(dominio.getIdActividadEstrategica(), dominio.getFecha(), dominio.getNombre());
+        return new EntidadObservacionActividadEstrategica(dominio.getIdActividadEstrategica(), dominio.getFecha(), dominio.getDescripcion());
     }
     public List<DtoObservacionActividadEstrategica> listarDominio(List<EntidadObservacionActividadEstrategica> entidades){
         List<DtoObservacionActividadEstrategica> listaDto = new ArrayList<>();
@@ -29,7 +29,7 @@ public class MapeadorObservacionActividadEstrategica implements MapeadorInfraest
             dto.setIdObservacionActividadEstrategica(entidad.getIdObservacionActividadEstrategica());
             dto.setIdActividadEstrategica(entidad.getIdActividadEstrategica());
             dto.setFecha(entidad.getFecha());
-            dto.setNombre(entidad.getNombre());
+            dto.setDescripcion(entidad.getDescripcion());
 
             listaDto.add(dto);
         }

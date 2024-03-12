@@ -3,6 +3,7 @@ package com.ccoa.planeacionestrategica.dominio.dto;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoPatUsuario;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoRol;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,6 @@ public class DtoUsuarioResumen {
     private String correo;
     private List<DtoDireccion> direcciones;
     private List<DtoPatUsuario> pats;
+    private List<DtoRol> rol;
     private Long idCargo;
 }

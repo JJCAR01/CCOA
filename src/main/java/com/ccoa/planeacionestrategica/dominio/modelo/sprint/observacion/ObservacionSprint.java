@@ -9,16 +9,16 @@ public class ObservacionSprint {
     private final Long idObservacionSprint;
     private final Long idSprint;
     private final LocalDate fecha;
-    private final String nombre;
+    private final String descripcion;
 
-    public static ObservacionSprint of(Long idObservacionSprint, Long idSprint, LocalDate fecha, String nombre){
-        return new ObservacionSprint(idObservacionSprint, idSprint, fecha, nombre);
+    public static ObservacionSprint of(Long idObservacionSprint, Long idSprint, LocalDate fecha, String descripcion){
+        return new ObservacionSprint(idObservacionSprint, idSprint, fecha, descripcion);
     }
 
-    public ObservacionSprint(Long idObservacionSprint, Long idSprint, LocalDate fecha, String nombre) {
+    public ObservacionSprint(Long idObservacionSprint, Long idSprint, LocalDate fecha, String descripcion) {
         this.idObservacionSprint = idObservacionSprint;
         this.idSprint = idSprint;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

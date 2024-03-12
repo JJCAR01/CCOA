@@ -21,12 +21,12 @@ public class EntidadObservacionPat {
     private Long idPat;
 
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 
-    public EntidadObservacionPat(Long idPat, LocalDate fecha, String nombre) {
+    public EntidadObservacionPat(Long idPat, LocalDate fecha, String descripcion) {
         this.idPat = idPat;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
 }

@@ -14,12 +14,12 @@ public class MapeadorObservacionTarea implements MapeadorInfraestructura<Entidad
     @Override
     public ObservacionTarea mapeadorDominio(EntidadObservacionTarea entidad) {
         return new ObservacionTarea(entidad.getIdObservacionTarea(), entidad.getIdTarea(), entidad.getFecha(),
-                entidad.getNombre());
+                entidad.getDescripcion());
     }
 
     @Override
     public EntidadObservacionTarea mapeadorEntidad(ObservacionTarea dominio) {
-        return new EntidadObservacionTarea(dominio.getIdTarea(), dominio.getFecha(), dominio.getNombre());
+        return new EntidadObservacionTarea(dominio.getIdTarea(), dominio.getFecha(), dominio.getDescripcion());
     }
     public List<DtoObservacionTarea> listarDominio(List<EntidadObservacionTarea> entidades){
         List<DtoObservacionTarea> listaDto = new ArrayList<>();
@@ -29,7 +29,7 @@ public class MapeadorObservacionTarea implements MapeadorInfraestructura<Entidad
             dto.setIdObservacionTarea(entidad.getIdObservacionTarea());
             dto.setIdTarea(entidad.getIdTarea());
             dto.setFecha(entidad.getFecha());
-            dto.setNombre(entidad.getNombre());
+            dto.setDescripcion(entidad.getDescripcion());
 
             listaDto.add(dto);
         }

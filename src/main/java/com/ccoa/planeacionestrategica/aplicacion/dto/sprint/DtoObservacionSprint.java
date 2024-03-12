@@ -15,5 +15,5 @@ public class DtoObservacionSprint {
     private Long idObservacionSprint;
     private Long idSprint;
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 }

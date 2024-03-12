@@ -9,16 +9,16 @@ public class ObservacionProyecto {
     private final Long idObservacionProyecto;
     private final Long idProyecto;
     private final LocalDate fecha;
-    private final String nombre;
+    private final String descripcion;
 
-    public static ObservacionProyecto of(Long idObservacionProyecto, Long idProyecto, LocalDate fecha, String nombre){
-        return new ObservacionProyecto(idObservacionProyecto,idProyecto, fecha, nombre);
+    public static ObservacionProyecto of(Long idObservacionProyecto, Long idProyecto, LocalDate fecha, String descripcion){
+        return new ObservacionProyecto(idObservacionProyecto,idProyecto, fecha, descripcion);
     }
 
-    public ObservacionProyecto(Long idObservacionProyecto, Long idProyecto, LocalDate fecha, String nombre) {
+    public ObservacionProyecto(Long idObservacionProyecto, Long idProyecto, LocalDate fecha, String descripcion) {
         this.idObservacionProyecto = idObservacionProyecto;
         this.idProyecto = idProyecto;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

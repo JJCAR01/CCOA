@@ -15,11 +15,11 @@ public class MapeadorObservacionSprint implements MapeadorInfraestructura<Entida
     @Override
     public ObservacionSprint mapeadorDominio(EntidadObservacionSprint entidad) {
         return new ObservacionSprint(entidad.getIdObservacionSprint(), entidad.getIdSprint(), entidad.getFecha(),
-                entidad.getNombre());
+                entidad.getDescripcion());
     }
     @Override
     public EntidadObservacionSprint mapeadorEntidad(ObservacionSprint dominio) {
-        return new EntidadObservacionSprint(dominio.getIdSprint(), dominio.getFecha(), dominio.getNombre());
+        return new EntidadObservacionSprint(dominio.getIdSprint(), dominio.getFecha(), dominio.getDescripcion());
     }
     public List<DtoObservacionSprint> listarDominio(List<EntidadObservacionSprint> entidades){
         List<DtoObservacionSprint> listaDto = new ArrayList<>();
@@ -29,7 +29,7 @@ public class MapeadorObservacionSprint implements MapeadorInfraestructura<Entida
             dto.setIdObservacionSprint(entidad.getIdObservacionSprint());
             dto.setIdSprint(entidad.getIdSprint());
             dto.setFecha(entidad.getFecha());
-            dto.setNombre(entidad.getNombre());
+            dto.setDescripcion(entidad.getDescripcion());
 
             listaDto.add(dto);
         }

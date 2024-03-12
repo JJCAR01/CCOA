@@ -50,7 +50,7 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
 
         // Buscar y agregar cada entidad de proceso asociada al usuario
         for (PatUsuario pat : pats) {
-            // Buscar la entidad EntidadProceso por nombre (suponiendo que existe un repositorio para Proceso)
+            // Buscar la entidad EntidadProceso por descripcion (suponiendo que existe un repositorio para Proceso)
             EntidadPat entidadPat = this.repositorioPatJpa.findByNombre(pat.getNombre());
             if (entidadPat != null) {
                 entidadesPats.add(entidadPat);
@@ -63,7 +63,7 @@ public class MapeadorInformacionUsuario implements MapeadorInfraestructura<Entid
 
         // Buscar y agregar cada entidad de proceso asociada al usuario
         for (Direccion direccion : direcciones) {
-            // Buscar la entidad EntidadProceso por nombre (suponiendo que existe un repositorio para Proceso)
+            // Buscar la entidad EntidadProceso por descripcion (suponiendo que existe un repositorio para Proceso)
             EntidadDireccion entidadDireccion = this.repositorioDireccionJpa.findByNombre(direccion.getNombre());
             if (entidadDireccion != null) {
                 entidadesDireccion.add(entidadDireccion);

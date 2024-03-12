@@ -9,16 +9,16 @@ public class ObservacionActividadGestion {
     private final Long idObservacionActividadGestion;
     private final Long idActividadGestion;
     private final LocalDate fecha;
-    private final String nombre;
+    private final String descripcion;
 
-    public static ObservacionActividadGestion of(Long idObservacionActividadGestion, Long idActividadGestion, LocalDate fecha, String nombre){
-        return new ObservacionActividadGestion(idObservacionActividadGestion,idActividadGestion, fecha, nombre);
+    public static ObservacionActividadGestion of(Long idObservacionActividadGestion, Long idActividadGestion, LocalDate fecha, String descripcion){
+        return new ObservacionActividadGestion(idObservacionActividadGestion,idActividadGestion, fecha, descripcion);
     }
 
-    public ObservacionActividadGestion(Long idObservacionActividadGestion, Long idActividadGestion, LocalDate fecha, String nombre) {
+    public ObservacionActividadGestion(Long idObservacionActividadGestion, Long idActividadGestion, LocalDate fecha, String descripcion) {
         this.idObservacionActividadGestion = idObservacionActividadGestion;
         this.idActividadGestion = idActividadGestion;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

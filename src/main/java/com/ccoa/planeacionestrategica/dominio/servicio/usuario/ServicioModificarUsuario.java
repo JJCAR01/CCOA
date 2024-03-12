@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.usuario;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.InformacionUsuario;
+import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
@@ -17,11 +18,11 @@ public class ServicioModificarUsuario {
         this.repositorioUsuario = repositorioUsuario;
     }
 
-    public Long ejecutarModificar(Usuario usuario, InformacionUsuario informacionUsuario,Long codigo){
+    public Long ejecutarModificar(Usuario usuario, Rol rol , InformacionUsuario informacionUsuario, Long codigo){
 
         if(this.repositorioUsuario.consultarPorId(codigo)==null) throw new ValorInvalidoExcepcion(NO_EXISTE_EL_USUARIO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
-        return this.repositorioUsuario.modificar(usuario,informacionUsuario , codigo);
+        return this.repositorioUsuario.modificar(usuario,rol,informacionUsuario , codigo);
     }
     public Long ejecutarAgregarPass(Usuario usuario, InformacionUsuario informacionUsuario,Long codigo){
 

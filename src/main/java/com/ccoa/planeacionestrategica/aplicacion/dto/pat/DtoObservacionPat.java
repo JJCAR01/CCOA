@@ -13,5 +13,5 @@ public class DtoObservacionPat {
     private Long idObservacionPat;
     private Long idPat;
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 }

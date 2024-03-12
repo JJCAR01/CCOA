@@ -4,14 +4,14 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Mensajes {
-    public static final String NOMBRE_DE_LA_ACTIVIDAD_DE_LA_GESTION_DEL_AREA_NO_PUEDE_ESTAR_VACIA = "El nombre de la actividad de la gestión del area no puede estar vacía";
-    public static final String NOMBRE_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIA = "El nombre del proyecto no puede estar vacía";
-    public static final String NOMBRE_DE_LA_ACTIVIDAD_ESTRATEGICA_NO_PUEDE_ESTAR_VACIA = "El nombre de la actividad estrategica no puede estar vacía";
-    public static final String NOMBRE_DEL_AREA_NO_PUEDE_ESTAR_VACIO = "El nombre del area no puede estar vacío";
-    public static final String NOMBRE_DEL_CARGO_NO_PUEDE_ESTAR_VACIO = "El nombre del cargo no puede estar vacío";
-    public static final String NOMBRE_DEL_PAT_NO_PUEDE_ESTAR_VACIO = "El nombre del pat no puede estar vacío";
-    public static final String NOMBRE_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIO = "El nombre de la tarea no puede estar vacía";
-    public static final String NOMBRE_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO = "El nombre del usuario no puede estar vacío";
+    public static final String NOMBRE_DE_LA_ACTIVIDAD_DE_LA_GESTION_DEL_AREA_NO_PUEDE_ESTAR_VACIA = "El descripcion de la actividad de la gestión del area no puede estar vacía";
+    public static final String NOMBRE_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIA = "El descripcion del proyecto no puede estar vacía";
+    public static final String NOMBRE_DE_LA_ACTIVIDAD_ESTRATEGICA_NO_PUEDE_ESTAR_VACIA = "El descripcion de la actividad estrategica no puede estar vacía";
+    public static final String NOMBRE_DEL_AREA_NO_PUEDE_ESTAR_VACIO = "El descripcion del area no puede estar vacío";
+    public static final String NOMBRE_DEL_CARGO_NO_PUEDE_ESTAR_VACIO = "El descripcion del cargo no puede estar vacío";
+    public static final String NOMBRE_DEL_PAT_NO_PUEDE_ESTAR_VACIO = "El descripcion del pat no puede estar vacío";
+    public static final String NOMBRE_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIO = "El descripcion de la tarea no puede estar vacía";
+    public static final String NOMBRE_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO = "El descripcion del usuario no puede estar vacío";
     public static final String LOS_APELLIDO_DEL_USUARIO_NO_PUEDE_ESTAR_VACIO = "Los apellidos del usuario no puede estar vacío";
     public static final String EL_PROCESO_NO_PUEDE_ESTAR_VACIO = "El proceso no puede estar vacía";
     public static final String LA_DIRECCION_NO_PUEDE_ESTAR_VACIA = "La dirección no puede estar vacía";

@@ -9,15 +9,15 @@ public class ObservacionTarea {
     private final Long idObservacionTarea;
     private final Long idTarea;
     private final LocalDate fecha;
-    private final String nombre;
+    private final String descripcion;
 
-    public static ObservacionTarea of(Long idObservacionTarea, Long idTarea, LocalDate fecha, String nombre){
-        return new ObservacionTarea(idObservacionTarea, idTarea, fecha, nombre);
+    public static ObservacionTarea of(Long idObservacionTarea, Long idTarea, LocalDate fecha, String descripcion){
+        return new ObservacionTarea(idObservacionTarea, idTarea, fecha, descripcion);
     }
-    public ObservacionTarea(Long idObservacionTarea, Long idTarea, LocalDate fecha, String nombre) {
+    public ObservacionTarea(Long idObservacionTarea, Long idTarea, LocalDate fecha, String descripcion) {
         this.idObservacionTarea = idObservacionTarea;
         this.idTarea = idTarea;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

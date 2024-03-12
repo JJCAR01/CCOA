@@ -16,7 +16,7 @@ public interface RepositorioUsuario {
     boolean existe(Usuario usuario);
     Long eliminar(Long id);
     Usuario consultar(String correo, String password);
-    Long modificar(Usuario usuario,InformacionUsuario informacionUsuario,Long id);
+    Long modificar(Usuario usuario,Rol rol, InformacionUsuario informacionUsuario,Long id);
     Long modificarAgregarPass(Usuario usuario,InformacionUsuario informacionUsuario,Long id);
     Long modificarDireciones(InformacionUsuario informacionUsuario,Long id);
     Long modificarDirecionesParaEliminar(InformacionUsuario informacionUsuario,Long id);

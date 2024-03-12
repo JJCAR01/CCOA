@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptad
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.direccion.DtoDireccion;
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoPatUsuario;
+import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoRol;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoUsuarioResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Rol;
 import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
@@ -10,6 +11,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adapta
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCifrarTextoEncoder;
@@ -65,6 +67,11 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
             dto.setApellidos(entidad.getApellido());
             dto.setCorreo(entidad.getCorreo());
             dto.setIdCargo(entidad.getIdCargo());
+            List<DtoRol> dtoRoles= entidad.getRoles()
+                    .stream()
+                    .map(this::mapearRol)
+                    .toList();
+            dto.setRol(dtoRoles);
 
             var infEntidadOptional = this.repositorioInformacionUsuarioJpa.findById(entidad.getIdUsuario());
 
@@ -101,8 +108,12 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
                 .stream()
                 .map(this::mapearPat)
                 .toList();
+        List<DtoRol> dtoRol = entidad.getRoles()
+                .stream()
+                .map(this::mapearRol)
+                .toList();
         return new DtoUsuarioResumen(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(),entidad.getCorreo(),
-                dtoDirecciones, dtoPats, entidad.getIdCargo());
+                dtoDirecciones, dtoPats,dtoRol, entidad.getIdCargo());
     }
 
     public DtoDireccion mapearDireccion(EntidadDireccion entidadDireccion) {
@@ -117,5 +128,12 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
         dtoPat.setNombre(entidadPat.getNombre());
         // Mapear otros atributos según sea necesario
         return dtoPat;
+    }
+    public DtoRol mapearRol(EntidadUsuarioRol entidadUsuarioRol) {
+        DtoRol dtoRol = new DtoRol();
+        dtoRol.setIdRol(entidadUsuarioRol.getIdUsuario());
+        dtoRol.setRol(entidadUsuarioRol.getRol());
+        // Mapear otros atributos según sea necesario
+        return dtoRol;
     }
 }

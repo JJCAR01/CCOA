@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.usuario.DtoUsuario;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.adaptador.MapeadorAplicacionRol;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.adaptador.MapeadorAplicacionInformacionUsuario;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.adaptador.MapeadorAplicacionUsuario;
@@ -13,17 +14,20 @@ public class ServicioAplicacionModificarUsuario {
     private final ServicioModificarUsuario servicioModificarUsuario;
     private final MapeadorAplicacionUsuario mapeadorAplicacionUsuario;
     private final MapeadorAplicacionInformacionUsuario mapeadorAplicacionInformacionUsuario;
+    private final MapeadorAplicacionRol mapeadorAplicacionRol;
 
-    public ServicioAplicacionModificarUsuario(ServicioModificarUsuario servicioModificarUsuario, MapeadorAplicacionUsuario mapeadorAplicacionUsuario, MapeadorAplicacionInformacionUsuario mapeadorAplicacionInformacionUsuario) {
+    public ServicioAplicacionModificarUsuario(ServicioModificarUsuario servicioModificarUsuario, MapeadorAplicacionUsuario mapeadorAplicacionUsuario, MapeadorAplicacionInformacionUsuario mapeadorAplicacionInformacionUsuario, MapeadorAplicacionRol mapeadorAplicacionRol) {
         this.servicioModificarUsuario = servicioModificarUsuario;
         this.mapeadorAplicacionUsuario = mapeadorAplicacionUsuario;
         this.mapeadorAplicacionInformacionUsuario = mapeadorAplicacionInformacionUsuario;
+        this.mapeadorAplicacionRol = mapeadorAplicacionRol;
     }
 
     public DtoRespuesta<Long> ejecutarModificar(DtoUsuario dto, Long codigo){
         var usuario = mapeadorAplicacionUsuario.actualizarAplicacion(dto);
+        var rol = this.mapeadorAplicacionRol.mapeadorAplicacion(dto);
         var informacionUsuario = mapeadorAplicacionInformacionUsuario.mapeadorActualizarPass(dto);
-        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,informacionUsuario,codigo));
+        return new DtoRespuesta<>(this.servicioModificarUsuario.ejecutarModificar(usuario,rol,informacionUsuario,codigo));
     }
     public DtoRespuesta<Long> ejecutarAgregarPass(DtoUsuario dto, Long codigo){
         var usuario = mapeadorAplicacionUsuario.mapeadorAplicacionSoloPass(dto);

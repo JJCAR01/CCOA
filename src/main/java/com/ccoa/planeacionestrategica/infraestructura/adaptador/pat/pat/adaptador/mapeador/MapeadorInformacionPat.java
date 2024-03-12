@@ -73,7 +73,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     public EntidadInformacionPat mapeadorEntidad(InformacionPat dominio) {
         Direccion direccion = dominio.getDireccion();
 
-        // Buscar la entidad entidad por nombre
+        // Buscar la entidad entidad por descripcion
         var entidadDireccion = this.repositorioDireccionJpa.findByNombre(direccion.getNombre());
 
         // Crear y devolver la entidad EntidadInformacionPat
@@ -84,7 +84,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     public void actualizarEntidad(EntidadInformacionPat entidad, InformacionPat informacionPat) {
 
         Direccion direccion = informacionPat.getDireccion();
-        // Buscar la entidad EntidadDireccion por nombre
+        // Buscar la entidad EntidadDireccion por descripcion
         var entidadDireccion = this.repositorioDireccionJpa.findByNombre(direccion.getNombre());
         entidad.setDireccion(entidadDireccion);
         entidad.setFechaInicial(informacionPat.getFechaInicial());

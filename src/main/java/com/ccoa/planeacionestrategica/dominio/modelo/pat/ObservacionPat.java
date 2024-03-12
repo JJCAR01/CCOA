@@ -10,16 +10,16 @@ public class ObservacionPat {
     private final Long idObservacionPat;
     private final Long idPat;
     private final LocalDate fecha;
-    private final String nombre;
+    private final String descripcion;
 
-    public static ObservacionPat of(Long idObservacionPat, Long idPat, LocalDate fecha, String nombre){
-        return new ObservacionPat(idObservacionPat,idPat, fecha, nombre);
+    public static ObservacionPat of(Long idObservacionPat, Long idPat, LocalDate fecha, String descripcion){
+        return new ObservacionPat(idObservacionPat,idPat, fecha, descripcion);
     }
 
-    public ObservacionPat(Long idObservacionPat, Long idPat, LocalDate fecha, String nombre) {
+    public ObservacionPat(Long idObservacionPat, Long idPat, LocalDate fecha, String descripcion) {
         this.idObservacionPat = idObservacionPat;
         this.idPat = idPat;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

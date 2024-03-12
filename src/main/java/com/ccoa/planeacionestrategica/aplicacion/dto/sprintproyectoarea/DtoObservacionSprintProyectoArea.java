@@ -11,5 +11,5 @@ public class DtoObservacionSprintProyectoArea {
     private Long idObservacionSprintProyectoArea;
     private Long idSprintProyectoArea;
     private LocalDate fecha;
-    private String nombre;
+    private String descripcion;
 }

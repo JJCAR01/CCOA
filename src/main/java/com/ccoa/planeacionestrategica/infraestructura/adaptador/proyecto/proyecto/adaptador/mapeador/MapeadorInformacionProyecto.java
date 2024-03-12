@@ -25,9 +25,6 @@ public class MapeadorInformacionProyecto implements MapeadorInfraestructura<Enti
         return new EntidadInformacionProyecto(dominio.getFechaInicial(),dominio.getFechaFinal(), dominio.getFechaRegistro(),dominio.getPlaneacionSprint(),
                 dominio.getTotalSprint());
     }
-    public long obtenerTotalSprint(Long id){
-        return this.repositorioInformacionProyectoJpa.findById(id).orElseThrow().getIdInformacionProyecto();
-    }
 
     public long obtenerTotalSprints(Long id){
         return this.repositorioInformacionProyectoJpa.findById(id)

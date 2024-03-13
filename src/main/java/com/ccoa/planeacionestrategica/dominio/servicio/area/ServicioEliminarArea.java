@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.area;
 
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioArea;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObligatorio;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS;
@@ -18,7 +18,7 @@ public class ServicioEliminarArea {
 
     public Long ejecutarEliminar(Long id){
 
-        if(this.repositorioArea.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioArea.consultarPorId(id)== null) throw new ExcepcionValidadorObligatorio(NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioArea.eliminar(id);
     }

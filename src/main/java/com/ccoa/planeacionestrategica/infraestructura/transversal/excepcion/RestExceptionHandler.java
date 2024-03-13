@@ -18,15 +18,15 @@ public class RestExceptionHandler {
     private static final ConcurrentHashMap<String, HttpStatus> STATES = new ConcurrentHashMap<>();
 
     public RestExceptionHandler() {
-        STATES.put(LongitudMinExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
-        STATES.put(LongitudMaxExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
-        STATES.put(NoDatoExcepcion.class.getSimpleName(), HttpStatus.NOT_FOUND);
-        STATES.put(ValorObligatorioExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
-        STATES.put(ValorCaracteresExcepcion.class.getSimpleName(), HttpStatus.BAD_REQUEST);
-        STATES.put(ValorNombreExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
-        STATES.put(ValorObjetoExcepcion.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
-        STATES.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
-        STATES.put(ValidadorFecha.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ExcepcionLongitudMinima.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ExcepcionLongitudMaxima.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ExcepcionNoExiste.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        STATES.put(ExcepcionValidadorObligatorio.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ExcepcionValidadorCaracteres.class.getSimpleName(), HttpStatus.BAD_REQUEST);
+        STATES.put(ExcepcionValidadorNombre.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ExcepcionValidadorObjeto.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATES.put(ExcepcionValidadorInvalido.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
+        STATES.put(ExcepcionValidadorFecha.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(AccessDeniedExcepcion.class.getSimpleName(),HttpStatus.INTERNAL_SERVER_ERROR);
         STATES.put(BadRequestExcepcion.class.getSimpleName(),HttpStatus.INTERNAL_SERVER_ERROR);
         STATES.put(BadRequestExcepcion.class.getSimpleName(),HttpStatus.BAD_REQUEST);

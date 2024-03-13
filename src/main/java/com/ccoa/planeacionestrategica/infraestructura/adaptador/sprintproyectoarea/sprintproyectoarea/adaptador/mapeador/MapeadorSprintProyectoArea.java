@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoa
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObjetoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObjeto;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorInformacionProyectoArea;
@@ -61,7 +61,7 @@ public class MapeadorSprintProyectoArea implements MapeadorInfraestructura<Entid
             return new EntidadSprintProyectoArea(dominio.getDescripcion(),dominio.getFechaInicial(),dominio.getFechaFinal(),proyecto);
         }
         else {
-            throw new ValorObjetoExcepcion(EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorObjeto(EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO,MENSAJE_DEFECTO);
         }
     }
     public List<DtoSprintProyectoAreaResumen> listarDominio(List<EntidadSprintProyectoArea> entidades){

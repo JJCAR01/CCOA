@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.dominio.modelo.usuario.Usuario;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuarioRol;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.UsuarioRolId;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioInformacionUsuarioJpa;
@@ -117,6 +116,8 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         // Obtener la entidad Usuario
         var entidadUsuario = this.repositorioUsuarioJpa.findById(id).orElse(null);
         assert entidadUsuario != null;
+
+        mapeadorUsuario.actualizarEntidad(entidadUsuario,usuario);
 
         // Buscar la entidad EntidadUsuarioRol correspondiente al usuario
         EntidadUsuarioRol entidadUsuarioRol = this.repositorioRolJpa.findByIdUsuario(id);

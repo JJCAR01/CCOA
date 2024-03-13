@@ -117,10 +117,9 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         double avanceTotal = (sumaActGestion + sumaActEstrategica + sumaProyectos)/ Mensaje.PORCENTAJE;
         entidad.setPorcentajeReal(avanceTotal);
         entidad.setIdInformacionPat(idPat);
-        var duracion = obtenerDuracion(entidad.getFechaInicial(),entidad.getFechaFinal());
         var entidadPat = mapeadorPat.obtenerPatRelacionadoConPat(idPat);
         var porcentajePat =  mapeadorPat.actualizarPorcentajePat(idPat,mapeadorPat.obtenerPatRelacionadoConPat(idPat));
-        entidad.setPorcentajeEsperado(obtenerPorcentajeEsperado(entidad.getFechaInicial(),duracion));
+        entidad.setPorcentajeEsperado(entidad.getPorcentajeEsperado());
         entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
         entidadPat.setPorcentajePat(porcentajePat);
         entidadPat.setIdPat(idPat);

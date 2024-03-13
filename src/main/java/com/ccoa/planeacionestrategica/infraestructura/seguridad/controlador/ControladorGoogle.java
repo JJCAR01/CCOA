@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.seguridad.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.login.DtoLoginGoogle;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.usuario.servicio.ServicioAplicacionListarUsuario;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.NoDatoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionNoExiste;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuario;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadUsuarioRol;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
@@ -47,7 +47,7 @@ public class ControladorGoogle {
             EntidadUsuario usuario = repositorioUsuarioJpa.findByCorreo(decodedToken.getEmail());
 
             // El usuario no está registrado en la base de datos
-            if (usuario == null) throw new NoDatoExcepcion(MENSAJE_DEFECTO, Mensaje.USUARIO_NO_ESTA_REGISTRADO);
+            if (usuario == null) throw new ExcepcionNoExiste(MENSAJE_DEFECTO, Mensaje.USUARIO_NO_ESTA_REGISTRADO);
 
             // Generar un JWT sin autenticar con Spring Security
             String jwt = jwtUtil.create(decodedToken.getEmail(), obtenerIdUsuario(decodedToken.getEmail()),
@@ -71,6 +71,8 @@ public class ControladorGoogle {
             return "ADMIN";
         } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("CONSULTOR"))) {
             return "CONSULTOR";
+        }else if (roles.stream().anyMatch(aut -> aut.getRol().equals("OPERADOR_EDITOR"))) {
+                return "OPERADOR_EDITOR";
         }else {
             return null;
         }

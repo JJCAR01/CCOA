@@ -4,7 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS;
@@ -19,7 +19,7 @@ public class ServicioGuardarSprint {
     }
 
     public Long ejecutarGuardar(Sprint sprint, InformacionSprint informacionSprint){
-        if(this.repositorioSprint.existe(sprint)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioSprint.existe(sprint)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioSprint.guardar(sprint, informacionSprint);
     }
 

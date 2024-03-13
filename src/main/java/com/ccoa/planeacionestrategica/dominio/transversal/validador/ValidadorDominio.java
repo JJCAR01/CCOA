@@ -19,65 +19,65 @@ public class ValidadorDominio {
 
     public static void validarObligatorio(Object valor, String mensajeTecnico,String mensajeHumano) {
         if (valor == null || (valor instanceof String str && str.trim().isEmpty())) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico, mensajeHumano);
+            throw new ExcepcionValidadorObligatorio(mensajeTecnico, mensajeHumano);
         }
     }
 
     public static void validarObligatorio(Object valor, String mensajeTecnico) {
         if (valor == null || (valor instanceof String str && str.trim().isEmpty())) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico, CAMPO_OBLIGATORIO);
+            throw new ExcepcionValidadorObligatorio(mensajeTecnico, CAMPO_OBLIGATORIO);
         }
     }
 
     public static void validarObligatorioTipoDato(LocalDate valor, String mensajeTecnico) {
         if (valor == null) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico, MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorObligatorio(mensajeTecnico, MENSAJE_DEFECTO);
         }
     }
 
 
     public static void validadorNoVacio(List<?> lista, String mensajeTecnico) {
         if(lista == null  || lista.isEmpty()) {
-            throw new ValorObligatorioExcepcion(mensajeTecnico,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorObligatorio(mensajeTecnico,MENSAJE_DEFECTO);
         }
     }
     public static void longitudPassword(String valor, String mensaje)
     {
         if(!(valor.length()>=13 && valor.length()<=20))
         {
-            throw new LongitudMaxExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionLongitudMaxima(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroEnteroYMayorACero(Integer valor, String mensaje){
 
         if(valor <= 0){
-            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorNumero(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroDoubleYMayorOIgualACero(Double valor, String mensaje) {
 
         if(valor < 0){
-            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorNumero(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static void validadorNumeroDoubleYMayorACero(Double valor, String mensaje) {
 
         if(valor < 0){
-            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorNumero(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void validadorNumeroLongYMayorACero(Long valor, String mensaje) {
 
         if(valor < 0){
-            throw new ValorNumeroExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorNumero(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static void validarObjeto(Object objeto, String mensaje){
         if(objeto == null){
-            throw new ValorObjetoExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorObjeto(mensaje,MENSAJE_DEFECTO);
         }
     }
 
@@ -91,7 +91,7 @@ public class ValidadorDominio {
     {
         if(aceptacionPatron(password, PATRON_CLAVE))
         {
-            throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorCaracteres(mensaje,MENSAJE_DEFECTO);
         }
         else{
             longitudPassword(password, "Valor del tamaño excedido");
@@ -102,32 +102,32 @@ public class ValidadorDominio {
     {
         if(aceptacionPatron(correo, PATRON_CORREO))
         {
-            throw new ValorCaracteresExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorCaracteres(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void fechaInicioEsMayorActual(LocalDate fecha, String mensaje){
         LocalDate fechaActual =LocalDate.now();
         if(fecha.isBefore(fechaActual)){
-            throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
 
     public static void fechaFinalEsMayorFechaInicio(LocalDate fechaFinal,LocalDate fechaInicio,String mensaje){
         if(fechaFinal.isBefore(fechaInicio)){
-            throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static void siEsFechaActualRegistrada(LocalDate fecha,String mensaje){
         LocalDate  fechaActual = LocalDate.now();
         if(!Objects.equals(fecha, fechaActual)){
-            throw new ValidadorFecha(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorFecha(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static void siEsLasFechasRegistrasdasSonValidasParaSprint(LocalDate fechaInicio,LocalDate fechaFinal,String mensaje) {
         long diferencia = calcularDiferencia(fechaInicio,fechaFinal);
         if ((diferencia <= 7)) {
-            throw new ValidadorFecha(mensaje, MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorFecha(mensaje, MENSAJE_DEFECTO);
         }
     }
 
@@ -137,7 +137,7 @@ public class ValidadorDominio {
 
     public static void validarPatronURLEsValido(String valor, String mensaje) {
         if (!cadenaURL(valor)) {
-            throw new ValorObjetoExcepcion(mensaje,MENSAJE_DEFECTO);
+            throw new ExcepcionValidadorObjeto(mensaje,MENSAJE_DEFECTO);
         }
     }
     public static boolean cadenaURL(String string) {

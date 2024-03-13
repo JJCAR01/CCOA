@@ -73,9 +73,7 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionActividadGestion(idInformacionActividadGestion);
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(idInformacionActividadGestion).getFechaInicial(), entidad.getDuracion());
-            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeEsperado(entidad.getPorcentajeEsperado());
             entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioInformacionActividadGestionJpa.save(entidad);
             var idPat = mapeadorActividadGestion.obtenerIdPatRelacionadoConElActividadGestion(idInformacionActividadGestion).getIdPat();

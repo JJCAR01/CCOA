@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprint;
 
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorObligatorioExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObligatorio;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS;
@@ -17,7 +17,7 @@ public class ServicioEliminarSprint {
     }
 
     public Long ejecutarEliminar(Long id){
-        if(this.repositorioSprint.consultarPorId(id)== null) throw new ValorObligatorioExcepcion(NO_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioSprint.consultarPorId(id)== null) throw new ExcepcionValidadorObligatorio(NO_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioSprint.eliminar(id);
     }
 }

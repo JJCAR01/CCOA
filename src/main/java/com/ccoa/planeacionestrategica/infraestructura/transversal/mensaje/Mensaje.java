@@ -14,6 +14,7 @@ public class Mensaje {
     public static final String EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO = "EL numero de sprint no puede ser mayor al numero de sprints establecidos";
     public static final String USUARIO_NO_ESTA_REGISTRADO = "El usuario no está registrado";
     public static final String ERROR_EN_LA_AUTENTICACION = "Error en la autenticacion";
+    public static final String ACCION_NO_PERMITIDA = "Está acción no es permitida";
     public static final String USUARIO_O_CLAVE_INCORRECTOS = "Usuario o clave incorrectos.";
     public static final String SE_HA_PRESENTADO_UN_ERROR_AL_GUARDAR_EL_USUARIO = "Se ha presentando un error al guardar el usuario";
 

@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.actividadgestionestrategica;
 
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadgestionestrategica.RepositorioActividadGestionEstrategica;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS;
@@ -17,13 +17,13 @@ public class ServicioEliminarActividadGestionEstrategica {
 
     public Long ejecutarEliminar(Long id){
 
-        if(this.repositorioActividadGestionEstrategica.consultarPorId(id)== null) throw new ValorInvalidoExcepcion(NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioActividadGestionEstrategica.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioActividadGestionEstrategica.eliminar(id);
     }
     public Long ejecutarEliminarPorActEstrategica(Long id){
 
-        if(this.repositorioActividadGestionEstrategica.consultarPorIdActividadEstrategicaAEliminar(id)== null) throw new ValorInvalidoExcepcion(NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioActividadGestionEstrategica.consultarPorIdActividadEstrategicaAEliminar(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioActividadGestionEstrategica.eliminarPorActividadEstrategica(id);
     }

@@ -5,7 +5,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionPro
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.ProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.documento.DocumentoProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea.RepositorioProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
@@ -20,7 +20,7 @@ public class ServicioGuardarProyectoArea {
     }
 
     public Long ejecutarGuardar(ProyectoArea proyectoArea, InformacionProyectoArea informacionProyectoArea, DetalleProyectoArea detalleProyectoArea){
-        if(this.repositorioProyectoArea.existe(proyectoArea)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioProyectoArea.existe(proyectoArea)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyectoArea.guardar(proyectoArea,informacionProyectoArea,detalleProyectoArea);
     }
     public Long ejecutarGuardarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo){

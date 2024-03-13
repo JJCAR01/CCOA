@@ -73,13 +73,7 @@ public class MapeadorInformacionSprintProyectoArea implements MapeadorInfraestru
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionSprintProyectoArea(idSprintProyectoArea);
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    mapeadorSprintProyectoArea.obtenerIdProyectoRelacionadoConElSprintProyectoArea(idSprintProyectoArea).getFechaInicial(),
-                    servicioObtenerDuracion.calcular(
-                            mapeadorSprintProyectoArea.obtenerIdProyectoRelacionadoConElSprintProyectoArea(idSprintProyectoArea).getFechaInicial(),
-                            mapeadorSprintProyectoArea.obtenerIdProyectoRelacionadoConElSprintProyectoArea(idSprintProyectoArea).getFechaFinal()
-                    ));
-            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeEsperado(entidad.getPorcentajeEsperado());
             entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioInformacionSprintProyectoAreaJpa.save(entidad);
             var idProyecto = mapeadorSprintProyectoArea.obtenerIdProyectoRelacionadoConElSprintProyectoArea(idSprintProyectoArea).getIdProyectoArea();

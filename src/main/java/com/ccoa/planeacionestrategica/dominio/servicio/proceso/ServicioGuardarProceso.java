@@ -2,7 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.proceso;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.dominio.puerto.RepositorioProceso;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
 
 import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS;
@@ -17,7 +17,7 @@ public class ServicioGuardarProceso {
 
     public Long ejecutarGuardar(Proceso proceso)  {
 
-        if(this.repositorioProceso.existe(proceso)) throw new ValorInvalidoExcepcion(YA_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        if(this.repositorioProceso.existe(proceso)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
         return this.repositorioProceso.guardar(proceso);
     }

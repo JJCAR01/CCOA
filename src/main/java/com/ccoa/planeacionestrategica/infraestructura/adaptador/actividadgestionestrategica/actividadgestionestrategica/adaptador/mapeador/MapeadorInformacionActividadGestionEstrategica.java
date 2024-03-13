@@ -76,9 +76,7 @@ public class MapeadorInformacionActividadGestionEstrategica implements MapeadorI
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionActividadGestionEstrategica(idInformacionActividadGestionEstrategica);
             entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
-            var porcentajeEsperado = servicioObtenerPorcentaje.obtenerPorcentajeEsperado(
-                    mapeadorActividadGestionEstrategica.obtenerIdProyectoRelacionadoConElSprint(idInformacionActividadGestionEstrategica).getFechaInicial(), entidad.getDuracion());
-            entidad.setPorcentajeEsperado(Math.min(porcentajeEsperado, Mensaje.PORCENTAJE));
+            entidad.setPorcentajeEsperado(entidad.getPorcentajeEsperado());
             entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
             repositorioInformacionActividadGestionEstrategicaJpa.save(entidad);
             var idActividadEstrategica = mapeadorActividadGestionEstrategica.obtenerIdProyectoRelacionadoConElSprint(idInformacionActividadGestionEstrategica).getIdActividadEstrategica();

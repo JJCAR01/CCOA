@@ -49,14 +49,10 @@ public class ControladorPat {
         return servicioAplicacionListarPat.consultarById(codigo);
     }
 
-    @PreAuthorize("hasRole('ROLE_OPERADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{codigo}")
     public DtoRespuesta<Long> eliminar(@PathVariable Long codigo){
-        try {
-            return this.servicioAplicacionEliminarPat.ejecutarEliminar(codigo);
-        } catch (AccessDeniedException e) {
-            throw new AccessDeniedExcepcion(MENSAJE_DEFECTO, Mensaje.ACCION_NO_PERMITIDA);
-        }
+        return this.servicioAplicacionEliminarPat.ejecutarEliminar(codigo);
     }
 
 

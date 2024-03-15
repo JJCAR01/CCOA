@@ -16,9 +16,9 @@ public class JwtUtil {
 
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(ORGANIZACION);
 
-    public String create(String username,Long user ,String type, List<String> direcciones, List<String> procesos) {
-        String direccionesString = String.join(",", direcciones);
-        String procesosString = String.join(",", procesos);
+    public String create(String username,Long user ,String type, List<String> direcciones, List<String> pats) {
+        String direccionesString = String.join("-", direcciones);
+        String patsString = String.join("-", pats);
         // Obtén la fecha actual
         Calendar calendar = Calendar.getInstance();
 
@@ -39,7 +39,7 @@ public class JwtUtil {
                 .withClaim("idUser", user)
                 .withClaim("type", type)
                 .withClaim("direcciones", direccionesString)
-                .withClaim("pats", procesosString)
+                .withClaim("pats", patsString)
                 .withIssuer("CCOA")
                 .withIssuedAt(new Date())
                 .withExpiresAt(expiracion)

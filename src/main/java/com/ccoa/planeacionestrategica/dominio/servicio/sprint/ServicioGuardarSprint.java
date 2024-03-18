@@ -19,7 +19,6 @@ public class ServicioGuardarSprint {
     }
 
     public Long ejecutarGuardar(Sprint sprint, InformacionSprint informacionSprint){
-        if(this.repositorioSprint.existe(sprint)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioSprint.guardar(sprint, informacionSprint);
     }
 

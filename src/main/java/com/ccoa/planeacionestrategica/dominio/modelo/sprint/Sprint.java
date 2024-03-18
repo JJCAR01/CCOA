@@ -18,6 +18,7 @@ public class Sprint {
 
     public static Sprint of(Long idSprint, String descripcion, LocalDate fechaInicial, LocalDate fechaFinal, Long idProyecto){
         ValidadorDominio.validarObligatorio(descripcion,LA_DESCRIPCION_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.validadorMaximo255Caracteres(descripcion,EXCEDIO_MAXIMO_DE_CARACTERES);
         ValidadorDominio.validarObligatorioTipoDato(fechaInicial,LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validarObligatorioTipoDato(fechaFinal,LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL);

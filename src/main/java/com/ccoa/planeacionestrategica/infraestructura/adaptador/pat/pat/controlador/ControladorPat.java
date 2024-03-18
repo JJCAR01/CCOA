@@ -54,8 +54,6 @@ public class ControladorPat {
     public DtoRespuesta<Long> eliminar(@PathVariable Long codigo){
         return this.servicioAplicacionEliminarPat.ejecutarEliminar(codigo);
     }
-
-
     @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoPat pat, @PathVariable Long codigo){
         return this.servicioAplicacionModificarPat.ejecutarModificar(pat,codigo);

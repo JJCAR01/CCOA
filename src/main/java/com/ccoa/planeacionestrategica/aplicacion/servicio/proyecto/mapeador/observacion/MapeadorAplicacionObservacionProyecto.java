@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionObservacionProyecto implements MapeadorAplicacion<DtoObservacionProyecto, ObservacionProyecto> {
     @Override
     public ObservacionProyecto mapeadorAplicacion(DtoObservacionProyecto dto) {
-            return new ObservacionProyecto(dto.getIdObservacionProyecto(), dto.getIdProyecto(),dto.getFecha(), dto.getDescripcion());
+            return ObservacionProyecto.of(dto.getIdObservacionProyecto(), dto.getIdProyecto(),dto.getFecha(), dto.getDescripcion());
     }
 }

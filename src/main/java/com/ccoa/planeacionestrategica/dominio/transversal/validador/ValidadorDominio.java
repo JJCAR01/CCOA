@@ -34,7 +34,11 @@ public class ValidadorDominio {
             throw new ExcepcionValidadorObligatorio(mensajeTecnico, MENSAJE_DEFECTO);
         }
     }
-
+    public static void validadorMaximo255Caracteres(String nombre, String mensajeTecnico) {
+        if(nombre.length() > 255) {
+            throw new ExcepcionValidadorObligatorio(mensajeTecnico, MENSAJE_DEFECTO);
+        }
+    }
 
     public static void validadorNoVacio(List<?> lista, String mensajeTecnico) {
         if(lista == null  || lista.isEmpty()) {

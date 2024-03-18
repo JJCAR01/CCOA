@@ -1,8 +1,11 @@
-package com.ccoa.planeacionestrategica.dominio.modelo.pat;
+package com.ccoa.planeacionestrategica.dominio.modelo.pat.observacion;
 
+import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
 
 import java.time.LocalDate;
+
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.EXCEDIO_MAXIMO_DE_CARACTERES;
 
 @Data
 public class ObservacionPat {
@@ -13,6 +16,7 @@ public class ObservacionPat {
     private final String descripcion;
 
     public static ObservacionPat of(Long idObservacionPat, Long idPat, LocalDate fecha, String descripcion){
+        ValidadorDominio.validadorMaximo255Caracteres(descripcion,EXCEDIO_MAXIMO_DE_CARACTERES);
         return new ObservacionPat(idObservacionPat,idPat, fecha, descripcion);
     }
 

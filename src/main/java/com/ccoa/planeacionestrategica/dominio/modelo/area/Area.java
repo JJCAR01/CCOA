@@ -3,8 +3,7 @@ package com.ccoa.planeacionestrategica.dominio.modelo.area;
 import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Getter;
 
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.LA_DIRECCION_NO_PUEDE_ESTAR_VACIA;
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.NOMBRE_DEL_AREA_NO_PUEDE_ESTAR_VACIO;
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
 
 @Getter
 public class Area {
@@ -16,6 +15,7 @@ public class Area {
 
     public static Area of(Long idArea,String nombre, Long idDireccion){
         ValidadorDominio.validarObligatorio(nombre,NOMBRE_DEL_AREA_NO_PUEDE_ESTAR_VACIO);
+        ValidadorDominio.validadorMaximo255Caracteres(nombre,EXCEDIO_MAXIMO_DE_CARACTERES);
         ValidadorDominio.validarObligatorio(idDireccion,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
         return new Area(idArea, nombre, idDireccion);
     }

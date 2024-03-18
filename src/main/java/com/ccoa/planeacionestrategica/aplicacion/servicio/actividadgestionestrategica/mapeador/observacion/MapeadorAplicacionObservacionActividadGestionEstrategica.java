@@ -10,7 +10,7 @@ public class MapeadorAplicacionObservacionActividadGestionEstrategica implements
         ObservacionActividadGestionEstrategica> {
     @Override
     public ObservacionActividadGestionEstrategica mapeadorAplicacion(DtoObservacionActividadGestionEstrategica dto) {
-            return new ObservacionActividadGestionEstrategica(dto.getIdObservacionActividadGestionEstrategica(), dto.getIdActividadGestionEstrategica(),
+            return ObservacionActividadGestionEstrategica.of(dto.getIdObservacionActividadGestionEstrategica(), dto.getIdActividadGestionEstrategica(),
                     dto.getFecha(), dto.getDescripcion());
     }
 }

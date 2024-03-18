@@ -17,8 +17,8 @@ public class JwtUtil {
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(ORGANIZACION);
 
     public String create(String username,Long user ,String type, List<String> direcciones, List<String> pats) {
-        String direccionesString = String.join("-", direcciones);
-        String patsString = String.join("-", pats);
+        String direccionesString = String.join("&", direcciones);
+        String patsString = String.join("&", pats);
         // Obtén la fecha actual
         Calendar calendar = Calendar.getInstance();
 

@@ -146,9 +146,10 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
                         entidadDetalleActividadEstrategica.getPorcentajeMeta()));
     }
 
-    public EntidadActividadEstrategica obtenerPatRelacionadoConActividadEstrategica(Long id){
+    public EntidadActividadEstrategica obtenerEntidadRelacionadoConActividadEstrategica(Long id){
         return this.repositorioActividadEstrategicaJpa.findById(id).orElseThrow();
     }
+
 
     public Integer obtenerDuracion(LocalDate fechaInicial, LocalDate fechaFinal){
         return servicioObtenerDuracion.calcular(fechaInicial,fechaFinal);

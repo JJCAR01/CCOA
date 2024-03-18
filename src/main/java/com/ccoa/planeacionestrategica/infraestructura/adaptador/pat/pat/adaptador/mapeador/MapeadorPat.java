@@ -83,7 +83,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
             dtoDireccion.setNombre(infEntidad.orElseThrow().getDireccion().getNombre());
             dto.setDireccion(dtoDireccion);
 
-            dto.setPorcentajePat(actualizarPorcentajePat(entidad.getIdPat(),entidad));
+            dto.setPorcentajePat(entidad.getPorcentajePat());
 
             listaDto.add(dto);
         }
@@ -98,8 +98,8 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         entidad.setFechaAnual(pat.getFechaAnual());
         entidad.setIdUsuario(pat.getIdUsuario());
     }
-    public double actualizarPorcentajePat(Long idPat, EntidadPat entidad) {
-        List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
+    public void actualizarPorcentajePat(EntidadPat entidad) {
+        List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(entidad.getIdPat());
 
         // Filtrar las actividades estratégicas por la fecha inicial
         List<EntidadActividadEstrategica> actividadesFiltradas = actividadEstrategicas.stream()
@@ -113,15 +113,14 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
                 .toList();
 
         // Calcular el porcentaje
-        double porcentaje = Mensaje.PORCENTAJE / informacionActividadesEstrategicas.size();
+        double porcentaje = Mensaje.PORCENTAJE * informacionActividadesEstrategicas.size();
 
-        double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajePat() * porcentaje).sum();
+        double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(EntidadInformacionActividadEstrategica::getPorcentajePat).sum();
 
-        double avanceTotal = sumaActEstrategica/ Mensaje.PORCENTAJE;
+        double avanceTotal = (sumaActEstrategica/ porcentaje) * Mensaje.PORCENTAJE;
         entidad.setPorcentajePat(avanceTotal);
-        entidad.setIdPat(idPat);
+        entidad.setIdPat(entidad.getIdPat());
         repositorioPatJpa.save(entidad);
-        return avanceTotal;
     }
     public EntidadPat obtenerPatRelacionadoConPat(Long id){
         return this.repositorioPatJpa.findById(id).orElseThrow();

@@ -19,7 +19,6 @@ public class ServicioGuardarSprintProyectoArea {
     }
 
     public Long ejecutarGuardar(SprintProyectoArea sprintProyectoArea, InformacionSprintProyectoArea informacionSprintProyectoArea){
-        if(this.repositorioSprintProyectoArea.existe(sprintProyectoArea)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_SPRINT_DEL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioSprintProyectoArea.guardar(sprintProyectoArea, informacionSprintProyectoArea);
     }
 

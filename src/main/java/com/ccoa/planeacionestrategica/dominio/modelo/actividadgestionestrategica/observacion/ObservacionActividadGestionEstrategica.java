@@ -1,8 +1,11 @@
 package com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.observacion;
 
+import com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio;
 import lombok.Data;
 
 import java.time.LocalDate;
+
+import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.EXCEDIO_MAXIMO_DE_CARACTERES;
 
 @Data
 public class ObservacionActividadGestionEstrategica {
@@ -13,6 +16,7 @@ public class ObservacionActividadGestionEstrategica {
 
     public static ObservacionActividadGestionEstrategica of(Long idObservacionActividadGestionEstrategica, Long idActividadGestionEstrategica, LocalDate fecha,
                                                             String descripcion){
+        ValidadorDominio.validadorMaximo255Caracteres(descripcion,EXCEDIO_MAXIMO_DE_CARACTERES);
         return new ObservacionActividadGestionEstrategica(idObservacionActividadGestionEstrategica,idActividadGestionEstrategica, fecha, descripcion);
     }
 

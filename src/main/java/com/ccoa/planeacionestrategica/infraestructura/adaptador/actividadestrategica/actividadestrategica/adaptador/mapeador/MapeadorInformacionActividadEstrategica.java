@@ -14,7 +14,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyect
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioDetalleProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -88,7 +87,7 @@ public class MapeadorInformacionActividadEstrategica implements MapeadorInfraest
         entidad.setPorcentajeEsperado(entidad.getPorcentajeEsperado());
         entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));
         repositorioInformacionActividadEstrategicaJpa.save(entidad);
-        var idPat = mapeadorActividadEstrategica.obtenerPatRelacionadoConActividadEstrategica(entidad.getIdInformacionActividadEstrategica()).getIdPat();
+        var idPat = mapeadorActividadEstrategica.obtenerEntidadRelacionadoConActividadEstrategica(entidad.getIdInformacionActividadEstrategica()).getIdPat();
         var entidadPat = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);
         mapeadorInformacionPat.actualizarPorcentajeAvance(entidadPat,idPat);
     }

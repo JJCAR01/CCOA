@@ -56,6 +56,7 @@ public class Mensajes {
     public static final String NO_EXISTE_EL_AREA_CON_LOS_DATOS_INGRESADOS = "No existe el area con los datos ingresados";
     public static final String NO_EXISTE_EL_CARGO_CON_LOS_DATOS_INGRESADOS = "No existe el cargo con los datos ingresados";
     public static final String NO_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS = "No existe el pat con los datos ingresados";
+    public static final String NO_EXISTE_LA_OBSERVACION_DEL_PAT_CON_LOS_DATOS_INGRESADOS = "No existe la observación del pat con los datos ingresados";
     public static final String NO_EXISTE_EL_PROCESO_CON_LOS_DATOS_INGRESADOS = "No existe el proceso con los datos ingresados";
     public static final String NO_EXISTE_LA_DIRECCION_CON_LOS_DATOS_INGRESADOS = "No existe la direccion con los datos ingresados";
     public static final String NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS = "No existe el proyecto con los datos ingresados";
@@ -83,4 +84,5 @@ public class Mensajes {
     public static final String YA_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION_DE_LA_ACTIVIDAD_ESTRATEGICA = "Ya existe un documento relacionado con la actividad de gestión de la actividad estratégica";
     public static final String YA_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad estrategica con los datos ingresados";
     public static final String YA_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS = "Ya existe la actividad gestion del area con los datos ingresados";
+    public static final String EXCEDIO_MAXIMO_DE_CARACTERES = "Excedió el máximo de caracteres(255), por favor intente de nuevo";
 }

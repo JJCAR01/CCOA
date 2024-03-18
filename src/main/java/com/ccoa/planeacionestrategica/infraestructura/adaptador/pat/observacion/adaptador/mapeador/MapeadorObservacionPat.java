@@ -1,8 +1,10 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.adaptador.mapeador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoObservacionPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.ObservacionPat;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.observacion.ObservacionPat;
+import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.adaptador.entidad.EntidadObservacionPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,5 +36,8 @@ public class MapeadorObservacionPat implements MapeadorInfraestructura<EntidadOb
             listaDto.add(dto);
         }
         return listaDto;
+    }
+    public void actualizarEntidad(EntidadObservacionPat entidad, ObservacionPat observacionPat) {
+        entidad.setDescripcion(observacionPat.getDescripcion());
     }
 }

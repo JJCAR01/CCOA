@@ -19,6 +19,7 @@ public class Proyecto {
     public static Proyecto of(Long idProyecto, String nombre, Double presupuesto, EModalidad modalidad,
                               Double valorEjecutado, Long idActividadEstrategica, Long idUsuario){
         ValidadorDominio.validarObligatorio(nombre,NOMBRE_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIA);
+        ValidadorDominio.validadorMaximo255Caracteres(nombre,EXCEDIO_MAXIMO_DE_CARACTERES);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(presupuesto,EL_PRESUPUESTO_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validarObligatorio(modalidad,LA_MODALIDAD_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(valorEjecutado,EL_VALOR_EJECUTADO_DEL_PROYECTO_NO_PUEDE_ESTAR_VACIO);

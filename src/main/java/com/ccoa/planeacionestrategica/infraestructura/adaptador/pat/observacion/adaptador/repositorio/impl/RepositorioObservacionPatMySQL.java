@@ -1,7 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.adaptador.repositorio.impl;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoObservacionPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.ObservacionPat;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.observacion.ObservacionPat;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioObservacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.adaptador.repositorio.jpa.RepositorioObservacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.adaptador.entidad.EntidadObservacionPat;
@@ -43,6 +43,20 @@ public class RepositorioObservacionPatMySQL implements RepositorioObservacionPat
     public List<DtoObservacionPat> consultarPorIdPat(Long idPat) {
         List<EntidadObservacionPat> entidades = this.repositorioObservacionPatJpa.findByIdPat(idPat);
         return this.mapeadorObservacionPat.listarDominio(entidades);
+    }
+
+    @Override
+    public Long eliminar(Long id) {
+        this.repositorioObservacionPatJpa.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public Long modificar(ObservacionPat observacionPat, Long id) {
+        var entidad = this.repositorioObservacionPatJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorObservacionPat.actualizarEntidad(entidad, observacionPat);
+        return this.repositorioObservacionPatJpa.save(entidad).getIdObservacionPat();
     }
 
 }

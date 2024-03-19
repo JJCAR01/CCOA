@@ -45,4 +45,18 @@ public class RepositorioObservacionActividadEstrategicaMySQL implements Reposito
         return this.mapeadorObservacionActividadEstrategica.listarDominio(entidades);
     }
 
+    @Override
+    public Long eliminar(Long id) {
+        this.repositorioObservacionActividadEstrategicaJpa.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public Long modificar(ObservacionActividadEstrategica observacionActividadEstrategica, Long id) {
+        var entidad = this.repositorioObservacionActividadEstrategicaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorObservacionActividadEstrategica.actualizarEntidad(entidad, observacionActividadEstrategica);
+        return this.repositorioObservacionActividadEstrategicaJpa.save(entidad).getIdObservacionActividadEstrategica();
+    }
+
 }

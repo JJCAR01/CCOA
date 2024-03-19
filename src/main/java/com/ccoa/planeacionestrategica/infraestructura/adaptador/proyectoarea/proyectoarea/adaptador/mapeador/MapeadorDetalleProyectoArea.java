@@ -10,7 +10,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoar
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioInformacionSprintProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.jpa.RepositorioSprintProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -21,19 +20,17 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
     private final MapeadorProyectoArea mapeadorProyectoArea;
     private final RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa;
     private final MapeadorInformacionPat mapeadorInformacionPat;
-    private final MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea;
     private final RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
 
     public MapeadorDetalleProyectoArea(
             RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa,
             MapeadorProyectoArea mapeadorProyectoArea, RepositorioSprintProyectoAreaJpa repositorioSprintProyectoAreaJpa,
-            MapeadorInformacionPat mapeadorInformacionPat, MapeadorInformacionProyectoArea mapeadorInformacionProyectoArea, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
+            MapeadorInformacionPat mapeadorInformacionPat, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
         this.mapeadorProyectoArea = mapeadorProyectoArea;
         this.repositorioSprintProyectoAreaJpa = repositorioSprintProyectoAreaJpa;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
-        this.mapeadorInformacionProyectoArea = mapeadorInformacionProyectoArea;
         this.repositorioDetalleProyectoAreaJpa = repositorioDetalleProyectoAreaJpa;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
     }

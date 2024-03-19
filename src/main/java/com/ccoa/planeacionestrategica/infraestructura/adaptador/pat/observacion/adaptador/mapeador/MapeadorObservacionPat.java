@@ -2,9 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoObservacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.observacion.ObservacionPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.proceso.Proceso;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.adaptador.entidad.EntidadObservacionPat;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proceso.adaptador.entidad.EntidadProceso;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 

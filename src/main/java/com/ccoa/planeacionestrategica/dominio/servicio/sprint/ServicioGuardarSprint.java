@@ -4,11 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
-
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.YA_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS;
-import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarSprint {

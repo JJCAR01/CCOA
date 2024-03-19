@@ -46,4 +46,18 @@ public class RepositorioObservacionProyectoAreaMySQL implements RepositorioObser
         return this.mapeadorObservacionProyectoArea.listarDominio(entidades);
     }
 
+    @Override
+    public Long eliminar(Long id) {
+        this.repositorioObservacionProyectoAreaJpa.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public Long modificar(ObservacionProyectoArea observacionProyectoArea, Long id) {
+        var entidad = this.repositorioObservacionProyectoAreaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorObservacionProyectoArea.actualizarEntidad(entidad, observacionProyectoArea);
+        return this.repositorioObservacionProyectoAreaJpa.save(entidad).getIdObservacionProyectoArea();
+    }
+
 }

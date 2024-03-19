@@ -1,6 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.observacion.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestionestrategica.DtoObservacionActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionestrategica.servicio.observacion.ServicioAplicacionEliminarObservacionActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionestrategica.servicio.observacion.ServicioAplicacionModificarObservacionActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionestrategica.servicio.observacion.ServicioAplicacionGuardarObservacionActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadgestionestrategica.servicio.observacion.ServicioAplicacionListarObservacionActividadGestionEstrategica;
@@ -16,11 +18,17 @@ public class ControladorObservacionActividadGestionEstrategica {
 
     private final ServicioAplicacionGuardarObservacionActividadGestionEstrategica servicioAplicacionGuardarObservacionActividadGestionEstrategica;
     private final ServicioAplicacionListarObservacionActividadGestionEstrategica servicioAplicacionListarObservacionActividadGestionEstrategica;
+    private final ServicioAplicacionModificarObservacionActividadGestionEstrategica servicioAplicacionModificarObservacionActividadGestionEstrategica;
+    private final ServicioAplicacionEliminarObservacionActividadGestionEstrategica servicioAplicacionEliminarObservacionActividadGestionEstrategica;
 
     public ControladorObservacionActividadGestionEstrategica(ServicioAplicacionGuardarObservacionActividadGestionEstrategica servicioAplicacionGuardarObservacionActividadGestionEstrategica,
-                                                             ServicioAplicacionListarObservacionActividadGestionEstrategica servicioAplicacionListarObservacionActividadGestionEstrategica) {
+                                                             ServicioAplicacionListarObservacionActividadGestionEstrategica servicioAplicacionListarObservacionActividadGestionEstrategica,
+                                                             ServicioAplicacionModificarObservacionActividadGestionEstrategica servicioAplicacionModificarObservacionActividadGestionEstrategica,
+                                                             ServicioAplicacionEliminarObservacionActividadGestionEstrategica servicioAplicacionEliminarObservacionActividadGestionEstrategica) {
         this.servicioAplicacionGuardarObservacionActividadGestionEstrategica = servicioAplicacionGuardarObservacionActividadGestionEstrategica;
         this.servicioAplicacionListarObservacionActividadGestionEstrategica = servicioAplicacionListarObservacionActividadGestionEstrategica;
+        this.servicioAplicacionModificarObservacionActividadGestionEstrategica = servicioAplicacionModificarObservacionActividadGestionEstrategica;
+        this.servicioAplicacionEliminarObservacionActividadGestionEstrategica = servicioAplicacionEliminarObservacionActividadGestionEstrategica;
     }
 
     @PostMapping
@@ -40,5 +48,14 @@ public class ControladorObservacionActividadGestionEstrategica {
     @GetMapping("/gestionesestrategicas/{codigo}")
     public ResponseEntity<List<DtoObservacionActividadGestionEstrategica>> listarPorActividadGestionEstrategica(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarObservacionActividadGestionEstrategica.consultarPorIdActividadGestionEstrategica(codigo));
+    }
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarObservacionActividadGestionEstrategica.ejecutarEliminar(codigo));
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoObservacionActividadGestionEstrategica observacionActividadGestionEstrategica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarObservacionActividadGestionEstrategica.ejecutarModificar(observacionActividadGestionEstrategica,codigo));
     }
 }

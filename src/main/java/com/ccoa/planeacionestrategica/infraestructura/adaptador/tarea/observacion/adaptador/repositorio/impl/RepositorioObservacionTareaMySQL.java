@@ -48,4 +48,18 @@ public class RepositorioObservacionTareaMySQL implements RepositorioObservacionT
         List<EntidadObservacionTarea> entidades = this.repositorioObservacionTareaJpa.findByIdTarea(idTarea);
         return this.mapeadorObservacionTarea.listarDominio(entidades);
     }
+
+    @Override
+    public Long eliminar(Long id) {
+        this.repositorioObservacionTareaJpa.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public Long modificar(ObservacionTarea observacionTarea, Long id) {
+        var entidad = this.repositorioObservacionTareaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorObservacionTarea.actualizarEntidad(entidad, observacionTarea);
+        return this.repositorioObservacionTareaJpa.save(entidad).getIdObservacionTarea();
+    }
 }

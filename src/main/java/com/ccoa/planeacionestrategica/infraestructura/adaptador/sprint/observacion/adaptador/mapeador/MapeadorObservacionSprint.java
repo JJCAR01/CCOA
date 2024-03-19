@@ -35,4 +35,7 @@ public class MapeadorObservacionSprint implements MapeadorInfraestructura<Entida
         }
         return listaDto;
     }
+    public void actualizarEntidad(EntidadObservacionSprint entidad, ObservacionSprint observacionSprint) {
+        entidad.setDescripcion(observacionSprint.getDescripcion());
+    }
 }

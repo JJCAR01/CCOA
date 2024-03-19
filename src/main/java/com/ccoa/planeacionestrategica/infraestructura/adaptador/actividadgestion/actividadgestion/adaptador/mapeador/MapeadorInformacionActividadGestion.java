@@ -12,7 +12,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adap
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;

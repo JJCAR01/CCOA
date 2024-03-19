@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.observacion.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.pat.DtoObservacionPat;
-import com.ccoa.planeacionestrategica.aplicacion.dto.proceso.DtoProceso;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.observacion.ServicioAplicacionEliminarObservacionPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.observacion.ServicioAplicacionModificarObservacionPat;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;

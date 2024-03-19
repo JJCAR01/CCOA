@@ -35,4 +35,7 @@ public class MapeadorObservacionActividadGestion implements MapeadorInfraestruct
         }
         return listaDto;
     }
+    public void actualizarEntidad(EntidadObservacionActividadGestion entidad, ObservacionActividadGestion observacionActividadGestion) {
+        entidad.setDescripcion(observacionActividadGestion.getDescripcion());
+    }
 }

@@ -1,6 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.observacion.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoObservacionActividadEstrategica;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.observacion.ServicioAplicacionEliminarObservacionActividadEstrategica;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.observacion.ServicioAplicacionModificarObservacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.observacion.ServicioAplicacionGuardarObservacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.servicio.observacion.ServicioAplicacionListarObservacionActividadEstrategica;
@@ -16,11 +18,17 @@ public class ControladorObservacionActividadEstrategica {
 
     private final ServicioAplicacionGuardarObservacionActividadEstrategica servicioAplicacionGuardarObservacionActividadEstrategica;
     private final ServicioAplicacionListarObservacionActividadEstrategica servicioAplicacionListarObservacionActividadEstrategica;
+    private final ServicioAplicacionModificarObservacionActividadEstrategica servicioAplicacionModificarObservacionActividadEstrategica;
+    private final ServicioAplicacionEliminarObservacionActividadEstrategica servicioAplicacionEliminarObservacionActividadEstrategica;
 
     public ControladorObservacionActividadEstrategica(ServicioAplicacionGuardarObservacionActividadEstrategica servicioAplicacionGuardarObservacionActividadEstrategica,
-                                                      ServicioAplicacionListarObservacionActividadEstrategica servicioAplicacionListarObservacionActividadEstrategica) {
+                                                      ServicioAplicacionListarObservacionActividadEstrategica servicioAplicacionListarObservacionActividadEstrategica,
+                                                      ServicioAplicacionModificarObservacionActividadEstrategica servicioAplicacionModificarObservacionActividadEstrategica,
+                                                      ServicioAplicacionEliminarObservacionActividadEstrategica servicioAplicacionEliminarObservacionActividadEstrategica) {
         this.servicioAplicacionGuardarObservacionActividadEstrategica = servicioAplicacionGuardarObservacionActividadEstrategica;
         this.servicioAplicacionListarObservacionActividadEstrategica = servicioAplicacionListarObservacionActividadEstrategica;
+        this.servicioAplicacionModificarObservacionActividadEstrategica = servicioAplicacionModificarObservacionActividadEstrategica;
+        this.servicioAplicacionEliminarObservacionActividadEstrategica = servicioAplicacionEliminarObservacionActividadEstrategica;
     }
 
     @PostMapping
@@ -40,5 +48,14 @@ public class ControladorObservacionActividadEstrategica {
     @GetMapping("/estrategicas/{codigo}")
     public ResponseEntity<List<DtoObservacionActividadEstrategica>> listarPorActividadEstrategica(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarObservacionActividadEstrategica.consultarPorIdActividadEstrategica(codigo));
+    }
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarObservacionActividadEstrategica.ejecutarEliminar(codigo));
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoObservacionActividadEstrategica observacionActividadEstrategica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarObservacionActividadEstrategica.ejecutarModificar(observacionActividadEstrategica,codigo));
     }
 }

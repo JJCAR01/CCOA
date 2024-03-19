@@ -10,7 +10,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.ad
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.List;
 public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadDetalleProyecto, DetalleProyecto> {
     private final RepositorioInformacionSprintJpa repositorioInformacionSprintJpa;
     private final MapeadorProyecto mapeadorProyecto;
-    private final MapeadorInformacionProyecto mapeadorInformacionProyecto;
     private final RepositorioSprintJpa repositorioSprintJpa;
     private final MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica;
     private final RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa;
@@ -27,10 +25,11 @@ public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadD
 
     public MapeadorDetalleProyecto(
             RepositorioInformacionSprintJpa repositorioInformacionSprintJpa,
-            MapeadorProyecto mapeadorProyecto, MapeadorInformacionProyecto mapeadorInformacionProyecto, RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica, RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
+            MapeadorProyecto mapeadorProyecto,
+            RepositorioSprintJpa repositorioSprintJpa, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica,
+            RepositorioDetalleProyectoJpa repositorioDetalleProyectoJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje) {
         this.repositorioInformacionSprintJpa = repositorioInformacionSprintJpa;
         this.mapeadorProyecto = mapeadorProyecto;
-        this.mapeadorInformacionProyecto = mapeadorInformacionProyecto;
         this.repositorioSprintJpa = repositorioSprintJpa;
         this.mapeadorInformacionActividadEstrategica = mapeadorInformacionActividadEstrategica;
         this.repositorioDetalleProyectoJpa = repositorioDetalleProyectoJpa;

@@ -4,11 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.Informac
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprintproyectoarea.RepositorioSprintProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
-
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
-import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarSprintProyectoArea {

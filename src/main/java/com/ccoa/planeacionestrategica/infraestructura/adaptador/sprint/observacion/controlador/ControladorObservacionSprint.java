@@ -1,5 +1,7 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.observacion.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.observacion.ServicioAplicacionEliminarObservacionSprint;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.observacion.ServicioAplicacionModificarObservacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoObservacionSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.observacion.ServicioAplicacionGuardarObservacionSprint;
@@ -16,11 +18,15 @@ public class ControladorObservacionSprint {
 
     private final ServicioAplicacionGuardarObservacionSprint servicioAplicacionGuardarObservacionSprint;
     private final ServicioAplicacionListarObservacionSprint servicioAplicacionListarObservacionSprint;
+    private final ServicioAplicacionModificarObservacionSprint servicioAplicacionModificarObservacionSprint;
+    private final ServicioAplicacionEliminarObservacionSprint servicioAplicacionEliminarObservacionSprint;
 
     public ControladorObservacionSprint(ServicioAplicacionGuardarObservacionSprint servicioAplicacionGuardarObservacionSprint,
-                                        ServicioAplicacionListarObservacionSprint servicioAplicacionListarObservacionSprint) {
+                                        ServicioAplicacionListarObservacionSprint servicioAplicacionListarObservacionSprint, ServicioAplicacionModificarObservacionSprint servicioAplicacionModificarObservacionSprint, ServicioAplicacionEliminarObservacionSprint servicioAplicacionEliminarObservacionSprint) {
         this.servicioAplicacionGuardarObservacionSprint = servicioAplicacionGuardarObservacionSprint;
         this.servicioAplicacionListarObservacionSprint = servicioAplicacionListarObservacionSprint;
+        this.servicioAplicacionModificarObservacionSprint = servicioAplicacionModificarObservacionSprint;
+        this.servicioAplicacionEliminarObservacionSprint = servicioAplicacionEliminarObservacionSprint;
     }
 
     @PostMapping
@@ -40,5 +46,14 @@ public class ControladorObservacionSprint {
     @GetMapping("/sprints/{codigo}")
     public ResponseEntity<List<DtoObservacionSprint>> listarPorSprint(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarObservacionSprint.consultarPorIdSprint(codigo));
+    }
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarObservacionSprint.ejecutarEliminar(codigo));
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoObservacionSprint observacionSprint, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarObservacionSprint.ejecutarModificar(observacionSprint,codigo));
     }
 }

@@ -12,4 +12,6 @@ public interface RepositorioObservacionActividadGestion {
     Long guardar(ObservacionActividadGestion observacionActividadGestion);
     boolean existe(ObservacionActividadGestion observacionActividadGestion);
     List<DtoObservacionActividadGestion> consultarPorIdActividadGestion(Long idTarea);
+    Long eliminar(Long id);
+    Long modificar(ObservacionActividadGestion observacionActividadGestion, Long id);
 }

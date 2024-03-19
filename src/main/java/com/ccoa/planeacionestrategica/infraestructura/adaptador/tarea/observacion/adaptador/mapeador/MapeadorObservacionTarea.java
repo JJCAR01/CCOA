@@ -35,4 +35,7 @@ public class MapeadorObservacionTarea implements MapeadorInfraestructura<Entidad
         }
         return listaDto;
     }
+    public void actualizarEntidad(EntidadObservacionTarea entidad, ObservacionTarea observacionTarea) {
+        entidad.setDescripcion(observacionTarea.getDescripcion());
+    }
 }

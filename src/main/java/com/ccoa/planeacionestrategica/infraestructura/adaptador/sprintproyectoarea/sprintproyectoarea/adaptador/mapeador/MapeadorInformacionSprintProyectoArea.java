@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoa
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.InformacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorDetalleProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadInformacionSprintProyectoArea;
@@ -13,7 +12,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adap
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -24,18 +22,16 @@ public class MapeadorInformacionSprintProyectoArea implements MapeadorInfraestru
     private final RepositorioTareaJpa repositorioTareaJpa;
     private final RepositorioInformacionTareaJpa repositorioInformacionTareaJpa;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
-    private final ServicioObtenerDuracion servicioObtenerDuracion;
     private final MapeadorDetalleProyectoArea mapeadorDetalleProyectoArea;
     private final MapeadorSprintProyectoArea mapeadorSprintProyectoArea;
 
     public MapeadorInformacionSprintProyectoArea(RepositorioInformacionSprintProyectoAreaJpa repositorioInformacionSprintProyectoAreaJpa, RepositorioTareaJpa repositorioTareaJpa,
                                                  RepositorioInformacionTareaJpa repositorioInformacionTareaJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje,
-                                                 ServicioObtenerDuracion servicioObtenerDuracion, MapeadorDetalleProyectoArea mapeadorDetalleProyectoArea, MapeadorSprintProyectoArea mapeadorSprintProyectoArea) {
+                                                 MapeadorDetalleProyectoArea mapeadorDetalleProyectoArea, MapeadorSprintProyectoArea mapeadorSprintProyectoArea) {
         this.repositorioInformacionSprintProyectoAreaJpa = repositorioInformacionSprintProyectoAreaJpa;
         this.repositorioTareaJpa = repositorioTareaJpa;
         this.repositorioInformacionTareaJpa = repositorioInformacionTareaJpa;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
-        this.servicioObtenerDuracion = servicioObtenerDuracion;
         this.mapeadorDetalleProyectoArea = mapeadorDetalleProyectoArea;
         this.mapeadorSprintProyectoArea = mapeadorSprintProyectoArea;
     }

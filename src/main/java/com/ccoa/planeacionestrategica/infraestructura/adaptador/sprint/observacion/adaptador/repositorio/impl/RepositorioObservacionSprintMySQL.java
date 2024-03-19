@@ -45,4 +45,18 @@ public class RepositorioObservacionSprintMySQL implements RepositorioObservacion
         return this.mapeadorObservacionSprint.listarDominio(entidades);
     }
 
+    @Override
+    public Long eliminar(Long id) {
+        this.repositorioObservacionSprintJpa.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public Long modificar(ObservacionSprint observacionSprint, Long id) {
+        var entidad = this.repositorioObservacionSprintJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorObservacionSprint.actualizarEntidad(entidad, observacionSprint);
+        return this.repositorioObservacionSprintJpa.save(entidad).getIdObservacionSprint();
+    }
+
 }

@@ -35,6 +35,8 @@ public class MapeadorObservacionProyectoArea implements MapeadorInfraestructura<
         }
         return listaDto;
     }
-
+    public void actualizarEntidad(EntidadObservacionProyectoArea entidad, ObservacionProyectoArea observacionProyectoArea) {
+        entidad.setDescripcion(observacionProyectoArea.getDescripcion());
+    }
 
 }

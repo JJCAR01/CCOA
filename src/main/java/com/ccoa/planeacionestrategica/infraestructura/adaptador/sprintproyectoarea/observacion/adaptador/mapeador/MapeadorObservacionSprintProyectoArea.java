@@ -35,4 +35,7 @@ public class MapeadorObservacionSprintProyectoArea implements MapeadorInfraestru
         }
         return listaDto;
     }
+    public void actualizarEntidad(EntidadObservacionSprintProyectoArea entidad, ObservacionSprintProyectoArea observacionSprintProyectoArea) {
+        entidad.setDescripcion(observacionSprintProyectoArea.getDescripcion());
+    }
 }

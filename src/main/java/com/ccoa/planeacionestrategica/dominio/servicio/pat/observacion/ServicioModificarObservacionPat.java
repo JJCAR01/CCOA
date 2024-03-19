@@ -1,10 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.pat.observacion;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
-import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.observacion.ObservacionPat;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioObservacionPat;
-import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
 

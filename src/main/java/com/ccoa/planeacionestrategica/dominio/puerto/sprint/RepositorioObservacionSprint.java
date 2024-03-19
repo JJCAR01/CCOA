@@ -12,4 +12,6 @@ public interface RepositorioObservacionSprint {
     Long guardar(ObservacionSprint observacionSprint);
     boolean existe(ObservacionSprint observacionSprint);
     List<DtoObservacionSprint> consultarPorIdSprint(Long idTarea);
+    Long eliminar(Long id);
+    Long modificar(ObservacionSprint observacionSprint, Long id);
 }

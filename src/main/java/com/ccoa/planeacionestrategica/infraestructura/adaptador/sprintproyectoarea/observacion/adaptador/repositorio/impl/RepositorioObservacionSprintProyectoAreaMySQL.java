@@ -46,4 +46,18 @@ public class RepositorioObservacionSprintProyectoAreaMySQL implements Repositori
         return this.mapeadorObservacionSprintProyectoArea.listarDominio(entidades);
     }
 
+    @Override
+    public Long eliminar(Long id) {
+        this.repositorioObservacionSprintProyectoAreaJpa.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public Long modificar(ObservacionSprintProyectoArea observacionSprintProyectoArea, Long id) {
+        var entidad = this.repositorioObservacionSprintProyectoAreaJpa.findById(id).orElse(null);
+        assert entidad != null;
+        this.mapeadorObservacionSprintProyectoArea.actualizarEntidad(entidad, observacionSprintProyectoArea);
+        return this.repositorioObservacionSprintProyectoAreaJpa.save(entidad).getIdObservacionSprintProyectoArea();
+    }
+
 }

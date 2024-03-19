@@ -1,6 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.observacion.controlador;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoObservacionProyecto;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.observacion.ServicioAplicacionEliminarObservacionProyecto;
+import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.observacion.ServicioAplicacionModificarObservacionProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.observacion.ServicioAplicacionGuardarObservacionProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.proyecto.servicio.observacion.ServicioAplicacionListarObservacionProyecto;
@@ -16,11 +18,17 @@ public class ControladorObservacionProyecto {
 
     private final ServicioAplicacionGuardarObservacionProyecto servicioAplicacionGuardarObservacionProyecto;
     private final ServicioAplicacionListarObservacionProyecto servicioAplicacionListarObservacionProyecto;
+    private final ServicioAplicacionModificarObservacionProyecto servicioAplicacionModificarObservacionProyecto;
+    private final ServicioAplicacionEliminarObservacionProyecto servicioAplicacionEliminarObservacionProyecto;
 
     public ControladorObservacionProyecto(ServicioAplicacionGuardarObservacionProyecto servicioAplicacionGuardarObservacionProyecto,
-                                          ServicioAplicacionListarObservacionProyecto servicioAplicacionListarObservacionProyecto) {
+                                          ServicioAplicacionListarObservacionProyecto servicioAplicacionListarObservacionProyecto,
+                                          ServicioAplicacionModificarObservacionProyecto servicioAplicacionModificarObservacionProyecto,
+                                          ServicioAplicacionEliminarObservacionProyecto servicioAplicacionEliminarObservacionProyecto) {
         this.servicioAplicacionGuardarObservacionProyecto = servicioAplicacionGuardarObservacionProyecto;
         this.servicioAplicacionListarObservacionProyecto = servicioAplicacionListarObservacionProyecto;
+        this.servicioAplicacionModificarObservacionProyecto = servicioAplicacionModificarObservacionProyecto;
+        this.servicioAplicacionEliminarObservacionProyecto = servicioAplicacionEliminarObservacionProyecto;
     }
 
     @PostMapping
@@ -40,5 +48,14 @@ public class ControladorObservacionProyecto {
     @GetMapping("/proyectos/{codigo}")
     public ResponseEntity<List<DtoObservacionProyecto>> listarPorProyecto(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarObservacionProyecto.consultarPorIdProyecto(codigo));
+    }
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminar(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarObservacionProyecto.ejecutarEliminar(codigo));
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoObservacionProyecto observacionProyecto, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarObservacionProyecto.ejecutarModificar(observacionProyecto,codigo));
     }
 }

@@ -7,15 +7,10 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioA
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionListarPat;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.pat.servicio.ServicioAplicacionModificarPat;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.excepcion.AccessDeniedExcepcion;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @RestController
 @RequestMapping("/ccoa/pats")

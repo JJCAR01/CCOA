@@ -26,4 +26,5 @@ public interface RepositorioActividadEstrategica{
     Long guardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo);
     boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica);
     List<DocumentoActividadEstrategica> consultarPorIdParaObtenerDocumento(Long id);
+    Long modificarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long id);
 }

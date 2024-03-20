@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface RepositorioDocumentoActividadEstrategicaJpa extends JpaRepository<EntidadDocumentoActividadEstrategica,Long> {
     List<EntidadDocumentoActividadEstrategica> findByIdActividadEstrategica(Long idActividadEstrategica);
+    EntidadDocumentoActividadEstrategica findByRutaDocumento(String rutaDocumento);
 }

@@ -17,7 +17,6 @@ public class ServicioGuardarActividadGestion {
         this.repositorioActividadGestion = repositorioActividadGestion;
     }
     public Long ejecutarGuardar(ActividadGestion actividadGestion, InformacionActividadGestion informacionActividadGestion) {
-        if(this.repositorioActividadGestion.existe(actividadGestion)) throw new ExcepcionValidadorInvalido(YA_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioActividadGestion.guardar(actividadGestion,informacionActividadGestion);
     }
     public Long ejecutarGuardarDocumento(DocumentoActividadGestion documentoActividadGestion, Long codigo){

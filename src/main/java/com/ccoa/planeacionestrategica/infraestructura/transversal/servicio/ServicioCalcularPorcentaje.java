@@ -48,7 +48,12 @@ public class ServicioCalcularPorcentaje implements ServicioObtenerPorcentaje {
         LocalDate fechaActual = LocalDate.now();
         if(fechaInicial.isBefore(fechaActual)) {
             long diasTranscurridos = ChronoUnit.DAYS.between(fechaInicial, fechaActual);
-            return (diasTranscurridos * Mensaje.PORCENTAJE) / totalDias;
+            double porcentajeEsperado =  (diasTranscurridos * Mensaje.PORCENTAJE) / totalDias;
+            if (porcentajeEsperado > 100){
+                return Mensaje.PORCENTAJE;
+            } else {
+                return porcentajeEsperado;
+            }
         } else {
             return Mensaje.PORCENTAJE_CERO;
         }

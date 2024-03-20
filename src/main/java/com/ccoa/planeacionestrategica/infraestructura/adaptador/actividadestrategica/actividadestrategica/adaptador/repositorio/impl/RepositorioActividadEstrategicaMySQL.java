@@ -154,4 +154,11 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         assert entidad != null;
         return this.mapeadorDocumentoActividadEstrategica.mapeadorListaDocumentos(entidad);
     }
+
+    @Override
+    public Long modificarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long id) {
+        var entidad = mapeadorDocumentoActividadEstrategica.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoActividadEstrategica.actualizarEntidad(entidad, documentoActividadEstrategica);
+        return this.repositorioDocumentoActividadEstrategicaJpa.save(entidad).getIdDocumentoActividadEstrategica();
+    }
 }

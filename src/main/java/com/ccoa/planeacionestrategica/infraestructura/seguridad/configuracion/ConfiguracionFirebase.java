@@ -15,7 +15,7 @@ public class ConfiguracionFirebase {
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
         FileInputStream serviceAccount =
-                new FileInputStream("/home/administrador/Conciliaciones/firebase/pat-ccoa-firebase-adminsdk-yk30n-7125cba998.json");
+                new FileInputStream("C:/Users/j.cardona/PACCOA/PACCOAB/CCOA/src/main/resources/pat-ccoa-firebase-adminsdk-yk30n-7125cba998.json");
                 //C:/Users/j.cardona/PACCOA/PACCOAB/CCOA/src/main/resources/
                 //D:\Back-End\PAT\CCOA\src\main\resources
                 ///home/administrador/Conciliaciones/firebase/

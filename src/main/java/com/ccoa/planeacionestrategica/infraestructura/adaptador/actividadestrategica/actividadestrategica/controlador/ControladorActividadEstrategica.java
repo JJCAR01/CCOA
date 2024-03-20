@@ -62,11 +62,15 @@ public class ControladorActividadEstrategica {
     }
 
     @PutMapping("/{codigo}")
-    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
-        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificar(epica,codigo));
+    public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoActividadEstrategica actividadEstrategica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.modificarActividadEstrategica(actividadEstrategica,codigo));
     }
     @PutMapping("/meta/{codigo}")
-    public ResponseEntity<DtoRespuesta<Long>> modificarResultadoMeta(@RequestBody DtoActividadEstrategica epica, @PathVariable Long codigo){
-        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.ejecutarModificarResultadoMeta(epica,codigo));
+    public ResponseEntity<DtoRespuesta<Long>> modificarResultadoMeta(@RequestBody DtoActividadEstrategica actividadEstrategica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.modificarResultadoMeta(actividadEstrategica,codigo));
+    }
+    @PutMapping("/archivo/modificar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarDocumento(@RequestBody DtoDocumentoActividadEstrategica documentoActividadEstrategica, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.modificarDocumento(documentoActividadEstrategica,codigo));
     }
 }

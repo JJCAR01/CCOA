@@ -11,16 +11,18 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensaje
 @NoArgsConstructor
 @Data
 public class DocumentoActividadEstrategica {
+    private Long idDocumentoActividadEstrategica;
     private Long idActividadEstrategica;
     private String rutaDocumento;
     private LocalDate fecha;
-    public static DocumentoActividadEstrategica of( Long idActividadEstrategica, String rutaDocumento, LocalDate fecha){
+    public static DocumentoActividadEstrategica of(Long idDocumentoActividadEstrategica, Long idActividadEstrategica, String rutaDocumento, LocalDate fecha){
         ValidadorDominio.validarObligatorio(rutaDocumento,RUTA_ARCHIVO_DEL_DOCUMENTO_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validarPatronURLEsValido(rutaDocumento,LA_URL_DEL_DOCUMENTO_DEBE_DE_SER_VALIDA);
-        return new DocumentoActividadEstrategica(idActividadEstrategica,rutaDocumento,fecha);
+        return new DocumentoActividadEstrategica(idDocumentoActividadEstrategica,idActividadEstrategica,rutaDocumento,fecha);
     }
 
-    public DocumentoActividadEstrategica(Long idActividadEstrategica, String rutaDocumento, LocalDate fecha) {
+    public DocumentoActividadEstrategica(Long idDocumentoActividadEstrategica, Long idActividadEstrategica, String rutaDocumento, LocalDate fecha) {
+        this.idDocumentoActividadEstrategica = idDocumentoActividadEstrategica;
         this.idActividadEstrategica = idActividadEstrategica;
         this.rutaDocumento = rutaDocumento;
         this.fecha = fecha;

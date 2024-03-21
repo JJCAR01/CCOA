@@ -14,6 +14,9 @@ public class MapeadorAplicacionDocumentoTarea implements MapeadorAplicacion<DtoD
     }
 
     public DocumentoTarea mapeadorAplicacionCrear(DtoDocumentoTarea dto, Long codigo) {
-        return new DocumentoTarea(codigo,dto.getRutaDocumento(),dto.getFecha());
+        return new DocumentoTarea(dto.getIdDocumentoTarea(), codigo,dto.getRutaDocumento(),dto.getFecha());
+    }
+    public DocumentoTarea mapeadorAplicacionModificar(DtoDocumentoTarea dto, Long codigo) {
+        return new DocumentoTarea(dto.getIdDocumentoTarea(), codigo,dto.getRutaDocumento(),dto.getFecha());
     }
 }

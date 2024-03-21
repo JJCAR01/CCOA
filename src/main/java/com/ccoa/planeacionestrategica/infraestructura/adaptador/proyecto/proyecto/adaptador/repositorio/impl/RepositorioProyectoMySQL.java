@@ -9,7 +9,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.documento.Document
 import com.ccoa.planeacionestrategica.dominio.puerto.proyecto.RepositorioProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorDetalleProyecto;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorDocumentoProyecto;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.documento.MapeadorDocumentoProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioDocumentoProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioInformacionProyectoJpa;
@@ -91,12 +91,11 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     }
     @Transactional
     @Override
-    public Long eliminarPorActividadEstrategica(Long id) {
+    public void eliminarPorActividadEstrategica(Long id) {
         var entidades = consultarPorIdActividadEstrategicaAEliminar(id);
         entidades.forEach(entidad -> repositorioInformacionProyectoJpa.deleteById(entidad.getIdInformacionProyecto()));
         entidades.forEach(entidad -> repositorioDetalleProyectoJpa.deleteById(entidad.getIdProyecto()));
         repositorioProyectoJpa.deleteByIdActividadEstrategica(id);
-        return id;
     }
 
     @Override
@@ -147,5 +146,17 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
         var entidad = this.repositorioDocumentoProyectoJpa.findByIdProyecto(id);
         assert entidad != null;
         return this.mapeadorDocumentoProyecto.mapeadorListaDocumentos(entidad);
+    }
+
+    @Override
+    public Long modificarDocumento(DocumentoProyecto documentoProyecto, Long id) {
+        var entidad = mapeadorDocumentoProyecto.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoProyecto.actualizarEntidad(entidad, documentoProyecto);
+        return this.repositorioDocumentoProyectoJpa.save(entidad).getIdDocumentoProyecto();
+    }
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoProyectoJpa.deleteById(id);
+        return id;
     }
 }

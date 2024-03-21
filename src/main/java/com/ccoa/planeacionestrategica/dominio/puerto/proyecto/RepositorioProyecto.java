@@ -15,7 +15,7 @@ public interface RepositorioProyecto {
     Long guardar(Proyecto proyecto, InformacionProyecto informacionProyecto, DetalleProyecto detalleProyecto);
     boolean existe(Proyecto proyecto);
     Long eliminar(Long id);
-    Long eliminarPorActividadEstrategica(Long id);
+    void eliminarPorActividadEstrategica(Long id);
     Long modificar(Proyecto proyecto,InformacionProyecto informacionProyecto,DetalleProyecto detalleProyecto, Long id);
     Long modificarValorEjecutado(Proyecto proyecto, Long id);
     List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id);
@@ -23,4 +23,6 @@ public interface RepositorioProyecto {
     Long guardarDocumento(DocumentoProyecto documentoProyecto, Long codigo);
     boolean existeDocumento(DocumentoProyecto documentoProyecto);
     List<DocumentoProyecto> consultarPorIdParaObtenerDocumento(Long id);
+    Long modificarDocumento(DocumentoProyecto documentoProyecto, Long id);
+    Long eliminarDocumento(Long id);
 }

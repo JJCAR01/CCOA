@@ -46,7 +46,6 @@ public class MapeadorDocumentoActividadEstrategica implements MapeadorInfraestru
     public void actualizarEntidad(EntidadDocumentoActividadEstrategica entidad, DocumentoActividadEstrategica documentoActividadEstrategica){
         entidad.setRutaDocumento(documentoActividadEstrategica.getRutaDocumento());
     }
-
     public EntidadDocumentoActividadEstrategica obtenerEntidadDocumento(Long id){
         return repositorioDocumentoActividadEstrategicaJpa.findById(id).orElseThrow();
     }

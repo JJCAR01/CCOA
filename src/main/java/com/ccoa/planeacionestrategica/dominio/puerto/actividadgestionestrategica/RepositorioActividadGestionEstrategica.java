@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.puerto.actividadgestionestrategic
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.ActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.documento.DocumentoActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.InformacionActividadGestionEstrategica;
@@ -22,4 +23,6 @@ public interface RepositorioActividadGestionEstrategica {
                    InformacionActividadGestionEstrategica informacionActividadGestionActividadEstrategica,Long id);
     List<DtoActividadGestionEstrategicaResumen> consultarPorIdActividadEstrategica(Long idActividadEstrategica);
     List<DtoIdsActividadGestionEstrategica> consultarPorIdActividadEstrategicaAEliminar(Long idActividadEstrategica);
+    Long modificarDocumento(DocumentoActividadGestionEstrategica documentoActividadGestionEstrategica, Long id);
+    Long eliminarDocumento(Long id);
 }

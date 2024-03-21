@@ -15,4 +15,7 @@ public class ServicioAplicacionEliminarSprint {
     public DtoRespuesta<Long> ejecutarEliminar(Long codigo){
         return new DtoRespuesta<>(this.servicioEliminarSprint.ejecutarEliminar(codigo));
     }
+    public DtoRespuesta<Long> eliminarDocumento(Long codigo){
+        return new DtoRespuesta<>(this.servicioEliminarSprint.eliminarDocumento(codigo));
+    }
 }

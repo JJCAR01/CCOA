@@ -11,7 +11,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador.MapeadorInformacionActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadGestionEstrategicaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador.MapeadorDocumentoActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador.documento.MapeadorDocumentoActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioDocumentoActividadGestionEstrategicaJpa;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -119,5 +119,18 @@ public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioA
     public List<DtoIdsActividadGestionEstrategica> consultarPorIdActividadEstrategicaAEliminar(Long idActividadEstrategica) {
         List<EntidadActividadGestionEstrategica> entidades = this.repositorioActividadGestionEstrategicaJpa.findByIdActividadEstrategica(idActividadEstrategica);
         return this.mapeadorActividadGestionEstrategica.listarPorIds(entidades);
+    }
+
+    @Override
+    public Long modificarDocumento(DocumentoActividadGestionEstrategica documentoActividadGestionEstrategica, Long id) {
+        var entidad = mapeadorDocumentoActividadGestionEstrategica.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoActividadGestionEstrategica.actualizarEntidad(entidad, documentoActividadGestionEstrategica);
+        return this.repositorioDocumentoActividadGestionEstrategicaJpa.save(entidad).getIdDocumentoActividadGestionEstrategica();
+    }
+
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoActividadGestionEstrategicaJpa.deleteById(id);
+        return id;
     }
 }

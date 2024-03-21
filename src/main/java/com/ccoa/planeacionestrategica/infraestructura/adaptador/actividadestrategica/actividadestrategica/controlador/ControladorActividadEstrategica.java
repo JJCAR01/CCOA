@@ -73,4 +73,8 @@ public class ControladorActividadEstrategica {
     public ResponseEntity<DtoRespuesta<Long>> modificarDocumento(@RequestBody DtoDocumentoActividadEstrategica documentoActividadEstrategica, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarActividadEstrategica.modificarDocumento(documentoActividadEstrategica,codigo));
     }
+    @DeleteMapping("/archivo/eliminar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminarDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarActividadEstrategica.eliminarDocumento(codigo));
+    }
 }

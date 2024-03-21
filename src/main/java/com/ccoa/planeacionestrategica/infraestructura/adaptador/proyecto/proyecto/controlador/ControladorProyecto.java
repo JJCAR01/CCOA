@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoDocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoDocumentoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
@@ -69,5 +70,13 @@ public class ControladorProyecto {
     @PutMapping("/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoProyecto proyecto, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarProyecto.ejecutarModificar(proyecto,codigo));
+    }
+    @PutMapping("/archivo/modificar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarDocumento(@RequestBody DtoDocumentoProyecto documentoProyecto, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarProyecto.modificarDocumento(documentoProyecto,codigo));
+    }
+    @DeleteMapping("/archivo/eliminar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminarDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarProyecto.eliminarDocumento(codigo));
     }
 }

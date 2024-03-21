@@ -119,4 +119,17 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
         List<EntidadActividadGestion> entidades = this.repositorioActividadGestionJpa.findByIdPat(idPat);
         return this.mapeadorActividadGestion.listarPorIds(entidades);
     }
+
+    @Override
+    public Long modificarDocumento(DocumentoActividadGestion documentoActividadGestion, Long id) {
+        var entidad = mapeadorDocumentoActividadGestion.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoActividadGestion.actualizarEntidad(entidad, documentoActividadGestion);
+        return this.repositorioDocumentoActividadGestionJpa.save(entidad).getIdActividadGestion();
+    }
+
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoActividadGestionJpa.deleteById(id);
+        return id;
+    }
 }

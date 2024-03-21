@@ -27,4 +27,5 @@ public interface RepositorioActividadEstrategica{
     boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica);
     List<DocumentoActividadEstrategica> consultarPorIdParaObtenerDocumento(Long id);
     Long modificarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long id);
+    Long eliminarDocumento(Long id);
 }

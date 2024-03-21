@@ -1,7 +1,9 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador;
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.documento;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadDocumentoSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioDocumentoSprintJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,9 +12,15 @@ import java.util.List;
 
 @Configuration
 public class MapeadorDocumentoSprint implements MapeadorInfraestructura<EntidadDocumentoSprint, DocumentoSprint> {
+    private final RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa;
+
+    public MapeadorDocumentoSprint(RepositorioDocumentoSprintJpa repositorioDocumentoSprintJpa) {
+        this.repositorioDocumentoSprintJpa = repositorioDocumentoSprintJpa;
+    }
+
     @Override
     public DocumentoSprint mapeadorDominio(EntidadDocumentoSprint entidad) {
-        return new DocumentoSprint(entidad.getIdSprint(), entidad.getRutaDocumento(),entidad.getFecha());
+        return new DocumentoSprint(entidad.getIdDocumentoSprint(), entidad.getIdSprint(), entidad.getRutaDocumento(),entidad.getFecha());
     }
 
     @Override
@@ -33,6 +41,12 @@ public class MapeadorDocumentoSprint implements MapeadorInfraestructura<EntidadD
             listaDto.add(dto);
         }
         return listaDto;
+    }
+    public void actualizarEntidad(EntidadDocumentoSprint entidad, DocumentoSprint documentoSprint){
+        entidad.setRutaDocumento(documentoSprint.getRutaDocumento());
+    }
+    public EntidadDocumentoSprint obtenerEntidadDocumento(Long id){
+        return repositorioDocumentoSprintJpa.findById(id).orElseThrow();
     }
 
 }

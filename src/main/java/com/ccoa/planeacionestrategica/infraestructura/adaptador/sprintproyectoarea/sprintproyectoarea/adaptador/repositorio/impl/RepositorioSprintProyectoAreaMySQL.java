@@ -123,4 +123,17 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
         return this.mapeadorSprintProyectoArea.listarDominio(entidades);
     }
 
+    @Override
+    public Long modificarDocumento(DocumentoSprintProyectoArea documentoSprintProyectoArea, Long id) {
+        var entidad = mapeadorDocumentoSprintProyectoArea.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoSprintProyectoArea.actualizarEntidad(entidad, documentoSprintProyectoArea);
+        return this.repositorioDocumentoSprintProyectoAreaJpa.save(entidad).getIdDocumentoSprintProyectoArea();
+    }
+
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoSprintProyectoAreaJpa.deleteById(id);
+        return id;
+    }
+
 }

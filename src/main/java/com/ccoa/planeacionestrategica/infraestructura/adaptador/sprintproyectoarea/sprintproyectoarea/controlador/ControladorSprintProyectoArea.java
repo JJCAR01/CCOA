@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoSprintProyectoArea;
@@ -64,5 +65,13 @@ public class ControladorSprintProyectoArea {
     @PutMapping("/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoSprintProyectoArea sprintProyectoArea, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarSprintProyectoArea.ejecutarModificar(sprintProyectoArea,codigo));
+    }
+    @PutMapping("/archivo/modificar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarDocumento(@RequestBody DtoDocumentoSprintProyectoArea documentoSprintProyectoArea, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarSprintProyectoArea.modificarDocumento(documentoSprintProyectoArea,codigo));
+    }
+    @DeleteMapping("/archivo/eliminar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminarDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarSprintProyectoArea.eliminarDocumento(codigo));
     }
 }

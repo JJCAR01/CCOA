@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoDocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoDocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
@@ -65,5 +66,13 @@ public class ControladorActividadGestion {
     @PutMapping("/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> modificar(@RequestBody DtoActividadGestion gestion, @PathVariable Long codigo){
         return ResponseEntity.ok(this.servicioAplicacionModificarActividadGestion.ejecutarModificar(gestion,codigo));
+    }
+    @PutMapping("/archivo/modificar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarDocumento(@RequestBody DtoDocumentoActividadGestion documentoActividadGestion, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarActividadGestion.modificarDocumento(documentoActividadGestion,codigo));
+    }
+    @DeleteMapping("/archivo/eliminar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminarDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarActividadGestion.eliminarDocumento(codigo));
     }
 }

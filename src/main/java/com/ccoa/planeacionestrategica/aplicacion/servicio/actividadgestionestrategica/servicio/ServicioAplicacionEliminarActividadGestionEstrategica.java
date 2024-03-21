@@ -16,4 +16,7 @@ public class ServicioAplicacionEliminarActividadGestionEstrategica {
     public DtoRespuesta<Long> ejecutarEliminar(Long codigo){
         return new DtoRespuesta<>(this.servicioEliminarActividadGestionEstrategica.ejecutarEliminar(codigo));
     }
+    public DtoRespuesta<Long> eliminarDocumento(Long codigo){
+        return new DtoRespuesta<>(this.servicioEliminarActividadGestionEstrategica.eliminarDocumento(codigo));
+    }
 }

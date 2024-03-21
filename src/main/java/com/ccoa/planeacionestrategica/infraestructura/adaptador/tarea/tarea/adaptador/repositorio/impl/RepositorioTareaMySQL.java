@@ -6,7 +6,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.ETipoASE;
 import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.MapeadorDocumentoTarea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.documento.MapeadorDocumentoTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.MapeadorInformacionTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador.MapeadorTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioDocumentoTareaJpa;
@@ -142,5 +142,16 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     @Override
     public boolean existeDocumento(DocumentoTarea documentoTarea) {
         return this.repositorioDocumentoTareaJpa.findById(documentoTarea.getIdTarea()).isPresent();
+    }
+    @Override
+    public Long modificarDocumento(DocumentoTarea documentoTarea, Long id) {
+        var entidad = mapeadorDocumentoTarea.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoTarea.actualizarEntidad(entidad, documentoTarea);
+        return this.repositorioDocumentoTareaJpa.save(entidad).getIdDocumentoTarea();
+    }
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoTareaJpa.deleteById(id);
+        return id;
     }
 }

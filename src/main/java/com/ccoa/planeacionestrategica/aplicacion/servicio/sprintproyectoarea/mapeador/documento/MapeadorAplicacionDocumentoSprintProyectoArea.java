@@ -14,6 +14,9 @@ public class MapeadorAplicacionDocumentoSprintProyectoArea implements MapeadorAp
     }
 
     public DocumentoSprintProyectoArea mapeadorAplicacionCrear(DtoDocumentoSprintProyectoArea dto, Long codigo) {
-        return new DocumentoSprintProyectoArea(codigo,dto.getRutaDocumento(),dto.getFecha());
+        return new DocumentoSprintProyectoArea(dto.getIdDocumentoSprintProyectoArea(),codigo,dto.getRutaDocumento(),dto.getFecha());
+    }
+    public DocumentoSprintProyectoArea mapeadorAplicacionModificar(DtoDocumentoSprintProyectoArea dto, Long codigo) {
+        return new DocumentoSprintProyectoArea(dto.getIdDocumentoSprintProyectoArea(),codigo,dto.getRutaDocumento(),dto.getFecha());
     }
 }

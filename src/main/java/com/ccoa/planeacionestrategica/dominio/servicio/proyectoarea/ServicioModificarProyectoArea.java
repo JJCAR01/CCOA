@@ -1,8 +1,10 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.proyectoarea;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.documento.DocumentoProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.ProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.documento.DocumentoProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea.RepositorioProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
@@ -25,5 +27,8 @@ public class ServicioModificarProyectoArea {
     public Long ejecutarModificarValorEjecutado(ProyectoArea proyectoArea, Long codigo){
         if(this.repositorioProyectoArea.consultarPorId(codigo)==null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyectoArea.modificarValorEjecutado(proyectoArea, codigo);
+    }
+    public Long modificarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo){
+        return this.repositorioProyectoArea.modificarDocumento(documentoProyectoArea, codigo);
     }
 }

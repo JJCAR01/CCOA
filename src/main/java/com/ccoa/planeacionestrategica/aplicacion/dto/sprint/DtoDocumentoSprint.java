@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class DtoDocumentoSprint {
+    private Long idDocumentoSprint;
     private Long idSprint;
     private String rutaDocumento;
     private LocalDate fecha;

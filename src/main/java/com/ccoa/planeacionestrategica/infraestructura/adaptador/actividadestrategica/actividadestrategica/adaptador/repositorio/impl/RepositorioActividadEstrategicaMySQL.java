@@ -161,4 +161,10 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         this.mapeadorDocumentoActividadEstrategica.actualizarEntidad(entidad, documentoActividadEstrategica);
         return this.repositorioDocumentoActividadEstrategicaJpa.save(entidad).getIdDocumentoActividadEstrategica();
     }
+
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoActividadEstrategicaJpa.deleteById(id);
+        return id;
+    }
 }

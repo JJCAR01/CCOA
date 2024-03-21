@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestio
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.entidad.EntidadDocumentoActividadGestion;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioDocumentoActividadGestionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,9 +11,15 @@ import java.util.List;
 
 @Configuration
 public class MapeadorDocumentoActividadGestion implements MapeadorInfraestructura<EntidadDocumentoActividadGestion, DocumentoActividadGestion> {
+    private final RepositorioDocumentoActividadGestionJpa repositorioDocumentoActividadGestionJpa;
+
+    public MapeadorDocumentoActividadGestion(RepositorioDocumentoActividadGestionJpa repositorioDocumentoActividadGestionJpa) {
+        this.repositorioDocumentoActividadGestionJpa = repositorioDocumentoActividadGestionJpa;
+    }
+
     @Override
     public DocumentoActividadGestion mapeadorDominio(EntidadDocumentoActividadGestion entidad) {
-        return new DocumentoActividadGestion(entidad.getIdActividadGestion(), entidad.getRutaDocumento(),entidad.getFecha());
+        return new DocumentoActividadGestion(entidad.getIdDocumentoActividadGestion(), entidad.getIdActividadGestion(), entidad.getRutaDocumento(),entidad.getFecha());
     }
 
     @Override
@@ -33,5 +40,12 @@ public class MapeadorDocumentoActividadGestion implements MapeadorInfraestructur
             listaDto.add(dto);
         }
         return listaDto;
+    }
+    public void actualizarEntidad(EntidadDocumentoActividadGestion entidad, DocumentoActividadGestion documentoActividadGestion){
+        entidad.setRutaDocumento(documentoActividadGestion.getRutaDocumento());
+    }
+
+    public EntidadDocumentoActividadGestion obtenerEntidadDocumento(Long id){
+        return repositorioDocumentoActividadGestionJpa.findById(id).orElseThrow();
     }
 }

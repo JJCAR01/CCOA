@@ -9,7 +9,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.documento.Docu
 import com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea.RepositorioProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorDetalleProyectoArea;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorDocumentoProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.documento.MapeadorDocumentoProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorInformacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador.MapeadorProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioDetalleProyectoAreaJpa;
@@ -146,5 +146,16 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
         var entidad = this.repositorioDocumentoProyectoAreaJpa.findByIdProyectoArea(id);
         assert entidad != null;
         return this.mapeadorDocumentoProyectoArea.mapeadorListaDocumentos(entidad);
+    }
+    @Override
+    public Long modificarDocumento(DocumentoProyectoArea documentoProyectoArea, Long id) {
+        var entidad = mapeadorDocumentoProyectoArea.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoProyectoArea.actualizarEntidad(entidad, documentoProyectoArea);
+        return this.repositorioDocumentoProyectoAreaJpa.save(entidad).getIdDocumentoProyectoArea();
+    }
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioDocumentoProyectoAreaJpa.deleteById(id);
+        return id;
     }
 }

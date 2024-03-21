@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
+import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.documento.DocumentoProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.ProyectoArea;
@@ -23,4 +24,6 @@ public interface RepositorioProyectoArea {
     Long guardarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo);
     boolean existeDocumento(DocumentoProyectoArea documentoProyectoArea);
     List<DocumentoProyectoArea> consultarPorIdParaObtenerDocumento(Long id);
+    Long modificarDocumento(DocumentoProyectoArea documentoProyectoArea, Long id);
+    Long eliminarDocumento(Long id);
 }

@@ -7,7 +7,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorDocumentoSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.documento.MapeadorDocumentoSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioDocumentoSprintJpa;
@@ -120,6 +120,19 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     public List<DtoSprintResumen> consultarPorIdProyecto(Long idProyecto) {
         List<EntidadSprint> entidades = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
         return this.mapeadorSprint.listarDominio(entidades);
+    }
+
+    @Override
+    public Long modificarDocumento(DocumentoSprint documentoSprint, Long id) {
+        var entidad = mapeadorDocumentoSprint.obtenerEntidadDocumento(id);
+        this.mapeadorDocumentoSprint.actualizarEntidad(entidad, documentoSprint);
+        return this.repositorioDocumentoSprintJpa.save(entidad).getIdDocumentoSprint();
+    }
+
+    @Override
+    public Long eliminarDocumento(Long id) {
+        this.repositorioSprintJpa.deleteById(id);
+        return id;
     }
 
 }

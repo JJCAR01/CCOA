@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.controlador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoDocumentoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
@@ -89,5 +90,13 @@ public class ControladorTarea {
     @GetMapping("/archivo/{codigo}")
     public ResponseEntity<List<DocumentoTarea>> obtenerDocumento(@PathVariable Long codigo){
         return ResponseEntity.ok(servicioAplicacionListarTarea.consultarByIdDocumento(codigo));
+    }
+    @PutMapping("/archivo/modificar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> modificarDocumento(@RequestBody DtoDocumentoTarea documentoTarea, @PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionModificarTarea.modificarDocumento(documentoTarea,codigo));
+    }
+    @DeleteMapping("/archivo/eliminar/{codigo}")
+    public ResponseEntity<DtoRespuesta<Long>> eliminarDocumento(@PathVariable Long codigo){
+        return ResponseEntity.ok(this.servicioAplicacionEliminarTarea.eliminarDocumento(codigo));
     }
 }

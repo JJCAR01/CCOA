@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.tarea;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
@@ -24,4 +25,6 @@ public interface RepositorioTarea {
     List<DocumentoTarea>  consultarPorIdParaObtenerDocumento(Long id);
     Long guardarDocumento(DocumentoTarea documentoTarea, Long codigo);
     boolean existeDocumento(DocumentoTarea documentoTarea);
+    Long modificarDocumento(DocumentoTarea documentoTarea, Long id);
+    Long eliminarDocumento(Long id);
 }

@@ -15,4 +15,7 @@ public class ServicioAplicacionEliminarProyectoArea {
     public DtoRespuesta<Long> ejecutarEliminar(Long codigo){
         return new DtoRespuesta<>(this.servicioEliminarProyectoArea.ejecutarEliminar(codigo));
     }
+    public DtoRespuesta<Long> eliminarDocumento(Long codigo){
+        return new DtoRespuesta<>(this.servicioEliminarProyectoArea.eliminarDocumento(codigo));
+    }
 }

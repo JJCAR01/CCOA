@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class DtoDocumentoSprintProyectoArea {
+    private Long idDocumentoSprintProyectoArea;
     private Long idSprintProyectoArea;
     private String rutaDocumento;
     private LocalDate fecha;

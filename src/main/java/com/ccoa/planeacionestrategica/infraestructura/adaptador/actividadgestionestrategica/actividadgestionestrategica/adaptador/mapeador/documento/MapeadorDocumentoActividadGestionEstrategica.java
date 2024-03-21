@@ -1,7 +1,8 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador;
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.mapeador.documento;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.documento.DocumentoActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.entidad.EntidadDocumentoActividadGestionEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioDocumentoActividadGestionEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,9 +12,15 @@ import java.util.List;
 @Configuration
 public class MapeadorDocumentoActividadGestionEstrategica implements MapeadorInfraestructura<EntidadDocumentoActividadGestionEstrategica,
         DocumentoActividadGestionEstrategica> {
+    private final RepositorioDocumentoActividadGestionEstrategicaJpa repositorioDocumentoActividadGestionEstrategicaJpa;
+
+    public MapeadorDocumentoActividadGestionEstrategica(RepositorioDocumentoActividadGestionEstrategicaJpa repositorioDocumentoActividadGestionEstrategicaJpa) {
+        this.repositorioDocumentoActividadGestionEstrategicaJpa = repositorioDocumentoActividadGestionEstrategicaJpa;
+    }
+
     @Override
     public DocumentoActividadGestionEstrategica mapeadorDominio(EntidadDocumentoActividadGestionEstrategica entidad) {
-        return new DocumentoActividadGestionEstrategica(entidad.getIdActividadGestionEstrategica(),
+        return new DocumentoActividadGestionEstrategica(entidad.getIdDocumentoActividadGestionEstrategica(), entidad.getIdActividadGestionEstrategica(),
                 entidad.getRutaDocumento(),entidad.getFecha());
     }
     @Override
@@ -36,5 +43,12 @@ public class MapeadorDocumentoActividadGestionEstrategica implements MapeadorInf
             listaDto.add(dto);
         }
         return listaDto;
+    }
+    public void actualizarEntidad(EntidadDocumentoActividadGestionEstrategica entidad, DocumentoActividadGestionEstrategica documentoActividadGestionEstrategica){
+        entidad.setRutaDocumento(documentoActividadGestionEstrategica.getRutaDocumento());
+    }
+
+    public EntidadDocumentoActividadGestionEstrategica obtenerEntidadDocumento(Long id){
+        return repositorioDocumentoActividadGestionEstrategicaJpa.findById(id).orElseThrow();
     }
 }

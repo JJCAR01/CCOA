@@ -33,6 +33,7 @@ public class MapeadorDocumentoActividadGestion implements MapeadorInfraestructur
         List<DocumentoActividadGestion> listaDto = new ArrayList<>();
         for (EntidadDocumentoActividadGestion entidadActual : entidades) {
             DocumentoActividadGestion dto = new DocumentoActividadGestion();
+            dto.setIdDocumentoActividadGestion(entidadActual.getIdDocumentoActividadGestion());
             dto.setIdActividadGestion(entidadActual.getIdActividadGestion());
             dto.setRutaDocumento(entidadActual.getRutaDocumento());
             dto.setFecha(entidadActual.getFecha());

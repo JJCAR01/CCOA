@@ -22,7 +22,6 @@ public class ServicioEliminarSprint {
         return this.repositorioSprint.eliminar(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioSprint.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_DOCUMENTO_RELACIONADO_CON_EL_SPRINT,MENSAJE_DEFECTO);
         return this.repositorioSprint.eliminarDocumento(id);
     }
 }

@@ -20,12 +20,11 @@ public class ServicioEliminarActividadGestion {
         if(this.repositorioActividadGestion.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_LA_ACTIVIDAD_GESTION_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioActividadGestion.eliminar(id);
     }
-    public Long ejecutarEliminarPorPat(Long id){
+    public void ejecutarEliminarPorPat(Long id){
         if(this.repositorioActividadGestion.consultarPorIdPatAEliminar(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioActividadGestion.eliminarPorPat(id);
+        this.repositorioActividadGestion.eliminarPorPat(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioActividadGestion.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_DE_GESTION,MENSAJE_DEFECTO);
         return this.repositorioActividadGestion.eliminarDocumento(id);
     }
 }

@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 @Configuration
-public class ConfiguracionFirebase {
+public class    ConfiguracionFirebase {
 
     @Bean
     public FirebaseApp firebaseApp() throws IOException {

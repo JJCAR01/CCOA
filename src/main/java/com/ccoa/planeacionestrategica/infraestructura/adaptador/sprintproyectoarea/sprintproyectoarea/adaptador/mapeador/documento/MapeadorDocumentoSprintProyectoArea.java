@@ -1,4 +1,4 @@
-package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.mapeador;
+package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.mapeador.documento;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.entidad.EntidadDocumentoSprintProyectoArea;
@@ -33,6 +33,7 @@ public class MapeadorDocumentoSprintProyectoArea implements MapeadorInfraestruct
         List<DocumentoSprintProyectoArea> listaDto = new ArrayList<>();
         for (EntidadDocumentoSprintProyectoArea entidadActual : entidades) {
             DocumentoSprintProyectoArea dto = new DocumentoSprintProyectoArea();
+            dto.setIdDocumentoSprintProyectoArea(entidadActual.getIdDocumentoSprintProyectoArea());
             dto.setIdSprintProyectoArea(entidadActual.getIdSprintProyectoArea());
             dto.setRutaDocumento(entidadActual.getRutaDocumento());
             dto.setFecha(entidadActual.getFecha());

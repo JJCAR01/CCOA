@@ -34,6 +34,7 @@ public class MapeadorDocumentoSprint implements MapeadorInfraestructura<EntidadD
         List<DocumentoSprint> listaDto = new ArrayList<>();
         for (EntidadDocumentoSprint entidadActual : entidades) {
             DocumentoSprint dto = new DocumentoSprint();
+            dto.setIdDocumentoSprint(entidadActual.getIdDocumentoSprint());
             dto.setIdSprint(entidadActual.getIdSprint());
             dto.setRutaDocumento(entidadActual.getRutaDocumento());
             dto.setFecha(entidadActual.getFecha());

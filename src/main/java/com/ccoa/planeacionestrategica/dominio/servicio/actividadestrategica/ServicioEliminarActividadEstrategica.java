@@ -30,7 +30,6 @@ public class ServicioEliminarActividadEstrategica{
         this.repositorioActividadEstrategica.eliminarPorPat(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioActividadEstrategica.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_UN_DOCUMENTO_RELACIONADO_CON_LA_ACTIVIDAD_ESTRATEGICA,MENSAJE_DEFECTO);
         return this.repositorioActividadEstrategica.eliminarDocumento(id);
     }
 }

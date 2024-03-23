@@ -25,7 +25,6 @@ public class ServicioEliminarProyecto {
         this.repositorioProyecto.eliminarPorActividadEstrategica(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioProyecto.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO,MENSAJE_DEFECTO);
         return this.repositorioProyecto.eliminarDocumento(id);
     }
 }

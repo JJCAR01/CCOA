@@ -24,7 +24,6 @@ public class ServicioEliminarProyectoArea {
         return this.repositorioProyectoArea.eliminarPorPat(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioProyectoArea.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_DOCUMENTO_RELACIONADO_CON_EL_PROYECTO_DEL_AREA,MENSAJE_DEFECTO);
         return this.repositorioProyectoArea.eliminarDocumento(id);
     }
 }

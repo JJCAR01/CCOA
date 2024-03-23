@@ -36,6 +36,7 @@ public class MapeadorDocumentoActividadGestionEstrategica implements MapeadorInf
         List<DocumentoActividadGestionEstrategica> listaDto = new ArrayList<>();
         for (EntidadDocumentoActividadGestionEstrategica entidadActual : entidades) {
             DocumentoActividadGestionEstrategica dto = new DocumentoActividadGestionEstrategica();
+            dto.setIdDocumentoActividadGestionEstrategica(entidadActual.getIdDocumentoActividadGestionEstrategica());
             dto.setIdActividadGestionEstrategica(entidadActual.getIdActividadGestionEstrategica());
             dto.setRutaDocumento(entidadActual.getRutaDocumento());
             dto.setFecha(entidadActual.getFecha());

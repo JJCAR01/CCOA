@@ -22,7 +22,6 @@ public class ServicioEliminarTarea {
         return this.repositorioTarea.eliminar(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioTarea.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_DOCUMENTO_RELACIONADO_CON_LA_TAREA,MENSAJE_DEFECTO);
         return this.repositorioTarea.eliminarDocumento(id);
     }
 }

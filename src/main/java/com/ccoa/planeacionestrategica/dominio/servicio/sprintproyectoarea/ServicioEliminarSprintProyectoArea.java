@@ -22,7 +22,6 @@ public class ServicioEliminarSprintProyectoArea {
         return this.repositorioSprintProyectoArea.eliminar(id);
     }
     public Long eliminarDocumento(Long id){
-        if(this.repositorioSprintProyectoArea.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_DOCUMENTO_RELACIONADO_CON_EL_SPRINT_DEL_PROYECTO_DEL_AREA,MENSAJE_DEFECTO);
         return this.repositorioSprintProyectoArea.eliminarDocumento(id);
     }
 }

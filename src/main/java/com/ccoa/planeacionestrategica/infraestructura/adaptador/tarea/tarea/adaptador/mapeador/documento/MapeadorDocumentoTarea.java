@@ -34,6 +34,7 @@ public class MapeadorDocumentoTarea implements MapeadorInfraestructura<EntidadDo
         List<DocumentoTarea> listaDto = new ArrayList<>();
         for (EntidadDocumentoTarea entidadActual : entidades) {
             DocumentoTarea dto = new DocumentoTarea();
+            dto.setIdDocumentoTarea(entidadActual.getIdDocumentoTarea());
             dto.setIdTarea(entidadActual.getIdTarea());
             dto.setRutaDocumento(entidadActual.getRutaDocumento());
             dto.setFecha(entidadActual.getFecha());

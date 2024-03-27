@@ -109,7 +109,9 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
         assert entidadDetalle != null;
         this.mapeadorProyectoArea.actualizarEntidad(entidad, proyectoArea,entidadInf,informacionProyectoArea,entidadDetalle);
         this.repositorioInformacionProyectoAreaJpa.save(entidadInf);
-        return this.repositorioProyectoAreaJpa.save(entidad).getIdProyectoArea();
+        this.repositorioProyectoAreaJpa.save(entidad);
+        this.mapeadorDetalleProyectoArea.actualizarPorcentajeAvance(entidadDetalle,id);
+        return id;
     }
     @Override
     public Long modificarValorEjecutado(ProyectoArea proyectoArea, Long id) {

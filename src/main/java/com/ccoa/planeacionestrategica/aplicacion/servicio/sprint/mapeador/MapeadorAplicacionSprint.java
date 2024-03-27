@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionSprint implements MapeadorAplicacion<DtoSprint, Sprint> {
     @Override
     public Sprint mapeadorAplicacion(DtoSprint dto) {
-        return new Sprint(dto.getIdSprint(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),dto.getIdProyecto());
+        return Sprint.of(dto.getIdSprint(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),dto.getIdProyecto());
     }
 }

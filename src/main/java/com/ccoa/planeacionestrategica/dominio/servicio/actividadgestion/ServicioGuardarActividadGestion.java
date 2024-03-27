@@ -4,11 +4,7 @@ import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadG
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadgestion.RepositorioActividadGestion;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
-
-import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensajes.*;
-import static com.ccoa.planeacionestrategica.dominio.transversal.validador.ValidadorDominio.MENSAJE_DEFECTO;
 
 @Service
 public class ServicioGuardarActividadGestion {

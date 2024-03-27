@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoDocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoDocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;

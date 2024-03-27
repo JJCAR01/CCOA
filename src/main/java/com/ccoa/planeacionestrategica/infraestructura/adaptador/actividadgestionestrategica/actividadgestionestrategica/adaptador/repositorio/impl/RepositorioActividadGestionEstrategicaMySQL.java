@@ -92,11 +92,10 @@ public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioA
 
     @Transactional
     @Override
-    public Long eliminarPorActividadEstrategica(Long id) {
+    public void eliminarPorActividadEstrategica(Long id) {
         var entidades = consultarPorIdActividadEstrategica(id);
         entidades.forEach(entidad -> repositorioInformacionActividadGestionEstrategicaJpa.deleteById(entidad.getIdActividadGestionEstrategica()));
         repositorioActividadGestionEstrategicaJpa.deleteByIdActividadEstrategica(id);
-        return id;
     }
 
     @Override
@@ -107,7 +106,9 @@ public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioA
         assert entidadInf != null;
         this.mapeadorActividadGestionEstrategica.actualizarEntidad(entidad, actividadGestionEstrategica,entidadInf,informacionActividadGestionEstrategica);
         this.repositorioInformacionActividadGestionEstrategicaJpa.save(entidadInf);
-        return this.repositorioActividadGestionEstrategicaJpa.save(entidad).getIdActividadGestionEstrategica();
+        this.repositorioActividadGestionEstrategicaJpa.save(entidad);
+        this.mapeadorInformacionActividadGestionEstrategica.actualizarPorcentajeAvance(entidadInf,id);
+        return id;
     }
     @Override
     public List<DtoActividadGestionEstrategicaResumen> consultarPorIdActividadEstrategica(Long idActividadEstrategica) {

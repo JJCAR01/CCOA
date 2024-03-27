@@ -12,6 +12,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.ad
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
@@ -48,14 +49,18 @@ public class MapeadorDetalleProyecto implements MapeadorInfraestructura<EntidadD
 
     public void actualizarPorcentajeAvance(EntidadDetalleProyecto entidad, Long idProyecto) {
         List<EntidadSprint> sprints = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
+        // Filtrar los sprints por la fecha inicial
+        List<EntidadSprint> sprintsFiltradas = sprints.stream()
+                .filter(sprint -> sprint.getFechaInicial().isBefore(LocalDate.now()))
+                .toList();
         List<EntidadInformacionSprint> informacionSprint = this.repositorioInformacionSprintJpa.
                 findAll()
                 .stream()
-                .filter(e -> sprints.stream()
+                .filter(e -> sprintsFiltradas.stream()
                         .anyMatch(sprint -> sprint.getIdSprint().equals(e.getIdInformacionSprint())))
                 .toList();
 
-        long totalSprints = sprints.size();
+        long totalSprints = sprintsFiltradas.size();
         double sumaSprint = informacionSprint.stream().mapToDouble(EntidadInformacionSprint::getPorcentajeReal).sum();
 
         if (totalSprints > 0) {

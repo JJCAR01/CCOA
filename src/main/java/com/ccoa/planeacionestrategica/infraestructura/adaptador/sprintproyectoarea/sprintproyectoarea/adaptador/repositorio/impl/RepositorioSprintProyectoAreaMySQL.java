@@ -114,7 +114,9 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
         assert entidad != null;
         this.mapeadorSprintProyectoArea.actualizarEntidad(entidad, sprintProyectoArea,informacionEntidad);
         this.repositorioInformacionSprintProyectoAreaJpa.save(informacionEntidad);
-        return this.repositorioSprintProyectoAreaJpa.save(entidad).getIdSprintProyectoArea();
+        this.repositorioSprintProyectoAreaJpa.save(entidad);
+        this.mapeadorInformacionSprintProyectoArea.actualizarPorcentajeAvance(informacionEntidad,id);
+        return id;
     }
 
     @Override

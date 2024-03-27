@@ -108,7 +108,9 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
         assert entidadDetalle != null;
         this.mapeadorProyecto.actualizarEntidad(entidad, proyecto,entidadInf,informacionProyecto,entidadDetalle);
         this.repositorioInformacionProyectoJpa.save(entidadInf);
-        return this.repositorioProyectoJpa.save(entidad).getIdProyecto();
+        this.repositorioProyectoJpa.save(entidad);
+        this.mapeadorDetalleProyecto.actualizarPorcentajeAvance(entidadDetalle,id);
+        return id;
     }
 
     @Override

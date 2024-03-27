@@ -113,7 +113,9 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
         assert entidad != null;
         this.mapeadorSprint.actualizarEntidad(entidad, sprint, informacionEntidad);
         this.repositorioInformacionSprintJpa.save(informacionEntidad);
-        return this.repositorioSprintJpa.save(entidad).getIdSprint();
+        this.repositorioSprintJpa.save(entidad);
+        this.mapeadorInformacionSprint.actualizarPorcentajeAvance(informacionEntidad,id);
+        return id;
     }
 
     @Override
@@ -131,7 +133,7 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
 
     @Override
     public Long eliminarDocumento(Long id) {
-        this.repositorioSprintJpa.deleteById(id);
+        this.repositorioDocumentoSprintJpa.deleteById(id);
         return id;
     }
 

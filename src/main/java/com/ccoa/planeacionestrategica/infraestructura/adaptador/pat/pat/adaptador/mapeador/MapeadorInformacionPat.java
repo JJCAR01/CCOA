@@ -17,8 +17,10 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.direccion.adapta
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadDetalleProyectoArea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadInformacionProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.entidad.EntidadProyectoArea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioDetalleProyectoAreaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioInformacionProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.jpa.RepositorioProyectoAreaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
@@ -34,6 +36,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
     private final ServicioObtenerDuracion servicioObtenerDuracion;
     private final RepositorioActividadGestionJpa repositorioActividadGestionJpa;
+    private final RepositorioInformacionProyectoAreaJpa repositorioInformacionProyectoAreaJpa;
     private final RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
@@ -44,7 +47,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
 
     public MapeadorInformacionPat(RepositorioDireccionJpa repositorioDireccionJpa, ServicioObtenerPorcentaje servicioObtenerPorcentaje, ServicioObtenerDuracion servicioObtenerDuracion, RepositorioActividadGestionJpa repositorioActividadGestionJpa,
-                                  RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
+                                  RepositorioInformacionProyectoAreaJpa repositorioInformacionProyectoAreaJpa, RepositorioInformacionActividadGestionJpa repositorioInformacionActividadGestionJpa,
                                   RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
                                   RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioProyectoAreaJpa repositorioProyectoAreaJpa, RepositorioDetalleProyectoAreaJpa repositorioDetalleProyectoAreaJpa,
                                   MapeadorPat mapeadorPat, RepositorioPatJpa repositorioPatJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa) {
@@ -52,6 +55,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
         this.servicioObtenerDuracion = servicioObtenerDuracion;
         this.repositorioActividadGestionJpa = repositorioActividadGestionJpa;
+        this.repositorioInformacionProyectoAreaJpa = repositorioInformacionProyectoAreaJpa;
         this.repositorioInformacionActividadGestionJpa = repositorioInformacionActividadGestionJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
@@ -96,19 +100,39 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
 
     public void actualizarPorcentajeAvance(EntidadInformacionPat entidad, Long idPat) {
         List<EntidadActividadGestion> actividadGestiones = this.repositorioActividadGestionJpa.findByIdPat(idPat);
-        List<EntidadInformacionActividadGestion> informacionActividadesGestiones = actividadGestiones.stream()
+        // Filtrar las actividades de Gestion por la fecha inicial
+        List<EntidadActividadGestion> actividadGestionesFiltradas = actividadGestiones.stream()
+                .filter(actividadGestion -> actividadGestion.getFechaInicial().isBefore(LocalDate.now()))
+                .toList();
+        List<EntidadInformacionActividadGestion> informacionActividadesGestiones = actividadGestionesFiltradas.stream()
                 .map(actividadGestion -> this.repositorioInformacionActividadGestionJpa.findByIdInformacionActividadGestion(actividadGestion.getIdActividadGestion()))
                 .flatMap(List::stream).toList();
+
         List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
-        List<EntidadInformacionActividadEstrategica> informacionActividadesEstrategicas = actividadEstrategicas.stream()
+        // Filtrar las actividades de Gestion por la fecha inicial
+        List<EntidadActividadEstrategica> actividadEstrategicasFiltradas = actividadEstrategicas.stream()
+                .filter(actividadEstrategica -> actividadEstrategica.getFechaInicial().isBefore(LocalDate.now()))
+                .toList();
+        List<EntidadInformacionActividadEstrategica> informacionActividadesEstrategicas = actividadEstrategicasFiltradas.stream()
                 .map(actividadEstrategica -> this.repositorioInformacionActividadEstrategicaJpa.findByIdInformacionActividadEstrategica(actividadEstrategica.getIdActividadEstrategica()))
                 .flatMap(List::stream).toList();
+
         List<EntidadProyectoArea> proyectosArea = this.repositorioProyectoAreaJpa.findByIdPat(idPat);
-        List<EntidadDetalleProyectoArea> detalleProyectosArea = proyectosArea.stream()
-                .map(proyecto -> this.repositorioDetalleProyectoAreaJpa.findByIdDetalleProyectoArea(proyecto.getIdProyectoArea()))
+        List<EntidadInformacionProyectoArea> informacionProyectos = this.repositorioInformacionProyectoAreaJpa.
+                findAll()
+                .stream()
+                .filter(e -> proyectosArea.stream()
+                        .anyMatch(proyecto -> proyecto.getIdProyectoArea().equals(e.getIdInformacionProyectoArea())))
+                .toList();
+        // Filtrar las actividades de Gestion estratégica por la fecha inicial
+        List<EntidadInformacionProyectoArea> informacionProyectosFiltradas = informacionProyectos.stream()
+                .filter(actividadGestion -> actividadGestion.getFechaInicial().isBefore(LocalDate.now()))
+                .toList();
+        List<EntidadDetalleProyectoArea> detalleProyectosArea = informacionProyectosFiltradas.stream()
+                .map(proyecto -> this.repositorioDetalleProyectoAreaJpa.findByIdDetalleProyectoArea(proyecto.getIdInformacionProyectoArea()))
                 .flatMap(List::stream).toList();
 
-        double porcentaje = Mensaje.PORCENTAJE / (actividadGestiones.size() + actividadEstrategicas.size() + proyectosArea.size());
+        double porcentaje = Mensaje.PORCENTAJE / (actividadGestionesFiltradas.size() + actividadEstrategicasFiltradas.size() + proyectosArea.size());
 
         double sumaActGestion = informacionActividadesGestiones.stream().mapToDouble(eGestion -> eGestion.getPorcentajeReal() * porcentaje).sum();
         double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajeReal() * porcentaje).sum();

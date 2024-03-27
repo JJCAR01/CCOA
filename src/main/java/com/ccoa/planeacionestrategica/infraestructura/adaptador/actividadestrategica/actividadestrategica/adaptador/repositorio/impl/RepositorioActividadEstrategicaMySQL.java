@@ -109,7 +109,9 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         assert entidadDetalle != null;
         this.mapeadorActividadEstrategica.actualizarEntidad(entidad, actividadEstrategica,entidadInf,informacionActividadEstrategica,entidadDetalle,detalleActividadEstrategica);
         this.repositorioInformacionActividadEstrategicaJpa.save(entidadInf);
-        return this.repositorioActividadEstrategicaJpa.save(entidad).getIdActividadEstrategica();
+        this.repositorioActividadEstrategicaJpa.save(entidad);
+        mapeadorInformacionActividadEstrategica.actualizarPorcentajeAvance(entidadInf,id);
+        return id;
     }
 
     @Override

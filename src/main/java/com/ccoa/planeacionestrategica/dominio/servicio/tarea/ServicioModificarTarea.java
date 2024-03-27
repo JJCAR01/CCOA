@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.tarea;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.documento.DocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;

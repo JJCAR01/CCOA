@@ -1,9 +1,7 @@
 package com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.mapeador.documento;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoDocumentoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.documento.DocumentoProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import org.springframework.context.annotation.Configuration;
 

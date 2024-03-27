@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoDocumentoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoDocumentoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;

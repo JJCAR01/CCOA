@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.controlador;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoDocumentoProyecto;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespuesta;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoDocumentoSprint;
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;

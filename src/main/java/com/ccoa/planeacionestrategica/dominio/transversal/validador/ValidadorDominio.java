@@ -1,14 +1,14 @@
 package com.ccoa.planeacionestrategica.dominio.transversal.validador;
 
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.*;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
-@AllArgsConstructor
 public class ValidadorDominio {
+
+    private ValidadorDominio() {}
 
     private static final String PATRON_CLAVE = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){13,20}$";
     private static final String PATRON_CORREO = "^[a-zA-Z]+@ccoa\\.org\\.co$";

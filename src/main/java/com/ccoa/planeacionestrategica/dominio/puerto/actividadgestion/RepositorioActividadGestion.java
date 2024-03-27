@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.dominio.puerto.actividadgestion;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestion;
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.documento.DocumentoActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.InformacionActividadGestion;

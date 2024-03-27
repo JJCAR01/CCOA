@@ -57,18 +57,18 @@ public class MapeadorInformacionActividadGestion implements MapeadorInfraestruct
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
     public void actualizarPorcentajeAvance(EntidadInformacionActividadGestion entidad,Long idInformacionActividadGestion) {
-        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(idInformacionActividadGestion, ETipoASE.ACTIVIDAD_GESTION);
-        List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
+        List<EntidadTarea> tareasActividadGestion = this.repositorioTareaJpa.findByIdASEAndTipoASE(idInformacionActividadGestion, ETipoASE.ACTIVIDAD_GESTION);
+        List<EntidadInformacionTarea> informacionTareasActividadGestion = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
-                .filter(e -> sprints.stream()
+                .filter(e -> tareasActividadGestion.stream()
                         .anyMatch(actividad -> actividad.getIdTarea().equals(e.getIdInformacionTarea())))
                 .toList();
-        long totalTareas = sprints.size();
-        long tareasTerminadas = sprints.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
+        long totalTareas = tareasActividadGestion.size();
+        long tareasTerminadas = tareasActividadGestion.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
 
         if (totalTareas > 0) {
-            double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);
+            double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasActividadGestion, tareasTerminadas, totalTareas);
             double nuevoAvance = servicioObtenerPorcentaje.obtenerNuevoAvance(tareasTerminadas,porcentajesDiferentesATareasUnicaVez,totalTareas);
             entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdInformacionActividadGestion(idInformacionActividadGestion);

@@ -12,6 +12,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoar
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
@@ -47,14 +48,18 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
 
     public void actualizarPorcentajeAvance(EntidadDetalleProyectoArea entidad, Long idProyectoArea) {
         List<EntidadSprintProyectoArea> sprintProyectoAreas = this.repositorioSprintProyectoAreaJpa.findByIdProyectoArea(idProyectoArea);
+        // Filtrar los sprints del proyecto del área por la fecha inicial
+        List<EntidadSprintProyectoArea> sprintProyectoAreasFiltradas = sprintProyectoAreas.stream()
+                .filter(sprint -> sprint.getFechaInicial().isBefore(LocalDate.now()))
+                .toList();
         List<EntidadInformacionSprintProyectoArea> informacionSprintProyectoArea = this.repositorioInformacionSprintProyectoAreaJpa.
                 findAll()
                 .stream()
-                .filter(e -> sprintProyectoAreas.stream()
+                .filter(e -> sprintProyectoAreasFiltradas.stream()
                         .anyMatch(sprintProyectoArea -> sprintProyectoArea.getIdSprintProyectoArea().equals(e.getIdInformacionSprintProyectoArea())))
                 .toList();
 
-        long totalSprintProyectoAreas = sprintProyectoAreas.size();
+        long totalSprintProyectoAreas = sprintProyectoAreasFiltradas.size();
         double sumaSprintProyectoArea = informacionSprintProyectoArea.stream().mapToDouble(EntidadInformacionSprintProyectoArea::getPorcentajeReal).sum();
 
         if (totalSprintProyectoAreas > 0) {

@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.proyecto;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.documento.DocumentoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.InformacionProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.Proyecto;

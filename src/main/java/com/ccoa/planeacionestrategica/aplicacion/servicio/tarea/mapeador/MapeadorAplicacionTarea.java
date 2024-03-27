@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionTarea implements MapeadorAplicacion<DtoTarea, Tarea> {
     @Override
     public Tarea mapeadorAplicacion(DtoTarea dto) {
-        return new Tarea(dto.getIdTarea(), dto.getNombre(), Mensaje.POR_DEFECTO_EN_BACKLOG, dto.getDescripcion(),dto.getTipoASE(), dto.getIdASE(), dto.getIdUsuario());
+        return Tarea.of(dto.getIdTarea(), dto.getNombre(), Mensaje.POR_DEFECTO_EN_BACKLOG, dto.getDescripcion(),dto.getTipoASE(), dto.getIdASE(), dto.getIdUsuario());
     }
 
     public Tarea actualizarEstado(DtoTarea dto) {

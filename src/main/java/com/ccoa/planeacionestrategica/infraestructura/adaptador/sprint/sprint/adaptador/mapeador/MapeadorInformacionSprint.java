@@ -53,16 +53,16 @@ public class MapeadorInformacionSprint implements MapeadorInfraestructura<Entida
                 entidadInformacionSprint.orElseThrow().getPorcentajeCumplimiento());
     }
     public void actualizarPorcentajeAvance(EntidadInformacionSprint entidad, Long idInformacionSprint) {
-        List<EntidadTarea> sprints = this.repositorioTareaJpa.findByIdASEAndTipoASE(idInformacionSprint, ETipoASE.SPRINT);
+        List<EntidadTarea> tareasSprint = this.repositorioTareaJpa.findByIdASEAndTipoASE(idInformacionSprint, ETipoASE.SPRINT);
         List<EntidadInformacionTarea> informacionTareasSprint = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
-                .filter(e -> sprints.stream()
+                .filter(e -> tareasSprint.stream()
                         .anyMatch(actividad -> actividad.getIdTarea().equals(e.getIdInformacionTarea())))
                 .toList();
 
-        long totalTareas = sprints.size();
-        long tareasTerminadas = sprints.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
+        long totalTareas = tareasSprint.size();
+        long tareasTerminadas = tareasSprint.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
 
         if (totalTareas > 0) {
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprint, tareasTerminadas, totalTareas);

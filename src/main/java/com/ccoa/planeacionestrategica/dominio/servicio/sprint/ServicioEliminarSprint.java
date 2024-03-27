@@ -1,7 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprint;
 
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
-import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObligatorio;
 import org.springframework.stereotype.Service;
 

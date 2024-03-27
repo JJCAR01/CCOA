@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.ada
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadDocumentoTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioDocumentoTareaJpa;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import org.springframework.context.annotation.Configuration;
 

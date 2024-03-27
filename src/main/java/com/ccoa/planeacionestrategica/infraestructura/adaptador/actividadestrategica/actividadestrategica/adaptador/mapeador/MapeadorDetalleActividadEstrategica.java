@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrat
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.DetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDetalleActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.stereotype.Component;
@@ -11,11 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MapeadorDetalleActividadEstrategica implements MapeadorInfraestructura<EntidadDetalleActividadEstrategica, DetalleActividadEstrategica> {
     private final ServicioCalcularPorcentaje servicioCalcularPorcentaje;
-    private final RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa;
 
-    public MapeadorDetalleActividadEstrategica(ServicioCalcularPorcentaje servicioCalcularPorcentaje, RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa) {
+    public MapeadorDetalleActividadEstrategica(ServicioCalcularPorcentaje servicioCalcularPorcentaje) {
         this.servicioCalcularPorcentaje = servicioCalcularPorcentaje;
-        this.repositorioDetalleActividadEstrategicaJpa = repositorioDetalleActividadEstrategicaJpa;
     }
 
     @Override
@@ -41,7 +38,4 @@ public class MapeadorDetalleActividadEstrategica implements MapeadorInfraestruct
 
     }
 
-    public EntidadDetalleActividadEstrategica obtenerDetalleActividadEstrategicaRelacionadoConActividadEstrategica(Long id){
-        return this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElseThrow();
-    }
 }

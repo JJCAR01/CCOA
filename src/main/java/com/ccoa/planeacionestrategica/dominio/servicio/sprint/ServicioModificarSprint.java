@@ -1,6 +1,5 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.sprint;
 
-import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.documento.DocumentoProyecto;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;

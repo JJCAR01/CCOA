@@ -105,7 +105,9 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
         assert entidadInf != null;
         this.mapeadorActividadGestion.actualizarEntidad(entidad, actividadGestion,entidadInf,informacionActividadGestion);
         this.repositorioInformacionActividadGestionJpa.save(entidadInf);
-        return this.repositorioActividadGestionJpa.save(entidad).getIdActividadGestion();
+        this.repositorioActividadGestionJpa.save(entidad);
+        this.mapeadorInformacionActividadGestion.actualizarPorcentajeAvance(entidadInf,id);
+        return id;
     }
 
     @Override

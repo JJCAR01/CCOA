@@ -53,16 +53,16 @@ public class MapeadorInformacionSprintProyectoArea implements MapeadorInfraestru
                 entidadInformacionSprintProyectoArea.orElseThrow().getPorcentajeCumplimiento());
     }
     public void actualizarPorcentajeAvance(EntidadInformacionSprintProyectoArea entidad, Long idSprintProyectoArea) {
-        List<EntidadTarea> sprintProyectoAreas = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprintProyectoArea, ETipoASE.SPRINT_PROYECTO_AREA);
+        List<EntidadTarea> tareasSprintProyectoArea = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprintProyectoArea, ETipoASE.SPRINT_PROYECTO_AREA);
         List<EntidadInformacionTarea> informacionTareasSprintProyectoArea = this.repositorioInformacionTareaJpa.
                 findAll()
                 .stream()
-                .filter(e -> sprintProyectoAreas.stream()
+                .filter(e -> tareasSprintProyectoArea.stream()
                         .anyMatch(actividad -> actividad.getIdTarea().equals(e.getIdInformacionTarea())))
                 .toList();
 
-        long totalTareas = sprintProyectoAreas.size();
-        long tareasTerminadas = sprintProyectoAreas.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
+        long totalTareas = tareasSprintProyectoArea.size();
+        long tareasTerminadas = tareasSprintProyectoArea.stream().filter(tarea -> tarea.getEstado() == EEstado.TERMINADO).count();
 
         if (totalTareas > 0) {
             double porcentajesDiferentesATareasUnicaVez = servicioObtenerPorcentaje.obtenerPorcentajesDiferentesATareasUnicaVez(informacionTareasSprintProyectoArea, tareasTerminadas, totalTareas);

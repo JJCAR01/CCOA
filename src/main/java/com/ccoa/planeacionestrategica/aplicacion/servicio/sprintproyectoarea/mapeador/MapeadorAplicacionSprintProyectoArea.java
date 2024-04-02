@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorAplicacionSprintProyectoArea implements MapeadorAplicacion<DtoSprintProyectoArea, SprintProyectoArea> {
     @Override
     public SprintProyectoArea mapeadorAplicacion(DtoSprintProyectoArea dto) {
-        return new SprintProyectoArea(dto.getIdSprintProyectoArea(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),dto.getIdProyectoArea());
+        return SprintProyectoArea.of(dto.getIdSprintProyectoArea(), dto.getDescripcion(), dto.getFechaInicial(),dto.getFechaFinal(),dto.getIdProyectoArea());
     }
 }

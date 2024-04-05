@@ -18,13 +18,13 @@ public class Tarea {
     private final Long idASE;
     private final Long idUsuario;
 
-    public static Tarea of(Long idTarea, String nombre, EEstado estado, String observacion, ETipoASE tipoASE, Long idASE, Long idUsuario){
+    public static Tarea of(Long idTarea, String nombre, EEstado estado, String descripcion, ETipoASE tipoASE, Long idASE, Long idUsuario){
         ValidadorDominio.validarObligatorio(nombre,NOMBRE_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorMaximo255Caracteres(nombre,EXCEDIO_MAXIMO_DE_CARACTERES);
         ValidadorDominio.validarObligatorio(estado,EL_ESTADO_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIO);
-        ValidadorDominio.validadorMaximo255Caracteres(observacion,EXCEDIO_MAXIMO_DE_CARACTERES);
+        ValidadorDominio.validadorMaximo255Caracteres(descripcion,EXCEDIO_MAXIMO_DE_CARACTERES);
         ValidadorDominio.validadorNumeroLongYMayorACero(idUsuario,NO_PUEDE_EXISTIR_SIN_USUARIO);
-        return new Tarea(idTarea, nombre,estado, observacion, tipoASE, idASE, idUsuario);
+        return new Tarea(idTarea, nombre,estado, descripcion, tipoASE, idASE, idUsuario);
     }
 
     public Tarea(Long idTarea, String nombre, EEstado estado, String descripcion, ETipoASE tipoASE, Long idASE, Long idUsuario) {

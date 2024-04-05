@@ -71,7 +71,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
             EntidadUsuarioRol entidadUsuarioRol = new EntidadUsuarioRol();
             entidadUsuarioRol.setIdUsuario(usuarioEntidad.getIdUsuario());
             entidadUsuarioRol.setUsuario(usuarioEntidad);  // Asignar el usuario antes de guardarlo
-            entidadUsuarioRol.setRol(rol.getRol());
+            entidadUsuarioRol.setNombreRol(rol.getNombreRol());
             this.repositorioRolJpa.save(entidadUsuarioRol);
 
             // Guardar la entidad de información de usuario
@@ -105,7 +105,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         if(entidadUsuario == null) {
             return null;
         }
-        List<Rol> roles = entidadUsuario.getRoles().stream().map(rol -> Rol.of(rol.getIdUsuario(), rol.getRol())).toList();
+        List<Rol> roles = entidadUsuario.getRoles().stream().map(rol -> Rol.of(rol.getIdUsuario(), rol.getNombreRol())).toList();
 
         return Usuario.of(entidadUsuario.getIdUsuario(), entidadUsuario.getNombre(), entidadUsuario.getApellido(), entidadUsuario.getCorreo(), entidadUsuario.getPassword(),
                 entidadUsuario.getIdCargo(),roles);
@@ -132,7 +132,7 @@ public class RepositorioUsuarioMySQL implements RepositorioUsuario {
         EntidadUsuarioRol nuevoUsuarioRol = new EntidadUsuarioRol();
         nuevoUsuarioRol.setIdUsuario(id);
         nuevoUsuarioRol.setUsuario(entidadUsuario);
-        nuevoUsuarioRol.setRol(rol.getRol());
+        nuevoUsuarioRol.setNombreRol(rol.getNombreRol());
 
         // Guardar la nueva instancia de EntidadUsuarioRol
         this.repositorioRolJpa.save(nuevoUsuarioRol);

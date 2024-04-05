@@ -14,17 +14,17 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UsuarioRolId implements Serializable {
     private Long idUsuario;
-    private String rol;
+    private String nombreRol;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UsuarioRolId that)) return false;
-        return Objects.equals(idUsuario, that.idUsuario) && Objects.equals(rol, that.rol);
+        return Objects.equals(idUsuario, that.idUsuario) && Objects.equals(nombreRol, that.nombreRol);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUsuario, rol);
+        return Objects.hash(idUsuario, nombreRol);
     }
 }

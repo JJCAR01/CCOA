@@ -14,7 +14,7 @@ public class EntidadDocumentoActividadGestionEstrategica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_documneto_actividad_gestion_actividad_estrategica")
+    @Column(name = "id_documento_actividad_gestion_estrategica")
     private Long idDocumentoActividadGestionEstrategica;
 
     @Column(name = "id_actividad_gestion_estrategica")

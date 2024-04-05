@@ -52,7 +52,7 @@ public class ServicioSeguridadUsuario implements UserDetailsService {
                 pats.addAll(informacionUsuario.getPats());
             }
         }
-        String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getRol).toArray(String[]::new);
+        String[] roles = entidadUsuario.getRoles().stream().map(EntidadUsuarioRol::getNombreRol).toArray(String[]::new);
         return User.builder()
                 .username(entidadUsuario.getCorreo())
                 .password(entidadUsuario.getPassword())

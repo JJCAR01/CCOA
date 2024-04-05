@@ -9,13 +9,11 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorInformacionTarea implements MapeadorInfraestructura<EntidadInformacionTarea, InformacionTarea> {
     @Override
     public InformacionTarea mapeadorDominio(EntidadInformacionTarea entidad) {
-        return new InformacionTarea(entidad.getPeriodicidad(),
-                entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado(),entidad.getPorcentajeCumplimiento());
+        return new InformacionTarea(entidad.getPeriodicidad(),entidad.getPorcentajeReal());
     }
 
     @Override
     public EntidadInformacionTarea mapeadorEntidad(InformacionTarea dominio) {
-        return new  EntidadInformacionTarea( dominio.getPeriodicidad(), dominio.getPorcentajeReal(),
-                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento());
+        return new  EntidadInformacionTarea( dominio.getPeriodicidad(), dominio.getPorcentajeReal());
     }
 }

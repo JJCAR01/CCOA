@@ -19,7 +19,7 @@ public class MapeadorAplicacionUsuario implements MapeadorAplicacion<DtoUsuario,
     public Usuario actualizarAplicacion(DtoUsuario dto) {
         List<Rol> roles = (dto.getRoles() != null)
                 ? dto.getRoles().stream()
-                .map(dtoRol -> new Rol(dtoRol.getIdRol(), dtoRol.getRol()))
+                .map(dtoRol -> new Rol(dtoRol.getIdRol(), dtoRol.getNombreRol()))
                 .toList()
                 : List.of();
         return new Usuario(dto.getIdUsuario(), dto.getNombre(), dto.getApellido(), dto.getPassword(), dto.getCorreo(),

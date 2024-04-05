@@ -37,7 +37,7 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
     @Override
     public Usuario mapeadorDominio(EntidadUsuario entidad) {
         return Usuario.of(entidad.getIdUsuario(), entidad.getNombre(), entidad.getApellido(), entidad.getPassword(),
-                entidad.getCorreo(), entidad.getIdCargo(), entidad.getRoles().stream().map(rol -> Rol.of(rol.getIdUsuario(), rol.getRol())).toList());
+                entidad.getCorreo(), entidad.getIdCargo(), entidad.getRoles().stream().map(rol -> Rol.of(rol.getIdUsuario(), rol.getNombreRol())).toList());
     }
 
     @Override
@@ -132,7 +132,7 @@ public class MapeadorUsuario implements MapeadorInfraestructura<EntidadUsuario,U
     public DtoRol mapearRol(EntidadUsuarioRol entidadUsuarioRol) {
         DtoRol dtoRol = new DtoRol();
         dtoRol.setIdRol(entidadUsuarioRol.getIdUsuario());
-        dtoRol.setRol(entidadUsuarioRol.getRol());
+        dtoRol.setNombreRol(entidadUsuarioRol.getNombreRol());
         // Mapear otros atributos según sea necesario
         return dtoRol;
     }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class MapeadorAplicacionRol implements MapeadorAplicacion<DtoUsuario, Rol> {
     @Override
     public Rol mapeadorAplicacion(DtoUsuario dto) {
-        String rolesString = dto.getRoles().stream().map(Rol::getRol).collect(Collectors.joining(","));
+        String rolesString = dto.getRoles().stream().map(Rol::getNombreRol).collect(Collectors.joining(","));
         return new Rol(dto.getIdUsuario(), rolesString);
     }
 }

@@ -16,8 +16,6 @@ public class DtoTarea {
     private EPeriodicidad periodicidad;
     private ETipoASE tipoASE;
     private Double porcentajeReal;
-    private Double porcentajeEsperado;
-    private Double porcentajeCumplimiento;
     private Long idASE;
     private Long idUsuario;
 }

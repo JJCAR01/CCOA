@@ -63,15 +63,15 @@ public class ControladorGoogle {
     }
 
     private String getTipo(List<EntidadUsuarioRol> roles) {
-        if (roles.stream().anyMatch(aut -> aut.getRol().equals("OPERADOR"))) {
+        if (roles.stream().anyMatch(aut -> aut.getNombreRol().equals("OPERADOR"))) {
             return "OPERADOR";
-        } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("DIRECTOR"))) {
+        } else if (roles.stream().anyMatch(aut -> aut.getNombreRol().equals("DIRECTOR"))) {
             return "DIRECTOR";
-        } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("ADMIN"))) {
+        } else if (roles.stream().anyMatch(aut -> aut.getNombreRol().equals("ADMIN"))) {
             return "ADMIN";
-        } else if (roles.stream().anyMatch(aut -> aut.getRol().equals("CONSULTOR"))) {
+        } else if (roles.stream().anyMatch(aut -> aut.getNombreRol().equals("CONSULTOR"))) {
             return "CONSULTOR";
-        }else if (roles.stream().anyMatch(aut -> aut.getRol().equals("OPERADOR_EDITOR"))) {
+        }else if (roles.stream().anyMatch(aut -> aut.getNombreRol().equals("OPERADOR_EDITOR"))) {
                 return "OPERADOR_EDITOR";
         }else {
             return null;

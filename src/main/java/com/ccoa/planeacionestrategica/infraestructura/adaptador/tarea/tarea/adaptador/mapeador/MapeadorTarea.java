@@ -99,8 +99,6 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
 
             dto.setPeriodicidad(informacionTarea.orElseThrow().getPeriodicidad());
             dto.setPorcentajeReal(informacionTarea.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(informacionTarea.orElseThrow().getPorcentajeEsperado());
-            dto.setPorcentajeCumplimiento(informacionTarea.orElseThrow().getPorcentajeCumplimiento());
 
             listaDto.add(dto);
         }

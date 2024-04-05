@@ -21,16 +21,9 @@ public class EntidadInformacionTarea {
     @Column(name = "porcentaje_real")
     private Double porcentajeReal;
 
-    @Column(name = "porcentaje_esperado")
-    private Double porcentajeEsperado;
 
-    @Column(name = "porcentaje_cumplimiento")
-    private Double porcentajeCumplimiento;
-
-    public EntidadInformacionTarea(EPeriodicidad periodicidad, Double porcentajeReal, Double porcentajeEsperado, Double porcentajeCumplimiento) {
+    public EntidadInformacionTarea(EPeriodicidad periodicidad, Double porcentajeReal) {
         this.periodicidad = periodicidad;
         this.porcentajeReal = porcentajeReal;
-        this.porcentajeEsperado = porcentajeEsperado;
-        this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
 }

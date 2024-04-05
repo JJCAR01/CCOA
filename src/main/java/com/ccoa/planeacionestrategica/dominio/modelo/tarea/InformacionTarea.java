@@ -12,21 +12,15 @@ public class InformacionTarea {
 
     private final EPeriodicidad periodicidad;
     private final double porcentajeReal;
-    private final double porcentajeEsperado;
-    private final double porcentajeCumplimiento;
 
-    public static InformacionTarea of(EPeriodicidad periodicidad, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
+    public static InformacionTarea of(EPeriodicidad periodicidad, double porcentajeReal) {
         ValidadorDominio.validarObligatorio(periodicidad, Mensajes.LA_PERIODICIDAD_DE_LA_TAREA_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
-        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
-        ValidadorDominio.validadorNumeroDoubleYMayorACero(porcentajeReal, EL_PORCENTAJE_DE_CUMPLIMIENTO_NO_PUEDE_ESTAR_VACIO);
-        return new InformacionTarea(periodicidad, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento);
+        return new InformacionTarea(periodicidad, porcentajeReal);
     }
 
-    public InformacionTarea(EPeriodicidad periodicidad, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento) {
+    public InformacionTarea(EPeriodicidad periodicidad, double porcentajeReal) {
         this.periodicidad = periodicidad;
         this.porcentajeReal = porcentajeReal;
-        this.porcentajeEsperado = porcentajeEsperado;
-        this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
 }

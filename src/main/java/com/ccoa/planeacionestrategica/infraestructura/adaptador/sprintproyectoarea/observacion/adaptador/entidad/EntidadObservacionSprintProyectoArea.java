@@ -17,7 +17,7 @@ public class EntidadObservacionSprintProyectoArea {
     @Column(name = "id_observacion_sprint_proyecto_area")
     private Long idObservacionSprintProyectoArea;
 
-    @Column(name = "id_sprint")
+    @Column(name = "id_sprint_proyecto_area")
     private Long idSprintProyectoArea;
 
     private LocalDate fecha;

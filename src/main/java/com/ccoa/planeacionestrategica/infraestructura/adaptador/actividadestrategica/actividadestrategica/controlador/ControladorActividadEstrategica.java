@@ -31,8 +31,8 @@ public class ControladorActividadEstrategica {
     }
 
     @PostMapping
-    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoActividadEstrategica epica){
-        return ResponseEntity.ok(this.servicioAplicacionGuardarActividadEstrategica.ejecutar(epica));
+    public ResponseEntity<DtoRespuesta<Long>> crear(@RequestBody DtoActividadEstrategica actividadEstrategica){
+        return ResponseEntity.ok(this.servicioAplicacionGuardarActividadEstrategica.ejecutar(actividadEstrategica));
     }
     @PutMapping("/archivo/{codigo}")
     public ResponseEntity<DtoRespuesta<Long>> guardarDocumento(@RequestBody DtoDocumentoActividadEstrategica rutaArchivo, @PathVariable Long codigo){

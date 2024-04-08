@@ -62,6 +62,22 @@ public class RepositorioPatMySQL implements RepositorioPat {
         repositorioInformacionUsuarioJpa.save(entidadUsuario);
         return idPat;
     }
+
+    @Override
+    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, Long codigo) {
+        var patEntity = mapeadorPat.mapeadorEntidad(pat);
+        var idPat = this.repositorioPatJpa.save(patEntity).getIdPat();
+
+        var informacionPatEntity = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
+        informacionPatEntity.setIdInformacionPat(idPat);
+        this.repositorioInformacionPatJpa.save(informacionPatEntity);
+        var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
+        mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
+        repositorioInformacionUsuarioJpa.save(entidadUsuario);
+
+        return idPat;
+    }
+
     @Override
     public boolean existe(Pat pat) {
         return this.repositorioPatJpa.findByNombre(pat.getNombre()) != null;

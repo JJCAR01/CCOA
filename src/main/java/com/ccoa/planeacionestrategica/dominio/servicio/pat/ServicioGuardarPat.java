@@ -21,4 +21,8 @@ public class ServicioGuardarPat {
         if(this.repositorioPat.existe(pat)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioPat.guardar(pat,informacionPat);
     }
+    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, long codigo)  {
+        if(this.repositorioPat.existe(pat)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        return this.repositorioPat.guardarDuplicado(pat,informacionPat,codigo);
+    }
 }

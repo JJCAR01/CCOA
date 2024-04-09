@@ -16,12 +16,13 @@ public interface RepositorioActividadEstrategica{
                  DetalleActividadEstrategica detalleActividadEstrategica) ;
     boolean existe(ActividadEstrategica actividadEstrategica);
     Long eliminar(Long id);
-    Long eliminarPorPat(Long id);
+    void eliminarPorPat(Long id);
     Long modificar(ActividadEstrategica actividadEstrategica ,InformacionActividadEstrategica informacionActividadEstrategica,
                    DetalleActividadEstrategica detalleActividadEstrategica, Long id);
     Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica,
             InformacionActividadEstrategica informacionActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);
+    List<DtoActividadEstrategicaResumen> consultarPorIdPatParaDuplicarActividadesEstrategicas(Long idPat);
     List<DtoIdsActividadEstrategica> consultarPorIdPatAEliminar(Long idPat);
     Long guardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo);
     boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica);

@@ -1,6 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica;
 
-import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoObservacionActividadEstrategica;;
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoObservacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.observacion.ObservacionActividadEstrategica;
 
 import java.util.List;

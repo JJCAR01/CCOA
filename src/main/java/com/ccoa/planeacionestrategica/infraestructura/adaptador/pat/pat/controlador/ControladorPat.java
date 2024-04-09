@@ -18,15 +18,14 @@ import java.util.List;
 public class ControladorPat {
 
     private final ServicioAplicacionGuardarPat servicioAplicacionGuardarPat;
-    private final ServicioAplicacionGuardarDuplicacionPat servicioAplicacionGuardarDuplicacionPat;
+
     private final ServicioAplicacionListarPat servicioAplicacionListarPat;
     private final ServicioAplicacionEliminarPat servicioAplicacionEliminarPat;
     private final ServicioAplicacionModificarPat servicioAplicacionModificarPat;
 
-    public ControladorPat(ServicioAplicacionGuardarPat servicioAplicacionGuardarPat, ServicioAplicacionGuardarDuplicacionPat servicioAplicacionGuardarDuplicacionPat, ServicioAplicacionListarPat servicioAplicacionListarPat,
+    public ControladorPat(ServicioAplicacionGuardarPat servicioAplicacionGuardarPat, ServicioAplicacionListarPat servicioAplicacionListarPat,
                           ServicioAplicacionEliminarPat servicioAplicacionEliminarPat, ServicioAplicacionModificarPat servicioAplicacionModificarPat) {
         this.servicioAplicacionGuardarPat = servicioAplicacionGuardarPat;
-        this.servicioAplicacionGuardarDuplicacionPat = servicioAplicacionGuardarDuplicacionPat;
         this.servicioAplicacionListarPat = servicioAplicacionListarPat;
         this.servicioAplicacionEliminarPat = servicioAplicacionEliminarPat;
         this.servicioAplicacionModificarPat = servicioAplicacionModificarPat;
@@ -55,10 +54,6 @@ public class ControladorPat {
     @PutMapping("/{codigo}")
     public DtoRespuesta<Long> modificar(@RequestBody DtoPat pat, @PathVariable Long codigo){
         return this.servicioAplicacionModificarPat.ejecutarModificar(pat,codigo);
-    }
-    @PostMapping("/duplicar/{codigo}")
-    public DtoRespuesta<Long> duplicar(@RequestBody DtoPat pat,@PathVariable Long codigo){
-        return this.servicioAplicacionGuardarDuplicacionPat.ejecutar(pat,codigo);
     }
 
 }

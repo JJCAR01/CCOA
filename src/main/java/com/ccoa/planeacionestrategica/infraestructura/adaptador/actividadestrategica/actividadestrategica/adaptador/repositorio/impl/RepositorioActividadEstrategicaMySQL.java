@@ -92,11 +92,10 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
 
     @Transactional
     @Override
-    public Long eliminarPorPat(Long id) {
+    public void eliminarPorPat(Long id) {
         var entidades = consultarPorIdPatAEliminar(id);
         entidades.forEach(entidad -> repositorioInformacionActividadEstrategicaJpa.deleteById(entidad.getIdActividadEstrategica()));
         repositorioActividadEstrategicaJpa.deleteByIdPat(id);
-        return id;
     }
 
     @Override
@@ -131,6 +130,11 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     public List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat) {
         List<EntidadActividadEstrategica> entidades = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
         return this.mapeadorActividadEstrategica.listarDominio(entidades);
+    }
+    public List<DtoActividadEstrategicaResumen> consultarPorIdPatParaDuplicarActividadesEstrategicas(Long idPat) {
+        List<EntidadActividadEstrategica> entidades = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
+
+        return this.mapeadorActividadEstrategica.crearActividadDuplicada(entidades);
     }
 
     @Override

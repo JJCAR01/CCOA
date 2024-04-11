@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
@@ -15,10 +16,11 @@ public interface RepositorioProyectoArea {
     Long guardar(ProyectoArea proyectoArea, InformacionProyectoArea informacionProyectoArea, DetalleProyectoArea detalleProyectoArea);
     boolean existe(ProyectoArea proyectoArea);
     Long eliminar(Long id);
-    Long eliminarPorPat(Long id);
+    void eliminarPorPat(Long id);
     Long modificar(ProyectoArea proyectoArea,InformacionProyectoArea informacionProyectoArea,DetalleProyectoArea detalleProyectoArea, Long id);
     Long modificarValorEjecutado(ProyectoArea proyectoArea, Long id);
     List<DtoProyectoAreaResumen> consultarPorIdPat(Long id);
+    List<DtoProyectoArea> consultarPorIdPatParaDuplicar(Long id);
     List<DtoIdsProyectoArea> consultarPorIdPatAEliminar(Long id);
     Long guardarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo);
     boolean existeDocumento(DocumentoProyectoArea documentoProyectoArea);

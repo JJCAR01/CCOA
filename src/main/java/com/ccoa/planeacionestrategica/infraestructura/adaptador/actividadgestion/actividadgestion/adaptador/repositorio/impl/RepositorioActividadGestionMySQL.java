@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
@@ -90,11 +91,10 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
     }
     @Transactional
     @Override
-    public Long eliminarPorPat(Long id) {
+    public void eliminarPorPat(Long id) {
         var entidades = consultarPorIdPatAEliminar(id);
         entidades.forEach(entidad -> repositorioInformacionActividadGestionJpa.deleteById(entidad.getIdInformacionActividadGestion()));
         this.repositorioActividadGestionJpa.deleteByIdPat(id);
-        return null;
     }
 
     @Override
@@ -114,6 +114,12 @@ public class RepositorioActividadGestionMySQL implements RepositorioActividadGes
     public List<DtoActividadGestionResumen> consultarPorIdPat(Long idPat) {
         List<EntidadActividadGestion> entidades = this.repositorioActividadGestionJpa.findByIdPat(idPat);
         return this.mapeadorActividadGestion.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoActividadGestion> consultarPorIdPatParaDuplicar(Long idPat) {
+        List<EntidadActividadGestion> entidades = this.repositorioActividadGestionJpa.findByIdPat(idPat);
+        return this.mapeadorActividadGestion.obtenerActividadesGestionParaDuplicar(entidades);
     }
 
     @Override

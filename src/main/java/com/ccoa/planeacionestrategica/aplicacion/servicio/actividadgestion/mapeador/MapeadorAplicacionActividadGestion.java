@@ -6,6 +6,8 @@ import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadG
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+
 @Configuration
 public class MapeadorAplicacionActividadGestion implements MapeadorAplicacion<DtoActividadGestion, ActividadGestion> {
     private final ServicioObtenerHoraActual servicioObtenerHoraActual;
@@ -16,5 +18,9 @@ public class MapeadorAplicacionActividadGestion implements MapeadorAplicacion<Dt
     public ActividadGestion mapeadorAplicacion(DtoActividadGestion dto) {
         return ActividadGestion.of(dto.getIdActividadGestion(),dto.getNombre(), dto.getFechaInicial(),dto.getFechaFinal(),
                 servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),dto.getIdUsuario(), dto.getIdPat());
+    }
+    public ActividadGestion mapeadorAplicacionDuplicar(DtoActividadGestion dto, Long idPat, LocalDate fechaInicial, LocalDate fechaFinal) {
+        return ActividadGestion.of(dto.getIdActividadGestion(),dto.getNombre(), fechaInicial,fechaFinal,
+                servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),dto.getIdUsuario(), idPat);
     }
 }

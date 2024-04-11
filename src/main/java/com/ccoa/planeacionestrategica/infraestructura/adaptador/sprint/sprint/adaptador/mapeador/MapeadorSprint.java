@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObjeto;
@@ -78,6 +79,19 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             dto.setPorcentajeReal(informacionSprint.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(informacionSprint.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoSprint> obtenerSprintParaDuplicar(List<EntidadSprint> entidades){
+        List<DtoSprint> listaDto = new ArrayList<>();
+        for (EntidadSprint entidad : entidades) {
+            DtoSprint dto = new DtoSprint();
+            dto.setIdSprint(entidad.getIdSprint());
+            dto.setDescripcion(entidad.getDescripcion());
+            dto.setFechaInicial(entidad.getFechaInicial());
+            dto.setFechaFinal(entidad.getFechaFinal());
 
             listaDto.add(dto);
         }

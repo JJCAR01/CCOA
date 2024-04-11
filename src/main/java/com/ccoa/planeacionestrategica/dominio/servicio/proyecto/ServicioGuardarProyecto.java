@@ -23,6 +23,9 @@ public class ServicioGuardarProyecto {
         if(this.repositorioProyecto.existe(proyecto)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyecto.guardar(proyecto,informacionProyecto,detalleProyecto);
     }
+    public Long ejecutarGuardarDuplicado(Proyecto proyecto, InformacionProyecto informacionProyecto, DetalleProyecto detalleProyecto){
+        return this.repositorioProyecto.guardar(proyecto,informacionProyecto,detalleProyecto);
+    }
     public Long ejecutarGuardarDocumento(DocumentoProyecto documentoProyecto, Long codigo){
         return this.repositorioProyecto.guardarDocumento(documentoProyecto,codigo);
     }

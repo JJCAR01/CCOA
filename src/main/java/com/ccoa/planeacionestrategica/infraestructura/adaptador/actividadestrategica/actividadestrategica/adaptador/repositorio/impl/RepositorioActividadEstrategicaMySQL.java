@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
@@ -131,9 +132,8 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         List<EntidadActividadEstrategica> entidades = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
         return this.mapeadorActividadEstrategica.listarDominio(entidades);
     }
-    public List<DtoActividadEstrategicaResumen> consultarPorIdPatParaDuplicarActividadesEstrategicas(Long idPat) {
+    public List<DtoActividadEstrategica> consultarPorIdPatParaDuplicarActividadesEstrategicas(Long idPat) {
         List<EntidadActividadEstrategica> entidades = this.repositorioActividadEstrategicaJpa.findByIdPat(idPat);
-
         return this.mapeadorActividadEstrategica.crearActividadDuplicada(entidades);
     }
 

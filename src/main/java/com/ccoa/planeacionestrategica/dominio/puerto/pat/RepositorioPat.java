@@ -12,7 +12,6 @@ public interface RepositorioPat {
     List<DtoPatResumen> listar();
     DtoPatResumen consultarPorId(Long id);
     Long guardar(Pat pat, InformacionPat informacionPat) ;
-    Long guardarDuplicado(Pat pat, InformacionPat informacionPat, Long codigo) ;
     boolean existe(Pat pat);
     Long eliminar(Long id);
     Long modificar(Pat pat, InformacionPat informacionPat ,Long id);

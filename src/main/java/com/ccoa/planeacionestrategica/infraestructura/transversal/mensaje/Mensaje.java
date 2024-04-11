@@ -9,6 +9,7 @@ public class Mensaje {
     public static final double PORCENTAJE_PONDERADO_ACTIVIDADES = 0.4;
     public static final double PORCENTAJE_PONDERADO_META = 0.6;
     public static final double PORCENTAJE_CERO = 0;
+    public static final String VACIO = "";
     public static final double POR_DEFECTO_AVANCE = 0;
     public static final EEstado POR_DEFECTO_EN_BACKLOG = EEstado.EN_BACKLOG;
     public static final String EL_NUMERO_DE_SPRINTS_NO_PUEDE_SER_MAYOR_AL_CALCULADO = "EL numero de sprint no puede ser mayor al numero de sprints establecidos";

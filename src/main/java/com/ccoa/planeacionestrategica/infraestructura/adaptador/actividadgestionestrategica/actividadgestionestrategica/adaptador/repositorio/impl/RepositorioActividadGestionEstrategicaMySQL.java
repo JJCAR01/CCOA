@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestionestrategica.DtoActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestionestrategica.ActividadGestionEstrategica;
@@ -114,6 +115,12 @@ public class RepositorioActividadGestionEstrategicaMySQL implements RepositorioA
     public List<DtoActividadGestionEstrategicaResumen> consultarPorIdActividadEstrategica(Long idActividadEstrategica) {
         List<EntidadActividadGestionEstrategica> entidades = this.repositorioActividadGestionEstrategicaJpa.findByIdActividadEstrategica(idActividadEstrategica);
         return this.mapeadorActividadGestionEstrategica.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoActividadGestionEstrategica> consultarPorIdActividadEstrategicaParaDuplicar(Long idActividadEstrategica) {
+        List<EntidadActividadGestionEstrategica> entidades = this.repositorioActividadGestionEstrategicaJpa.findByIdActividadEstrategica(idActividadEstrategica);
+        return this.mapeadorActividadGestionEstrategica.obtenerActividadParaDuplicar(entidades);
     }
 
     @Override

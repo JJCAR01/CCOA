@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
@@ -122,6 +123,12 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     public List<DtoSprintResumen> consultarPorIdProyecto(Long idProyecto) {
         List<EntidadSprint> entidades = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
         return this.mapeadorSprint.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoSprint> consultarPorIdProyectoParaDuplicar(Long idProyecto) {
+        List<EntidadSprint> entidades = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
+        return this.mapeadorSprint.obtenerSprintParaDuplicar(entidades);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
@@ -82,6 +83,24 @@ public class MapeadorProyectoArea implements MapeadorInfraestructura<EntidadProy
             dto.setFechaRegistro(informacionEntidad.orElseThrow().getFechaRegistro());
             dto.setPlaneacionSprint(informacionEntidad.orElseThrow().getPlaneacionSprint());
             dto.setTotalSprint(informacionEntidad.orElseThrow().getTotalSprint());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoProyectoArea> obtenerProyectosAreaParaDuplicar(List<EntidadProyectoArea> entidades){
+        List<DtoProyectoArea> listaDto = new ArrayList<>();
+        for (EntidadProyectoArea entidad : entidades) {
+            DtoProyectoArea dto = new DtoProyectoArea();
+            dto.setIdProyectoArea(entidad.getIdProyectoArea());
+            dto.setNombre(entidad.getNombre());
+            dto.setModalidad(entidad.getModalidad());
+            dto.setIdUsuario(entidad.getIdUsuario());
+
+            var informacionEntidad = repositorioInformacionProyectoAreaJpa.findById(entidad.getIdProyectoArea());
+            dto.setFechaInicial(informacionEntidad.orElseThrow().getFechaInicial());
+            dto.setFechaFinal(informacionEntidad.orElseThrow().getFechaFinal());
+            dto.setPlaneacionSprint(informacionEntidad.orElseThrow().getPlaneacionSprint());
 
             listaDto.add(dto);
         }

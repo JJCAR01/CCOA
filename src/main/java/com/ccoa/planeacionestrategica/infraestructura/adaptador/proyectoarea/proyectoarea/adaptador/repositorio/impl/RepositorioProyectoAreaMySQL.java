@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyectoarea.proyectoarea.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.DetalleProyectoArea;
@@ -91,12 +92,11 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
     }
     @Transactional
     @Override
-    public Long eliminarPorPat(Long id) {
+    public void eliminarPorPat(Long id) {
         var entidades = consultarPorIdPatAEliminar(id);
         entidades.forEach(entidad -> repositorioInformacionProyectoAreaJpa.deleteById(entidad.getIdInformacionProyectoArea()));
         entidades.forEach(entidad -> repositorioDetalleProyectoAreaJpa.deleteById(entidad.getIdProyectoArea()));
         repositorioProyectoAreaJpa.deleteByIdPat(id);
-        return id;
     }
 
     @Override
@@ -125,6 +125,12 @@ public class RepositorioProyectoAreaMySQL implements RepositorioProyectoArea {
     public List<DtoProyectoAreaResumen> consultarPorIdPat(Long id) {
         List<EntidadProyectoArea> entidades = this.repositorioProyectoAreaJpa.findByIdPat(id);
         return this.mapeadorProyectoArea.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoProyectoArea> consultarPorIdPatParaDuplicar(Long id) {
+        List<EntidadProyectoArea> entidades = this.repositorioProyectoAreaJpa.findByIdPat(id);
+        return this.mapeadorProyectoArea.obtenerProyectosAreaParaDuplicar(entidades);
     }
 
     public List<DtoIdsProyectoArea> consultarPorIdPatAEliminar(Long id) {

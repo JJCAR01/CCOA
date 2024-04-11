@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.proyecto;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
@@ -19,6 +20,7 @@ public interface RepositorioProyecto {
     Long modificar(Proyecto proyecto,InformacionProyecto informacionProyecto,DetalleProyecto detalleProyecto, Long id);
     Long modificarValorEjecutado(Proyecto proyecto, Long id);
     List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id);
+    List<DtoProyecto> consultarPorIdActividadEstrategicaParaDuplicar(Long id);
     List<DtoIdsProyecto> consultarPorIdActividadEstrategicaAEliminar(Long id);
     Long guardarDocumento(DocumentoProyecto documentoProyecto, Long codigo);
     boolean existeDocumento(DocumentoProyecto documentoProyecto);

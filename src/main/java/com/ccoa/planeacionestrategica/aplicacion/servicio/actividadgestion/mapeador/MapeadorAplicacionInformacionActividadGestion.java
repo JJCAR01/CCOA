@@ -9,6 +9,8 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.Servi
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+
 @Configuration
 public class MapeadorAplicacionInformacionActividadGestion implements MapeadorAplicacion<DtoActividadGestion, InformacionActividadGestion> {
 
@@ -24,10 +26,19 @@ public class MapeadorAplicacionInformacionActividadGestion implements MapeadorAp
 
     @Override
     public InformacionActividadGestion mapeadorAplicacion(DtoActividadGestion dto) {
-        return InformacionActividadGestion.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
-                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()), Mensaje.POR_DEFECTO_AVANCE,
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),
-                        servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()))
+        var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
+        var diasRestantes = servicioCalcularDiasRestantes.calcular(dto.getFechaFinal());
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),duracion);
+
+        return InformacionActividadGestion.of(duracion,diasRestantes, Mensaje.POR_DEFECTO_AVANCE,
+                porcentajeEsperado,Mensaje.POR_DEFECTO_AVANCE);
+    }
+    public InformacionActividadGestion mapeadorAplicacionDuplicar(LocalDate fechaInicial, LocalDate fechaFinal) {
+        var duracion = servicioCalcularDuracionDias.calcular(fechaInicial,fechaFinal);
+        var diasRestantes = servicioCalcularDiasRestantes.calcular(fechaFinal);
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion);
+
+        return InformacionActividadGestion.of(duracion,diasRestantes, Mensaje.POR_DEFECTO_AVANCE, porcentajeEsperado
                 ,Mensaje.POR_DEFECTO_AVANCE);
     }
 }

@@ -1,6 +1,7 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.actividadgestion;
 
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
@@ -17,9 +18,10 @@ public interface RepositorioActividadGestion {
     boolean existe(ActividadGestion actividadGestion);
     boolean existeDocumento(DocumentoActividadGestion documentoActividadGestion);
     Long eliminar(Long id);
-    Long eliminarPorPat(Long id);
+    void eliminarPorPat(Long id);
     Long modificar(ActividadGestion actividadGestion,InformacionActividadGestion informacionActividadGestion, Long id);
     List<DtoActividadGestionResumen> consultarPorIdPat(Long idPat);
+    List<DtoActividadGestion> consultarPorIdPatParaDuplicar(Long idPat);
     List<DtoIdsActividadGestion> consultarPorIdPatAEliminar(Long idPat);
     Long modificarDocumento(DocumentoActividadGestion documentoActividadGestion, Long id);
     Long eliminarDocumento(Long id);

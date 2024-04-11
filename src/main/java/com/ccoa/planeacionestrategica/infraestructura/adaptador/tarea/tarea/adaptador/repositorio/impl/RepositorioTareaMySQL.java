@@ -1,6 +1,8 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.documento.DocumentoTarea;
@@ -13,6 +15,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adap
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioInformacionTareaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.entidad.EntidadTarea;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.repositorio.jpa.RepositorioTareaJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -71,6 +74,20 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
         this.repositorioTareaJpa.deleteById(id);
         return id;
     }
+    @Transactional
+    @Override
+    public void eliminarPorActividadGestionEstrategica(Long id) {
+        var entidades = consultarPorIdActividadGestionEstrategicaAEliminar(id);
+        entidades.forEach(entidad -> repositorioInformacionTareaJpa.deleteById(entidad.getIdInformacionTarea()));
+        repositorioTareaJpa.deleteByIdASE(id);
+    }
+    @Transactional
+    @Override
+    public void eliminarPorActividadGestion(Long id) {
+        var entidades = consultarPorIdActividadGestionAEliminar(id);
+        entidades.forEach(entidad -> repositorioInformacionTareaJpa.deleteById(entidad.getIdInformacionTarea()));
+        repositorioTareaJpa.deleteByIdASE(id);
+    }
 
     @Override
     public Long modificar(Tarea tarea,InformacionTarea informacionTarea, Long id) {
@@ -109,21 +126,57 @@ public class RepositorioTareaMySQL implements RepositorioTarea {
     }
 
     @Override
+    public List<DtoTarea> consultarPorIdActividadGestionParaDuplicar(Long idActividadGestion, ETipoASE tipoASE) {
+        var entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idActividadGestion,tipoASE);
+        return this.mapeadorTarea.obtenerTareaParaDuplicar(entidades);
+    }
+
+    @Override
+    public List<DtoIdsTarea> consultarPorIdActividadGestionAEliminar(Long id) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(id,ETipoASE.ACTIVIDAD_GESTION);
+        return this.mapeadorTarea.listarIds(entidades);
+    }
+
+    @Override
     public List<DtoTareaResumen> consultarPorIdSprint(Long idSprint, ETipoASE tipoASE) {
         List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprint,tipoASE);
         return this.mapeadorTarea.listarDominio(entidades);
     }
 
     @Override
-    public List<DtoTareaResumen> consultarPorIdSprintProyectoArea(Long idSprintProyectoAre, ETipoASE tipoASE) {
-        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprintProyectoAre,tipoASE);
+    public List<DtoTarea> consultarPorIdSprintParaDuplicar(Long idSprint, ETipoASE tipoASE) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprint,tipoASE);
+        return this.mapeadorTarea.obtenerTareaParaDuplicar(entidades);
+    }
+
+    @Override
+    public List<DtoTareaResumen> consultarPorIdSprintProyectoArea(Long idSprintProyectoArea, ETipoASE tipoASE) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprintProyectoArea,tipoASE);
         return this.mapeadorTarea.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoTarea> consultarPorIdSprintProyectoAreaParaDuplicar(Long idSprintProyectoArea, ETipoASE tipoASE) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idSprintProyectoArea,tipoASE);
+        return this.mapeadorTarea.obtenerTareaParaDuplicar(entidades);
     }
 
     @Override
     public List<DtoTareaResumen> consultarPorIdActividadGestionActvidadEstrategica(Long idActividadGestionActividadEstrategica, ETipoASE tipoASE) {
         List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idActividadGestionActividadEstrategica,tipoASE);
         return this.mapeadorTarea.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoTarea> consultarPorIdActividadGestionActvidadEstrategicaParaDuplicar(Long idActividadGestionActividadEstrategica, ETipoASE tipoASE) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(idActividadGestionActividadEstrategica,tipoASE);
+        return this.mapeadorTarea.obtenerTareaParaDuplicar(entidades);
+    }
+
+    @Override
+    public List<DtoIdsTarea> consultarPorIdActividadGestionEstrategicaAEliminar(Long id) {
+        List<EntidadTarea> entidades = this.repositorioTareaJpa.findByIdASEAndTipoASE(id,ETipoASE.ACTIVIDAD_GESTION_ACTIVIDAD_ESTRATEGICA);
+        return this.mapeadorTarea.listarIds(entidades);
     }
 
     @Override

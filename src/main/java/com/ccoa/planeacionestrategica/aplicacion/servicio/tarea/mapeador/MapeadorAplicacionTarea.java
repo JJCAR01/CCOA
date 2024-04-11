@@ -12,6 +12,9 @@ public class MapeadorAplicacionTarea implements MapeadorAplicacion<DtoTarea, Tar
     public Tarea mapeadorAplicacion(DtoTarea dto) {
         return Tarea.of(dto.getIdTarea(), dto.getNombre(), Mensaje.POR_DEFECTO_EN_BACKLOG, dto.getDescripcion(),dto.getTipoASE(), dto.getIdASE(), dto.getIdUsuario());
     }
+    public Tarea mapeadorAplicacionDuplicar(DtoTarea dto,Long idActividadGestionEstrategica) {
+        return Tarea.of(dto.getIdTarea(), dto.getNombre(), Mensaje.POR_DEFECTO_EN_BACKLOG, dto.getDescripcion(),dto.getTipoASE(), idActividadGestionEstrategica, dto.getIdUsuario());
+    }
 
     public Tarea actualizarEstado(DtoTarea dto) {
         return new Tarea(dto.getIdTarea(), dto.getNombre(), dto.getEstado(), dto.getDescripcion(),dto.getTipoASE(), dto.getIdASE(), dto.getIdUsuario());

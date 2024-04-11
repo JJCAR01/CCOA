@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
@@ -22,7 +23,7 @@ public interface RepositorioActividadEstrategica{
     Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica,
             InformacionActividadEstrategica informacionActividadEstrategica, Long id);
     List<DtoActividadEstrategicaResumen> consultarPorIdPat(Long idPat);
-    List<DtoActividadEstrategicaResumen> consultarPorIdPatParaDuplicarActividadesEstrategicas(Long idPat);
+    List<DtoActividadEstrategica> consultarPorIdPatParaDuplicarActividadesEstrategicas(Long idPat);
     List<DtoIdsActividadEstrategica> consultarPorIdPatAEliminar(Long idPat);
     Long guardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo);
     boolean existeDocumento(DocumentoActividadEstrategica documentoActividadEstrategica);

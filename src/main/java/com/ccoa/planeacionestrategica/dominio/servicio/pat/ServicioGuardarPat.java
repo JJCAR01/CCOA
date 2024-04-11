@@ -2,6 +2,7 @@ package com.ccoa.planeacionestrategica.dominio.servicio.pat;
 
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
+import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioDuplicar;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorInvalido;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.validador.Valid
 @Service
 public class ServicioGuardarPat {
     private final RepositorioPat repositorioPat;
+    private final RepositorioDuplicar repositorioDuplicar;
 
-    public ServicioGuardarPat(RepositorioPat repositorioPat) {
+    public ServicioGuardarPat(RepositorioPat repositorioPat, RepositorioDuplicar repositorioDuplicar) {
         this.repositorioPat = repositorioPat;
+        this.repositorioDuplicar = repositorioDuplicar;
     }
 
     public Long ejecutarGuardar(Pat pat, InformacionPat informacionPat)  {
@@ -22,7 +25,6 @@ public class ServicioGuardarPat {
         return this.repositorioPat.guardar(pat,informacionPat);
     }
     public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, long codigo)  {
-        if(this.repositorioPat.existe(pat)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioPat.guardarDuplicado(pat,informacionPat,codigo);
+        return this.repositorioDuplicar.guardarDuplicado(pat,informacionPat,codigo);
     }
 }

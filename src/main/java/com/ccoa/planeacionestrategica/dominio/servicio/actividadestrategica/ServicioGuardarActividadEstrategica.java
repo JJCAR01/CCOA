@@ -25,6 +25,10 @@ public class ServicioGuardarActividadEstrategica {
         if(this.repositorioActividadEstrategica.existe(actividadEstrategica)) throw new ExcepcionValidadorInvalido(YA_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioActividadEstrategica.guardar(actividadEstrategica,informacionActividadEstrategica, detalleActividadEstrategica);
     }
+    public Long ejecutarGuardarDuplicado(ActividadEstrategica actividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica,
+                                DetalleActividadEstrategica detalleActividadEstrategica){
+        return this.repositorioActividadEstrategica.guardar(actividadEstrategica,informacionActividadEstrategica, detalleActividadEstrategica);
+    }
     public Long ejecutarGuardarDocumento(DocumentoActividadEstrategica documentoActividadEstrategica, Long codigo){
         return this.repositorioActividadEstrategica.guardarDocumento(documentoActividadEstrategica,codigo);
     }

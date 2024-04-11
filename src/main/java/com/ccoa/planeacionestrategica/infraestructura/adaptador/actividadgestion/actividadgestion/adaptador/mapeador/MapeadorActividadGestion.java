@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadgestion.DtoActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadGestionResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadgestion.ActividadGestion;
@@ -72,6 +73,21 @@ public class MapeadorActividadGestion implements MapeadorInfraestructura<Entidad
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoActividadGestion> obtenerActividadesGestionParaDuplicar(List<EntidadActividadGestion> entidades){
+        List<DtoActividadGestion> listaDto = new ArrayList<>();
+
+        for (EntidadActividadGestion entidad : entidades) {
+            DtoActividadGestion dto = new DtoActividadGestion();
+            dto.setIdActividadGestion(entidad.getIdActividadGestion());
+            dto.setNombre(entidad.getNombre());
+            dto.setFechaInicial(entidad.getFechaInicial());
+            dto.setFechaFinal(entidad.getFechaFinal());
+            dto.setIdUsuario(entidad.getIdUsuario());
 
             listaDto.add(dto);
         }

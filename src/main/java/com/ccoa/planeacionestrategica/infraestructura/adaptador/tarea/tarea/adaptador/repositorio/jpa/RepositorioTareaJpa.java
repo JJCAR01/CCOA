@@ -14,4 +14,5 @@ public interface RepositorioTareaJpa extends JpaRepository<EntidadTarea,Long> {
     List<EntidadTarea> findByIdASE(Long idASE);
     Boolean findByEstado(EEstado estado);
     List<EntidadTarea> findByIdASEAndTipoASE(Long idASE,ETipoASE tipoASE);
+    void deleteByIdASE(Long idASE);
 }

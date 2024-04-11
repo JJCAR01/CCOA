@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.puerto.sprint;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
@@ -18,6 +19,7 @@ public interface RepositorioSprint {
     Long eliminar(Long id);
     Long modificar(Sprint sprint,InformacionSprint informacionSprint, Long id);
     List<DtoSprintResumen> consultarPorIdProyecto(Long idProyecto);
+    List<DtoSprint> consultarPorIdProyectoParaDuplicar(Long idProyecto);
     Long modificarDocumento(DocumentoSprint documentoSprint, Long id);
     Long eliminarDocumento(Long id);
 }

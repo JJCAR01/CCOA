@@ -8,6 +8,8 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.Servi
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+
 @Configuration
 public class MapeadorAplicacionDetalleProyecto implements MapeadorAplicacion<DtoProyecto, DetalleProyecto> {
     private final ServicioCalcularDuracionDias servicioCalcularDuracionDias;
@@ -19,10 +21,17 @@ public class MapeadorAplicacionDetalleProyecto implements MapeadorAplicacion<Dto
     }
     @Override
     public DetalleProyecto mapeadorAplicacion(DtoProyecto dto) {
-        return DetalleProyecto.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()) ,
-                Mensaje.POR_DEFECTO_AVANCE,
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),
-                        servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
+        var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),duracion);
+
+        return DetalleProyecto.of(duracion,Mensaje.POR_DEFECTO_AVANCE,porcentajeEsperado,
+                Mensaje.POR_DEFECTO_AVANCE);
+    }
+    public DetalleProyecto mapeadorAplicacionDuplicar(LocalDate fechaInicial, LocalDate fechaFinal) {
+        var duracion = servicioCalcularDuracionDias.calcular(fechaInicial,fechaFinal);
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion);
+
+        return DetalleProyecto.of(duracion , Mensaje.POR_DEFECTO_AVANCE, porcentajeEsperado,
                 Mensaje.POR_DEFECTO_AVANCE);
     }
 }

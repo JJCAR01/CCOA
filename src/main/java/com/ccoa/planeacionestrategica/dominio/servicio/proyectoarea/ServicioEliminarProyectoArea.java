@@ -18,9 +18,9 @@ public class ServicioEliminarProyectoArea {
         if(this.repositorioProyectoArea.consultarPorId(id)== null) throw new ExcepcionValidadorObligatorio(NO_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyectoArea.eliminar(id);
     }
-    public Long ejecutarEliminarPorPat(Long id){
+    public void ejecutarEliminarPorPat(Long id){
         if(this.repositorioProyectoArea.consultarPorIdPat(id)== null) throw new ExcepcionValidadorObligatorio(NO_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioProyectoArea.eliminarPorPat(id);
+        this.repositorioProyectoArea.eliminarPorPat(id);
     }
     public Long eliminarDocumento(Long id){
         return this.repositorioProyectoArea.eliminarDocumento(id);

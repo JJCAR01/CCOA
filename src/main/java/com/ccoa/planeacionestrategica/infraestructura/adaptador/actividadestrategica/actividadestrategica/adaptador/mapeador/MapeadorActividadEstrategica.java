@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
@@ -106,36 +107,15 @@ public class MapeadorActividadEstrategica implements MapeadorInfraestructura<Ent
         }
         return listaDto;
     }
-    public List<DtoActividadEstrategicaResumen> crearActividadDuplicada(List<EntidadActividadEstrategica> entidades){
-        List<DtoActividadEstrategicaResumen> listaDto = new ArrayList<>();
+    public List<DtoActividadEstrategica> crearActividadDuplicada(List<EntidadActividadEstrategica> entidades){
+        List<DtoActividadEstrategica> listaDto = new ArrayList<>();
         for (EntidadActividadEstrategica entidad : entidades) {
-            DtoActividadEstrategicaResumen dto = new DtoActividadEstrategicaResumen();
+            DtoActividadEstrategica dto = new DtoActividadEstrategica();
             dto.setIdActividadEstrategica(entidad.getIdActividadEstrategica());
             dto.setNombre(entidad.getNombre());
             dto.setFechaInicial(entidad.getFechaInicial());
             dto.setFechaFinal(entidad.getFechaFinal());
-            dto.setFechaRegistro(entidad.getFechaRegistro());
             dto.setIdUsuario(entidad.getIdUsuario());
-            dto.setIdPat(entidad.getIdPat());
-
-            var infEntidad = repositorioInformacionActividadEstrategicaJpa.findById(entidad.getIdActividadEstrategica());
-
-            dto.setDuracion(infEntidad.orElseThrow().getDuracion());
-            dto.setDiasRestantes(infEntidad.orElseThrow().getDiasRestantes());
-            dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
-            dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
-            dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
-
-            var detalleEntidad = repositorioDetalleActividadEstrategicaJpa.findById(entidad.getIdActividadEstrategica());
-
-            dto.setUnidad(detalleEntidad.orElseThrow().getUnidad());
-            dto.setMeta(detalleEntidad.orElseThrow().getMeta());
-            dto.setPeriodicidadMeta(detalleEntidad.orElseThrow().getPeriodicidadMeta());
-            dto.setResultadoMeta(detalleEntidad.orElseThrow().getResultadoMeta());
-            dto.setPromedioMeta(detalleEntidad.orElseThrow().getPorcentajeMeta());
-            dto.setEntregable(detalleEntidad.orElseThrow().getEntregable());
-            dto.setPorcentajePat(servicioObtenerPorcentaje.obtenerPorcentajePat(
-                    infEntidad.orElseThrow().getPorcentajeCumplimiento(),detalleEntidad.orElseThrow().getPorcentajeMeta()));
 
             listaDto.add(dto);
         }

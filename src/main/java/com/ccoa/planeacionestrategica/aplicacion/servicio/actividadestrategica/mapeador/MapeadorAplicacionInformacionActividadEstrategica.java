@@ -9,6 +9,8 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.Servi
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+
 @Configuration
 public class MapeadorAplicacionInformacionActividadEstrategica implements MapeadorAplicacion<DtoActividadEstrategica, InformacionActividadEstrategica> {
     private final ServicioCalcularDiasRestantes servicioCalcularDiasRestantes;
@@ -23,10 +25,20 @@ public class MapeadorAplicacionInformacionActividadEstrategica implements Mapead
 
     @Override
     public InformacionActividadEstrategica mapeadorAplicacion(DtoActividadEstrategica dto) {
-        return InformacionActividadEstrategica.of(servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal()),
-                servicioCalcularDiasRestantes.calcular(dto.getFechaFinal()),Mensaje.POR_DEFECTO_AVANCE,
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),
-                        servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
+        var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
+        var diasRestantes = servicioCalcularDiasRestantes.calcular(dto.getFechaFinal());
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),duracion);
+
+        return InformacionActividadEstrategica.of(duracion,diasRestantes,Mensaje.POR_DEFECTO_AVANCE, porcentajeEsperado,
+                Mensaje.POR_DEFECTO_AVANCE,dto.getPorcentajePat());
+    }
+    public InformacionActividadEstrategica mapeadorAplicacionDuplicar(DtoActividadEstrategica dto, LocalDate fechaInicial,LocalDate fechaFinal) {
+        var duracion = servicioCalcularDuracionDias.calcular(fechaInicial,fechaFinal);
+        var diasRestantes = servicioCalcularDiasRestantes.calcular(fechaFinal);
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion);
+
+        return InformacionActividadEstrategica.of(duracion,diasRestantes
+                ,Mensaje.POR_DEFECTO_AVANCE, porcentajeEsperado,
                 Mensaje.POR_DEFECTO_AVANCE,dto.getPorcentajePat());
     }
     public InformacionActividadEstrategica mapeadorAplicacionActualizarPorcentaje(DtoActividadEstrategica dto) {

@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
@@ -64,21 +65,6 @@ public class RepositorioPatMySQL implements RepositorioPat {
         var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
         mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
         repositorioInformacionUsuarioJpa.save(entidadUsuario);
-        return idPat;
-    }
-
-    @Override
-    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, Long codigo) {
-        var patEntity = mapeadorPat.mapeadorEntidad(pat);
-        var idPat = this.repositorioPatJpa.save(patEntity).getIdPat();
-
-        var informacionPatEntity = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
-        informacionPatEntity.setIdInformacionPat(idPat);
-        this.repositorioInformacionPatJpa.save(informacionPatEntity);
-        var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
-        mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
-        repositorioInformacionUsuarioJpa.save(entidadUsuario);
-        repositorioActividadEstrategica.consultarPorIdPatParaDuplicarActividadesEstrategicas(codigo);
         return idPat;
     }
 

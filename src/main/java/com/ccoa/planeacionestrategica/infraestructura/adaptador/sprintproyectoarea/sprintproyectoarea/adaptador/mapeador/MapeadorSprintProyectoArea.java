@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObjeto;
@@ -79,6 +80,19 @@ public class MapeadorSprintProyectoArea implements MapeadorInfraestructura<Entid
             dto.setPorcentajeReal(informacionSprintProyectoArea.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(informacionSprintProyectoArea.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoSprintProyectoArea> obtenerSprintProyectosAreaParaDuplicar(List<EntidadSprintProyectoArea> entidades){
+        List<DtoSprintProyectoArea> listaDto = new ArrayList<>();
+        for (EntidadSprintProyectoArea entidad : entidades) {
+            DtoSprintProyectoArea dto = new DtoSprintProyectoArea();
+            dto.setIdSprintProyectoArea(entidad.getIdSprintProyectoArea());
+            dto.setDescripcion(entidad.getDescripcion());
+            dto.setFechaInicial(entidad.getFechaInicial());
+            dto.setFechaFinal(entidad.getFechaFinal());
 
             listaDto.add(dto);
         }

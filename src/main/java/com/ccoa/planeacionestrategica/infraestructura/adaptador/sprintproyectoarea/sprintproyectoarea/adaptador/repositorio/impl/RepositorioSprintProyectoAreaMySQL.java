@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.sprintproyectoarea.DtoSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintProyectoAreaResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.InformacionSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprintproyectoarea.SprintProyectoArea;
@@ -123,6 +124,12 @@ public class RepositorioSprintProyectoAreaMySQL implements RepositorioSprintProy
     public List<DtoSprintProyectoAreaResumen> consultarPorIdProyectoArea(Long idProyecto) {
         List<EntidadSprintProyectoArea> entidades = this.repositorioSprintProyectoAreaJpa.findByIdProyectoArea(idProyecto);
         return this.mapeadorSprintProyectoArea.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoSprintProyectoArea> consultarPorIdProyectoAreaParaDuplicar(Long idProyectoArea) {
+        List<EntidadSprintProyectoArea> entidades = this.repositorioSprintProyectoAreaJpa.findByIdProyectoArea(idProyectoArea);
+        return this.mapeadorSprintProyectoArea.obtenerSprintProyectosAreaParaDuplicar(entidades);
     }
 
     @Override

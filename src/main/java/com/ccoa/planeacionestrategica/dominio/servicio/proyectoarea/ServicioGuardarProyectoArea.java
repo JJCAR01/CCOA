@@ -23,6 +23,9 @@ public class ServicioGuardarProyectoArea {
         if(this.repositorioProyectoArea.existe(proyectoArea)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PROYECTO_DEL_AREA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioProyectoArea.guardar(proyectoArea,informacionProyectoArea,detalleProyectoArea);
     }
+    public Long ejecutarGuardarDuplicado(ProyectoArea proyectoArea, InformacionProyectoArea informacionProyectoArea, DetalleProyectoArea detalleProyectoArea){
+        return this.repositorioProyectoArea.guardar(proyectoArea,informacionProyectoArea,detalleProyectoArea);
+    }
     public Long ejecutarGuardarDocumento(DocumentoProyectoArea documentoProyectoArea, Long codigo){
         return this.repositorioProyectoArea.guardarDocumento(documentoProyectoArea,codigo);
     }

@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.impl;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.proyecto.DtoProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoProyectoResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyecto.DetalleProyecto;
@@ -125,6 +126,12 @@ public class RepositorioProyectoMySQL implements RepositorioProyecto {
     public List<DtoProyectoResumen> consultarPorIdActividadEstrategica(Long id) {
         List<EntidadProyecto> entidades = this.repositorioProyectoJpa.findByIdActividadEstrategica(id);
         return this.mapeadorProyecto.listarDominio(entidades);
+    }
+
+    @Override
+    public List<DtoProyecto> consultarPorIdActividadEstrategicaParaDuplicar(Long id) {
+        List<EntidadProyecto> entidades = this.repositorioProyectoJpa.findByIdActividadEstrategica(id);
+        return this.mapeadorProyecto.obtenerProyectoParaDuplicar(entidades);
     }
 
     public List<DtoIdsProyecto> consultarPorIdActividadEstrategicaAEliminar(Long id) {

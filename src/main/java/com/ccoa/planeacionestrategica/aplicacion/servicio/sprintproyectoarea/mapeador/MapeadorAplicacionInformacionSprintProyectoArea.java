@@ -10,6 +10,7 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.Servi
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularPorcentaje;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,18 @@ public class MapeadorAplicacionInformacionSprintProyectoArea implements Mapeador
     @Override
     public InformacionSprintProyectoArea mapeadorAplicacion(DtoSprintProyectoArea dto) {
         List<Tarea> tarea = new ArrayList<>();
+        var duracion = servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal());
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),duracion);
+
         return InformacionSprintProyectoArea.of(servicioObtenerPorcentaje.calcularPorcentaje(tarea),
-                servicioCalcularPorcentaje.obtenerPorcentajeEsperado(dto.getFechaInicial(),servicioCalcularDuracionDias.calcular(dto.getFechaInicial(),dto.getFechaFinal())),
-                Mensaje.POR_DEFECTO_AVANCE);
+                porcentajeEsperado,Mensaje.POR_DEFECTO_AVANCE);
+    }
+    public InformacionSprintProyectoArea mapeadorAplicacionDuplicar(LocalDate fechaInicial, LocalDate fechaFinal) {
+        List<Tarea> tarea = new ArrayList<>();
+        var duracion = servicioCalcularDuracionDias.calcular(fechaInicial,fechaFinal);
+        var porcentajeEsperado = servicioCalcularPorcentaje.obtenerPorcentajeEsperado(fechaInicial,duracion);
+
+        return InformacionSprintProyectoArea.of(servicioObtenerPorcentaje.calcularPorcentaje(tarea),
+                porcentajeEsperado,Mensaje.POR_DEFECTO_AVANCE);
     }
 }

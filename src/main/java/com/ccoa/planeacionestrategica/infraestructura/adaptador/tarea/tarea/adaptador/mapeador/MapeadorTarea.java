@@ -1,6 +1,9 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.tarea.tarea.adaptador.mapeador;
 
+import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;
 import com.ccoa.planeacionestrategica.dominio.transversal.enums.EEstado;
@@ -10,6 +13,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestionestrategica.actividadgestionestrategica.adaptador.repositorio.jpa.RepositorioActividadGestionEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.mapeador.MapeadorInformacionActividadGestion;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadgestion.actividadgestion.adaptador.repositorio.jpa.RepositorioActividadGestionJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.MapeadorInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprintproyectoarea.sprintproyectoarea.adaptador.mapeador.MapeadorInformacionSprintProyectoArea;
@@ -92,6 +96,40 @@ public class MapeadorTarea implements MapeadorInfraestructura<EntidadTarea, Tare
             dto.setEstado(entidad.getEstado().toString());
             dto.setDescripcion(entidad.getDescripcion());
             dto.setTipoAES(entidad.getTipoASE().toString());
+            dto.setIdASE(entidad.getIdASE());
+            dto.setIdUsuario(entidad.getIdUsuario());
+
+            var informacionTarea = this.repositorioInformacionTareaJpa.findById(entidad.getIdTarea());
+
+            dto.setPeriodicidad(informacionTarea.orElseThrow().getPeriodicidad());
+            dto.setPorcentajeReal(informacionTarea.orElseThrow().getPorcentajeReal());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoIdsTarea> listarIds(List<EntidadTarea> entidades){
+        List<DtoIdsTarea> listaDto = new ArrayList<>();
+        for (EntidadTarea entidad : entidades) {
+            DtoIdsTarea dto = new DtoIdsTarea();
+            dto.setIdTarea(entidad.getIdTarea());
+
+            var informacionEntidad = repositorioInformacionTareaJpa.findById(entidad.getIdTarea());
+            dto.setIdInformacionTarea(informacionEntidad.orElseThrow().getIdInformacionTarea());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+    public List<DtoTarea> obtenerTareaParaDuplicar(List<EntidadTarea> entidades){
+        List<DtoTarea> listaDto = new ArrayList<>();
+        for (EntidadTarea entidad : entidades) {
+            DtoTarea dto = new DtoTarea();
+            dto.setIdTarea(entidad.getIdTarea());
+            dto.setNombre(entidad.getNombre());
+            dto.setEstado(entidad.getEstado());
+            dto.setDescripcion(entidad.getDescripcion());
+            dto.setTipoASE(entidad.getTipoASE());
             dto.setIdASE(entidad.getIdASE());
             dto.setIdUsuario(entidad.getIdUsuario());
 

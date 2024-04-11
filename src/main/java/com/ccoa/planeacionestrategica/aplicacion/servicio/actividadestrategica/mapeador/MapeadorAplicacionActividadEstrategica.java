@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.actividadestrategica.
 import com.ccoa.planeacionestrategica.aplicacion.dto.actividadestrategica.DtoActividadEstrategica;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.actividadestrategica.ActividadEstrategica;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioCambiarFecha;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;
 import org.springframework.context.annotation.Configuration;
 

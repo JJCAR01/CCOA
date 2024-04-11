@@ -2,8 +2,6 @@ package com.ccoa.planeacionestrategica.dominio.puerto.tarea;
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoTareaResumen;
-import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsActividadGestionEstrategica;
-import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.InformacionTarea;
 import com.ccoa.planeacionestrategica.dominio.modelo.tarea.Tarea;

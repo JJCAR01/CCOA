@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.aplicacion.dto.tarea.DtoTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.mapeador.MapeadorAplicacionInformacionTarea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.mapeador.MapeadorAplicacionTarea;
 import com.ccoa.planeacionestrategica.dominio.servicio.tarea.ServicioGuardarTarea;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioCambiarFecha;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,14 +15,15 @@ public class ServicioAplicacionGuardarTarea {
     private final MapeadorAplicacionTarea mapeadorAplicacionTarea;
     private final MapeadorAplicacionInformacionTarea mapeadorAplicacionInformacionTarea;
     private final MapeadorAplicacionDocumentoTarea mapeadorAplicacionDocumentoTarea;
-    private final ServicioCambiarFecha servicioCambiarFecha;
 
-    public ServicioAplicacionGuardarTarea(ServicioGuardarTarea servicioGuardarTarea, MapeadorAplicacionTarea mapeadorAplicacionTarea, MapeadorAplicacionInformacionTarea mapeadorAplicacionInformacionTarea, MapeadorAplicacionDocumentoTarea mapeadorAplicacionDocumentoTarea, ServicioCambiarFecha servicioCambiarFecha) {
+    public ServicioAplicacionGuardarTarea(ServicioGuardarTarea servicioGuardarTarea,
+                                          MapeadorAplicacionTarea mapeadorAplicacionTarea,
+                                          MapeadorAplicacionInformacionTarea mapeadorAplicacionInformacionTarea,
+                                          MapeadorAplicacionDocumentoTarea mapeadorAplicacionDocumentoTarea) {
         this.servicioGuardarTarea = servicioGuardarTarea;
         this.mapeadorAplicacionTarea = mapeadorAplicacionTarea;
         this.mapeadorAplicacionInformacionTarea = mapeadorAplicacionInformacionTarea;
         this.mapeadorAplicacionDocumentoTarea = mapeadorAplicacionDocumentoTarea;
-        this.servicioCambiarFecha = servicioCambiarFecha;
     }
 
     public DtoRespuesta<Long> ejecutar(DtoTarea dto){

@@ -4,7 +4,6 @@ import com.ccoa.planeacionestrategica.aplicacion.transversal.respuesta.DtoRespue
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadestrategica.ServicioEliminarActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.servicio.actividadgestion.ServicioEliminarActividadGestion;
 import com.ccoa.planeacionestrategica.dominio.servicio.pat.ServicioEliminarPat;
-import com.ccoa.planeacionestrategica.dominio.servicio.proyecto.ServicioEliminarProyecto;
 import com.ccoa.planeacionestrategica.dominio.servicio.proyectoarea.ServicioEliminarProyectoArea;
 import org.springframework.stereotype.Component;
 

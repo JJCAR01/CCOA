@@ -3,7 +3,6 @@ package com.ccoa.planeacionestrategica.aplicacion.servicio.proyectoarea.mapeador
 import com.ccoa.planeacionestrategica.aplicacion.dto.proyectoarea.DtoProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.transversal.mapeador.MapeadorAplicacion;
 import com.ccoa.planeacionestrategica.dominio.modelo.proyectoarea.InformacionProyectoArea;
-import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioCambiarFecha;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularDuracionDias;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioCalcularTotalSprint;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.servicio.ServicioObtenerHoraActual;

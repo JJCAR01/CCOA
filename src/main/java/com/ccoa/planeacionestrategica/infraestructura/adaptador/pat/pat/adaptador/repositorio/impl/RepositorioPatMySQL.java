@@ -1,12 +1,9 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.impl;
 
-import com.ccoa.planeacionestrategica.dominio.dto.DtoActividadEstrategicaResumen;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
-import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.mapeador.MapeadorActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
@@ -27,15 +24,16 @@ public class RepositorioPatMySQL implements RepositorioPat {
     private final MapeadorPat mapeadorPat;
     private final MapeadorInformacionPat mapeadorInformacionPat;
     private final MapeadorInformacionUsuario mapeadorInformacionUsuario;
-    private final RepositorioActividadEstrategica  repositorioActividadEstrategica;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
-    public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat, MapeadorInformacionUsuario mapeadorInformacionUsuario, RepositorioActividadEstrategica repositorioActividadEstrategica, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
+    public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa,
+                               RepositorioInformacionPatJpa repositorioInformacionPatJpa,
+                               MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat,
+                               MapeadorInformacionUsuario mapeadorInformacionUsuario, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
         this.mapeadorPat = mapeadorPat;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
         this.mapeadorInformacionUsuario = mapeadorInformacionUsuario;
-        this.repositorioActividadEstrategica = repositorioActividadEstrategica;
         this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
     }
 

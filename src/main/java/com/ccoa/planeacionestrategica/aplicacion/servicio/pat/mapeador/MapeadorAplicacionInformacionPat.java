@@ -8,8 +8,6 @@ import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioCambi
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
-
 @Configuration
 public class MapeadorAplicacionInformacionPat implements MapeadorAplicacion<DtoPat, InformacionPat> {
     private final ServicioCambiarFecha servicioCambiarFecha;

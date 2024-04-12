@@ -20,6 +20,10 @@ public class ServicioEliminarSprint {
         if(this.repositorioSprint.consultarPorId(id)== null) throw new ExcepcionValidadorObligatorio(NO_EXISTE_EL_SPRINT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
         return this.repositorioSprint.eliminar(id);
     }
+    public void ejecutarEliminarPorProyecto(Long id){
+        if(this.repositorioSprint.consultarPorIdProyectoAEliminar(id)== null) throw new ExcepcionValidadorObligatorio(NO_EXISTE_EL_PROYECTO_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
+        this.repositorioSprint.eliminarPorProyecto(id);
+    }
     public Long eliminarDocumento(Long id){
         return this.repositorioSprint.eliminarDocumento(id);
     }

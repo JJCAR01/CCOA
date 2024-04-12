@@ -10,4 +10,5 @@ import java.util.List;
 public interface RepositorioSprintJpa extends JpaRepository<EntidadSprint,Long> {
     EntidadSprint findByDescripcion(String descripcion);
     List<EntidadSprint> findByIdProyecto(Long idProyecto);
+    void deleteByIdProyecto(Long idProyecto);
 }

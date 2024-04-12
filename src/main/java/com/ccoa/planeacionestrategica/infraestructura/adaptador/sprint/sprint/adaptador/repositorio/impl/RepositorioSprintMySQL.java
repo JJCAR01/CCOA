@@ -2,10 +2,12 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.documento.MapeadorDocumentoSprint;
@@ -14,6 +16,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.ad
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioDocumentoSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioSprintJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -105,6 +108,13 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
         this.repositorioInformacionSprintJpa.deleteById(id);
         return id;
     }
+    @Transactional
+    @Override
+    public void eliminarPorProyecto(Long id) {
+        var entidades = consultarPorIdProyectoAEliminar(id);
+        entidades.forEach(entidad -> repositorioInformacionSprintJpa.deleteById(entidad.getIdInformacionSprint()));
+        repositorioSprintJpa.deleteByIdProyecto(id);
+    }
 
     @Override
     public Long modificar(Sprint sprint, InformacionSprint informacionSprint, Long id) {
@@ -129,6 +139,12 @@ public class RepositorioSprintMySQL implements RepositorioSprint {
     public List<DtoSprint> consultarPorIdProyectoParaDuplicar(Long idProyecto) {
         List<EntidadSprint> entidades = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
         return this.mapeadorSprint.obtenerSprintParaDuplicar(entidades);
+    }
+
+    @Override
+    public List<DtoIdsSprint> consultarPorIdProyectoAEliminar(Long idProyecto) {
+        List<EntidadSprint> entidades = this.repositorioSprintJpa.findByIdProyecto(idProyecto);
+        return this.mapeadorSprint.listarIds(entidades);
     }
 
     @Override

@@ -2,10 +2,13 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
+import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObjeto;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;
@@ -92,6 +95,20 @@ public class MapeadorSprint implements MapeadorInfraestructura<EntidadSprint, Sp
             dto.setDescripcion(entidad.getDescripcion());
             dto.setFechaInicial(entidad.getFechaInicial());
             dto.setFechaFinal(entidad.getFechaFinal());
+
+            listaDto.add(dto);
+        }
+        return listaDto;
+    }
+
+    public List<DtoIdsSprint> listarIds(List<EntidadSprint> entidades){
+        List<DtoIdsSprint> listaDto = new ArrayList<>();
+        for (EntidadSprint entidad : entidades) {
+            DtoIdsSprint dto = new DtoIdsSprint();
+            dto.setIdSprint(entidad.getIdSprint());
+
+            var informacionEntidad = repositorioInformacionSprintJpa.findById(entidad.getIdSprint());
+            dto.setIdInformacionSprint(informacionEntidad.orElseThrow().getIdInformacionSprint());
 
             listaDto.add(dto);
         }

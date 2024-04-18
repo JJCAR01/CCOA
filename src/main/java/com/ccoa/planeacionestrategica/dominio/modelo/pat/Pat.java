@@ -10,7 +10,7 @@ import static com.ccoa.planeacionestrategica.dominio.transversal.mensaje.Mensaje
 @Data
 public class Pat {
 
-    //Clase de de asignacion de atributos y se validan entradas
+    //Clase de asignacion de atributos y se validan entradas
     private final Long idPat;
     private final String nombre;
     private final Integer fechaAnual;

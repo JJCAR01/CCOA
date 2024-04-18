@@ -16,6 +16,7 @@ import com.ccoa.planeacionestrategica.aplicacion.servicio.proyectoarea.servicio.
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprint.servicio.ServicioAplicacionGuardarSprint;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.sprintproyectoarea.servicio.ServicioAplicacionGuardarSprintProyectoArea;
 import com.ccoa.planeacionestrategica.aplicacion.servicio.tarea.servicio.tarea.ServicioAplicacionGuardarTarea;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.DetallePat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.actividadestrategica.RepositorioActividadEstrategica;
@@ -90,7 +91,7 @@ public class RepositorioDuplicarMySQL implements RepositorioDuplicar {
     }
 
     @Override
-    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, Long codigo) {
+    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, DetallePat detallePat, Long codigo) {
         var entidadPat = mapeadorPat.mapeadorEntidad(pat);
         var idPatCreado = this.repositorioPatJpa.save(entidadPat).getIdPat();
 

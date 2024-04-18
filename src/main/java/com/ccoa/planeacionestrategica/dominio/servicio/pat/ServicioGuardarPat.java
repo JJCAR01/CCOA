@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.pat;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.DetallePat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioDuplicar;
@@ -20,11 +21,11 @@ public class ServicioGuardarPat {
         this.repositorioDuplicar = repositorioDuplicar;
     }
 
-    public Long ejecutarGuardar(Pat pat, InformacionPat informacionPat)  {
+    public Long ejecutarGuardar(Pat pat, InformacionPat informacionPat, DetallePat detallePat)  {
         if(this.repositorioPat.existe(pat)) throw new ExcepcionValidadorInvalido(YA_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-        return this.repositorioPat.guardar(pat,informacionPat);
+        return this.repositorioPat.guardar(pat,informacionPat,detallePat );
     }
-    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat, long codigo)  {
-        return this.repositorioDuplicar.guardarDuplicado(pat,informacionPat,codigo);
+    public Long guardarDuplicado(Pat pat, InformacionPat informacionPat,DetallePat detallePat, long codigo)  {
+        return this.repositorioDuplicar.guardarDuplicado(pat,informacionPat, detallePat, codigo);
     }
 }

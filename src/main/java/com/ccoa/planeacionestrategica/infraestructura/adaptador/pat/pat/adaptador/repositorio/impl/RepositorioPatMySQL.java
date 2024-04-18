@@ -1,11 +1,14 @@
 package com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.impl;
 
 import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.DetallePat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorDetallePat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioDetallePatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.entidad.EntidadInformacionUsuario;
@@ -21,18 +24,22 @@ public class RepositorioPatMySQL implements RepositorioPat {
 
     private final RepositorioPatJpa repositorioPatJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
+    private final RepositorioDetallePatJpa repositorioDetallePatJpa;
     private final MapeadorPat mapeadorPat;
     private final MapeadorInformacionPat mapeadorInformacionPat;
+    private final MapeadorDetallePat mapeadorDetallePat;
     private final MapeadorInformacionUsuario mapeadorInformacionUsuario;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
     public RepositorioPatMySQL(RepositorioPatJpa repositorioPatJpa,
-                               RepositorioInformacionPatJpa repositorioInformacionPatJpa,
-                               MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat,
+                               RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioDetallePatJpa repositorioDetallePatJpa,
+                               MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat, MapeadorDetallePat mapeadorDetallePat,
                                MapeadorInformacionUsuario mapeadorInformacionUsuario, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa) {
         this.repositorioPatJpa = repositorioPatJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
+        this.repositorioDetallePatJpa = repositorioDetallePatJpa;
         this.mapeadorPat = mapeadorPat;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
+        this.mapeadorDetallePat = mapeadorDetallePat;
         this.mapeadorInformacionUsuario = mapeadorInformacionUsuario;
         this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
     }
@@ -46,20 +53,27 @@ public class RepositorioPatMySQL implements RepositorioPat {
     @Override
     public DtoPatResumen consultarPorId(Long id) {
         var entidad = this.repositorioPatJpa.findById(id).orElse(null);
-        var informacionPat = this.repositorioInformacionPatJpa.findById(id).orElse(null);
         assert entidad != null;
+        var informacionPat = this.repositorioInformacionPatJpa.findById(id).orElse(null);
         assert informacionPat != null;
-        return this.mapeadorPat.patDominio(entidad,informacionPat);
+        var detallePat = this.repositorioDetallePatJpa.findById(id).orElse(null);
+        assert detallePat != null;
+
+        return this.mapeadorPat.patDominio(entidad,informacionPat,detallePat);
     }
 
     @Override
-    public Long guardar(Pat pat, InformacionPat informacionPat) {
-        var patEntity = mapeadorPat.mapeadorEntidad(pat);
-        var idPat = this.repositorioPatJpa.save(patEntity).getIdPat();
+    public Long guardar(Pat pat, InformacionPat informacionPat, DetallePat detallePat) {
+        var entidadPat = mapeadorPat.mapeadorEntidad(pat);
+        var idPat = this.repositorioPatJpa.save(entidadPat).getIdPat();
 
-        var informacionPatEntity = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
-        informacionPatEntity.setIdInformacionPat(idPat);
-        this.repositorioInformacionPatJpa.save(informacionPatEntity);
+        var entidadInformacionPat = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
+        entidadInformacionPat.setIdInformacionPat(idPat);
+
+        var entidadDetallePat = mapeadorDetallePat.mapeadorEntidad(detallePat);
+        entidadDetallePat.setIdDetallePat(idPat);
+
+        this.repositorioInformacionPatJpa.save(entidadInformacionPat);
         var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
         mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
         repositorioInformacionUsuarioJpa.save(entidadUsuario);

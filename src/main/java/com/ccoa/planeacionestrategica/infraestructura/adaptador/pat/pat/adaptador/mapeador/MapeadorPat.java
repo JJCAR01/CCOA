@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
@@ -89,8 +90,13 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
 
             dto.setPorcentajePat(entidad.getPorcentajePat());
 
-            var detalleEntidad = repositorioDetallePatJpa.findById(entidad.getIdPat());
+            Optional<EntidadDetallePat> detallePatOptional = repositorioDetallePatJpa.findById(entidad.getIdPat());
 
+            if (detallePatOptional.isPresent()) {
+                EntidadDetallePat detallePat = detallePatOptional.get();
+                dto.setDeProceso(detallePat.isDeProceso());
+                dto.setEstrategica(detallePat.isEstrategica());
+            }
 
             listaDto.add(dto);
         }
@@ -105,9 +111,10 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     public void actualizarPorcentajePat(EntidadPat entidad) {
         List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(entidad.getIdPat());
 
+        LocalDate fechaActual = LocalDate.now();
         // Filtrar las actividades estratégicas por la fecha inicial
         List<EntidadActividadEstrategica> actividadesFiltradas = actividadEstrategicas.stream()
-                .filter(actividad -> actividad.getFechaInicial().isBefore(LocalDate.now()))
+                .filter(actividad -> actividad.getFechaInicial().isBefore(fechaActual))
                 .toList();
 
         // Obtener la información de las actividades filtradas

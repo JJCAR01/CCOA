@@ -73,6 +73,7 @@ public class RepositorioPatMySQL implements RepositorioPat {
         var entidadDetallePat = mapeadorDetallePat.mapeadorEntidad(detallePat);
         entidadDetallePat.setIdDetallePat(idPat);
 
+        repositorioDetallePatJpa.save(entidadDetallePat);
         this.repositorioInformacionPatJpa.save(entidadInformacionPat);
         var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
         mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
@@ -89,18 +90,25 @@ public class RepositorioPatMySQL implements RepositorioPat {
     public Long eliminar(Long id) {
         eliminarReferenciasDePat(id);
         this.repositorioInformacionPatJpa.deleteById(id);
+        this.repositorioDetallePatJpa.deleteById(id);
         this.repositorioPatJpa.deleteById(id);
         return id;
     }
 
     @Override
-    public Long modificar(Pat pat, InformacionPat informacionPat, Long id) {
+    public Long modificar(Pat pat, InformacionPat informacionPat, DetallePat detallePat, Long id) {
         var entidadPat = this.repositorioPatJpa.findById(id).orElse(null);
-        var entidadInformacionpat = this.repositorioInformacionPatJpa.findById(id).orElse(null);
         assert entidadPat != null;
+        var entidadInformacionpat = this.repositorioInformacionPatJpa.findById(id).orElse(null);
         assert entidadInformacionpat != null;
+        var entidadDetallePat = this.repositorioDetallePatJpa.findById(id).orElse(null);
+        assert entidadDetallePat != null;
+
         this.mapeadorPat.actualizarEntidad(entidadPat, pat);
         this.mapeadorInformacionPat.actualizarEntidad(entidadInformacionpat, informacionPat);
+        this.mapeadorDetallePat.actualizarEntidad(entidadDetallePat,detallePat);
+
+        repositorioDetallePatJpa.save(entidadDetallePat);
         this.repositorioInformacionPatJpa.save(entidadInformacionpat);
         var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
         repositorioInformacionUsuarioJpa.save(entidadUsuario);

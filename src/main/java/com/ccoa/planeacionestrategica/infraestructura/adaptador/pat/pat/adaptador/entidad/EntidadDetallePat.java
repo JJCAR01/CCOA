@@ -22,7 +22,7 @@ public class EntidadDetallePat {
     @Column(name = "de_proceso")
     private boolean deProceso;
 
-    public EntidadDetallePat( boolean estrategica, boolean deProceso) {
+    public EntidadDetallePat(boolean estrategica, boolean deProceso) {
         this.estrategica = estrategica;
         this.deProceso = deProceso;
     }

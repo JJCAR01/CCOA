@@ -15,7 +15,7 @@ public interface RepositorioPat {
     Long guardar(Pat pat, InformacionPat informacionPat, DetallePat detallePat) ;
     boolean existe(Pat pat);
     Long eliminar(Long id);
-    Long modificar(Pat pat, InformacionPat informacionPat ,Long id);
+    Long modificar(Pat pat, InformacionPat informacionPat, DetallePat detallePat ,Long id);
 
 }
 

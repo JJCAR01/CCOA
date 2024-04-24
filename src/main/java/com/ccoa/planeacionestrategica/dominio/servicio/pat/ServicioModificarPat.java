@@ -1,5 +1,6 @@
 package com.ccoa.planeacionestrategica.dominio.servicio.pat;
 
+import com.ccoa.planeacionestrategica.dominio.modelo.pat.DetallePat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.InformacionPat;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.puerto.pat.RepositorioPat;
@@ -17,11 +18,11 @@ public class ServicioModificarPat {
         this.repositorioPat = repositorioPat;
     }
 
-    public Long ejecutarModificar(Pat pat, InformacionPat informacionPat ,Long codigo){
+    public Long ejecutarModificar(Pat pat, InformacionPat informacionPat , DetallePat detallePat, Long codigo){
 
         if(this.repositorioPat.consultarPorId(codigo)==null) throw new ExcepcionValidadorInvalido(NO_EXISTE_EL_PAT_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
 
-        return this.repositorioPat.modificar(pat,informacionPat,codigo);
+        return this.repositorioPat.modificar(pat,informacionPat,detallePat,codigo);
     }
 
 

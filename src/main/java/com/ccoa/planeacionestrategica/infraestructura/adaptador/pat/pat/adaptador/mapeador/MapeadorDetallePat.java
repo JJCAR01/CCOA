@@ -9,11 +9,16 @@ import org.springframework.context.annotation.Configuration;
 public class MapeadorDetallePat implements MapeadorInfraestructura<EntidadDetallePat, DetallePat> {
     @Override
     public DetallePat mapeadorDominio(EntidadDetallePat entidad) {
-        return new DetallePat(entidad.isEstrategica(), entidad.isDeProceso())   ;
+        return new DetallePat(entidad.isEstrategica(), entidad.isDeProceso());
     }
 
     @Override
     public EntidadDetallePat mapeadorEntidad(DetallePat dominio) {
-        return new EntidadDetallePat(dominio.isEstrategica(), dominio.isEstrategica());
+        return new EntidadDetallePat(dominio.isEstrategica(), dominio.isDeProceso());
+    }
+    public void actualizarEntidad(EntidadDetallePat entidad, DetallePat detallePat) {
+
+        entidad.setEstrategica(detallePat.isEstrategica());
+        entidad.setDeProceso(detallePat.isDeProceso());
     }
 }

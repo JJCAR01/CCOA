@@ -28,8 +28,10 @@ import com.ccoa.planeacionestrategica.dominio.puerto.proyectoarea.RepositorioPro
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprintproyectoarea.RepositorioSprintProyectoArea;
 import com.ccoa.planeacionestrategica.dominio.puerto.tarea.RepositorioTarea;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorDetallePat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioDetallePatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioInformacionPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.mapeador.MapeadorInformacionUsuario;
@@ -45,7 +47,9 @@ public class RepositorioDuplicarMySQL implements RepositorioDuplicar {
     private final MapeadorPat mapeadorPat;
     private final RepositorioPatJpa repositorioPatJpa;
     private final MapeadorInformacionPat mapeadorInformacionPat;
+    private final MapeadorDetallePat mapeadorDetallePat;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
+    private final RepositorioDetallePatJpa repositorioDetallePatJpa;
     private final MapeadorInformacionUsuario mapeadorInformacionUsuario;
     private final RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa;
     private final RepositorioActividadEstrategica repositorioActividadEstrategica;
@@ -65,11 +69,13 @@ public class RepositorioDuplicarMySQL implements RepositorioDuplicar {
     private final ServicioAplicacionGuardarProyecto servicioAplicacionGuardarProyecto;
     private final ServicioAplicacionGuardarProyectoArea servicioAplicacionGuardarProyectoArea;
 
-    public RepositorioDuplicarMySQL(MapeadorPat mapeadorPat, RepositorioPatJpa repositorioPatJpa, MapeadorInformacionPat mapeadorInformacionPat, RepositorioInformacionPatJpa repositorioInformacionPatJpa, MapeadorInformacionUsuario mapeadorInformacionUsuario, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa, RepositorioActividadEstrategica repositorioActividadEstrategica, RepositorioActividadGestion repositorioActividadGestion, RepositorioActividadGestionEstrategica repositorioActividadGestionEstrategica, RepositorioProyecto repositorioProyecto, RepositorioProyectoArea repositorioProyectoArea, RepositorioTarea repositorioTarea, RepositorioSprint repositorioSprint, RepositorioSprintProyectoArea repositorioSprintProyectoArea, ServicioAplicacionGuardarActividadEstrategica servicioAplicacionGuardarActividadEstrategica, ServicioAplicacionGuardarTarea servicioAplicacionGuardarTarea, ServicioAplicacionGuardarActividadGestionEstrategica servicioAplicacionGuardarActividadGestionEstrategica, ServicioAplicacionGuardarActividadGestion servicioAplicacionGuardarActividadGestion, ServicioAplicacionGuardarSprint servicioAplicacionGuardarSprint, ServicioAplicacionGuardarSprintProyectoArea servicioAplicacionGuardarSprintProyectoArea, ServicioAplicacionGuardarProyecto servicioAplicacionGuardarProyecto, ServicioAplicacionGuardarProyectoArea servicioAplicacionGuardarProyectoArea) {
+    public RepositorioDuplicarMySQL(MapeadorPat mapeadorPat, RepositorioPatJpa repositorioPatJpa, MapeadorInformacionPat mapeadorInformacionPat, MapeadorDetallePat mapeadorDetallePat, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioDetallePatJpa repositorioDetallePatJpa, MapeadorInformacionUsuario mapeadorInformacionUsuario, RepositorioInformacionUsuarioJpa repositorioInformacionUsuarioJpa, RepositorioActividadEstrategica repositorioActividadEstrategica, RepositorioActividadGestion repositorioActividadGestion, RepositorioActividadGestionEstrategica repositorioActividadGestionEstrategica, RepositorioProyecto repositorioProyecto, RepositorioProyectoArea repositorioProyectoArea, RepositorioTarea repositorioTarea, RepositorioSprint repositorioSprint, RepositorioSprintProyectoArea repositorioSprintProyectoArea, ServicioAplicacionGuardarActividadEstrategica servicioAplicacionGuardarActividadEstrategica, ServicioAplicacionGuardarTarea servicioAplicacionGuardarTarea, ServicioAplicacionGuardarActividadGestionEstrategica servicioAplicacionGuardarActividadGestionEstrategica, ServicioAplicacionGuardarActividadGestion servicioAplicacionGuardarActividadGestion, ServicioAplicacionGuardarSprint servicioAplicacionGuardarSprint, ServicioAplicacionGuardarSprintProyectoArea servicioAplicacionGuardarSprintProyectoArea, ServicioAplicacionGuardarProyecto servicioAplicacionGuardarProyecto, ServicioAplicacionGuardarProyectoArea servicioAplicacionGuardarProyectoArea) {
         this.mapeadorPat = mapeadorPat;
         this.repositorioPatJpa = repositorioPatJpa;
         this.mapeadorInformacionPat = mapeadorInformacionPat;
+        this.mapeadorDetallePat = mapeadorDetallePat;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
+        this.repositorioDetallePatJpa = repositorioDetallePatJpa;
         this.mapeadorInformacionUsuario = mapeadorInformacionUsuario;
         this.repositorioInformacionUsuarioJpa = repositorioInformacionUsuarioJpa;
         this.repositorioActividadEstrategica = repositorioActividadEstrategica;
@@ -97,7 +103,12 @@ public class RepositorioDuplicarMySQL implements RepositorioDuplicar {
 
         var entidadInformacionPat = mapeadorInformacionPat.mapeadorEntidad(informacionPat);
         entidadInformacionPat.setIdInformacionPat(idPatCreado);
+
+        var entidadDetallePat = mapeadorDetallePat.mapeadorEntidad(detallePat);
+        entidadDetallePat.setIdDetallePat(idPatCreado);
+
         this.repositorioInformacionPatJpa.save(entidadInformacionPat);
+        this.repositorioDetallePatJpa.save(entidadDetallePat);
         var entidadUsuario = mapeadorInformacionUsuario.obtenerUsuario(pat.getIdUsuario());
         mapeadorInformacionUsuario.actualizarPatsPorPat(entidadUsuario, pat);
         repositorioInformacionUsuarioJpa.save(entidadUsuario);

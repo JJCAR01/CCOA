@@ -18,6 +18,6 @@ public class MapeadorAplicacionPat implements MapeadorAplicacion<DtoPat, Pat> {
     @Override
     public Pat mapeadorAplicacion(DtoPat dto) {
         return Pat.of(dto.getIdPat(), dto.getNombre(),dto.getFechaAnual(), servicioObtenerHoraActual.calcular(dto.getFechaRegistro()),
-                Mensaje.POR_DEFECTO_AVANCE, dto.getIdUsuario());
+                Mensaje.POR_DEFECTO_AVANCE, dto.getIdUsuario(), dto.getIdClasificacion());
     }
 }

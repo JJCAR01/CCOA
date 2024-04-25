@@ -31,12 +31,16 @@
         @JoinColumn(name = "id_usuario")
         private Long idUsuario;
 
+        @JoinColumn(name = "id_clasificacion")
+        private Long idClasificacion;
 
-        public EntidadPat(String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentajePat, Long idUsuario) {
+
+        public EntidadPat(String nombre, Integer fechaAnual, LocalDate fechaRegistro, Double porcentajePat, Long idUsuario, Long idClasificacion) {
             this.nombre = nombre;
             this.fechaAnual = fechaAnual;
             this.fechaRegistro = fechaRegistro;
             this.porcentajePat = porcentajePat;
             this.idUsuario = idUsuario;
+            this.idClasificacion = idClasificacion;
         }
     }

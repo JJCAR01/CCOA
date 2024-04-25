@@ -24,5 +24,5 @@ public class DtoPat {
     private boolean deProceso;
     private DtoDireccion direccion;
     private Long idUsuario;
-
+    private Long idClasificacion;
 }

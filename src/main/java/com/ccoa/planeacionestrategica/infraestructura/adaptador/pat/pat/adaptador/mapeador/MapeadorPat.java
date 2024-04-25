@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrate
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.clasificacion.adaptador.repositorio.jpa.RepositorioClasificacionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadDetallePat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadPat;
@@ -26,17 +27,19 @@ import java.util.Optional;
 @Configuration
 public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final RepositorioUsuarioJpa repositorioUsuarioJpa;
+    private final RepositorioClasificacionJpa repositorioClasificacionJpa;
     private final RepositorioInformacionPatJpa repositorioInformacionPatJpa;
     private final RepositorioDetallePatJpa repositorioDetallePatJpa;
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
     private final RepositorioPatJpa repositorioPatJpa;
-    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioDetallePatJpa repositorioDetallePatJpa,
+    public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioClasificacionJpa repositorioClasificacionJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioDetallePatJpa repositorioDetallePatJpa,
                        ServicioObtenerPorcentaje servicioObtenerPorcentaje,
                        RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
                        RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
+        this.repositorioClasificacionJpa = repositorioClasificacionJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
         this.repositorioDetallePatJpa = repositorioDetallePatJpa;
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
@@ -48,23 +51,25 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     @Override
     public Pat mapeadorDominio(EntidadPat entidad) {
         return new Pat(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro(),
-                entidad.getPorcentajePat(), entidad.getIdUsuario());
+                entidad.getPorcentajePat(), entidad.getIdUsuario(), entidad.getIdClasificacion() );
     }
     @Override
     public EntidadPat mapeadorEntidad(Pat dominio) {
         var idUsuario = this.repositorioUsuarioJpa.findById(dominio.getIdUsuario()).orElseThrow().getIdUsuario();
+        var idClasificacion = this.repositorioClasificacionJpa.findById(dominio.getIdClasificacion()).orElseThrow().getIdClasificacion();
 
         return new EntidadPat(dominio.getNombre(), dominio.getFechaAnual(),dominio.getFechaRegistro(),
-                dominio.getPorcentajePat(), idUsuario);
+                dominio.getPorcentajePat(), idUsuario, idClasificacion);
     }
     public DtoPatResumen patDominio(EntidadPat entidad, EntidadInformacionPat entidadInformacionPat, EntidadDetallePat detallePat) {
         DtoDireccion dtoDireccion = new DtoDireccion();
         dtoDireccion.setNombre(entidadInformacionPat.getDireccion().getNombre());
 
         return new DtoPatResumen(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro(),
-                entidad.getPorcentajePat(),entidadInformacionPat.getPorcentajeReal(), entidadInformacionPat.getPorcentajeEsperado(),
-                entidadInformacionPat.getPorcentajeCumplimiento(),entidadInformacionPat.getFechaInicial(),
-                entidadInformacionPat.getFechaFinal(), detallePat.isEstrategica(), detallePat.isDeProceso(), dtoDireccion,entidad.getIdUsuario());
+                entidad.getPorcentajePat(),entidadInformacionPat.getPorcentajeReal(),
+                entidadInformacionPat.getPorcentajeEsperado(),entidadInformacionPat.getPorcentajeCumplimiento(),
+                entidadInformacionPat.getFechaInicial(),entidadInformacionPat.getFechaFinal(), detallePat.isEstrategica(),
+                detallePat.isDeProceso(), dtoDireccion,entidad.getIdUsuario(), entidad.getIdClasificacion());
     }
     public List<DtoPatResumen> listarDominio(List<EntidadPat> entidades){
         List<DtoPatResumen> listaDto = new ArrayList<>();
@@ -75,6 +80,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
             dto.setFechaAnual(entidad.getFechaAnual());
             dto.setFechaRegistro(entidad.getFechaRegistro());
             dto.setIdUsuario(entidad.getIdUsuario());
+            dto.setIdClasificacion(entidad.getIdClasificacion());
 
             var infEntidad = repositorioInformacionPatJpa.findById(entidad.getIdPat());
 
@@ -107,6 +113,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         entidad.setNombre(pat.getNombre());
         entidad.setFechaAnual(pat.getFechaAnual());
         entidad.setIdUsuario(pat.getIdUsuario());
+        entidad.setIdClasificacion(pat.getIdClasificacion());
     }
     public void actualizarPorcentajePat(EntidadPat entidad) {
         List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(entidad.getIdPat());

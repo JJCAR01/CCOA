@@ -7,6 +7,7 @@ import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.Mapea
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+
 @Configuration
 public class MapeadorProceso implements MapeadorInfraestructura<EntidadProceso, Proceso> {
     @Override
@@ -18,13 +19,16 @@ public class MapeadorProceso implements MapeadorInfraestructura<EntidadProceso, 
     public EntidadProceso mapeadorEntidad(Proceso dominio) {
         return new EntidadProceso(dominio.getNombre());
     }
+
     public List<DtoProcesoResumen> listarDominio(List<EntidadProceso> entidades){
-        return entidades.stream().map(entidad -> new DtoProcesoResumen(entidad.getIdProceso(), entidad.getNombre())).toList();
+        return entidades.stream().map(entidad -> new DtoProcesoResumen(entidad.getIdProceso() ,entidad.getNombre())).toList();
     }
+
     public DtoProcesoResumen listarDtoResumen(EntidadProceso entidad) {
         return new DtoProcesoResumen(entidad.getIdProceso(), entidad.getNombre());
     }
-    public void actualizarEntidad(EntidadProceso entidad, Proceso proceso) {
+
+    public void actualizarEntidad(EntidadProceso entidad, Proceso  proceso) {
         entidad.setNombre(proceso.getNombre());
     }
 }

@@ -63,8 +63,8 @@ public class MapeadorDetalleProyectoArea implements MapeadorInfraestructura<Enti
         double sumaSprintProyectoArea = informacionSprintProyectoArea.stream().mapToDouble(EntidadInformacionSprintProyectoArea::getPorcentajeReal).sum();
 
         if (totalSprintProyectoAreas > 0) {
-            int nuevoAvance = (int) (sumaSprintProyectoArea / totalSprintProyectoAreas);
-            entidad.setPorcentajeReal((double) nuevoAvance);
+            double nuevoAvance = (sumaSprintProyectoArea / totalSprintProyectoAreas);
+            entidad.setPorcentajeReal(nuevoAvance);
             entidad.setIdDetalleProyectoArea(idProyectoArea);
             entidad.setPorcentajeEsperado(entidad.getPorcentajeEsperado());
             entidad.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(entidad.getPorcentajeReal(),entidad.getPorcentajeEsperado()));

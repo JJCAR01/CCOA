@@ -7,7 +7,6 @@ import com.ccoa.planeacionestrategica.dominio.modelo.sprint.InformacionSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.documento.DocumentoSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.puerto.sprint.RepositorioSprint;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.mapeador.MapeadorInformacionProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.mapeador.documento.MapeadorDocumentoSprint;

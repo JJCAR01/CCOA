@@ -75,7 +75,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
     public InformacionPat mapeadorDominio(EntidadInformacionPat entidad) {
         Direccion direccion = Direccion.of(entidad.getDireccion().getNombre());
         return InformacionPat.of(direccion,entidad.getPorcentajeReal(),
-                entidad.getPorcentajeEsperado(), entidad.getPorcentajeCumplimiento(),entidad.getFechaInicial(),entidad.getFechaFinal());
+                entidad.getPorcentajeEsperado(), entidad.getPorcentajeCumplimiento(),entidad.getPorcentajeKPI(),
+                entidad.getFechaInicial(),entidad.getFechaFinal());
     }
 
     @Override
@@ -87,7 +88,8 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
 
         // Crear y devolver la entidad EntidadInformacionPat
         return new EntidadInformacionPat(entidadDireccion, dominio.getPorcentajeReal(),
-                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento(),dominio.getFechaInicial(),dominio.getFechaFinal());
+                dominio.getPorcentajeEsperado(), dominio.getPorcentajeCumplimiento(),
+                dominio.getPorcentajeKPI(),dominio.getFechaInicial(),dominio.getFechaFinal());
     }
 
     public void actualizarEntidad(EntidadInformacionPat entidad, InformacionPat informacionPat) {
@@ -119,10 +121,10 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
                         .map(actividadEstrategica -> this.repositorioInformacionActividadEstrategicaJpa.findByIdInformacionActividadEstrategica(actividadEstrategica.getIdActividadEstrategica()))
                         .flatMap(List::stream).toList();
 
-                double porcentaje = Mensaje.PORCENTAJE /actividadEstrategicasFiltradas.size();
+                double porcentaje = actividadEstrategicasFiltradas.size();
 
-                double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(eEstrategica -> eEstrategica.getPorcentajeReal() * porcentaje).sum();
-                double avanceTotal = sumaActEstrategica/ Mensaje.PORCENTAJE;
+                double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(EntidadInformacionActividadEstrategica::getPorcentajeReal).sum();
+                double avanceTotal = sumaActEstrategica/ porcentaje;
 
                 actualizarEntidadPat(entidad,idPat,avanceTotal);
 
@@ -136,8 +138,6 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
                 List<EntidadInformacionActividadGestion> informacionActividadesGestiones = actividadGestionesFiltradas.stream()
                         .map(actividadGestion -> this.repositorioInformacionActividadGestionJpa.findByIdInformacionActividadGestion(actividadGestion.getIdActividadGestion()))
                         .flatMap(List::stream).toList();
-
-
 
                 List<EntidadProyectoArea> proyectosArea = this.repositorioProyectoAreaJpa.findByIdPat(idPat);
                 List<EntidadInformacionProyectoArea> informacionProyectos = this.repositorioInformacionProyectoAreaJpa.
@@ -154,10 +154,10 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
                         .map(proyecto -> this.repositorioDetalleProyectoAreaJpa.findByIdDetalleProyectoArea(proyecto.getIdInformacionProyectoArea()))
                         .flatMap(List::stream).toList();
 
-                double porcentaje = Mensaje.PORCENTAJE / (actividadGestionesFiltradas.size() + proyectosArea.size());
-                double sumaProyectos = detalleProyectosArea.stream().mapToDouble(proyecto -> proyecto.getPorcentajeReal() * porcentaje).sum();
-                double sumaActGestion = informacionActividadesGestiones.stream().mapToDouble(eGestion -> eGestion.getPorcentajeReal() * porcentaje).sum();
-                double avanceTotal = (sumaActGestion + sumaProyectos)/ Mensaje.PORCENTAJE;
+                double porcentaje = (actividadGestionesFiltradas.size() + proyectosArea.size());
+                double sumaProyectos = detalleProyectosArea.stream().mapToDouble(EntidadDetalleProyectoArea::getPorcentajeReal).sum();
+                double sumaActGestion = informacionActividadesGestiones.stream().mapToDouble(EntidadInformacionActividadGestion::getPorcentajeReal).sum();
+                double avanceTotal = (sumaActGestion + sumaProyectos)/ porcentaje;
 
                 actualizarEntidadPat(entidad,idPat,avanceTotal);
             }
@@ -187,6 +187,7 @@ public class    MapeadorInformacionPat implements MapeadorInfraestructura<Entida
                 ,entidad.orElseThrow().getPorcentajeReal(),
                 entidad.orElseThrow().getPorcentajeEsperado(),
                 entidad.orElseThrow().getPorcentajeCumplimiento(),
+                entidad.orElseThrow().getPorcentajeKPI(),
                 entidad.orElseThrow().getFechaInicial(),
                 entidad.orElseThrow().getFechaFinal());
     }

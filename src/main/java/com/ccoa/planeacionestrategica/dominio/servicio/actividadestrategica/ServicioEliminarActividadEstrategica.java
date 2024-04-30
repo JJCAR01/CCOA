@@ -17,9 +17,7 @@ public class ServicioEliminarActividadEstrategica{
     }
 
     public Long ejecutarEliminar(Long id){
-
         if(this.repositorioActividadEstrategica.consultarPorId(id)== null) throw new ExcepcionValidadorInvalido(NO_EXISTE_LA_ACTIVIDAD_ESTRATEGICA_CON_LOS_DATOS_INGRESADOS,MENSAJE_DEFECTO);
-
         return this.repositorioActividadEstrategica.eliminar(id);
     }
     public void ejecutarEliminarPorPat(Long id){

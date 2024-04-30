@@ -2,13 +2,11 @@ package com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.a
 
 import com.ccoa.planeacionestrategica.aplicacion.dto.sprint.DtoSprint;
 import com.ccoa.planeacionestrategica.dominio.dto.DtoSprintResumen;
-import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsProyecto;
 import com.ccoa.planeacionestrategica.dominio.dto.ids.DtoIdsSprint;
 import com.ccoa.planeacionestrategica.dominio.modelo.sprint.Sprint;
 import com.ccoa.planeacionestrategica.dominio.transversal.excepciones.ExcepcionValidadorObjeto;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerDuracion;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
-import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.entidad.EntidadProyecto;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.proyecto.proyecto.adaptador.repositorio.jpa.RepositorioProyectoJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.entidad.EntidadInformacionSprint;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.sprint.sprint.adaptador.repositorio.jpa.RepositorioInformacionSprintJpa;

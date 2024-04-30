@@ -17,6 +17,7 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrate
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDetalleActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDocumentoActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorInformacionPat;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.mapeador.MapeadorPat;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -118,9 +119,12 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     public Long modificarResultadoMeta(DetalleActividadEstrategica detalleActividadEstrategica, InformacionActividadEstrategica informacionActividadEstrategica, Long id) {
         var entidadDetalle = this.repositorioDetalleActividadEstrategicaJpa.findById(id).orElse(null);
         assert  entidadDetalle != null;
+
         var entidadInformacion = this.repositorioInformacionActividadEstrategicaJpa.findById(id).orElse(null);
         assert  entidadInformacion != null;
+
         this.mapeadorDetalleActividadEstrategica.actualizarResultadoMeta(entidadDetalle, detalleActividadEstrategica,entidadInformacion);
+
         var idPat =  mapeadorActividadEstrategica.obtenerEntidadRelacionadoConActividadEstrategica(id).getIdPat();
         mapeadorPat.actualizarPorcentajePat(mapeadorPat.obtenerPatRelacionadoConPat(idPat));
         repositorioInformacionActividadEstrategicaJpa.save(entidadInformacion);

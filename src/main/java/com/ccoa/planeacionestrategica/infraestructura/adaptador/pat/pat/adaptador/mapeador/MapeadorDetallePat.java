@@ -17,7 +17,6 @@ public class MapeadorDetallePat implements MapeadorInfraestructura<EntidadDetall
         return new EntidadDetallePat(dominio.isEstrategica(), dominio.isDeProceso());
     }
     public void actualizarEntidad(EntidadDetallePat entidad, DetallePat detallePat) {
-
         entidad.setEstrategica(detallePat.isEstrategica());
         entidad.setDeProceso(detallePat.isDeProceso());
     }

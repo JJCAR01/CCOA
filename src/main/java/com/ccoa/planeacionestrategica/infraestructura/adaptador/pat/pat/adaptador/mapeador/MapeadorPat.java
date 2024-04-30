@@ -16,7 +16,6 @@ import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptado
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.repositorio.jpa.RepositorioPatJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.usuario.adaptador.repositorio.jpa.RepositorioUsuarioJpa;
 import com.ccoa.planeacionestrategica.infraestructura.transversal.mapeador.MapeadorInfraestructura;
-import com.ccoa.planeacionestrategica.infraestructura.transversal.mensaje.Mensaje;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
@@ -68,8 +67,8 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         return new DtoPatResumen(entidad.getIdPat(), entidad.getNombre(), entidad.getFechaAnual(),entidad.getFechaRegistro(),
                 entidad.getPorcentajePat(),entidadInformacionPat.getPorcentajeReal(),
                 entidadInformacionPat.getPorcentajeEsperado(),entidadInformacionPat.getPorcentajeCumplimiento(),
-                entidadInformacionPat.getFechaInicial(),entidadInformacionPat.getFechaFinal(), detallePat.isEstrategica(),
-                detallePat.isDeProceso(), dtoDireccion,entidad.getIdUsuario(), entidad.getIdClasificacion());
+                entidadInformacionPat.getPorcentajeKPI(),entidadInformacionPat.getFechaInicial(),entidadInformacionPat.getFechaFinal(),
+                detallePat.isEstrategica(),detallePat.isDeProceso(), dtoDireccion,entidad.getIdUsuario(), entidad.getIdClasificacion());
     }
     public List<DtoPatResumen> listarDominio(List<EntidadPat> entidades){
         List<DtoPatResumen> listaDto = new ArrayList<>();
@@ -89,6 +88,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
             dto.setPorcentajeReal(infEntidad.orElseThrow().getPorcentajeReal());
             dto.setPorcentajeEsperado(infEntidad.orElseThrow().getPorcentajeEsperado());
             dto.setPorcentajeCumplimiento(servicioObtenerPorcentaje.obtenerPorcentajeDeCumplimiento(dto.getPorcentajeReal(),dto.getPorcentajeEsperado()));
+            dto.setPorcentajeKPI(infEntidad.orElseThrow().getPorcentajeKPI());
 
             DtoDireccion dtoDireccion = new DtoDireccion();
             dtoDireccion.setNombre(infEntidad.orElseThrow().getDireccion().getNombre());
@@ -131,11 +131,12 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
                 .toList();
 
         // Calcular el porcentaje
-        double porcentaje = Mensaje.PORCENTAJE * informacionActividadesEstrategicas.size();
+        double porcentaje = informacionActividadesEstrategicas.size();
 
-        double sumaActEstrategica = informacionActividadesEstrategicas.stream().mapToDouble(EntidadInformacionActividadEstrategica::getPorcentajePat).sum();
+        double sumaActEstrategicaPorcentajePat = informacionActividadesEstrategicas.stream().mapToDouble(EntidadInformacionActividadEstrategica::getPorcentajePat).sum();
 
-        double avanceTotal = (sumaActEstrategica/ porcentaje) * Mensaje.PORCENTAJE;
+        double avanceTotal = (sumaActEstrategicaPorcentajePat / porcentaje);
+
         entidad.setPorcentajePat(avanceTotal);
         entidad.setIdPat(entidad.getIdPat());
         repositorioPatJpa.save(entidad);

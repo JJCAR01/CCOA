@@ -15,11 +15,12 @@ public class InformacionPat {
     private double porcentajeReal;
     private double porcentajeEsperado;
     private double porcentajeCumplimiento;
+    private double porcentajeKPI;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
 
-    public static InformacionPat of(Direccion direccion, double porcentajeReal, double porcentajeEsperado,
-                                    double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal){
+    public static InformacionPat of(Direccion direccion, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento,
+                                    double porcentajeKPI, LocalDate fechaInicial, LocalDate fechaFinal){
         ValidadorDominio.validarObligatorio(direccion,LA_DIRECCION_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeReal,EL_PORCENTAJE_REAL_NO_PUEDE_ESTAR_VACIO);
         ValidadorDominio.validadorNumeroDoubleYMayorOIgualACero(porcentajeEsperado,EL_PORCENTAJE_ESPERADO_NO_PUEDE_ESTAR_VACIO);
@@ -27,15 +28,16 @@ public class InformacionPat {
         ValidadorDominio.validarObligatorioTipoDato(fechaInicial,LA_FECHA_INICIAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.validarObligatorioTipoDato(fechaFinal,LA_FECHA_FINAL_NO_PUEDE_ESTAR_VACIA);
         ValidadorDominio.fechaFinalEsMayorFechaInicio(fechaFinal,fechaInicial,LA_FECHA_FINAL_DEBE_SER_MAYOR_A_LA_FECHA_INICIAL);
-        return new InformacionPat(direccion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, fechaInicial, fechaFinal);
+        return new InformacionPat(direccion, porcentajeReal, porcentajeEsperado, porcentajeCumplimiento, porcentajeKPI,fechaInicial, fechaFinal);
     }
 
-    public InformacionPat( Direccion direccion, double porcentajeReal, double porcentajeEsperado,
-                          double porcentajeCumplimiento, LocalDate fechaInicial, LocalDate fechaFinal) {
+    public InformacionPat(Direccion direccion, double porcentajeReal, double porcentajeEsperado, double porcentajeCumplimiento,
+                          double porcentajeKPI, LocalDate fechaInicial, LocalDate fechaFinal) {
         this.direccion = direccion;
         this.porcentajeReal = porcentajeReal;
         this.porcentajeEsperado = porcentajeEsperado;
         this.porcentajeCumplimiento = porcentajeCumplimiento;
+        this.porcentajeKPI = porcentajeKPI;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
     }

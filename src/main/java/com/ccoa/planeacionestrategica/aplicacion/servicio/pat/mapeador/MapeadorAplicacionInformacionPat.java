@@ -20,14 +20,15 @@ public class MapeadorAplicacionInformacionPat implements MapeadorAplicacion<DtoP
     public InformacionPat mapeadorAplicacion(DtoPat dto) {
         Direccion direccion = Direccion.of(dto.getDireccion().getNombre());
         return InformacionPat.of(direccion, Mensaje.POR_DEFECTO_AVANCE,
-                Mensaje.POR_DEFECTO_AVANCE
-                ,Mensaje.POR_DEFECTO_AVANCE,dto.getFechaInicial(),dto.getFechaFinal());
+                Mensaje.POR_DEFECTO_AVANCE,Mensaje.POR_DEFECTO_AVANCE,
+                Mensaje.POR_DEFECTO_AVANCE,dto.getFechaInicial(),dto.getFechaFinal());
     }
     public InformacionPat mapeadorActualizar(DtoPat dto) {
         Direccion direccion = Direccion.of(dto.getDireccion().getNombre());
         var fechaInicial = servicioCambiarFecha.calcular(dto.getFechaInicial(),dto.getFechaAnual());
         var fechaFinal = servicioCambiarFecha.calcular(dto.getFechaFinal(),dto.getFechaAnual());
         return new InformacionPat (direccion, dto.getPorcentajeReal(),
-                dto.getPorcentajeEsperado(), dto.getPorcentajeCumplimiento(),fechaInicial,fechaFinal);
+                dto.getPorcentajeEsperado(), dto.getPorcentajeCumplimiento(),
+                dto.getPorcentajeKPI(), fechaInicial,fechaFinal);
     }
 }

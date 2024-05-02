@@ -4,8 +4,10 @@ import com.ccoa.planeacionestrategica.dominio.dto.DtoPatResumen;
 import com.ccoa.planeacionestrategica.dominio.modelo.pat.Pat;
 import com.ccoa.planeacionestrategica.dominio.transversal.servicio.ServicioObtenerPorcentaje;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadActividadEstrategica;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadDetalleActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.entidad.EntidadInformacionActividadEstrategica;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioActividadEstrategicaJpa;
+import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioDetalleActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.actividadestrategica.actividadestrategica.adaptador.repositorio.jpa.RepositorioInformacionActividadEstrategicaJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.clasificacion.adaptador.repositorio.jpa.RepositorioClasificacionJpa;
 import com.ccoa.planeacionestrategica.infraestructura.adaptador.pat.pat.adaptador.entidad.EntidadDetallePat;
@@ -32,11 +34,12 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
     private final ServicioObtenerPorcentaje servicioObtenerPorcentaje;
     private final RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa;
     private final RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa;
+    private final RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa;
     private final RepositorioPatJpa repositorioPatJpa;
     public MapeadorPat(RepositorioUsuarioJpa repositorioUsuarioJpa, RepositorioClasificacionJpa repositorioClasificacionJpa, RepositorioInformacionPatJpa repositorioInformacionPatJpa, RepositorioDetallePatJpa repositorioDetallePatJpa,
                        ServicioObtenerPorcentaje servicioObtenerPorcentaje,
                        RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa,
-                       RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa) {
+                       RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa, RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa, RepositorioPatJpa repositorioPatJpa) {
         this.repositorioUsuarioJpa = repositorioUsuarioJpa;
         this.repositorioClasificacionJpa = repositorioClasificacionJpa;
         this.repositorioInformacionPatJpa = repositorioInformacionPatJpa;
@@ -44,6 +47,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         this.servicioObtenerPorcentaje = servicioObtenerPorcentaje;
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
+        this.repositorioDetalleActividadEstrategicaJpa = repositorioDetalleActividadEstrategicaJpa;
         this.repositorioPatJpa = repositorioPatJpa;
     }
 
@@ -115,7 +119,7 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
         entidad.setIdUsuario(pat.getIdUsuario());
         entidad.setIdClasificacion(pat.getIdClasificacion());
     }
-    public void actualizarPorcentajePat(EntidadPat entidad) {
+    public void actualizarPorcentajePat(EntidadPat entidad, EntidadInformacionPat entidadInformacionPat) {
         List<EntidadActividadEstrategica> actividadEstrategicas = this.repositorioActividadEstrategicaJpa.findByIdPat(entidad.getIdPat());
 
         LocalDate fechaActual = LocalDate.now();
@@ -130,12 +134,23 @@ public class MapeadorPat implements MapeadorInfraestructura<EntidadPat, Pat> {
                 .flatMap(List::stream)
                 .toList();
 
+        List<EntidadDetalleActividadEstrategica> detalleActividadEstrategicas = actividadesFiltradas.stream()
+                .map(actividadEstrategica -> this.repositorioDetalleActividadEstrategicaJpa.findByIdDetalleActividadEstrategica(actividadEstrategica.getIdActividadEstrategica()))
+                .flatMap(List::stream)
+                .toList();
+
         // Calcular el porcentaje
         double porcentaje = informacionActividadesEstrategicas.size();
 
+        double sumaActEstrategicaPorcentajeKPI = detalleActividadEstrategicas.stream().mapToDouble(EntidadDetalleActividadEstrategica::getPorcentajeMeta).sum();
         double sumaActEstrategicaPorcentajePat = informacionActividadesEstrategicas.stream().mapToDouble(EntidadInformacionActividadEstrategica::getPorcentajePat).sum();
 
         double avanceTotal = (sumaActEstrategicaPorcentajePat / porcentaje);
+        double promedioKPI = (sumaActEstrategicaPorcentajeKPI / porcentaje);
+
+        entidadInformacionPat.setPorcentajeKPI(promedioKPI);
+
+        repositorioInformacionPatJpa.save(entidadInformacionPat);
 
         entidad.setPorcentajePat(avanceTotal);
         entidad.setIdPat(entidad.getIdPat());

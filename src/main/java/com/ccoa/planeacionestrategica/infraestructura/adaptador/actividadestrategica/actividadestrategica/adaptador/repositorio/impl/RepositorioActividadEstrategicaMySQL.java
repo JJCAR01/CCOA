@@ -35,9 +35,10 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
     private final MapeadorDocumentoActividadEstrategica mapeadorDocumentoActividadEstrategica;
     private final MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica;
     private final MapeadorPat mapeadorPat;
+    private final MapeadorInformacionPat mapeadorInformacionPat;
 
     public RepositorioActividadEstrategicaMySQL(RepositorioActividadEstrategicaJpa repositorioActividadEstrategicaJpa, RepositorioDocumentoActividadEstrategicaJpa repositorioDocumentoActividadEstrategicaJpa, RepositorioInformacionActividadEstrategicaJpa repositorioInformacionActividadEstrategicaJpa,
-                                                RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa, MapeadorActividadEstrategica mapeadorActividadEstrategica, MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica, MapeadorDocumentoActividadEstrategica mapeadorDocumentoActividadEstrategica, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica, MapeadorPat mapeadorPat) {
+                                                RepositorioDetalleActividadEstrategicaJpa repositorioDetalleActividadEstrategicaJpa, MapeadorActividadEstrategica mapeadorActividadEstrategica, MapeadorDetalleActividadEstrategica mapeadorDetalleActividadEstrategica, MapeadorDocumentoActividadEstrategica mapeadorDocumentoActividadEstrategica, MapeadorInformacionActividadEstrategica mapeadorInformacionActividadEstrategica, MapeadorPat mapeadorPat, MapeadorInformacionPat mapeadorInformacionPat) {
         this.repositorioActividadEstrategicaJpa = repositorioActividadEstrategicaJpa;
         this.repositorioDocumentoActividadEstrategicaJpa = repositorioDocumentoActividadEstrategicaJpa;
         this.repositorioInformacionActividadEstrategicaJpa = repositorioInformacionActividadEstrategicaJpa;
@@ -47,6 +48,7 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         this.mapeadorDocumentoActividadEstrategica = mapeadorDocumentoActividadEstrategica;
         this.mapeadorInformacionActividadEstrategica = mapeadorInformacionActividadEstrategica;
         this.mapeadorPat = mapeadorPat;
+        this.mapeadorInformacionPat = mapeadorInformacionPat;
     }
 
     @Override
@@ -126,7 +128,11 @@ public class RepositorioActividadEstrategicaMySQL implements RepositorioActivida
         this.mapeadorDetalleActividadEstrategica.actualizarResultadoMeta(entidadDetalle, detalleActividadEstrategica,entidadInformacion);
 
         var idPat =  mapeadorActividadEstrategica.obtenerEntidadRelacionadoConActividadEstrategica(id).getIdPat();
-        mapeadorPat.actualizarPorcentajePat(mapeadorPat.obtenerPatRelacionadoConPat(idPat));
+
+        var entidadPat = mapeadorPat.obtenerPatRelacionadoConPat(idPat);
+        var entidadInformacionPat = mapeadorInformacionPat.obtenerTodaEntidadPat(idPat);
+
+        mapeadorPat.actualizarPorcentajePat(entidadPat,entidadInformacionPat);
         repositorioInformacionActividadEstrategicaJpa.save(entidadInformacion);
         return this.repositorioDetalleActividadEstrategicaJpa.save(entidadDetalle).getIdDetalleActividadEstrategica();
     }
